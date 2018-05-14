@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问 | ini&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。">
+<meta name="keywords" content="SSL,HTTPS,NGINX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问">
+<meta property="og:url" content="http://inicb.com/archives/f19cae66.html">
+<meta property="og:site_name" content="ini&#39;s Blog">
+<meta property="og:description" content="本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.pexels.com/photos/614503/pexels-photo-614503.jpeg?cs=srgb&dl=adult-back-view-beach-614503.jpg&fm=jpg">
+<meta property="og:updated_time" content="2018-05-04T02:44:05.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问">
+<meta name="twitter:description" content="本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。">
+<meta name="twitter:image" content="https://images.pexels.com/photos/614503/pexels-photo-614503.jpeg?cs=srgb&dl=adult-back-view-beach-614503.jpg&fm=jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="ini&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ini&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <!-- <button type="submit" class="search-form-submit"></button> -->
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+              <script type='text/javascript'>
+              $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 80%; display: block; float:none;}}</style>");
+              </script>
+              <script type='text/javascript'>
+              document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
+              </script>
+           
+            <section id="main"><article id="post-使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="https://images.pexels.com/photos/614503/pexels-photo-614503.jpeg?cs=srgb&dl=adult-back-view-beach-614503.jpg&fm=jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/f19cae66.html">
+            <time datetime="2018-04-20T02:50:14.000Z" itemprop="datePublished">2018-04-20</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/NGINX/">NGINX</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/HTTPS/">HTTPS</a>, <a class="tag-link" href="/tags/NGINX/">NGINX</a>, <a class="tag-link" href="/tags/SSL/">SSL</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#FreeSSL免费SSL证书"><span class="toc-number">1.</span> <span class="toc-text">FreeSSL免费SSL证书</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置Nginx支持Https"><span class="toc-number">2.</span> <span class="toc-text">配置Nginx支持Https</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Http请求重定向到Https"><span class="toc-number">3.</span> <span class="toc-text">Http请求重定向到Https</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Freessl-相关"><span class="toc-number">4.</span> <span class="toc-text">Freessl 相关</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            
+            <p>本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。</p>
+<a id="more"></a>
+<h5 id="FreeSSL免费SSL证书"><a href="#FreeSSL免费SSL证书" class="headerlink" title="FreeSSL免费SSL证书"></a>FreeSSL免费SSL证书</h5><p>FreeSSL.org 是一个提供免费HTTPS证书申请的网站 ，目前支持通过这两家CA机构TrustAsia，Let’s Encrypt生成SSL证书。<br>我们这里选择TrustAsia，创建一个一年期限的ssl证书。</p>
+<p><img src="/images/freessl/step_1.png" alt=""><br>输入对应的域名，选择Ca机构，点击“创建免费的SSL证书”<br><img src="/images/freessl/step_2.png" alt=""><br>输入邮箱地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在证书快到期的时候，Freessl会发邮件提醒你。</span><br></pre></td></tr></table></figure></p>
+<p>选择证书类型，验证类型为“File”，CSR生成为“浏览器生成”（为了安全，最好是选择我有CSR），点击生成，<br>会弹出如下界面<br><img src="/images/freessl/step_3.png" alt=""><br>在服务器项目根目录下新建.well-known/pki-validation/fileauth.txt文件，复制“201804190313215v2qzo2quee1emf9z180awofxk4ju12koqxbaw1d531n0jv030”到fileauth文件中，点击“点击验证”<br>如果CA生成证书成功，直接下载下来就行。<br><img src="/images/freessl/step_4.png" alt=""><br>至此 完成ssl证书的创建。</p>
+<h5 id="配置Nginx支持Https"><a href="#配置Nginx支持Https" class="headerlink" title="配置Nginx支持Https"></a>配置Nginx支持Https</h5><p>把上一步生成的证书以及私钥上传到服务器上，然后配置Nginx支持https访问，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/nginx/nginx.conf</span><br><span class="line"></span><br><span class="line">添加支持https的server</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       443 ssl;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">    root /data/blog;    </span><br><span class="line">#        root         /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">    ssl_certificate &quot;/data/chain/full_chain.pem&quot;;</span><br><span class="line">    ssl_certificate_key &quot;/data/chain/private.key&quot;;</span><br><span class="line">    ssl_session_cache shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout  10m;</span><br><span class="line">    ssl_ciphers HIGH:!aNULL:!MD5;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line"></span><br><span class="line">    # Load configuration files for the default server block.</span><br><span class="line">    include /etc/nginx/default.d/*.conf;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 404 /404.html;</span><br><span class="line">        location = /40x.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 500 502 503 504 /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="Http请求重定向到Https"><a href="#Http请求重定向到Https" class="headerlink" title="Http请求重定向到Https"></a>Http请求重定向到Https</h5><p>修改Nginx配置文件如下,在Http server中添加重定向语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">  listen       80 default_server;</span><br><span class="line">  listen       [::]:80 default_server;</span><br><span class="line">  server_name  _;</span><br><span class="line">  rewrite ^(.*)$  https://$host$1 permanent;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="Freessl-相关"><a href="#Freessl-相关" class="headerlink" title="Freessl 相关"></a>Freessl 相关</h5><ul>
+<li>关于CSR生成的说明<br>1、浏览器生成<br>在浏览器支持 Web Cryptography 的情况下，我们默认使用浏览器根据用户的信息生成CSR文件（关于 Web Cryptography 的浏览器支持情况可点击 这里 了解详情）。</li>
+</ul>
+<p>2、后端服务器生成<br>在浏览器不支持CSR文件生成的时候，我们会根据用户所填的信息，在后端服务器生成一个CSR文件。</p>
+<p>3、上传自己的CSR文件<br>如果你有自己的CSR文件，并且想使用自己的CSR文件，那么可以点击上方表单中点击生成下方的文字，通过粘贴，使用自己的CSR文件。</p>
+<ul>
+<li>关于域名验证的说明<br>CA 需要对您是否拥有该域名进行验证，这样才能给您颁发证书。这里有多种验证方式，您可以采用对您较为方便的方式进行。在进行下一步的同时，你将同意 Lets Encrypt service agreement 或 TrustAsia。如果您的网站有防火墙，请对 66.133.109.36 开放。如果您收到 504 网关超时，无法连接等其它错误， 请刷新页面重试；如果您有自己的CSR文件，可上传CSR文件之后进行手动验证。<br>1、手动验证（文件）<br>CA 将通过访问特定 URL 地址来验证您是否有改域名的所有权。因此，您需要下载给顶的验证文件，并上传到您的服务器</li>
+</ul>
+<p>2、手动验证（DNS）<br>CA 将通过查询 DNS 的 TXT 记录来确定您对该域名的所有权。您只需要在域名管理平台将生成的 TXT 记录名与记录值添加到该域名下，等待大约 1 分钟即可验证成功</p>
+<p>3、如果你有自己的CSR文件，可手动上传验证文件到您的域以验证所有权<br>CA 将通过查询 DNS 的 TXT 记录来确定您对该域名的所有权。您只需要在域名管理平台将生成的 TXT 记录名与记录值添加到该域名下，等待大约 1 分钟即可验证成功</p>
+<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
+<li><a href="https://freessl.org/" target="_blank" rel="noopener">https://freessl.org/</a></li>
+<li><a href="https://docs.lvrui.io/2017/04/01/nginx%E9%85%8D%E7%BD%AEhttp%E5%BC%BA%E5%88%B6%E8%B7%B3%E8%BD%AChttps/" target="_blank" rel="noopener">nginx配置http强制跳转https</a></li>
+<li><a href="https://aotu.io/notes/2016/08/16/nginx-https/index.html" target="_blank" rel="noopener">Nginx 配置 HTTPS 服务器</a></li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者：</strong>王建磊</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="" title="{{ page.title }}">使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>发布时间：</strong>
+          <a href="" title="{{ page.title }}">2018年4月20日 - 10时04分</a>
+          </li>
+          <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+          </li>
+        </ul>
+      <div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://inicb.com/archives/f19cae66.html" data-id="cjh5tp2cx000r1roz381ooz2u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+      
+<nav id="article-nav">
+    
+        <a href="/archives/fdfa2529.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    新时代e支部后台创作的故事 
+                
+            </div>
+        </a>
+    
+    
+        <a href="/archives/31b33e7a.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">FastDFS Tracker及Storage节点添加及删除</div>
+        </a>
+    
+</nav>
+
+
+    
+  </div>
+
+    <!-- 
+        
+<nav id="article-nav">
+    
+        <a href="/archives/fdfa2529.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    新时代e支部后台创作的故事 
+                
+            </div>
+        </a>
+    
+    
+        <a href="/archives/31b33e7a.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">FastDFS Tracker及Storage节点添加及删除</div>
+        </a>
+    
+</nav>
+
+
+     -->
+</article>
+
+
+    
+    
+
+
+
+</section>
+            
+            <!-- 
+             -->
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 ini<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
