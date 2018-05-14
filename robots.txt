@@ -1,0 +1,14 @@
+# hexo robots.txt
+User-agent: * Allow: /
+Allow: /archives/
+Allow: /
+Allow: /home/
+Allow: /about/
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+Sitemap: http://inicb.com/sitemap.xml
+Sitemap: http://inicb.com/baidusitemap.xml
