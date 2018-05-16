@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://inicb.com/images/burp_sqlmap/1.png">
 <meta property="og:image" content="http://inicb.com/images/burp_sqlmap/2.png">
 <meta property="og:image" content="http://inicb.com/images/burp_sqlmap/3.png">
-<meta property="og:updated_time" content="2018-05-16T07:54:26.217Z">
+<meta property="og:updated_time" content="2018-05-16T07:56:17.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Burp和sqlmap进行自动化sql注入">
 <meta name="twitter:description" content="Tips：本文主要用于sql注入攻击自查，请不要做犯法的事情。  之前已经讲过如何用Burp和Sqlmap配合进行sql注入攻击，但是使用起来特别麻烦，对有大量接口调用的项目如何自动化的进行检测便变得重要，本篇注重介绍如何使用Burp以及sqlmap的批量注入来完成自动化注入攻击。 整体流程为：  使用BurpSuite保存request记录log 因为BurpSuite的日志记录了所有走代理">
@@ -207,6 +207,7 @@
 <li>因为BurpSuite的日志记录了所有走代理的流量，包括静态资源啊，重复的提交啊，这些都会影响SqlMap的分析效率，所以对Request日志进行过滤。</li>
 <li>对过滤后的日志文件进行批量注入攻击。</li>
 </ol>
+<a id="more"></a>
 <h5 id="使用BurpSuite保存request记录log"><a href="#使用BurpSuite保存request记录log" class="headerlink" title="使用BurpSuite保存request记录log"></a>使用BurpSuite保存request记录log</h5><p>使用的BurpSuite版本为1.7.26进行的操作，各个版本有可能不一样，请注意。</p>
 <p>勾选BurpSuite输出日志<br><img src="/images/burp_sqlmap/1.png" alt=""><br>输入要保存为的文件名称<br><img src="/images/burp_sqlmap/2.png" alt=""></p>
 <h5 id="对日志进行过滤"><a href="#对日志进行过滤" class="headerlink" title="对日志进行过滤"></a>对日志进行过滤</h5><p>强大的SqlMap支持使用BurpSuite的日志进行批量分析，但是BurpSuite的日志记录了所有走代理的流量，包括静态资源啊，重复的提交啊，这些都会影响SqlMap的分析效率，所以需要对访问日志进行过滤，只筛选出我们需要的。</p>
@@ -299,7 +300,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/f38a06d2.html" data-id="cjh8szels001daeoz3xdp87cb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/f38a06d2.html" data-id="cjh8tb9fo001dcroznqlsfac5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
