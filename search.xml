@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp）]]></title>
     <url>%2Farchives%2F8b7fb8fa.html</url>
-    <content type="text"><![CDATA[在做安卓开发过程中，经常会遇到需要适配各种奇形怪状的屏幕的情况，例如下面这位大哥：宽：67.5cm高：120cm但是他的实际像素才1080(w)x1872(h)，density：1.0，densityDpi：160。在这种情况下我们知道应该用values-sw600dp这种类型的文件夹存放这种屏幕的资源，但是如何确认屏幕应该用什么样尺寸的文件夹呢，也就是应该如何确认是600，还是700，还是480呢？这里又一个算法： sw-xxxx-dp的计算公式是 xxxx = sw *160/dpi其中sw为屏幕分辨率中最小的那个值。在这里就是1080 dpi为屏幕密度，在这里就是160 。 也可以用如下方式获取： 1adb shell getprop ro.sf.lcd_density 所以这个屏幕所使用的最小宽度应该为：1080 * 160 / 160 = 1080，也就是sw-1080dp。 提供一个获取安卓设备信息的开源项目： https://github.com/menny/android-device-info 下面是一些常用范例： 参考资料： Android开发中如何匹配layout资源（layout-sw480dp layout-sw600dp-land layout-sw720dp-port）]]></content>
+    <content type="text"><![CDATA[在做安卓开发过程中，经常会遇到需要适配各种奇形怪状的屏幕的情况，例如下面这位大哥： 宽：67.5cm高：120cm但是他的实际像素才1080(w)x1872(h)，density：1.0，densityDpi：160。在这种情况下我们知道应该用values-sw600dp这种类型的文件夹存放这种屏幕的资源，但是如何确认屏幕应该用什么样尺寸的文件夹呢，也就是应该如何确认是600，还是700，还是480呢？这里有一个算法： sw-xxxx-dp的计算公式是 xxxx = sw *160/dpi其中sw为屏幕分辨率中最小的那个值。在这里就是1080 dpi为屏幕密度，在这里就是160 。 也可以用如下方式获取： 1adb shell getprop ro.sf.lcd_density 所以这个屏幕所使用的最小宽度应该为：1080 * 160 / 160 = 1080，也就是sw-1080dp。 提供一个获取安卓设备信息的开源项目： https://github.com/menny/android-device-info 下面是一些常用范例： 参考资料： Android开发中如何匹配layout资源（layout-sw480dp layout-sw600dp-land layout-sw720dp-port）]]></content>
       <categories>
         <category>技术开发</category>
         <category>Android</category>
