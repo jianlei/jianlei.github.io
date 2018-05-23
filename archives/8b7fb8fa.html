@@ -3,19 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Android 多个源码目录和资源目录 | ini&#39;s Blog</title>
+    <title>Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp） | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1.首先你得使用gradle 去构建项目。原理如下：  引用源码目录和资源目录，以及Manifest文件 1234567891011121314sourceSets &amp;#123;        main &amp;#123;            manifest.srcFile &amp;apos;AndroidManifest.xml&amp;apos;            java.srcDirs = [&amp;apo">
+    <meta name="description" content="在做安卓开发过程中，经常会遇到需要适配各种奇形怪状的屏幕的情况，例如下面这位大哥：宽：67.5cm高：120cm但是他的实际像素才1080(w)x1872(h)，density：1.0，densityDpi：160。在这种情况下我们知道应该用values-sw600dp这种类型的文件夹存放这种屏幕的资源，但是如何确认屏幕应该用什么样尺寸的文件夹呢，也就是应该如何确认是600，还是700，还是">
+<meta name="keywords" content="Android,屏幕适配">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android 多个源码目录和资源目录">
-<meta property="og:url" content="http://inicb.com/archives/e0c2a9d8.html">
+<meta property="og:title" content="Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp）">
+<meta property="og:url" content="http://inicb.com/archives/8b7fb8fa.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="1.首先你得使用gradle 去构建项目。原理如下：  引用源码目录和资源目录，以及Manifest文件 1234567891011121314sourceSets &amp;#123;        main &amp;#123;            manifest.srcFile &amp;apos;AndroidManifest.xml&amp;apos;            java.srcDirs = [&amp;apo">
+<meta property="og:description" content="在做安卓开发过程中，经常会遇到需要适配各种奇形怪状的屏幕的情况，例如下面这位大哥：宽：67.5cm高：120cm但是他的实际像素才1080(w)x1872(h)，density：1.0，densityDpi：160。在这种情况下我们知道应该用values-sw600dp这种类型的文件夹存放这种屏幕的资源，但是如何确认屏幕应该用什么样尺寸的文件夹呢，也就是应该如何确认是600，还是700，还是">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-04T02:44:05.191Z">
+<meta property="og:image" content="http://inicb.com/images/Android/1.png">
+<meta property="og:image" content="http://inicb.com/images/Android/2.png">
+<meta property="og:updated_time" content="2018-05-23T06:04:03.195Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android 多个源码目录和资源目录">
-<meta name="twitter:description" content="1.首先你得使用gradle 去构建项目。原理如下：  引用源码目录和资源目录，以及Manifest文件 1234567891011121314sourceSets &amp;#123;        main &amp;#123;            manifest.srcFile &amp;apos;AndroidManifest.xml&amp;apos;            java.srcDirs = [&amp;apo">
+<meta name="twitter:title" content="Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp）">
+<meta name="twitter:description" content="在做安卓开发过程中，经常会遇到需要适配各种奇形怪状的屏幕的情况，例如下面这位大哥：宽：67.5cm高：120cm但是他的实际像素才1080(w)x1872(h)，density：1.0，densityDpi：160。在这种情况下我们知道应该用values-sw600dp这种类型的文件夹存放这种屏幕的资源，但是如何确认屏幕应该用什么样尺寸的文件夹呢，也就是应该如何确认是600，还是700，还是">
+<meta name="twitter:image" content="http://inicb.com/images/Android/1.png">
     
 
     
@@ -150,7 +154,7 @@
               document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
               </script>
            
-            <section id="main"><article id="post-Android-多个源码目录和资源目录" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Android开发中如何匹配各种layout资源（layout-sw480dp-layout-sw600dp）" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -158,7 +162,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Android 多个源码目录和资源目录
+            Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp）
         </h1>
     
 
@@ -167,8 +171,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/archives/e0c2a9d8.html">
-            <time datetime="2016-06-14T02:54:46.000Z" itemprop="datePublished">2016-06-14</time>
+        <a href="/archives/8b7fb8fa.html">
+            <time datetime="2018-05-23T05:26:51.000Z" itemprop="datePublished">2018-05-23</time>
         </a>
     </div>
 
@@ -180,6 +184,11 @@
     </div>
 
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android/">Android</a>, <a class="tag-link" href="/tags/屏幕适配/">屏幕适配</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -188,16 +197,16 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h3 id="1-首先你得使用gradle-去构建项目。"><a href="#1-首先你得使用gradle-去构建项目。" class="headerlink" title="1.首先你得使用gradle 去构建项目。"></a>1.首先你得使用gradle 去构建项目。</h3><p>原理如下：</p>
-<ol>
-<li><p>引用源码目录和资源目录，以及Manifest文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line">            manifest.srcFile &apos;AndroidManifest.xml&apos;</span><br><span class="line">            java.srcDirs = [&apos;src&apos;]</span><br><span class="line">            resources.srcDirs = [&apos;src&apos;]</span><br><span class="line">            aidl.srcDirs = [&apos;src&apos;]</span><br><span class="line">            renderscript.srcDirs = [&apos;src&apos;]</span><br><span class="line">            res.srcDirs = [&apos;res&apos;]</span><br><span class="line">            assets.srcDirs = [&apos;assets&apos;]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        debug.setRoot(&apos;build-types/debug&apos;)</span><br><span class="line">        release.setRoot(&apos;build-types/release&apos;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>多个目录配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sourceSets&#123;</span><br><span class="line">        main&#123;</span><br><span class="line">            res.srcDirs = [</span><br><span class="line">                    &apos;src/main/res/sub_res/base&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/notice&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/study&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/rckq&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/associates&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res&apos;,</span><br><span class="line">                    &apos;src/main/res&apos;</span><br><span class="line">            ];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>如上所示。</p>
+            <p>在做安卓开发过程中，经常会遇到需要适配各种奇形怪状的屏幕的情况，例如下面这位大哥：<br><img src="/images/Android/1.png" alt=""><br>宽：67.5cm<br>高：120cm<br>但是他的实际像素才1080(w)x1872(h)，density：1.0，densityDpi：160。<br>在这种情况下我们知道应该用values-sw600dp这种类型的文件夹存放这种屏幕的资源，但是如何确认屏幕应该用什么样尺寸的文件夹呢，也就是应该如何确认是600，还是700，还是480呢？<br>这里又一个算法：</p>
+<h3 id="sw-xxxx-dp的计算公式是-xxxx-sw-160-dpi"><a href="#sw-xxxx-dp的计算公式是-xxxx-sw-160-dpi" class="headerlink" title="sw-xxxx-dp的计算公式是  xxxx = sw *160/dpi"></a>sw-xxxx-dp的计算公式是  xxxx = sw *160/dpi</h3><p>其中sw为屏幕分辨率中最小的那个值。在这里就是1080<br>   dpi为屏幕密度，在这里就是160 。 也可以用如下方式获取：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell getprop ro.sf.lcd_density</span><br></pre></td></tr></table></figure></p>
+<p>所以这个屏幕所使用的最小宽度应该为：1080 * 160 / 160 = 1080，也就是sw-1080dp。</p>
+<p>提供一个获取安卓设备信息的开源项目：</p>
+<p><a href="https://github.com/menny/android-device-info" target="_blank" rel="noopener">https://github.com/menny/android-device-info</a></p>
+<p>下面是一些常用范例：<br><img src="/images/Android/2.png" alt=""></p>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://blog.csdn.net/tung214/article/details/46054233" target="_blank" rel="noopener">Android开发中如何匹配layout资源（layout-sw480dp layout-sw600dp-land layout-sw720dp-port）</a></li>
+</ul>
 
         
         </div>
@@ -257,11 +266,11 @@
           </li>
           <li class="post-copyright-link">
           <strong>本文链接：</strong>
-          <a href="" title="{{ page.title }}">Android 多个源码目录和资源目录</a>
+          <a href="" title="{{ page.title }}">Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp）</a>
           </li>
           <li class="post-copyright-link">
           <strong>发布时间：</strong>
-          <a href="" title="{{ page.title }}">2016年6月14日 - 10时06分</a>
+          <a href="" title="{{ page.title }}">2018年5月23日 - 13时05分</a>
           </li>
           <li class="post-copyright-license">
           <strong>版权声明： </strong>
@@ -276,7 +285,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/e0c2a9d8.html" data-id="cjhipe96h0019r5ozpdc37jx3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/8b7fb8fa.html" data-id="cjhipe96b0016r5ozykfzwjth" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -349,19 +358,10 @@
       
 <nav id="article-nav">
     
-        <a href="/archives/4a17b156.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Hello World
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/f11662fe.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/f38a06d2.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Android从布局中快速高效地提取Style</div>
+            <div class="article-nav-title">使用Burp和sqlmap进行自动化sql注入</div>
         </a>
     
 </nav>
@@ -374,19 +374,10 @@
         
 <nav id="article-nav">
     
-        <a href="/archives/4a17b156.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Hello World
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/f11662fe.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/f38a06d2.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Android从布局中快速高效地提取Style</div>
+            <div class="article-nav-title">使用Burp和sqlmap进行自动化sql注入</div>
         </a>
     
 </nav>

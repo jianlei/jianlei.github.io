@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp）]]></title>
+    <url>%2Farchives%2F8b7fb8fa.html</url>
+    <content type="text"><![CDATA[在做安卓开发过程中，经常会遇到需要适配各种奇形怪状的屏幕的情况，例如下面这位大哥：宽：67.5cm高：120cm但是他的实际像素才1080(w)x1872(h)，density：1.0，densityDpi：160。在这种情况下我们知道应该用values-sw600dp这种类型的文件夹存放这种屏幕的资源，但是如何确认屏幕应该用什么样尺寸的文件夹呢，也就是应该如何确认是600，还是700，还是480呢？这里又一个算法： sw-xxxx-dp的计算公式是 xxxx = sw *160/dpi其中sw为屏幕分辨率中最小的那个值。在这里就是1080 dpi为屏幕密度，在这里就是160 。 也可以用如下方式获取： 1adb shell getprop ro.sf.lcd_density 所以这个屏幕所使用的最小宽度应该为：1080 * 160 / 160 = 1080，也就是sw-1080dp。 提供一个获取安卓设备信息的开源项目： https://github.com/menny/android-device-info 下面是一些常用范例： 参考资料： Android开发中如何匹配layout资源（layout-sw480dp layout-sw600dp-land layout-sw720dp-port）]]></content>
+      <categories>
+        <category>技术开发</category>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>屏幕适配</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用Burp和sqlmap进行自动化sql注入]]></title>
     <url>%2Farchives%2Ff38a06d2.html</url>
     <content type="text"><![CDATA[Tips：本文主要用于sql注入攻击自查，请不要做犯法的事情。 之前已经讲过如何用Burp和Sqlmap配合进行sql注入攻击，但是使用起来特别麻烦，对有大量接口调用的项目如何自动化的进行检测便变得重要，本篇注重介绍如何使用Burp以及sqlmap的批量注入来完成自动化注入攻击。 整体流程为： 使用BurpSuite保存request记录log 因为BurpSuite的日志记录了所有走代理的流量，包括静态资源啊，重复的提交啊，这些都会影响SqlMap的分析效率，所以对Request日志进行过滤。 对过滤后的日志文件进行批量注入攻击。 使用BurpSuite保存request记录log使用的BurpSuite版本为1.7.26进行的操作，各个版本有可能不一样，请注意。 勾选BurpSuite输出日志输入要保存为的文件名称 对日志进行过滤强大的SqlMap支持使用BurpSuite的日志进行批量分析，但是BurpSuite的日志记录了所有走代理的流量，包括静态资源啊，重复的提交啊，这些都会影响SqlMap的分析效率，所以需要对访问日志进行过滤，只筛选出我们需要的。 使用burplogfilter.py过滤日志，点击下载介绍：12345678910Usage: python3 burplogfilter.py [options]Options: -h Show this showHelp -f filepath The BurpSuite log to analyze --host keyword, --host=keyword Host name filter -v Show debug messageExamples: python3 burplogfilter.py -f /tmp/burp.log --host=&apos;google.com&apos; &gt; burp-proxy.log 参考本文BurpSuite日志分析过滤工具，加快SqlMap进行批量扫描的速度git地址使用：12python3 burplogfilter.py -f ~/temp/burp/sql_map_log --host=xxxx &gt; ~/temp/burp/sql_map_log_proxy# 保存过滤日志到新的文件 在使用burplogfilter过程中，发现报以下错误“TypeError: cannot use a string pattern on a bytes-like object”修改burplogfilter.py以下位置即可1234567891011121314151617def scrapBlocks(filename): global DEBUG if DEBUG: print(&quot;Try to anayze file %s&quot;%filename) blocks=None with open(filename, &apos;rb&apos;) as f: content=f.read() content = content.decode(&apos;ISO-8859-1&apos;) #添加这句话 blocks = re.findall(r&apos;======================================================&apos; r&apos;.*?======================================================&apos; r&apos;.*?======================================================&apos;, content, re.S) if DEBUG: print(&quot;The file contains %s block(s)&quot;%len(blocks)) return blocks 对过滤后的日志文件进行批量注入攻击进入sqlmap.py所在目录，1234python sqlmap.py -l /Users/daren/temp/burp/sql_map_log_1_filter --batch -smart --dbms=oracle# -l 访问日志文件# batch：自动选yes。# smart：启发式快速判断，节约时间。 到此完成自动化批量注入攻击。 参考资料 BurpSuite日志分析过滤工具，加快SqlMap进行批量扫描的速度 python 编码问题 UnicodeDecodeError: ‘utf8’ codec can’t decode byte 0xb4 in position 0: invalid start byt BurpSuite导出log配合SQLMAP批量扫描注入点 如何使用Burp Suite代理]]></content>
