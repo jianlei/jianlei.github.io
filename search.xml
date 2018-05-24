@@ -182,7 +182,7 @@
     <content type="text"><![CDATA[华为 sd 手机默认关闭了ap日志，在开发过程中很不方便。所以需要我们打开app日志，方便调试。 进入拨号界面输入：1*#*#2846579#*#* 依次选择1工程菜单---后台设置----LOG设置---LOG开关 点击打开，完事。]]></content>
       <categories>
         <category>技术开发</category>
-        <category>ANDROID</category>
+        <category>Android</category>
       </categories>
       <tags>
         <tag>Android</tag>
