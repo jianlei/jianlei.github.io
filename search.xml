@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[星云链Nas开发笔记]]></title>
+    <url>%2Farchives%2F9e7c4bd8.html</url>
+    <content type="text"><![CDATA[学习资料 成熟网站 面试经历网网站地址： https://duanyugit.github.io/interview/index.htmlgithub地址：https://github.com/duanyuGit/interview合约地址：https://explorer.nebulas.io/#/address/n1uqMB4GSXudXCp5KuMo3LxbgvoNTHJSYiw]]></content>
+      <categories>
+        <category>区块链</category>
+      </categories>
+      <tags>
+        <tag>Nas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用bitnami-gitlab一体包搭建git代码服务器]]></title>
+    <url>%2Farchives%2Fc2439d6c.html</url>
+    <content type="text"><![CDATA[最近git代码服务器IP变了，需要修改git远程地址的访问ip，以前用gitlab搭建过git服务器，不过时间有点久远了，也没记录下来，这里在这里整理一下gitlab的使用方法，以备后续查找使用。 修改gitlab项目的ip地址1234vim /etc/gitlab/gitlab.rb修改为如下：external_url &apos;https://192.168.1.113&apos; 重启Gitlab1gitlab-ctl restart 完成。]]></content>
+      <categories>
+        <category>Gitlab</category>
+      </categories>
+      <tags>
+        <tag>Gitlab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Android Studio 3.0 Annotation processors Error]]></title>
     <url>%2Farchives%2F33608f55.html</url>
     <content type="text"><![CDATA[升级到Android Studio 3.0之后，当编译项目的时候，如果项目使饮用了Lombok和Butterknifeh这两个开源项目，你就会发现在编译过程中发生以下错误：12345Error:Execution failed for task &apos;:Base:javaPreCompileDebug&apos;.&gt; Annotation processors must be explicitly declared now. The following dependencies on the compile classpath are found to contain annotation processor. Please add them to the annotationProcessor configuration. - butterknife-7.0.1.jar (com.jakewharton:butterknife:7.0.1) Alternatively, set android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true to continue with previous behavior. Note that this option is deprecated and will be removed in the future. See https://developer.android.com/r/tools/annotation-processor-error-message.html for more details. 错误日志已经告诉我们了，在Android Studio 3.0 之后 annotationProcessor必须由我们开发者显示声明了，添加annotationProcessor之后即可解决此问题。12compile &apos;com.jakewharton:butterknife:7.0.1&apos;annotationProcessor &apos;com.jakewharton:butterknife:7.0.1&apos; 参考链接： https://stackoverflow.com/a/44084804]]></content>
@@ -205,7 +227,7 @@
   <entry>
     <title><![CDATA[常用网站工具箱集合]]></title>
     <url>%2Farchives%2F62b50406.html</url>
-    <content type="text"><![CDATA[图片 pexels https://www.pexels.com/ https://unsplash.com/ https://foter.com/ http://www.iconfont.cn/ 生成favicon图片的网站 https://realfavicongenerator.net 存储图片平台 https://cloudinary.com/ Nginx nginx配置location总结及rewrite规则写法 http://seanlook.com/2015/05/17/nginx-location-rewrite/ 重疾： 失能收入补偿，不要指望能把终生重疾险能把一辈子医疗费用报销了，他是为了失能收入补偿，优先考虑退休前，如果预算比较宽松，可以考虑终身。保额比时间更重要。一年一买的保险只能作为补充受益人 一部分父母，一部分孩子双支柱做5倍保额重疾是一次性赔付。重疾险保额年收入的三倍货币有时间价值医疗险 先花钱后报销 倒入表 imp ccstyj/ccstyj@orcl file=/data/wjl/tbl_mobile.dmp full=y]]></content>
+    <content type="text"><![CDATA[图片 pexels https://www.pexels.com/ https://unsplash.com/ https://foter.com/ http://www.iconfont.cn/ 生成favicon图片的网站 https://realfavicongenerator.net 存储图片平台 https://cloudinary.com/ JS layer web弹层组件 http://layer.layui.com/Nginx nginx配置location总结及rewrite规则写法 http://seanlook.com/2015/05/17/nginx-location-rewrite/ 重疾： 失能收入补偿，不要指望能把终生重疾险能把一辈子医疗费用报销了，他是为了失能收入补偿，优先考虑退休前，如果预算比较宽松，可以考虑终身。保额比时间更重要。一年一买的保险只能作为补充受益人 一部分父母，一部分孩子双支柱做5倍保额重疾是一次性赔付。重疾险保额年收入的三倍货币有时间价值医疗险 先花钱后报销 倒入表 imp ccstyj/ccstyj@orcl file=/data/wjl/tbl_mobile.dmp full=y]]></content>
       <categories>
         <category>技术开发</category>
         <category>工具箱</category>

@@ -4,6 +4,67 @@
 
     
   <url>
+    <loc>http://inicb.com/archives/9e7c4bd8.html</loc>
+    <lastmod>2018-06-13T04:53:02.269Z</lastmod>
+    <data>
+        <display>
+        <title>星云链Nas开发笔记</title>
+        <pubTime>2018-06-13T04:51:18.000Z</pubTime>
+        
+        <tag>Nas</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://inicb.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/c2439d6c.html</loc>
+    <lastmod>2018-06-13T02:30:17.125Z</lastmod>
+    <data>
+        <display>
+        <title>使用bitnami-gitlab一体包搭建git代码服务器</title>
+        <pubTime>2018-06-13T02:03:37.000Z</pubTime>
+        
+        <tag>Gitlab</tag>
+         
+         
+           
+             
+              <breadCrumb title="Gitlab" url="http://inicb.com/categories/Gitlab/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/62b50406.html</loc>
+    <lastmod>2018-06-03T11:11:36.340Z</lastmod>
+    <data>
+        <display>
+        <title>常用网站工具箱集合</title>
+        <pubTime>2018-03-15T08:23:50.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="工具箱" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://inicb.com/archives/63b4e8a0.html</loc>
     <lastmod>2018-05-24T02:45:02.909Z</lastmod>
     <data>
@@ -120,27 +181,6 @@
           
              
               <breadCrumb title="WeChat" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/WeChat/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://inicb.com/archives/62b50406.html</loc>
-    <lastmod>2018-05-11T08:31:31.726Z</lastmod>
-    <data>
-        <display>
-        <title>常用网站工具箱集合</title>
-        <pubTime>2018-03-15T08:23:50.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
-          
-             
-              <breadCrumb title="工具箱" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
           
         </display>
     </data>
