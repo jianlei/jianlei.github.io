@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux常用命令整理]]></title>
+    <url>%2Farchives%2Ff42d2759.html</url>
+    <content type="text"><![CDATA[Yum 如何配置Yum代理123vim /etc/yum.conf# 添加如下：proxy=http://10.1.65.6:1080/]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[在Centos7上安装docker]]></title>
+    <url>%2Farchives%2F5368ee28.html</url>
+    <content type="text"><![CDATA[安装docker参照官方网址：https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-ce docker支持多种安装方式，我这里是用了最常见的安装方式yum进行安装。Install using the repository SET UP THE REPOSITORY(配置) 安装所需依赖Install required packages 123sudo yum install -y yum-utils \ device-mapper-persistent-data \ lvm2 使用稳定的docker yum 源 123sudo yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo 安装docker 安装最新版本的docker 1sudo yum install docker-ce 启动docker 1sudo systemctl start docker 检测docker是否正确安装 1sudo docker run hello-world 使用docker加载本地镜像如果你的镜像没有发不到仓库上，可以通过docker的加载本地镜像来加载。1docker load --input docker_image_ezb_20180302.tar]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[星云链Nas开发笔记]]></title>
     <url>%2Farchives%2F9e7c4bd8.html</url>
-    <content type="text"><![CDATA[学习资料 成熟网站 面试经历网网站地址： https://duanyugit.github.io/interview/index.htmlgithub地址：https://github.com/duanyuGit/interview合约地址：https://explorer.nebulas.io/#/address/n1uqMB4GSXudXCp5KuMo3LxbgvoNTHJSYiw]]></content>
+    <content type="text"><![CDATA[学习资料 官方教程 手把手教你星云DApp开发（第一部分) 手把手教你星云DApp开发（第二部分) nebPay 介绍 NAS星云链DAPP开发之宠物养成游戏 开源成熟网站 面试经历网网站地址： https://duanyugit.github.io/interview/index.htmlgithub地址：https://github.com/duanyuGit/interview合约地址：https://explorer.nebulas.io/#/address/n1uqMB4GSXudXCp5KuMo3LxbgvoNTHJSYiw 我的星云查看gate io 钱包nas数量https://explorer.nebulas.io/#/address/n1dnerPW8iQRgu5mCcwHeJVaQaxdigaCyAX 查看本地钱包 nas数量https://explorer.nebulas.io/#/address/n1Z1WRfKxRV3Hae4emF43m8J3GgDKn51PUZ]]></content>
       <categories>
         <category>区块链</category>
       </categories>
@@ -182,11 +192,6 @@
     <content type="text"><![CDATA[修改网卡名称为eth0 在centos7之后，系统网卡的默认名称由以往的Ethx改成了Enox，下面介绍如何将code Centos7 的网卡名称改为Ethx的方法。 首先修改“/etc/sysconfig/grub”文件 1vim /etc/sysconfig/grub 内容大概是这样 12345678GRUB_TIMEOUT=5GRUB_DISTRIBUTOR=&quot;$(sed &apos;s, release .*$,,g&apos; /etc/system-release)&quot;GRUB_DEFAULT=savedGRUB_DISABLE_SUBMENU=trueGRUB_TERMINAL_OUTPUT=&quot;console&quot;GRUB_CMDLINE_LINUX=&quot;crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet net.ifnames=0 biosdevname=0&quot;#GRUB_CMDLINE_LINUX=&quot;crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet&quot;GRUB_DISABLE_RECOVERY=&quot;true&quot; 其中有一行是GRUB_CMDLINE_LINUX，在这行结尾的引号前面加上这句 1net.ifnames=0 biosdevname=0 修改完成后这行内容为 1GRUB_CMDLINE_LINUX=&quot;crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet net.ifnames=0 biosdevname=0&quot; 然后用 grub2-mkconfig 命令重新建立 GRUB 的设定值 1grub2-mkconfig -o /boot/grub2/grub.cfg 接着把Eno网卡的名称改为Eth0，如下： 1mv /etc/sysconfig/network-scripts/ifcfg-eno16777736 /etc/sysconfig/network-scripts/ifcfg-eth0 修改网卡名称，并且设置为静态IP 接着编辑/etc/sysconfig/network-scripts/ifcfg-eth0 文件，修改为如下，同时设置为静态ip： 1234567891011121314TYPE=EthernetBOOTPROTO=static //设置为静态IPDEFROUTE=yesPEERDNS=yesPEERROUTES=yesIPV4_FAILURE_FATAL=noIPADDR=192.168.1.120 //ip 地址GATEWAY=192.168.1.1 //网关NETMASK=255.255.255.0 //子网掩码DNS1=8.8.8.8 //DNSNAME=eth0 //网卡名称UUID=bef554bc-0bc9-4234-a896-2c46da01a923DEVICE=eth0 //设备名称ONBOOT=yes //开机自动启动 最后记得重启系统，使配置生效。 参考资料https://www.phpini.com/linux/centos-7-network-interface-name https://blog.csdn.net/johnnycode/article/details/40624403 http://blog.51cto.com/mannerwang/1852712 http://blog.51cto.com/bguncle/957315]]></content>
   </entry>
   <entry>
-    <title><![CDATA[xshell端口转发，plsql连接远程oracle]]></title>
-    <url>%2Farchives%2F1712872b.html</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
     <title><![CDATA[IntelliJ IDEA 2017 注册码]]></title>
     <url>%2Farchives%2F95920696.html</url>
     <content type="text"><![CDATA[Intellij Idea 2017注册码 Mac电脑修改idea 2017注册码方式如下： 修改host文件1sudo vim /private/etc/hosts 在host文件最下面添加如下配置 10.0.0.0 account.jetbrains.com 修改idea 2017注册码为如下1EB101IWSWD-eyJsaWNlbnNlSWQiOiJFQjEwMUlXU1dEIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJXUyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUkMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUk0iLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJETSIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkFDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiRFBOIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUFMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlBDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUlNVIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In1dLCJoYXNoIjoiNjk0NDAzMi8wIiwiZ3JhY2VQZXJpb2REYXlzIjowLCJhdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJpc0F1dG9Qcm9sb25nYXRlZCI6ZmFsc2V9-Gbb7jeR8JWOVxdUFaXfJzVU/O7c7xHQyaidCnhYLp7v32zdeXiHUU7vlrrm5y9ZX0lmQk3plCCsW+phrC9gGAPd6WDKhkal10qVNg0larCR2tQ3u8jfv1t2JAvWrMOJfFG9kKsJuw1P4TozZ/E7Qvj1cupf/rldhoOmaXMyABxNN1af1RV3bVhe4FFZe0p7xlIJF/ctZkFK62HYmh8V3AyhUNTzrvK2k+t/tlDJz2LnW7nYttBLHld8LabPlEEjpTHswhzlthzhVqALIgvF0uNbIJ5Uwpb7NqR4U/2ob0Z+FIcRpFUIAHEAw+RLGwkCge5DyZKfx+RoRJ/In4q/UpA==-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO/5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij/78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB/xVy/VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE/EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4/+wuC5EtZBfvdl4HT/8vzMW/oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c/F4tlK/DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr/OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek/Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f/qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa/cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog==]]></content>
@@ -227,7 +232,7 @@
   <entry>
     <title><![CDATA[常用网站工具箱集合]]></title>
     <url>%2Farchives%2F62b50406.html</url>
-    <content type="text"><![CDATA[图片 pexels https://www.pexels.com/ https://unsplash.com/ https://foter.com/ http://www.iconfont.cn/ 生成favicon图片的网站 https://realfavicongenerator.net 存储图片平台 https://cloudinary.com/ JS layer web弹层组件 http://layer.layui.com/Nginx nginx配置location总结及rewrite规则写法 http://seanlook.com/2015/05/17/nginx-location-rewrite/ 重疾： 失能收入补偿，不要指望能把终生重疾险能把一辈子医疗费用报销了，他是为了失能收入补偿，优先考虑退休前，如果预算比较宽松，可以考虑终身。保额比时间更重要。一年一买的保险只能作为补充受益人 一部分父母，一部分孩子双支柱做5倍保额重疾是一次性赔付。重疾险保额年收入的三倍货币有时间价值医疗险 先花钱后报销 倒入表 imp ccstyj/ccstyj@orcl file=/data/wjl/tbl_mobile.dmp full=y]]></content>
+    <content type="text"><![CDATA[图片 pexels https://www.pexels.com/ https://unsplash.com/ https://foter.com/ http://www.iconfont.cn/ 生成favicon图片的网站 https://realfavicongenerator.net 存储图片平台 https://cloudinary.com/ JS layer web弹层组件 http://layer.layui.com/Nginx nginx配置location总结及rewrite规则写法 http://seanlook.com/2015/05/17/nginx-location-rewrite/ 视频音频 you-getYou-Get is a tiny command-line utility to download media contents (videos, audios, images) from the Web, in case there is no other handy way to do it. RxJava2 学习 https://maxwell-nc.github.io/android/rxjava2-1.html bootstrap modalhttp://www.runoob.com/bootstrap/bootstrap-modal-plugin.html]]></content>
       <categories>
         <category>技术开发</category>
         <category>工具箱</category>
@@ -242,8 +247,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>VPS</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -293,8 +298,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>VPS</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
