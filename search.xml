@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Linux常用命令整理]]></title>
     <url>%2Farchives%2Ff42d2759.html</url>
-    <content type="text"><![CDATA[Yum 如何配置Yum代理123vim /etc/yum.conf# 添加如下：proxy=http://10.1.65.6:1080/]]></content>
+    <content type="text"><![CDATA[Yum 如何配置Yum代理123vim /etc/yum.conf# 添加如下：proxy=http://10.1.65.6:1080/ lftp]]></content>
   </entry>
   <entry>
     <title><![CDATA[在Centos7上安装docker]]></title>
@@ -190,6 +190,15 @@
     <title><![CDATA[CentOs7 修改网卡名字为eth0以及修改静态ip]]></title>
     <url>%2Farchives%2Fa7be2108.html</url>
     <content type="text"><![CDATA[修改网卡名称为eth0 在centos7之后，系统网卡的默认名称由以往的Ethx改成了Enox，下面介绍如何将code Centos7 的网卡名称改为Ethx的方法。 首先修改“/etc/sysconfig/grub”文件 1vim /etc/sysconfig/grub 内容大概是这样 12345678GRUB_TIMEOUT=5GRUB_DISTRIBUTOR=&quot;$(sed &apos;s, release .*$,,g&apos; /etc/system-release)&quot;GRUB_DEFAULT=savedGRUB_DISABLE_SUBMENU=trueGRUB_TERMINAL_OUTPUT=&quot;console&quot;GRUB_CMDLINE_LINUX=&quot;crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet net.ifnames=0 biosdevname=0&quot;#GRUB_CMDLINE_LINUX=&quot;crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet&quot;GRUB_DISABLE_RECOVERY=&quot;true&quot; 其中有一行是GRUB_CMDLINE_LINUX，在这行结尾的引号前面加上这句 1net.ifnames=0 biosdevname=0 修改完成后这行内容为 1GRUB_CMDLINE_LINUX=&quot;crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet net.ifnames=0 biosdevname=0&quot; 然后用 grub2-mkconfig 命令重新建立 GRUB 的设定值 1grub2-mkconfig -o /boot/grub2/grub.cfg 接着把Eno网卡的名称改为Eth0，如下： 1mv /etc/sysconfig/network-scripts/ifcfg-eno16777736 /etc/sysconfig/network-scripts/ifcfg-eth0 修改网卡名称，并且设置为静态IP 接着编辑/etc/sysconfig/network-scripts/ifcfg-eth0 文件，修改为如下，同时设置为静态ip： 1234567891011121314TYPE=EthernetBOOTPROTO=static //设置为静态IPDEFROUTE=yesPEERDNS=yesPEERROUTES=yesIPV4_FAILURE_FATAL=noIPADDR=192.168.1.120 //ip 地址GATEWAY=192.168.1.1 //网关NETMASK=255.255.255.0 //子网掩码DNS1=8.8.8.8 //DNSNAME=eth0 //网卡名称UUID=bef554bc-0bc9-4234-a896-2c46da01a923DEVICE=eth0 //设备名称ONBOOT=yes //开机自动启动 最后记得重启系统，使配置生效。 参考资料https://www.phpini.com/linux/centos-7-network-interface-name https://blog.csdn.net/johnnycode/article/details/40624403 http://blog.51cto.com/mannerwang/1852712 http://blog.51cto.com/bguncle/957315]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[xshell端口转发，plsql连接远程oracle]]></title>
+    <url>%2Farchives%2F1712872b.html</url>
+    <content type="text"><![CDATA[本文主要介绍如何使用XShell建立隧道连接, 让plsql能够直接在本地远程到远程服务器内网中的数据库。 需要前置条件 需要有能够通过ssh链接的中间服务器。例如A 1.先建立一个ssh链接，如下图所示：其中：在主机输入要A的ip，端口号输入A上开发的ssh端口号。2.选择“密码”验证，输入用户名和密码。3.如下图所示：选择“隧道”，然后点击“添加”，在弹出的对话框中输入转移规则，其中：类型（方向）选择“Local(Outgoing)”源主机，输入“localhost”侦听端口，选择本机开发端口，例如：15216如果选中“仅接受本地连接”，表示此隧道只支持本机电脑使用。目标主机，输入服务器真正的数据库内网机器。目标端口，输入服务器数据库端口。点击确定完成隧道创建。4.使用plsql建立数据库远程访问如图所示：]]></content>
+      <categories>
+        <category>技术开发</category>
+        <category>开发工具</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[IntelliJ IDEA 2017 注册码]]></title>
