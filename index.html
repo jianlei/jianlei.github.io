@@ -257,11 +257,13 @@
 <li><a href="https://developer.android.com/studio/build/optimize-your-build?hl=zh-cn" target="_blank" rel="noopener">优化您的构建速度 | Android Developers</a></li>
 <li><a href="http://www.easemob.com/news/852" target="_blank" rel="noopener">环信</a></li>
 </ol>
-<p>下面提取文章重点，以做备忘。<br>在我们谈论优化措施之前，我们先来看看优化之前项目的build性能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew clean app:assembleDebug --profile</span><br></pre></td></tr></table></figure></p>
-<p>我们使用这个命令执行full-build(从头创建)的过程，来衡量build的性能。</p>
-<h2 id="优化您的构建配置"><a href="#优化您的构建配置" class="headerlink" title="优化您的构建配置"></a>优化您的构建配置</h2><p>按照下面的提示操作，提升您的 Android Studio 项目的构建速度。</p>
-<h3 id="保持工具处于最新状态"><a href="#保持工具处于最新状态" class="headerlink" title="保持工具处于最新状态"></a>保持工具处于最新状态</h3><p>Android 工具几乎在每一次更新中都会获得构建优化和新功能，本页介绍的一些提示假设您正在使用最新版本。要充分利用最新优化，请保持以下工具处于最新状态.</p>
-<h3 id="避免Legacy-Multidex"><a href="#避免Legacy-Multidex" class="headerlink" title="避免Legacy Multidex"></a>避免Legacy Multidex</h3><p>Google针对64k方法数的问题推出了MultiDex的解决方法，但是不同的api版本上，multidex的做法是不一样的，在api21以上，因为Android采用了新的运行时ART，会在安装的时候将所有的classesN.dex合并成一个.oat包。你需要做的就是在编译脚本中加一行 multiDexEnabled true。但是在api以下，你需要引入multidex support library. 而且在编译过程中，编译脚本要话很长时间决定哪些class要放入primary dex中，哪些放入secondary dex中。在api21以下，这叫做legacy multidex。</p></p>
+<p>下面提取文章重点，以做备忘。<br>在我们谈论优化措施之前，我们先来看看优化之前项目的build性能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gradlew clean //执行干净构建</span><br><span class="line">gradlew --profile --recompile-scripts --offline --rerun-tasks assembleFlavorDebug</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>profile：启用分析。</li>
+<li>recompile-scripts：在绕过缓存时强制重新编译脚本。</li>
+<li>offline：禁止 Gradle 提取在线依赖项。这样可以确保 Gradle 在尝试更新依赖项时引起的任何延迟都不会干扰您的分析数据。您应当已将项目构建一次，以便确保 Gradle 已经下载和缓存您的依赖项。</li>
+<li>rerun-tasks：强制 Gradle 重新运行所有任务并忽略任何任务优化。<br>我们使用这个命令执行full-build(从头创建)的过程，来衡量build的性能。<h2 id="优化您的构建配置"><a href="#优化您的构建配置" class="headerlink" title="优化您的构建配置"></a>优化您的构建配置</h2>按照下面的提示操作，提升您的 Android Studio 项目的构建速度。<h3 id="保持工具处于最新状态"><a href="#保持工具处于最新状态" class="headerlink" title="保持工具处于最新状态"></a>保持工具处于最新状态</h3>Android 工具几乎在每一次更新中都会获得构建优化和新功能，本页介绍的一些提示假设您正在使用最新版本。要充分利用最新优化，请保持以下工具处于最新状态.<h3 id="避免Legacy-Multidex"><a href="#避免Legacy-Multidex" class="headerlink" title="避免Legacy Multidex"></a>避免Legacy Multidex</h3>Google针对64k方法数的问题推出了MultiDex的解决方法，但是不同的api版本上，multidex的做法是不一样的，在api21以上，因为Android采用了新的运行时ART，会在安装的时候将所有的classesN.dex合并成一个.oat包。你需要做的就是在编译脚本中加一行 multiDexEnabled true。但是在api以下，你需要引入multidex support library. 而且在编译过程中，编译脚本要话很长时间决定哪些class要放入primary dex中，哪些放入secondary dex中。在api21以下，这叫做legacy multidex。</li>
+</ul></p>
             <p class="article-more-link">
                 <a href="/archives/35dc888d.html#more">查看更多</a>
             </p>
