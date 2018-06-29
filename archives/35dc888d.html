@@ -5,19 +5,19 @@
     
     <title>如何提高Android Studio构建速度 | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Tips：自从切换到AS开发安卓应用以来，一直被AS蜗牛般的构建速度困扰着，特别是在构建大型项目的时候如果构建变种很多的话，速度更是慢的够呛，所以最近研究一下如何提高编译速度，在网上找到这样一篇文章，供大家参考。  文章来源：  优化您的构建速度 | Android Developers 环信  下面提取文章重点，以做备忘。在我们谈论优化措施之前，我们先来看看优化之前项目的build性能12g">
+    <meta name="description" content="Tips：自从切换到AS开发安卓应用以来，一直被AS蜗牛般的构建速度困扰着，特别是在构建大型项目的时候如果构建变种很多的话，速度更是慢的够呛，所以最近研究一下如何提高编译速度，在网上找到这样一篇文章，供大家参考。  文章来源：  优化您的构建速度 | Android Developers 几个小改动，将Android 构建速度提升10倍以上！  下面提取文章重点，以做备忘。在我们谈论优化措施之">
 <meta name="keywords" content="Android Studio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何提高Android Studio构建速度">
 <meta property="og:url" content="http://inicb.com/archives/35dc888d.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="Tips：自从切换到AS开发安卓应用以来，一直被AS蜗牛般的构建速度困扰着，特别是在构建大型项目的时候如果构建变种很多的话，速度更是慢的够呛，所以最近研究一下如何提高编译速度，在网上找到这样一篇文章，供大家参考。  文章来源：  优化您的构建速度 | Android Developers 环信  下面提取文章重点，以做备忘。在我们谈论优化措施之前，我们先来看看优化之前项目的build性能12g">
+<meta property="og:description" content="Tips：自从切换到AS开发安卓应用以来，一直被AS蜗牛般的构建速度困扰着，特别是在构建大型项目的时候如果构建变种很多的话，速度更是慢的够呛，所以最近研究一下如何提高编译速度，在网上找到这样一篇文章，供大家参考。  文章来源：  优化您的构建速度 | Android Developers 几个小改动，将Android 构建速度提升10倍以上！  下面提取文章重点，以做备忘。在我们谈论优化措施之">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://inicb.com/images/pic/pexels-photo-12838.jpeg">
-<meta property="og:updated_time" content="2018-06-29T05:52:56.769Z">
+<meta property="og:updated_time" content="2018-06-29T07:10:51.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何提高Android Studio构建速度">
-<meta name="twitter:description" content="Tips：自从切换到AS开发安卓应用以来，一直被AS蜗牛般的构建速度困扰着，特别是在构建大型项目的时候如果构建变种很多的话，速度更是慢的够呛，所以最近研究一下如何提高编译速度，在网上找到这样一篇文章，供大家参考。  文章来源：  优化您的构建速度 | Android Developers 环信  下面提取文章重点，以做备忘。在我们谈论优化措施之前，我们先来看看优化之前项目的build性能12g">
+<meta name="twitter:description" content="Tips：自从切换到AS开发安卓应用以来，一直被AS蜗牛般的构建速度困扰着，特别是在构建大型项目的时候如果构建变种很多的话，速度更是慢的够呛，所以最近研究一下如何提高编译速度，在网上找到这样一篇文章，供大家参考。  文章来源：  优化您的构建速度 | Android Developers 几个小改动，将Android 构建速度提升10倍以上！  下面提取文章重点，以做备忘。在我们谈论优化措施之">
 <meta name="twitter:image" content="http://inicb.com/images/pic/pexels-photo-12838.jpeg">
     
 
@@ -209,7 +209,7 @@
 <p>文章来源：</p>
 <ol>
 <li><a href="https://developer.android.com/studio/build/optimize-your-build?hl=zh-cn" target="_blank" rel="noopener">优化您的构建速度 | Android Developers</a></li>
-<li><a href="http://www.easemob.com/news/852" target="_blank" rel="noopener">环信</a></li>
+<li><a href="http://www.easemob.com/news/852" target="_blank" rel="noopener">几个小改动，将Android 构建速度提升10倍以上！</a></li>
 </ol>
 <p>下面提取文章重点，以做备忘。<br>在我们谈论优化措施之前，我们先来看看优化之前项目的build性能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gradlew clean //执行干净构建</span><br><span class="line">gradlew --profile --recompile-scripts --offline --rerun-tasks assembleFlavorDebug</span><br></pre></td></tr></table></figure></p>
 <ul>
@@ -312,7 +312,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/35dc888d.html" data-id="cjizkan3e001z0dozyaulixrc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/35dc888d.html" data-id="cjiznjt5y001x9kozh16y233h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
