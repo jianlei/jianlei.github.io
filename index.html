@@ -270,12 +270,11 @@
 <li><p>最后别忘记处理屏幕旋转，否则横竖屏切换会重新走一遍生命周期.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">          android:name=&quot;.html.ZbtWebViewActivity&quot;</span><br><span class="line">          android:theme=&quot;@style/Theme.AppCompat.NoActionBar&quot;</span><br><span class="line">          android:configChanges=&quot;orientation&quot;&gt;</span><br><span class="line">      &lt;/activity&gt;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<p>代码地址：<a href="https://github.com/jianlei/VideoEnabledWebView" target="_blank" rel="noopener">可全屏的webview</a></p>
-<ol>
-<li>隐藏网页中的广告<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onPageFinished(WebView view, String url) &#123;</span><br><span class="line">    String js = &quot;javascript:function hideAd()&#123;document.getElementsByClassName(&apos;mobile__live--title&apos;)[0].style.display=&apos;none&apos;&#125;&quot;;</span><br><span class="line">    webView.loadUrl(js);</span><br><span class="line">    webView.loadUrl(&quot;javascript:hideAd();&quot;); //调用js方法，隐藏广告</span><br><span class="line">    super.onPageFinished(view, url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>隐藏网页中的广告</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onPageFinished(WebView view, String url) &#123;</span><br><span class="line">    String js = &quot;javascript:function hideAd()&#123;document.getElementsByClassName(&apos;mobile__live--title&apos;)[0].style.display=&apos;none&apos;&#125;&quot;;</span><br><span class="line">    webView.loadUrl(js);</span><br><span class="line">    webView.loadUrl(&quot;javascript:hideAd();&quot;); //调用js方法，隐藏广告</span><br><span class="line">    super.onPageFinished(view, url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<p>代码地址：<a href="https://github.com/jianlei/VideoEnabledWebView" target="_blank" rel="noopener">可全屏的webview</a></p>
 <p>参考链接：</p>
 <ul>
 <li><a href="https://segmentfault.com/a/1190000007561455" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007561455</a></li>
