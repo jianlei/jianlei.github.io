@@ -4,8 +4,33 @@
 
     
   <url>
+    <loc>http://inicb.com/archives/a0439c.html</loc>
+    <lastmod>2018-08-15T08:27:50.742Z</lastmod>
+    <data>
+        <display>
+        <title>Android实现毛玻璃效果(高斯模糊)</title>
+        <pubTime>2018-08-15T07:53:36.000Z</pubTime>
+        
+        <tag>StackBlur</tag>
+         
+        <tag>毛玻璃</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Android" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://inicb.com/archives/d3b6c7a6.html</loc>
-    <lastmod>2018-08-10T01:44:03.166Z</lastmod>
+    <lastmod>2018-08-10T02:01:04.671Z</lastmod>
     <data>
         <display>
         <title>Android WebView实现全屏播放的一种方法</title>

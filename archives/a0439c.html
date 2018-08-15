@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Android 多个源码目录和资源目录 | ini&#39;s Blog</title>
+    <title>Android实现毛玻璃效果(高斯模糊) | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1.首先你得使用gradle 去构建项目。原理如下：  引用源码目录和资源目录，以及Manifest文件 1234567891011121314sourceSets &amp;#123;        main &amp;#123;            manifest.srcFile &amp;apos;AndroidManifest.xml&amp;apos;            java.srcDirs = [&amp;apo">
+    <meta name="description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95">
+<meta name="keywords" content="StackBlur,毛玻璃">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android 多个源码目录和资源目录">
-<meta property="og:url" content="http://inicb.com/archives/e0c2a9d8.html">
+<meta property="og:title" content="Android实现毛玻璃效果(高斯模糊)">
+<meta property="og:url" content="http://inicb.com/archives/a0439c.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="1.首先你得使用gradle 去构建项目。原理如下：  引用源码目录和资源目录，以及Manifest文件 1234567891011121314sourceSets &amp;#123;        main &amp;#123;            manifest.srcFile &amp;apos;AndroidManifest.xml&amp;apos;            java.srcDirs = [&amp;apo">
+<meta property="og:description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-04T02:44:05.191Z">
+<meta property="og:updated_time" content="2018-08-15T08:27:50.742Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android 多个源码目录和资源目录">
-<meta name="twitter:description" content="1.首先你得使用gradle 去构建项目。原理如下：  引用源码目录和资源目录，以及Manifest文件 1234567891011121314sourceSets &amp;#123;        main &amp;#123;            manifest.srcFile &amp;apos;AndroidManifest.xml&amp;apos;            java.srcDirs = [&amp;apo">
+<meta name="twitter:title" content="Android实现毛玻璃效果(高斯模糊)">
+<meta name="twitter:description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95">
     
 
     
@@ -150,7 +151,7 @@
               document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
               </script>
            
-            <section id="main"><article id="post-Android-多个源码目录和资源目录" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Android实现毛玻璃效果-高斯模糊" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -158,7 +159,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Android 多个源码目录和资源目录
+            Android实现毛玻璃效果(高斯模糊)
         </h1>
     
 
@@ -167,8 +168,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/archives/e0c2a9d8.html">
-            <time datetime="2016-06-14T02:54:46.000Z" itemprop="datePublished">2016-06-14</time>
+        <a href="/archives/a0439c.html">
+            <time datetime="2018-08-15T07:53:36.000Z" itemprop="datePublished">2018-08-15</time>
         </a>
     </div>
 
@@ -180,6 +181,11 @@
     </div>
 
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/StackBlur/">StackBlur</a>, <a class="tag-link" href="/tags/毛玻璃/">毛玻璃</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -188,16 +194,16 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h3 id="1-首先你得使用gradle-去构建项目。"><a href="#1-首先你得使用gradle-去构建项目。" class="headerlink" title="1.首先你得使用gradle 去构建项目。"></a>1.首先你得使用gradle 去构建项目。</h3><p>原理如下：</p>
+            <p>在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？</p>
+<p>在网上看到这篇文章，大家可以参考一下</p>
+<p><a href="http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/</a></p>
+<p>主要思想就是，</p>
 <ol>
-<li><p>引用源码目录和资源目录，以及Manifest文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line">            manifest.srcFile &apos;AndroidManifest.xml&apos;</span><br><span class="line">            java.srcDirs = [&apos;src&apos;]</span><br><span class="line">            resources.srcDirs = [&apos;src&apos;]</span><br><span class="line">            aidl.srcDirs = [&apos;src&apos;]</span><br><span class="line">            renderscript.srcDirs = [&apos;src&apos;]</span><br><span class="line">            res.srcDirs = [&apos;res&apos;]</span><br><span class="line">            assets.srcDirs = [&apos;assets&apos;]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        debug.setRoot(&apos;build-types/debug&apos;)</span><br><span class="line">        release.setRoot(&apos;build-types/release&apos;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>多个目录配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sourceSets&#123;</span><br><span class="line">        main&#123;</span><br><span class="line">            res.srcDirs = [</span><br><span class="line">                    &apos;src/main/res/sub_res/base&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/notice&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/study&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/rckq&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/associates&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res&apos;,</span><br><span class="line">                    &apos;src/main/res&apos;</span><br><span class="line">            ];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。</li>
+<li>对压缩后的图片进行模糊处理。主要采用 <a href="http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html" target="_blank" rel="noopener">StackBlur</a> 模糊算法，这种算法应用非常广泛，能得到非常良好的毛玻璃效果。在这里，使用是它的 Java 实现代码<a href="https://github.com/wingjay/BlurImageView/blob/master/blurimageviewlib/src/main/java/com/wingjay/blurimageviewlib/FastBlurUtil.java" target="_blank" rel="noopener">FastBlur.java</a>。<br></li>
 </ol>
-<p>如上所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap)</span><br></pre></td></tr></table></figure>
+<p>可以看出，使用方法非常简单，传入待虚化的 bitmap、虚化程序(一般为 8)、和是否重用 flag。</p>
 
         
         </div>
@@ -257,11 +263,11 @@
           </li>
           <li class="post-copyright-link">
           <strong>本文链接：</strong>
-          <a href="" title="{{ page.title }}">Android 多个源码目录和资源目录</a>
+          <a href="" title="{{ page.title }}">Android实现毛玻璃效果(高斯模糊)</a>
           </li>
           <li class="post-copyright-link">
           <strong>发布时间：</strong>
-          <a href="" title="{{ page.title }}">2016年6月14日 - 10时06分</a>
+          <a href="" title="{{ page.title }}">2018年8月15日 - 15时08分</a>
           </li>
           <li class="post-copyright-license">
           <strong>版权声明： </strong>
@@ -276,7 +282,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/e0c2a9d8.html" data-id="cjkuvjf3j002jnnozp3vfk5v3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/a0439c.html" data-id="cjkuvjf3e002gnnozv7qdb4z4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -349,19 +355,10 @@
       
 <nav id="article-nav">
     
-        <a href="/archives/4a17b156.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Hello World
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/f11662fe.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/d3b6c7a6.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Android从布局中快速高效地提取Style</div>
+            <div class="article-nav-title">Android WebView实现全屏播放的一种方法</div>
         </a>
     
 </nav>
@@ -374,19 +371,10 @@
         
 <nav id="article-nav">
     
-        <a href="/archives/4a17b156.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Hello World
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/f11662fe.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/d3b6c7a6.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Android从布局中快速高效地提取Style</div>
+            <div class="article-nav-title">Android WebView实现全屏播放的一种方法</div>
         </a>
     
 </nav>
