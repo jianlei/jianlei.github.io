@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Android实现毛玻璃效果(高斯模糊)]]></title>
     <url>%2Farchives%2Fa0439c.html</url>
-    <content type="text"><![CDATA[在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/ 主要思想就是， 对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。 对压缩后的图片进行模糊处理。主要采用 StackBlur 模糊算法，这种算法应用非常广泛，能得到非常良好的毛玻璃效果。在这里，使用是它的 Java 实现代码FastBlur.java。 1public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) 可以看出，使用方法非常简单，传入待虚化的 bitmap、虚化程序(一般为 8)、和是否重用 flag。 相关资料 android-stackblur]]></content>
+    <content type="text"><![CDATA[在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 一种快速毛玻璃虚化效果实现 主要思想就是， 对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。 对压缩后的图片进行模糊处理。主要采用 StackBlur 模糊算法，这种算法应用非常广泛，能得到非常良好的毛玻璃效果。在这里，使用是它的 Java 实现代码FastBlur.java。 1public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) 可以看出，使用方法非常简单，传入待虚化的 bitmap、虚化程序(一般为 8)、和是否重用 flag。 相关资料 android-stackblur]]></content>
       <categories>
         <category>技术开发</category>
         <category>Android</category>

@@ -5,18 +5,18 @@
     
     <title>Android实现毛玻璃效果(高斯模糊) | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95">
+    <meta name="description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 一种快速毛玻璃虚化效果实现 主要思想就是，  对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。 对压缩后的图片进行模糊处理。主要采用 StackBlur 模糊算法，这种算法应用非常广泛，能得到非常良好的毛玻璃效果。在这里，使用是">
 <meta name="keywords" content="StackBlur,毛玻璃">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android实现毛玻璃效果(高斯模糊)">
 <meta property="og:url" content="http://inicb.com/archives/a0439c.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95">
+<meta property="og:description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 一种快速毛玻璃虚化效果实现 主要思想就是，  对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。 对压缩后的图片进行模糊处理。主要采用 StackBlur 模糊算法，这种算法应用非常广泛，能得到非常良好的毛玻璃效果。在这里，使用是">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-15T08:30:02.555Z">
+<meta property="og:updated_time" content="2018-08-15T08:31:13.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android实现毛玻璃效果(高斯模糊)">
-<meta name="twitter:description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95">
+<meta name="twitter:description" content="在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？ 在网上看到这篇文章，大家可以参考一下 一种快速毛玻璃虚化效果实现 主要思想就是，  对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。 对压缩后的图片进行模糊处理。主要采用 StackBlur 模糊算法，这种算法应用非常广泛，能得到非常良好的毛玻璃效果。在这里，使用是">
     
 
     
@@ -196,7 +196,7 @@
             
             <p>在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？</p>
 <p>在网上看到这篇文章，大家可以参考一下</p>
-<p><a href="http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/</a></p>
+<p><a href="http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">一种快速毛玻璃虚化效果实现</a></p>
 <p>主要思想就是，</p>
 <ol>
 <li>对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。</li>
@@ -285,7 +285,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/a0439c.html" data-id="cjkuvlgk7002cosozeca1d3vr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/a0439c.html" data-id="cjkuvmy3a0021q3oz9zw4cn6g" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
