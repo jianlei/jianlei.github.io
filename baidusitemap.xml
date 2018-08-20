@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://inicb.com/archives/d45e8871.html</loc>
-    <lastmod>2018-08-16T06:41:18.970Z</lastmod>
+    <lastmod>2018-08-20T01:44:21.168Z</lastmod>
     <data>
         <display>
         <title>搭建GitLab CI服务器</title>
@@ -22,6 +22,31 @@
           
              
               <breadCrumb title="CI" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/CI/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/b732e7e5.html</loc>
+    <lastmod>2018-08-20T01:41:27.354Z</lastmod>
+    <data>
+        <display>
+        <title>Android项目在Gitlab-CI上的使用</title>
+        <pubTime>2018-08-20T01:40:58.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>CI</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Android" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Android/"/>
           
         </display>
     </data>
@@ -435,9 +460,9 @@
         <title>部署Hexo博客到VPS</title>
         <pubTime>2018-03-15T02:29:59.000Z</pubTime>
         
-        <tag>Hexo</tag>
-         
         <tag>VPS</tag>
+         
+        <tag>Hexo</tag>
          
          
            
@@ -479,9 +504,9 @@
         <title>在VPS上配置hexo博客</title>
         <pubTime>2016-05-26T06:23:17.000Z</pubTime>
         
-        <tag>Hexo</tag>
-         
         <tag>VPS</tag>
+         
+        <tag>Hexo</tag>
          
          
            
