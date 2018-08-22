@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://inicb.com/images/excel/1.png">
 <meta property="og:image" content="http://inicb.com/images/excel/2.png">
 <meta property="og:image" content="http://inicb.com/images/excel/3.png">
-<meta property="og:updated_time" content="2018-08-22T06:04:44.110Z">
+<meta property="og:updated_time" content="2018-08-22T23:48:17.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Pandas Merge替代Excel Vlookup">
 <meta name="twitter:description" content="事情起因是媳妇儿在处理excel数据的时候，用VLookup查找查找数据的时候，发现经常出现查找错误，折腾了好几天，也没找到规律，所以我决定用Python Pandas替换Excel的VLookup函数。  假设我们有这样一个Excel文件：Sheet1为：Sheet2为：其中Sheet2数据比Sheet1数据多一条，我们要实现的目标是把Sheet1中人员对应的年龄放到Sheet2对应的人员上">
@@ -202,7 +202,7 @@
 </blockquote></p>
 <p>假设我们有这样一个Excel文件：<br>Sheet1为：<br><img src="/images/excel/1.png" alt=""><br>Sheet2为：<br><img src="/images/excel/2.png" alt=""><br>其中Sheet2数据比Sheet1数据多一条，我们要实现的目标是把Sheet1中人员对应的年龄放到Sheet2对应的人员上，如果人员在Sheet1中不存在，则不用处理。<br>预期结果如下图所示：<br><img src="/images/excel/3.png" alt=""><br>正常我们可以用Excel的VLookup实现这个功能，但是不知道为啥，VLookup在数量大的时候经常查询错乱，所以这里用Pandas的merge功能实现VLookup。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">What is vlookup? Vlookup is essentially combining two different tables using a shared column.</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>实现代码如下:(我这里用的是Aconda配置的Python环境)<br><script src="//gist.github.com/131136793fc1c954687e66f0f5f73b4b.js"></script></p>
+<p>实现代码如下:(我这里用的是Aconda配置的Python环境)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"># _*_ coding: utf-8 _*_</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">df1 = pd.read_excel(&quot;/Users/daren/Downloads/1.xlsx&quot;, sheet_name=0)</span><br><span class="line">df2 = pd.read_excel(&quot;/Users/daren/Downloads/1.xlsx&quot;, sheet_name=1)</span><br><span class="line"></span><br><span class="line">c = df1.merge(df2, on=&quot;Name&quot;, how=&quot;right&quot;)</span><br><span class="line"># c=pd.merge(a,b,how=&apos;right&apos;)</span><br><span class="line"># print(c.head())</span><br><span class="line">c.to_excel(&apos;3.xlsx&apos;, sheet_name=&apos;result&apos;)</span><br></pre></td></tr></table></figure></p>
 <p>现在让我们逐行分析。<br>第5行：引入pandas library<br>第7-8行：使用pandas.read_excel方法导入excel表格的两个Sheet页面，作为dataframe对象。<br>第10行：执行merge操作，也就是实现VLookup函数的地方。</p>
 <p>基于共有的“Name”列merge  df1和df2，生成一个新的dataframe，然后生成excel。<br>c = df1.merge(df2, on=”Name”, how=”left”)<br>其中df1作为left dataframe，df2作为right dataframe。</p>
 <p>how有4中选择生成新的dataframe：</p>
@@ -296,7 +296,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/651663e0.html" data-id="cjl4qheit002lp2oz2wp6wy2x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/651663e0.html" data-id="cjl5shih3002lo9oze8tbpk20" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
