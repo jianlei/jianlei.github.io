@@ -4,8 +4,33 @@
 
     
   <url>
+    <loc>http://inicb.com/archives/739fa792.html</loc>
+    <lastmod>2018-09-05T01:07:48.563Z</lastmod>
+    <data>
+        <display>
+        <title>使用 pyenv 管理 Python 版本</title>
+        <pubTime>2018-09-05T00:53:52.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>pyenv</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Python" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://inicb.com/archives/b732e7e5.html</loc>
-    <lastmod>2018-08-28T08:34:12.898Z</lastmod>
+    <lastmod>2018-08-29T00:17:01.171Z</lastmod>
     <data>
         <display>
         <title>Android项目在Gitlab-CI上的使用</title>

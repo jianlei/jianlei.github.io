@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[使用 pyenv 管理 Python 版本]]></title>
+    <url>%2Farchives%2F739fa792.html</url>
+    <content type="text"><![CDATA[转自使用 pyenv 管理 Python 版本 ,略有修改。 前言在使用python的时候，我们经常被python项目混乱的版本以及复杂的包依赖搞得头晕脑胀，但是自从有了pyenv和anaconda(python包虚拟环境，包依赖)，一切都清晰明了了。 pyenv 是 Python 版本管理工具。 pyenv 可以改变全局的 Python 版本，安装多个版本的 Python， 设置目录级别的 Python 版本，还能创建和管理 virtual python environments 。所有的设置都是用户级别的操作，不需要 sudo 命令。 pyenv 主要用来管理 Python 的版本，比如一个项目需要 Python 2.x ，一个项目需要 Python 3.x 。 而 anaconda 主要用来管理 Python 包的依赖，不同项目需要依赖的包版本不同，则需要使用虚拟环境。 pyenv 通过系统修改环境变量来实现 Python 不同版本的切换。而 anaconda 通过将 Python 包安装到一个目录来作为Python 包虚拟环境，通过切换目录来实现不同包环境间的切换。 pyenv 的美好之处在于，它并没有使用将不同的 PATH 植入不同的Shell这种高耦合的工作方式，而是简单的在 PATH 的最前面插入了一个垫片路径（shims）：~/.pyenv/shims:/usr/local/bin:/usr/bin:/bin。所有对 Python 可执行文件的查找都会首先被这个 shims 路径截获，从而使后方的系统路径失效。 pyenv安装具体的安装方式参照 官网我这里是Mac，推荐使用brew安装。安装成功之后，在.bashrc 或者 .bash_profile 中添加三行来开启自动补全.123export PATH=&quot;$HOME/.pyenv/bin:$PATH&quot;eval &quot;$(pyenv init -)&quot;eval &quot;$(pyenv virtualenv-init -)&quot; pyenv 常用命令使用 pyenv commands 显示所有可用命令 查看本机安装 Python 版本 1pyenv versions 查看可安装 Python 版本 1pyenv install -l python 安装与卸载 12$ pyenv install 2.7.3 # 安装python$ pyenv uninstall 2.7.3 # 卸载python python切换 12$ pyenv global 2.7.3 # 设置全局的 Python 版本，通过将版本号写入 ~/.pyenv/version 文件的方式。$ pyenv local 2.7.3 # 设置 Python 本地版本，通过将版本号写入当前目录下的 .python-version 文件的方式。通过这种方式设置的 Python 版本优先级较 global 高。 python优先级 shell &gt; local &gt; global pyenv 会从当前目录开始向上逐级查找 .python-version 文件，直到根目录为止。若找不到，就用 global 版本。1234$ pyenv shell 2.7.3 # 设置面向 shell 的 Python 版本，通过设置当前 shell 的 PYENV_VERSION 环境变量的方式。这个版本的优先级比 local 和 global 都要高。–unset 参数可以用于取消当前 shell 设定的版本。$ pyenv shell --unset$ pyenv rehash # 创建垫片路径（为所有已安装的可执行文件创建 shims，如：~/.pyenv/versions/*/bin/*，因此，每当你增删了 Python 版本或带有可执行文件的包（如 pip）以后，都应该执行一次本命令）]]></content>
+      <categories>
+        <category>技术开发</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>pyenv</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用Pandas Merge替代Excel Vlookup]]></title>
     <url>%2Farchives%2F651663e0.html</url>
     <content type="text"><![CDATA[事情起因是媳妇儿在处理excel数据的时候，用VLookup查找查找数据的时候，发现经常出现查找错误，折腾了好几天，也没找到规律，所以我决定用Python Pandas替换Excel的VLookup函数。 假设我们有这样一个Excel文件：Sheet1为：Sheet2为：其中Sheet2数据比Sheet1数据多一条，我们要实现的目标是把Sheet1中人员对应的年龄放到Sheet2对应的人员上，如果人员在Sheet1中不存在，则不用处理。预期结果如下图所示：正常我们可以用Excel的VLookup实现这个功能，但是不知道为啥，VLookup在数量大的时候经常查询错乱，所以这里用Pandas的merge功能实现VLookup。1What is vlookup? Vlookup is essentially combining two different tables using a shared column. 实现代码如下:(我这里用的是Aconda配置的Python环境)12345678910111213#!/usr/bin/env python3# _*_ coding: utf-8 _*_import pandas as pddf1 = pd.read_excel(&quot;/Users/daren/Downloads/1.xlsx&quot;, sheet_name=0)df2 = pd.read_excel(&quot;/Users/daren/Downloads/1.xlsx&quot;, sheet_name=1)c = df1.merge(df2, on=&quot;Name&quot;, how=&quot;right&quot;)# c=pd.merge(a,b,how=&apos;right&apos;)# print(c.head())c.to_excel(&apos;3.xlsx&apos;, sheet_name=&apos;result&apos;) 现在让我们逐行分析。第5行：引入pandas library第7-8行：使用pandas.read_excel方法导入excel表格的两个Sheet页面，作为dataframe对象。第10行：执行merge操作，也就是实现VLookup函数的地方。 基于共有的“Name”列merge df1和df2，生成一个新的dataframe，然后生成excel。c = df1.merge(df2, on=”Name”, how=”left”)其中df1作为left dataframe，df2作为right dataframe。 how有4中选择生成新的dataframe： left，以左侧表格共享列为基准 right，以右侧表格共享列为基准 inner，以两侧共有表格共享列为基准(取交集) outer，取两侧表格共享列最大区间为基准（取并集） 下载1.xlsx 参考资料 Common Excel Task in Python: Vlookup with Pandas Merge Vlookup功能的另类实现（VBA,Python,Access）－当数据量较大时 Common Excel Tasks Demonstrated in Pandas]]></content>
