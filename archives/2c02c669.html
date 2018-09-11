@@ -3,24 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>使用Burp和sqlmap进行自动化sql注入 | ini&#39;s Blog</title>
+    <title>Android修改全局Window窗口大小 | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Tips：本文主要用于sql注入攻击自查，请不要做犯法的事情。  之前已经讲过如何用Burp和Sqlmap配合进行sql注入攻击，但是使用起来特别麻烦，对有大量接口调用的项目如何自动化的进行检测便变得重要，本篇注重介绍如何使用Burp以及sqlmap的批量注入来完成自动化注入攻击。 整体流程为：  使用BurpSuite保存request记录log 因为BurpSuite的日志记录了所有走代理">
-<meta name="keywords" content="SQLMAP,BURP,自动化">
+    <meta name="description" content="在项目开发过程中，如果屏幕宽高比过于悬殊，例如电视大小的安卓设备（定制），在显示应用的时候需要居中显示，两边留白，按照手机大小显示应用。怎么实现呢？思路是通过修改应用的window大小来实现。但是window是绑定activity的，所以需要修改所有界面的window大小。 实现效果如下：实现方式如下：12345678910111213141516171819202122232425262728">
+<meta name="keywords" content="Window">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Burp和sqlmap进行自动化sql注入">
-<meta property="og:url" content="http://inicb.com/archives/f38a06d2.html">
+<meta property="og:title" content="Android修改全局Window窗口大小">
+<meta property="og:url" content="http://inicb.com/archives/2c02c669.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="Tips：本文主要用于sql注入攻击自查，请不要做犯法的事情。  之前已经讲过如何用Burp和Sqlmap配合进行sql注入攻击，但是使用起来特别麻烦，对有大量接口调用的项目如何自动化的进行检测便变得重要，本篇注重介绍如何使用Burp以及sqlmap的批量注入来完成自动化注入攻击。 整体流程为：  使用BurpSuite保存request记录log 因为BurpSuite的日志记录了所有走代理">
+<meta property="og:description" content="在项目开发过程中，如果屏幕宽高比过于悬殊，例如电视大小的安卓设备（定制），在显示应用的时候需要居中显示，两边留白，按照手机大小显示应用。怎么实现呢？思路是通过修改应用的window大小来实现。但是window是绑定activity的，所以需要修改所有界面的window大小。 实现效果如下：实现方式如下：12345678910111213141516171819202122232425262728">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://inicb.com/images/burp_sqlmap/1.png">
-<meta property="og:image" content="http://inicb.com/images/burp_sqlmap/2.png">
-<meta property="og:image" content="http://inicb.com/images/burp_sqlmap/3.png">
-<meta property="og:updated_time" content="2018-05-18T07:26:50.885Z">
+<meta property="og:image" content="http://inicb.com/images/Android/3.png">
+<meta property="og:updated_time" content="2018-09-11T00:38:53.653Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Burp和sqlmap进行自动化sql注入">
-<meta name="twitter:description" content="Tips：本文主要用于sql注入攻击自查，请不要做犯法的事情。  之前已经讲过如何用Burp和Sqlmap配合进行sql注入攻击，但是使用起来特别麻烦，对有大量接口调用的项目如何自动化的进行检测便变得重要，本篇注重介绍如何使用Burp以及sqlmap的批量注入来完成自动化注入攻击。 整体流程为：  使用BurpSuite保存request记录log 因为BurpSuite的日志记录了所有走代理">
-<meta name="twitter:image" content="http://inicb.com/images/burp_sqlmap/1.png">
+<meta name="twitter:title" content="Android修改全局Window窗口大小">
+<meta name="twitter:description" content="在项目开发过程中，如果屏幕宽高比过于悬殊，例如电视大小的安卓设备（定制），在显示应用的时候需要居中显示，两边留白，按照手机大小显示应用。怎么实现呢？思路是通过修改应用的window大小来实现。但是window是绑定activity的，所以需要修改所有界面的window大小。 实现效果如下：实现方式如下：12345678910111213141516171819202122232425262728">
+<meta name="twitter:image" content="http://inicb.com/images/Android/3.png">
     
 
     
@@ -155,7 +153,7 @@
               document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
               </script>
            
-            <section id="main"><article id="post-使用Burp和sqlmap进行自动化sql注入" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Android修改全局Window窗口大小" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -163,7 +161,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            使用Burp和sqlmap进行自动化sql注入
+            Android修改全局Window窗口大小
         </h1>
     
 
@@ -172,8 +170,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/archives/f38a06d2.html">
-            <time datetime="2018-05-16T07:01:53.000Z" itemprop="datePublished">2018-05-16</time>
+        <a href="/archives/2c02c669.html">
+            <time datetime="2018-09-10T23:54:42.000Z" itemprop="datePublished">2018-09-11</time>
         </a>
     </div>
 
@@ -181,13 +179,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/BURP/">BURP</a>, <a class="tag-link" href="/tags/SQLMAP/">SQLMAP</a>, <a class="tag-link" href="/tags/自动化/">自动化</a>
+        <a class="tag-link" href="/tags/Window/">Window</a>
     </div>
 
                     </div>
@@ -198,30 +196,10 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <blockquote><p>Tips：<br>本文主要用于sql注入攻击自查，请不要做犯法的事情。</p>
-</blockquote>
-<p>之前已经讲过如何用Burp和Sqlmap配合进行sql注入攻击，但是使用起来特别麻烦，对有大量接口调用的项目如何自动化的进行检测便变得重要，本篇注重介绍如何使用Burp以及sqlmap的批量注入来完成自动化注入攻击。</p>
-<p>整体流程为：</p>
-<ol>
-<li>使用BurpSuite保存request记录log</li>
-<li>因为BurpSuite的日志记录了所有走代理的流量，包括静态资源啊，重复的提交啊，这些都会影响SqlMap的分析效率，所以对Request日志进行过滤。</li>
-<li>对过滤后的日志文件进行批量注入攻击。</li>
-</ol>
-<a id="more"></a>
-<h5 id="使用BurpSuite保存request记录log"><a href="#使用BurpSuite保存request记录log" class="headerlink" title="使用BurpSuite保存request记录log"></a>使用BurpSuite保存request记录log</h5><p>使用的BurpSuite版本为1.7.26进行的操作，各个版本有可能不一样，请注意。</p>
-<p>勾选BurpSuite输出日志<br><img src="/images/burp_sqlmap/1.png" alt=""><br>输入要保存为的文件名称<br><img src="/images/burp_sqlmap/2.png" alt=""></p>
-<h5 id="对日志进行过滤"><a href="#对日志进行过滤" class="headerlink" title="对日志进行过滤"></a>对日志进行过滤</h5><p>强大的SqlMap支持使用BurpSuite的日志进行批量分析，但是BurpSuite的日志记录了所有走代理的流量，包括静态资源啊，重复的提交啊，这些都会影响SqlMap的分析效率，所以需要对访问日志进行过滤，只筛选出我们需要的。</p>
-<p>使用burplogfilter.py过滤日志，<a href="/files/burplogfilter.py">点击下载</a><br>介绍：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Usage: python3 burplogfilter.py [options]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -h                                  Show this showHelp</span><br><span class="line">  -f filepath                         The BurpSuite log to analyze</span><br><span class="line">  --host keyword, --host=keyword      Host name filter</span><br><span class="line">  -v                                  Show debug message</span><br><span class="line"></span><br><span class="line">Examples:</span><br><span class="line">  python3 burplogfilter.py -f /tmp/burp.log --host=&apos;google.com&apos; &gt; burp-proxy.log</span><br></pre></td></tr></table></figure></p>
-<p>参考本文<a href="http://www.freebuf.com/sectool/104855.html" target="_blank" rel="noopener">BurpSuite日志分析过滤工具，加快SqlMap进行批量扫描的速度</a><br><a href="https://github.com/tony1016/BurpLogFilter" target="_blank" rel="noopener">git地址</a><br>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 burplogfilter.py -f ~/temp/burp/sql_map_log --host=xxxx &gt;  ~/temp/burp/sql_map_log_proxy</span><br><span class="line"># 保存过滤日志到新的文件</span><br></pre></td></tr></table></figure></p>
-<p>在使用burplogfilter过程中，发现报以下错误“TypeError: cannot use a string pattern on a bytes-like object”<br><img src="/images/burp_sqlmap/3.png" alt=""><br>修改burplogfilter.py以下位置即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def scrapBlocks(filename):</span><br><span class="line">    global DEBUG</span><br><span class="line"></span><br><span class="line">    if DEBUG:</span><br><span class="line">        print(&quot;Try to anayze file %s&quot;%filename)</span><br><span class="line"></span><br><span class="line">    blocks=None</span><br><span class="line">    with open(filename, &apos;rb&apos;) as f:</span><br><span class="line">        content=f.read()</span><br><span class="line">        content = content.decode(&apos;ISO-8859-1&apos;) #添加这句话</span><br><span class="line">        blocks = re.findall(r&apos;======================================================&apos;</span><br><span class="line">            r&apos;.*?======================================================&apos;</span><br><span class="line">            r&apos;.*?======================================================&apos;, content, re.S)</span><br><span class="line">        if DEBUG:</span><br><span class="line">            print(&quot;The file contains %s block(s)&quot;%len(blocks))</span><br><span class="line"></span><br><span class="line">    return blocks</span><br></pre></td></tr></table></figure></p>
-<h5 id="对过滤后的日志文件进行批量注入攻击"><a href="#对过滤后的日志文件进行批量注入攻击" class="headerlink" title="对过滤后的日志文件进行批量注入攻击"></a>对过滤后的日志文件进行批量注入攻击</h5><p>进入sqlmap.py所在目录，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -l /Users/daren/temp/burp/sql_map_log_1_filter --batch -smart --dbms=oracle</span><br><span class="line"># -l 访问日志文件</span><br><span class="line"># batch：自动选yes。</span><br><span class="line"># smart：启发式快速判断，节约时间。</span><br></pre></td></tr></table></figure></p>
-<p>到此完成自动化批量注入攻击。</p>
-<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
-<li><a href="http://www.freebuf.com/sectool/104855.html" target="_blank" rel="noopener">BurpSuite日志分析过滤工具，加快SqlMap进行批量扫描的速度</a></li>
-<li><a href="https://blog.csdn.net/rifengxxc/article/details/76585164" target="_blank" rel="noopener">python 编码问题 UnicodeDecodeError: ‘utf8’ codec can’t decode byte 0xb4 in position 0: invalid start byt</a></li>
-<li><a href="https://www.cnblogs.com/qmfsun/p/5654192.html" target="_blank" rel="noopener">BurpSuite导出log配合SQLMAP批量扫描注入点</a></li>
-<li><a href="https://t0data.gitbooks.io/burpsuite/content/chapter3.html" target="_blank" rel="noopener">如何使用Burp Suite代理</a></li>
-</ul>
+            <p>在项目开发过程中，如果屏幕宽高比过于悬殊，例如电视大小的安卓设备（定制），在显示应用的时候需要居中显示，两边留白，按照手机大小显示应用。怎么实现呢？<br>思路是通过修改应用的window大小来实现。但是window是绑定activity的，所以需要修改所有界面的window大小。</p>
+<p>实现效果如下：<br><img src="/images/Android/3.png" alt=""><br>实现方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"># 定义activity生命周期监听</span><br><span class="line">private ActivityLifecycleCallbacks mActivityLifecycleCallbacks = new ActivityLifecycleCallbacks() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onActivityCreated(Activity activity, Bundle savedInstanceState) &#123;</span><br><span class="line">        if (Build.MODEL.equalsIgnoreCase(&quot;3280&quot;)</span><br><span class="line">                &amp;&amp; Build.MANUFACTURER.equalsIgnoreCase(&quot;rockchip&quot;)) &#123;</span><br><span class="line">            //特殊设备，设置宽度</span><br><span class="line">            WindowManager m = activity.getWindowManager();</span><br><span class="line">            Display d = m.getDefaultDisplay();  //为获取屏幕宽、高</span><br><span class="line">            android.view.WindowManager.LayoutParams p = activity.getWindow().getAttributes();  //获取对话框当前的参数值</span><br><span class="line">            p.height = (int) (d.getHeight() * 1);   //高度设置为屏幕的0.6</span><br><span class="line">            p.width = (int) (d.getWidth() * 0.50);    //宽度设置为屏幕的0.95</span><br><span class="line">            activity.getWindow().setAttributes(p);     //设置生效</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onActivityStarted(Activity activity) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onActivityResumed(Activity activity) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onActivityPaused(Activity activity) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onActivityStopped(Activity activity) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onActivitySaveInstanceState(Activity activity, Bundle outState) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onActivityDestroyed(Activity activity) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在application中注册<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onCreate() &#123;</span><br><span class="line">  super.onCreate();</span><br><span class="line">  registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>application注销的时候取消注册<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onTerminate() &#123;</span><br><span class="line">    super.onTerminate();</span><br><span class="line">    unregisterActivityLifecycleCallbacks(mActivityLifecycleCallbacks);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
         
         </div>
@@ -281,11 +259,11 @@
           </li>
           <li class="post-copyright-link">
           <strong>本文链接：</strong>
-          <a href="" title="{{ page.title }}">使用Burp和sqlmap进行自动化sql注入</a>
+          <a href="" title="{{ page.title }}">Android修改全局Window窗口大小</a>
           </li>
           <li class="post-copyright-link">
           <strong>发布时间：</strong>
-          <a href="" title="{{ page.title }}">2018年5月16日 - 15时05分</a>
+          <a href="" title="{{ page.title }}">2018年9月11日 - 07时09分</a>
           </li>
           <li class="post-copyright-license">
           <strong>版权声明： </strong>
@@ -300,7 +278,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/f38a06d2.html" data-id="cjlwzobsa001dcvozcmpjc701" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/2c02c669.html" data-id="cjlwzobu6002tcvoz8ff1glry" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -373,19 +351,10 @@
       
 <nav id="article-nav">
     
-        <a href="/archives/8b7fb8fa.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp）
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/75c2257b.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/739fa792.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">微信公众号-网页开发 开发入门</div>
+            <div class="article-nav-title">使用 pyenv 管理 Python 版本</div>
         </a>
     
 </nav>
@@ -398,19 +367,10 @@
         
 <nav id="article-nav">
     
-        <a href="/archives/8b7fb8fa.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Android开发中如何匹配各种layout资源（layout-sw480dp layout-sw600dp）
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/75c2257b.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/739fa792.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">微信公众号-网页开发 开发入门</div>
+            <div class="article-nav-title">使用 pyenv 管理 Python 版本</div>
         </a>
     
 </nav>
