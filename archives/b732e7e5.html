@@ -14,7 +14,7 @@
 <meta property="og:description" content="Setting up GitLab CI for Android projects搭建Android环境下载JDK下载Android Sdk由于我们安装的Runner环境一般都是在服务器上，是没有界面操作的，所有需要我们通过无ui 的方式下载更新安卓sdk，先下载android sdk tools12- wget --quiet --output-document=android-sdk.zip">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://inicb.com/images/runners/2.png">
-<meta property="og:updated_time" content="2018-08-29T00:17:01.171Z">
+<meta property="og:updated_time" content="2018-09-13T05:33:35.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android项目在Gitlab-CI上的使用">
 <meta name="twitter:description" content="Setting up GitLab CI for Android projects搭建Android环境下载JDK下载Android Sdk由于我们安装的Runner环境一般都是在服务器上，是没有界面操作的，所有需要我们通过无ui 的方式下载更新安卓sdk，先下载android sdk tools12- wget --quiet --output-document=android-sdk.zip">
@@ -227,6 +227,8 @@
 <p><font style="color:red">问题 2</font><br>在build结束的时候，runner会把生成的包当成artifacts上传到CI服务器上，如下所示文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">artifacts:</span><br><span class="line">    paths:</span><br><span class="line">    - $PWD/apk/</span><br></pre></td></tr></table></figure></p>
 <p>但是gitlba 默认只给每个项目100M的附件空间，所以如果你项目生成的文件比较多，有可能会报一下错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Uploading artifacts to coordinator... too large archive  id=1004 responseStatus=413 Request Entity Too Large status=413 Request Entity Too Large token=y9oZhbeX</span><br><span class="line">FATAL: Too large</span><br></pre></td></tr></table></figure></p>
 <p>这时候只需调整如图所示图片即可<br><img src="/images/runners/2.png" alt=""></p>
+<p><font style="color:red">问题 3</font><br>修改runner 任务artifacts上传存储路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">### For storing GitLab application uploads, eg. LFS objects, build artifacts</span><br><span class="line">###! Docs: https://docs.gitlab.com/ce/development/shared_files.html</span><br><span class="line"># gitlab_rails[&apos;shared_path&apos;] = &apos;/var/opt/gitlab/gitlab-rails/shared&apos;</span><br><span class="line">gitlab_rails[&apos;shared_path&apos;] = &apos;/data/gitlab_shared&apos;</span><br></pre></td></tr></table></figure></p>
+<p>然后执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后执行sudo gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure></p>
 <h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
 <li><a href="https://my.oschina.net/zhenian/blog/469013" target="_blank" rel="noopener">Android SDK 国内镜像</a></li>
 <li><a href="https://about.gitlab.com/2018/02/14/setting-up-gitlab-ci-for-android-projects/" target="_blank" rel="noopener">Setting up GitLab CI for Android projects</a></li>
@@ -311,7 +313,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/b732e7e5.html" data-id="cjlwzrhpd002gfnozqgb2j3wn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/b732e7e5.html" data-id="cjm052nnc0024ufozcrmng8f1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

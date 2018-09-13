@@ -4,8 +4,33 @@
 
     
   <url>
+    <loc>http://inicb.com/archives/b732e7e5.html</loc>
+    <lastmod>2018-09-13T05:33:35.538Z</lastmod>
+    <data>
+        <display>
+        <title>Android项目在Gitlab-CI上的使用</title>
+        <pubTime>2018-08-20T01:40:58.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>CI</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Android" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://inicb.com/archives/2c02c669.html</loc>
-    <lastmod>2018-09-11T00:42:05.456Z</lastmod>
+    <lastmod>2018-09-11T01:15:36.688Z</lastmod>
     <data>
         <display>
         <title>Android修改全局Window窗口大小</title>
@@ -45,31 +70,6 @@
           
              
               <breadCrumb title="Python" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://inicb.com/archives/b732e7e5.html</loc>
-    <lastmod>2018-08-29T00:17:01.171Z</lastmod>
-    <data>
-        <display>
-        <title>Android项目在Gitlab-CI上的使用</title>
-        <pubTime>2018-08-20T01:40:58.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>CI</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
-          
-             
-              <breadCrumb title="Android" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Android/"/>
           
         </display>
     </data>
