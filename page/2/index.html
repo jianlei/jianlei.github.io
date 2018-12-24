@@ -362,7 +362,7 @@
 <h5 id="导出镜像"><a href="#导出镜像" class="headerlink" title="导出镜像"></a>导出镜像</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker save -o xxx.tar xxx ## xxx 镜像名称</span><br></pre></td></tr></table></figure>
 <h5 id="通过已有镜像创建新的镜像"><a href="#通过已有镜像创建新的镜像" class="headerlink" title="通过已有镜像创建新的镜像"></a>通过已有镜像创建新的镜像</h5><ol>
 <li><p>编写Dockerfile</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM xxx  ## 镜像名称</span><br><span class="line">COPY catalina.sh /tomcat/bin/  ## 拷贝文件</span><br><span class="line">CMD [&quot;/run.sh&quot;]  ## 容器启动的时候运行的脚本</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#使用 # 来注释</span><br><span class="line"># FROM 指令告诉 Docker 使用哪个镜像作为基础</span><br><span class="line">FROM xxx  ## 镜像名称</span><br><span class="line">COPY catalina.sh /tomcat/bin/  ## 拷贝本地文件到容器文件</span><br><span class="line">CMD [&quot;/run.sh&quot;]  ## 容器启动的时候运行的脚本</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>通过名称生成镜像文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t tomcat . ## tomcat是镜像的名称</span><br></pre></td></tr></table></figure>
