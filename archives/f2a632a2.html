@@ -5,19 +5,19 @@
     
     <title>Android P使用私有API弹出warning(转载) | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对话框 起初以为是targetAPI的问题，升级到28问题依旧，于是Google了一下，发现是从Andro">
+    <meta name="description" content="转自：https://huangyu.github.io/archives/35fd3a81.html 最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对">
 <meta name="keywords" content="Android P">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android P使用私有API弹出warning(转载)">
 <meta property="og:url" content="http://inicb.com/archives/f2a632a2.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对话框 起初以为是targetAPI的问题，升级到28问题依旧，于是Google了一下，发现是从Andro">
+<meta property="og:description" content="转自：https://huangyu.github.io/archives/35fd3a81.html 最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://huangyu.github.io/archives/35fd3a81/warning.png">
-<meta property="og:updated_time" content="2018-12-29T07:23:47.042Z">
+<meta property="og:updated_time" content="2018-12-29T07:27:11.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android P使用私有API弹出warning(转载)">
-<meta name="twitter:description" content="最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对话框 起初以为是targetAPI的问题，升级到28问题依旧，于是Google了一下，发现是从Andro">
+<meta name="twitter:description" content="转自：https://huangyu.github.io/archives/35fd3a81.html 最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对">
 <meta name="twitter:image" content="https://huangyu.github.io/archives/35fd3a81/warning.png">
     
 
@@ -196,7 +196,8 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。<br>于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对话框<br><img src="https://huangyu.github.io/archives/35fd3a81/warning.png" alt=""></p>
+            <p>转自：<a href="https://huangyu.github.io/archives/35fd3a81.html" target="_blank" rel="noopener">https://huangyu.github.io/archives/35fd3a81.html</a></p>
+<p>最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。<br>于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对话框<br><img src="https://huangyu.github.io/archives/35fd3a81/warning.png" alt=""></p>
 <p>起初以为是targetAPI的问题，升级到28问题依旧，于是Google了一下，发现是从Android P开始，系统会限制非SDK的接口调用，也就是如果App通过反射使用系统隐藏的API，则会弹出提示。</p>
 <p>具体的细节可参考：<a href="https://developer.android.com/about/versions/pie/restrictions-non-sdk-interfaces?hl=zh-cn" target="_blank" rel="noopener">https://developer.android.com/about/versions/pie/restrictions-non-sdk-interfaces?hl=zh-cn</a></p>
 <p>Android P中，将所有API分为以下几类：</p>
@@ -291,7 +292,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/f2a632a2.html" data-id="cjq954xkj002xtmozfq7g64zi" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/f2a632a2.html" data-id="cjq958dyv0030v4ozsahhaow4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
