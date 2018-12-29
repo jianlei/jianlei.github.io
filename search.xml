@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Android P使用私有API弹出warning(转载)]]></title>
+    <url>%2Farchives%2Ff2a632a2.html</url>
+    <content type="text"><![CDATA[最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对话框 起初以为是targetAPI的问题，升级到28问题依旧，于是Google了一下，发现是从Android P开始，系统会限制非SDK的接口调用，也就是如果App通过反射使用系统隐藏的API，则会弹出提示。 具体的细节可参考：https://developer.android.com/about/versions/pie/restrictions-non-sdk-interfaces?hl=zh-cn Android P中，将所有API分为以下几类： 白名单：SDK的API，正常使用； 浅灰名单（light greylist）会在logcat弹出提示：Accessing hidden field Landroid/os/Message;-&gt;flags:I (light greylist, JNI)； 深灰名单（dark greylist）则debug版本在会弹出dialog提示框，在release版本会有Toast提示，均提示为”Detected problems with API compatibility”。； 黑名单(darklist)则会引发异常。 看了logcat日志，项目中许多地方使用到了系统私有API，直接全部修改工作量比较大，于是寻找解决方案。 最后发现原因是在SDK 28版本中Activity中的performStart有这个警告，只要在调用performStart前，ActivityThread的mHiddenApiWarningShown变量的值为true，产生这个警告的条件就无法满足。 1234567891011121314151617181920212223boolean isAppDebuggable = (mApplication.getApplicationInfo().flags &amp; ApplicationInfo.FLAG_DEBUGGABLE) != 0;// This property is set for all non-user builds except final releaseboolean isApiWarningEnabled = SystemProperties.getInt(&quot;ro.art.hiddenapi.warning&quot;, 0) == 1;if (isAppDebuggable || isApiWarningEnabled) &#123; if (!mMainThread.mHiddenApiWarningShown &amp;&amp; VMRuntime.getRuntime().hasUsedHiddenApi()) &#123; // Only show the warning once per process. mMainThread.mHiddenApiWarningShown = true; String appName = getApplicationInfo().loadLabel(getPackageManager()) .toString(); String warning = &quot;Detected problems with API compatibility\n&quot; + &quot;(visit g.co/dev/appcompat for more info)&quot;; if (isAppDebuggable) &#123; new AlertDialog.Builder(this) .setTitle(appName) .setMessage(warning) .setPositiveButton(android.R.string.ok, null) .setCancelable(false) .show(); &#125; else &#123; Toast.makeText(this, appName + &quot;\n&quot; + warning, Toast.LENGTH_LONG).show(); &#125; &#125;&#125; 具体是在Application OnCreate加入以下代码：（通过反射私有变量来解决私有API的warning，也是有趣） 1234567891011try &#123; Class&lt;?&gt; cls = Class.forName(&quot;android.app.ActivityThread&quot;); Method declaredMethod = cls.getDeclaredMethod(&quot;currentActivityThread&quot;); declaredMethod.setAccessible(true); Object activityThread = declaredMethod.invoke(null); Field mHiddenApiWarningShown = cls.getDeclaredField(&quot;mHiddenApiWarningShown&quot;); mHiddenApiWarningShown.setAccessible(true); mHiddenApiWarningShown.setBoolean(activityThread, true);&#125; catch (Exception e) &#123; e.printStackTrace();&#125; 最终warning框不再弹出，但是logcat依旧，在Logcat中看到，修改mHiddenApiWarningShown本身就是dark greylist，估计后续该办法会给官方禁用。 最好的解决方式是根据logcat的warning提示，对使用darklist的地方必须进行修改，尽量避免使用dark greylist方法。]]></content>
+      <categories>
+        <category>技术开发</category>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Android P</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Cookie 的路径以及 Cookie 域，设置同一域名下多个Tomcat共享Cookie]]></title>
     <url>%2Farchives%2F6d1addbc.html</url>
     <content type="text"><![CDATA[Cookie 路径cookie 一般都是由于用户访问页面而被创建的，可是并不是只有在创建 cookie 的页面才可以访问这个cookie。在默认情况下，出于安全方面的考虑，只有与创建 cookie 的页面处于同一个目录或在创建cookie页面的子目录下的网页才可以访问。那么此时如果希望其父级或者整个网页都能够使用cookie，就需要进行路径的设置。 让这个设置的cookie 能被其他目录或者父级的目录访问的方法：1document.cookie = &quot;userName = 独行冰海; path=/&quot;; Cookie 域路径能解决在同一个域下访问 cookie 的问题，那么如何解决同一个主域下的访问问题呢？我们可以通过指定可访问cookie的主机名来进行设置。 document.cookie=”name=value; domain=cookieDomain”; 例如 “www.baidu.com&quot; 与 “mp3.baidu.com” 公用一个关联的域名”baidu.com”，我们如果想让 “www.baidu.com&quot; 下的cookie被 “mp3.baidu.com” 访问，我们就需要用到 cookie 的domain属性，并且需要把path属性设置为 “/“ 这里需要注意一点：一定的是同域之间的访问，不能把domain的值设置成非主域的域名。 默认cookie的域是当前域名，默认的路径的设置cookie时的当前页面的目录路径。如果想要跨域或者在其他的路径下访问cookie就必须要重新设置这两个属性，domain和path。 www.baidu.com/content/example/3.jsp则域domain为www.baidu.com, 路径path为/content/example 1document.cookie = &quot;username=独行冰海; path=/; domain=baidu.com&quot;]]></content>
@@ -9,7 +21,7 @@
         <category>J2EE</category>
       </categories>
       <tags>
-        <tag>新时代e支部</tag>
+        <tag>Cookie</tag>
       </tags>
   </entry>
   <entry>

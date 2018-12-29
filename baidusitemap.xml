@@ -5,13 +5,13 @@
     
   <url>
     <loc>http://inicb.com/archives/6d1addbc.html</loc>
-    <lastmod>2018-12-29T03:29:48.618Z</lastmod>
+    <lastmod>2018-12-29T07:23:54.245Z</lastmod>
     <data>
         <display>
         <title>Cookie 的路径以及 Cookie 域，设置同一域名下多个Tomcat共享Cookie</title>
         <pubTime>2018-12-29T03:22:55.000Z</pubTime>
         
-        <tag>新时代e支部</tag>
+        <tag>Cookie</tag>
          
          
            
@@ -20,6 +20,29 @@
           
              
               <breadCrumb title="J2EE" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/J2EE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/f2a632a2.html</loc>
+    <lastmod>2018-12-29T07:23:47.042Z</lastmod>
+    <data>
+        <display>
+        <title>Android P使用私有API弹出warning(转载)</title>
+        <pubTime>2018-12-29T07:21:32.000Z</pubTime>
+        
+        <tag>Android P</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Android" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Android/"/>
           
         </display>
     </data>
