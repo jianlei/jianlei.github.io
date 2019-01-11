@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                45
+                46
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                38
+                39
                 <span>标签</span>
             </div>
         </div>
@@ -208,6 +208,120 @@
             
             
             <section id="main">
+    <article id="post-微信公众号开发入门" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/75c2257b.html">微信公众号-网页开发 开发入门</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/75c2257b.html">
+            <time datetime="2018-05-11T08:26:11.000Z" itemprop="datePublished">2018-05-11</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/WeChat/">WeChat</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/微信公众号/">微信公众号</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><blockquote><p>Tips：<br>本文章主要基于微信JS-SDK和jQuery WeUI 进行的微信公众号网页开发。前提需要<br>1.微信公众号已经完成开发者认证。<br>2.在“基本配置”中设置IP白名单。<br>3.提供一个能支持80或者443的服务。</p>
+</blockquote>
+<p>微信官方文档 <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421141115" target="_blank" rel="noopener">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421141115</a></p>
+<h4 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h4><p>先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。</p>
+<h4 id="引入JS文件"><a href="#引入JS文件" class="headerlink" title="引入JS文件"></a>引入JS文件</h4><p>在需要调用JS接口的页面引入如下JS文件，（支持https）：<a href="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" target="_blank" rel="noopener">http://res.wx.qq.com/open/js/jweixin-1.2.0.js</a></p>
+<h4 id="获取access-token"><a href="#获取access-token" class="headerlink" title="获取access_token"></a>获取access_token</h4><p>access_token 用户获取jsapi_ticket，有效期7200秒，开发者必须在自己的服务全局缓存access_token。<br>建议开发者建立自己的access_token中控服务器统一获取和刷新，其他业务逻辑服务器所使用的access_token均来自于该中控服务器。 <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140183" target="_blank" rel="noopener">微信获取access_token接口文档</a></p>
+<h6 id="接口调用说明"><a href="#接口调用说明" class="headerlink" title="接口调用说明"></a>接口调用说明</h6><font color="red">前提调用接口时，请登录“微信公众平台-开发-基本配置”提前将服务器IP地址添加到IP白名单中，点击查看设置方法，否则将无法调用成功。</font>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https请求方式: GET</span><br><span class="line">https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=APPID&amp;secret=APPSECRET</span><br></pre></td></tr></table></figure>
+<p>我这里使用了shell脚本获取access_token。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a_url=`curl https://api.weixin.qq.com/cgi-bin/token\?grant_type\=client_credential\&amp;appid\=xxx\&amp;secret\=xxxx`</span><br><span class="line">access_token=`echo $a_url|jq -r &apos;.access_token&apos;`</span><br><span class="line">echo $access_token</span><br></pre></td></tr></table></figure></p>
+<p>tips: jq 是linux下shell进行json处理的工具，很强大。</p></p>
+            <p class="article-more-link">
+                <a href="/archives/75c2257b.html#more">查看更多</a>
+            </p>
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
     <article id="post-使用Burp-Suite进行手机端代理抓包" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1179,117 +1293,6 @@
 
 
 
-    <article id="post-Nginx配置proxy-pass转发的-路径问题" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/82fd99c.html">Nginx配置proxy_pass转发的/路径问题</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/82fd99c.html">
-            <time datetime="2018-04-18T00:52:40.000Z" itemprop="datePublished">2018-04-18</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/NGINX/">NGINX</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Nginx/">Nginx</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>在日常使用Nginx过程中，经常会遇到对路径进行映射的问题，有时候会为路径添加前缀，例如访问 <a href="http://localhost:80/file/group1/M00/00/00/zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO.png," target="_blank" rel="noopener">http://localhost:80/file/group1/M00/00/00/zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO.png,</a> 通过Nginx映射之后，其实访问的是 <a href="http://localhost:80/group1/M00/00/00/zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO.png" target="_blank" rel="noopener">http://localhost:80/group1/M00/00/00/zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO.png</a>, 对file路径进行了重定向。</p>
-<p>实现方法如下：</p>
-<p>在Nginx中配置proxy_pass时，如果是按照^~匹配路径时,要注意proxy_pass后的url最后的/,当加上了/，相当于是绝对根路径，则nginx不会把location中匹配的路径部分代理走;如果没有/，则会把匹配的路径部分也给代理走。</p>
-<p>location ^~ /static_js/<br>{<br>proxy_cache js_cache;<br>proxy_set_header Host js.test.com;<br>proxy_pass <a href="http://js.test.com/" target="_blank" rel="noopener">http://js.test.com/</a>;<br>}</p>
-<p>如上面的配置，如果请求的url是<a href="http://servername/static_js/test.html" target="_blank" rel="noopener">http://servername/static_js/test.html</a><br>会被代理成<a href="http://js.test.com/test.html" target="_blank" rel="noopener">http://js.test.com/test.html</a></p>
-<p>而如果这么配置</p>
-<p>location ^~ /static_js/<br>{<br>proxy_cache js_cache;<br>proxy_set_header Host js.test.com;<br>proxy_pass <a href="http://js.test.com" target="_blank" rel="noopener">http://js.test.com</a>;<br>}</p>
-<p>则会被代理到<a href="http://js.test.com/static_js/test.htm" target="_blank" rel="noopener">http://js.test.com/static_js/test.htm</a></p>
-<p>参考资料：<br><a href="http://blog.51cto.com/wangwei007/1103734" target="_blank" rel="noopener">http://blog.51cto.com/wangwei007/1103734</a></p>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
     <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
     </nav>
@@ -1303,6 +1306,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/archives/ed7c431b.html" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://images.pexels.com/photos/1209658/pexels-photo-1209658.jpeg?cs=srgb&amp;dl=backlit-blurred-background-close-up-1209658.jpg&amp;fm=jpg)" alt="RecyclerView根据内容多少动态设置高度" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a></p>
+                            <p class="item-title"><a href="/archives/ed7c431b.html" class="title">RecyclerView根据内容多少动态设置高度</a></p>
+                            <p class="item-date"><time datetime="2019-01-11T05:58:36.000Z" itemprop="datePublished">2019-01-11</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1380,25 +1402,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/archives/739fa792.html" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://images.pexels.com/photos/1387037/pexels-photo-1387037.jpeg?cs=srgb&amp;dl=beach-freedom-friendship-1387037.jpg&amp;fm=jpg)" alt="使用 pyenv 管理 Python 版本" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Python/">Python</a></p>
-                            <p class="item-title"><a href="/archives/739fa792.html" class="title">使用 pyenv 管理 Python 版本</a></p>
-                            <p class="item-date"><time datetime="2018-09-05T00:53:52.000Z" itemprop="datePublished">2018-09-05</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1408,7 +1411,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">31</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1417,7 +1420,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -1426,7 +1429,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-P/">Android P</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BURP/">BURP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Baidu-Map/">Baidu Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FastDFS/">FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICARUS/">ICARUS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nas/">Nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/">SSL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/StackBlur/">StackBlur</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLookup/">VLookup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Window/">Window</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyenv/">pyenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubntu/">ubntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/屏幕适配/">屏幕适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众号/">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新时代e支部/">新时代e支部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毛玻璃/">毛玻璃</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-P/">Android P</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BURP/">BURP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Baidu-Map/">Baidu Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FastDFS/">FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICARUS/">ICARUS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nas/">Nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RecyclerView/">RecyclerView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/">SSL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/StackBlur/">StackBlur</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLookup/">VLookup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Window/">Window</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyenv/">pyenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubntu/">ubntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/屏幕适配/">屏幕适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众号/">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新时代e支部/">新时代e支部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毛玻璃/">毛玻璃</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1435,7 +1438,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-P/" style="font-size: 10px;">Android P</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BURP/" style="font-size: 10px;">BURP</a> <a href="/tags/Baidu-Map/" style="font-size: 10px;">Baidu Map</a> <a href="/tags/CI/" style="font-size: 13.33px;">CI</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/FastDFS/" style="font-size: 10px;">FastDFS</a> <a href="/tags/Gitlab/" style="font-size: 13.33px;">Gitlab</a> <a href="/tags/HEXO/" style="font-size: 10px;">HEXO</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/ICARUS/" style="font-size: 10px;">ICARUS</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/Nas/" style="font-size: 10px;">Nas</a> <a href="/tags/Nginx/" style="font-size: 16.67px;">Nginx</a> <a href="/tags/Pandas/" style="font-size: 10px;">Pandas</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SQLMAP/" style="font-size: 10px;">SQLMAP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/StackBlur/" style="font-size: 10px;">StackBlur</a> <a href="/tags/VLookup/" style="font-size: 10px;">VLookup</a> <a href="/tags/VPS/" style="font-size: 13.33px;">VPS</a> <a href="/tags/Webview-Video-FullScreen/" style="font-size: 10px;">Webview Video FullScreen</a> <a href="/tags/Window/" style="font-size: 10px;">Window</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/pyenv/" style="font-size: 10px;">pyenv</a> <a href="/tags/ubntu/" style="font-size: 10px;">ubntu</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/新时代e支部/" style="font-size: 10px;">新时代e支部</a> <a href="/tags/毛玻璃/" style="font-size: 10px;">毛玻璃</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-P/" style="font-size: 10px;">Android P</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BURP/" style="font-size: 10px;">BURP</a> <a href="/tags/Baidu-Map/" style="font-size: 10px;">Baidu Map</a> <a href="/tags/CI/" style="font-size: 13.33px;">CI</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/FastDFS/" style="font-size: 10px;">FastDFS</a> <a href="/tags/Gitlab/" style="font-size: 13.33px;">Gitlab</a> <a href="/tags/HEXO/" style="font-size: 10px;">HEXO</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/ICARUS/" style="font-size: 10px;">ICARUS</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/Nas/" style="font-size: 10px;">Nas</a> <a href="/tags/Nginx/" style="font-size: 16.67px;">Nginx</a> <a href="/tags/Pandas/" style="font-size: 10px;">Pandas</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/SQLMAP/" style="font-size: 10px;">SQLMAP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/StackBlur/" style="font-size: 10px;">StackBlur</a> <a href="/tags/VLookup/" style="font-size: 10px;">VLookup</a> <a href="/tags/VPS/" style="font-size: 13.33px;">VPS</a> <a href="/tags/Webview-Video-FullScreen/" style="font-size: 10px;">Webview Video FullScreen</a> <a href="/tags/Window/" style="font-size: 10px;">Window</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/pyenv/" style="font-size: 10px;">pyenv</a> <a href="/tags/ubntu/" style="font-size: 10px;">ubntu</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/新时代e支部/" style="font-size: 10px;">新时代e支部</a> <a href="/tags/毛玻璃/" style="font-size: 10px;">毛玻璃</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
         </div>
     </div>
 
@@ -1470,7 +1473,7 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 ini<br>
+            &copy; 2019 ini<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
         </div>
     </div>
