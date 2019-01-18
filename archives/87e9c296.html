@@ -5,13 +5,13 @@
     
     <title>GeoHash算法，实现快速查找附近的点 | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Geohash介绍应用场景 POI（Point of Interest）：查找某个坐标附近的支部，餐厅等常见需求 热点分析：统计某个地图区域的热度；Geohash算法地图上一般是使用经度和纬度两个维度来唯一的确定一个点，而geohash采用经纬度二维值转为一维的值。  优点：  只需要对一个字段进行索引，提高性能、降低复杂度 可转成可排序，可比较的字符串，满足灵活的需求  具体详细的介绍参考 维">
+    <meta name="description" content="做任何跟地理位置相关的服务，位置如何表示及存储是绝对绕不开的问题之一。位置的表示倒是可以用经纬度，但是索引和检索的时候，经纬度这种二维表示法就比较麻烦了，这时我们就可以利用 GeoHash 进行『降维攻击』来解决这个问题了。 Geohash介绍应用场景 POI（Point of Interest）：查找某个坐标附近的支部，餐厅等常见需求 热点分析：统计某个地图区域的热度；Geohash算法地图上">
 <meta name="keywords" content="GeoHash">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GeoHash算法，实现快速查找附近的点">
 <meta property="og:url" content="http://inicb.com/archives/87e9c296.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="Geohash介绍应用场景 POI（Point of Interest）：查找某个坐标附近的支部，餐厅等常见需求 热点分析：统计某个地图区域的热度；Geohash算法地图上一般是使用经度和纬度两个维度来唯一的确定一个点，而geohash采用经纬度二维值转为一维的值。  优点：  只需要对一个字段进行索引，提高性能、降低复杂度 可转成可排序，可比较的字符串，满足灵活的需求  具体详细的介绍参考 维">
+<meta property="og:description" content="做任何跟地理位置相关的服务，位置如何表示及存储是绝对绕不开的问题之一。位置的表示倒是可以用经纬度，但是索引和检索的时候，经纬度这种二维表示法就比较麻烦了，这时我们就可以利用 GeoHash 进行『降维攻击』来解决这个问题了。 Geohash介绍应用场景 POI（Point of Interest）：查找某个坐标附近的支部，餐厅等常见需求 热点分析：统计某个地图区域的热度；Geohash算法地图上">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://inicb.com/images/map/1.png">
 <meta property="og:image" content="http://inicb.com/images/map/2.png">
@@ -25,10 +25,10 @@
 <meta property="og:image" content="http://inicb.com/images/map/10.png">
 <meta property="og:image" content="http://inicb.com/images/map/11.png">
 <meta property="og:image" content="http://inicb.com/images/map/12.png">
-<meta property="og:updated_time" content="2019-01-18T04:38:44.453Z">
+<meta property="og:updated_time" content="2019-01-18T07:08:46.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GeoHash算法，实现快速查找附近的点">
-<meta name="twitter:description" content="Geohash介绍应用场景 POI（Point of Interest）：查找某个坐标附近的支部，餐厅等常见需求 热点分析：统计某个地图区域的热度；Geohash算法地图上一般是使用经度和纬度两个维度来唯一的确定一个点，而geohash采用经纬度二维值转为一维的值。  优点：  只需要对一个字段进行索引，提高性能、降低复杂度 可转成可排序，可比较的字符串，满足灵活的需求  具体详细的介绍参考 维">
+<meta name="twitter:description" content="做任何跟地理位置相关的服务，位置如何表示及存储是绝对绕不开的问题之一。位置的表示倒是可以用经纬度，但是索引和检索的时候，经纬度这种二维表示法就比较麻烦了，这时我们就可以利用 GeoHash 进行『降维攻击』来解决这个问题了。 Geohash介绍应用场景 POI（Point of Interest）：查找某个坐标附近的支部，餐厅等常见需求 热点分析：统计某个地图区域的热度；Geohash算法地图上">
 <meta name="twitter:image" content="http://inicb.com/images/map/1.png">
     
 
@@ -207,7 +207,8 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h4 id="Geohash介绍"><a href="#Geohash介绍" class="headerlink" title="Geohash介绍"></a>Geohash介绍</h4><h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><ul>
+            <p>做任何跟地理位置相关的服务，位置如何表示及存储是绝对绕不开的问题之一。位置的表示倒是可以用经纬度，但是索引和检索的时候，经纬度这种二维表示法就比较麻烦了，这时我们就可以利用 GeoHash 进行『降维攻击』来解决这个问题了。</p>
+<h4 id="Geohash介绍"><a href="#Geohash介绍" class="headerlink" title="Geohash介绍"></a>Geohash介绍</h4><h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><ul>
 <li>POI（Point of Interest）：查找某个坐标附近的支部，餐厅等常见需求</li>
 <li>热点分析：统计某个地图区域的热度；<h5 id="Geohash算法"><a href="#Geohash算法" class="headerlink" title="Geohash算法"></a>Geohash算法</h5>地图上一般是使用经度和纬度两个维度来唯一的确定一个点，而geohash采用经纬度二维值转为一维的值。</li>
 </ul>
@@ -247,12 +248,22 @@
 <h5 id="五、使用注意点"><a href="#五、使用注意点" class="headerlink" title="五、使用注意点"></a>五、使用注意点</h5><p>1）由于GeoHash是将区域划分为一个个规则矩形，并对每个矩形进行编码，这样在查询附近POI信息时会导致以下问题，比如红色的点是我们的位置，绿色的两个点分别是附近的两个餐馆，但是在查询的时候会发现距离较远餐馆的GeoHash编码与我们一样（因为在同一个GeoHash区域块上），而较近餐馆的GeoHash编码与我们不一致。这个问题往往产生在边界处。</p>
 <p><img src="/images/map/12.png" alt=""><br>解决的思路很简单，我们查询时，除了使用定位点的GeoHash编码进行匹配外，还使用周围8个区域的GeoHash编码，这样可以避免这个问题。<br>2）我们已经知道现有的GeoHash算法使用的是Peano空间填充曲线，这种曲线会产生突变，造成了编码虽然相似但距离可能相差很大的问题，因此在查询附近餐馆时候，首先筛选GeoHash编码相似的POI点，然后进行实际距离计算。</p>
 <p>geohash只是空间索引的一种方式，特别适合点数据，而对线、面数据采用R树索引更有优势（可参考：深入浅出空间索引：为什么需要空间索引）。</p>
+<h5 id="六、应用"><a href="#六、应用" class="headerlink" title="六、应用"></a>六、应用</h5><p>了解了具体的 GeoHash 算法之后，我们可以来看看具体在实际应用中可能遇到的各种问题：</p>
+<ul>
+<li>GeoHash 编码对应的是矩形区域，在边界处需要处理临近区域，但是具体区域的编码并不完全跟 hash 之后的字符串一致（参考前面 0111 和 1000的例子）。为此，我们需要使用周围八个区域的 GeoHash 编码，通过有限扩大搜索范围的方法来解决这个问题</li>
+<li>如果是用传统关系型数据库，可以直接利用 GeoHash 的前缀进行检索，比方说 select * from locations where geohash like ‘ws03%’</li>
+<li>如果需要兼顾速度与精确度，那么同时保存经纬度和 GeoHash 即可，利用 GeoHash 来缩小范围，再利用经纬度进行精确计算</li>
+<li>计算周围 8 个矩形区域，利用原始的 GeoHash 字符串显然是不行的（考虑分别处于赤道两边且很相近的两个点）对于经度一个维度来说，无论切分几次，它的左邻和右邻都只会和它相差1。画一下就知道它是一棵有序的01满二叉树。根据当前矩形的经度串，很容易就获得了它的两个东西邻接经度串。同理，可以根据其纬度串获取南北邻接纬度串。连同当前矩形的经度串和纬度串，就能组合得到周边的8个矩形的二进制串了。Base32 编码后的到 geohash 值，即是所需要的8个索引了</li>
+<li>Base32 是一种简单的加密算法，详情请参考后文链接</li>
+</ul>
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><ul>
 <li><a href="http://en.wikipedia.org/wiki/Geohash" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Geohash</a></li>
 <li><a href="http://geohash.gofreerange.com/" target="_blank" rel="noopener">http://geohash.gofreerange.com/</a></li>
 <li><a href="https://github.com/GongDexing/Geohash" target="_blank" rel="noopener">GeoHash Java实现</a></li>
 <li><a href="https://my.oschina.net/shipley/blog/704964" target="_blank" rel="noopener">https://my.oschina.net/shipley/blog/704964</a></li>
 <li><a href="https://github.com/jazztunes/geohash-plsql" target="_blank" rel="noopener">GeoHash存储过过程实现</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Base32" target="_blank" rel="noopener">Base32 - From Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://wdxtub.com/2016/09/07/geohash-guide/" target="_blank" rel="noopener">GeoHash 指南</a></li>
 </ul>
 
         
@@ -332,7 +343,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/87e9c296.html" data-id="cjr1l52ne0034x6oz7o2oqzg0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/87e9c296.html" data-id="cjr1pe0j4003djuozvudse74x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -405,6 +416,15 @@
       
 <nav id="article-nav">
     
+        <a href="/archives/7b922444.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    获取Geohash当前区域周围8个区域编码
+                
+            </div>
+        </a>
+    
     
         <a href="/archives/ed7c431b.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -420,6 +440,15 @@
     <!-- 
         
 <nav id="article-nav">
+    
+        <a href="/archives/7b922444.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    获取Geohash当前区域周围8个区域编码
+                
+            </div>
+        </a>
     
     
         <a href="/archives/ed7c431b.html" id="article-nav-older" class="article-nav-link-wrap">
