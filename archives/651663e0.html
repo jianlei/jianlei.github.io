@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>使用Pandas Merge替代Excel Vlookup | ini&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="事情起因是媳妇儿在处理excel数据的时候，用VLookup查找查找数据的时候，发现经常出现查找错误，折腾了好几天，也没找到规律，所以我决定用Python Pandas替换Excel的VLookup函数。  假设我们有这样一个Excel文件：Sheet1为：Sheet2为：其中Sheet2数据比Sheet1数据多一条，我们要实现的目标是把Sheet1中人员对应的年龄放到Sheet2对应的人员上">
+<meta name="keywords" content="Pandas,VLookup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Pandas Merge替代Excel Vlookup">
+<meta property="og:url" content="http://inicb.com/archives/651663e0.html">
+<meta property="og:site_name" content="ini&#39;s Blog">
+<meta property="og:description" content="事情起因是媳妇儿在处理excel数据的时候，用VLookup查找查找数据的时候，发现经常出现查找错误，折腾了好几天，也没找到规律，所以我决定用Python Pandas替换Excel的VLookup函数。  假设我们有这样一个Excel文件：Sheet1为：Sheet2为：其中Sheet2数据比Sheet1数据多一条，我们要实现的目标是把Sheet1中人员对应的年龄放到Sheet2对应的人员上">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://inicb.com/images/excel/1.png">
+<meta property="og:image" content="http://inicb.com/images/excel/2.png">
+<meta property="og:image" content="http://inicb.com/images/excel/3.png">
+<meta property="og:updated_time" content="2018-08-22T23:52:09.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Pandas Merge替代Excel Vlookup">
+<meta name="twitter:description" content="事情起因是媳妇儿在处理excel数据的时候，用VLookup查找查找数据的时候，发现经常出现查找错误，折腾了好几天，也没找到规律，所以我决定用Python Pandas替换Excel的VLookup函数。  假设我们有这样一个Excel文件：Sheet1为：Sheet2为：其中Sheet2数据比Sheet1数据多一条，我们要实现的目标是把Sheet1中人员对应的年龄放到Sheet2对应的人员上">
+<meta name="twitter:image" content="http://inicb.com/images/excel/1.png">
+    
+
+    
+        <link rel="alternate" href="/" title="ini&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ini&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <!-- <button type="submit" class="search-form-submit"></button> -->
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+              <script type='text/javascript'>
+              $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 80%; display: block; float:none;}}</style>");
+              </script>
+              <script type='text/javascript'>
+              document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
+              </script>
+           
+            <section id="main"><article id="post-使用Pandas-Merge替代Excel-Vlookup" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            使用Pandas Merge替代Excel Vlookup
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/651663e0.html">
+            <time datetime="2018-08-22T02:51:20.000Z" itemprop="datePublished">2018-08-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Python/">Python</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Pandas/">Pandas</a>, <a class="tag-link" href="/tags/VLookup/">VLookup</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><blockquote><p>事情起因是媳妇儿在处理excel数据的时候，用VLookup查找查找数据的时候，发现经常出现查找错误，折腾了好几天，也没找到规律，所以我决定用Python Pandas替换Excel的VLookup函数。</p>
+</blockquote></p>
+<p>假设我们有这样一个Excel文件：<br>Sheet1为：<br><img src="/images/excel/1.png" alt=""><br>Sheet2为：<br><img src="/images/excel/2.png" alt=""><br>其中Sheet2数据比Sheet1数据多一条，我们要实现的目标是把Sheet1中人员对应的年龄放到Sheet2对应的人员上，如果人员在Sheet1中不存在，则不用处理。<br>预期结果如下图所示：<br><img src="/images/excel/3.png" alt=""><br>正常我们可以用Excel的VLookup实现这个功能，但是不知道为啥，VLookup在数量大的时候经常查询错乱，所以这里用Pandas的merge功能实现VLookup。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">What is vlookup? Vlookup is essentially combining two different tables using a shared column.</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>实现代码如下:(我这里用的是Aconda配置的Python环境)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"># _*_ coding: utf-8 _*_</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">df1 = pd.read_excel(&quot;/Users/daren/Downloads/1.xlsx&quot;, sheet_name=0)</span><br><span class="line">df2 = pd.read_excel(&quot;/Users/daren/Downloads/1.xlsx&quot;, sheet_name=1)</span><br><span class="line"></span><br><span class="line">c = df1.merge(df2, on=&quot;Name&quot;, how=&quot;right&quot;)</span><br><span class="line"># c=pd.merge(a,b,how=&apos;right&apos;)</span><br><span class="line"># print(c.head())</span><br><span class="line">c.to_excel(&apos;3.xlsx&apos;, sheet_name=&apos;result&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>现在让我们逐行分析。<br>第5行：引入pandas library<br>第7-8行：使用pandas.read_excel方法导入excel表格的两个Sheet页面，作为dataframe对象。<br>第10行：执行merge操作，也就是实现VLookup函数的地方。</p>
+<p>基于共有的“Name”列merge  df1和df2，生成一个新的dataframe，然后生成excel。<br>c = df1.merge(df2, on=”Name”, how=”left”)<br>其中df1作为left dataframe，df2作为right dataframe。</p>
+<p>how有4中选择生成新的dataframe：</p>
+<ul>
+<li>left，以左侧表格共享列为基准</li>
+<li>right，以右侧表格共享列为基准</li>
+<li>inner，以两侧共有表格共享列为基准(取交集)</li>
+<li>outer，取两侧表格共享列最大区间为基准（取并集）</li>
+</ul>
+<p><a href="/images/excel/1.xlsx">下载1.xlsx</a></p>
+<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
+<li><a href="https://medium.com/importexcel/common-excel-task-in-python-vlookup-with-pandas-merge-c99d4e108988" target="_blank" rel="noopener">Common Excel Task in Python: Vlookup with Pandas Merge</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/30597908" target="_blank" rel="noopener">Vlookup功能的另类实现（VBA,Python,Access）－当数据量较大时</a></li>
+<li><a href="http://pbpython.com/excel-pandas-comp.html" target="_blank" rel="noopener">Common Excel Tasks Demonstrated in Pandas</a></li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者：</strong>王建磊</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="" title="{{ page.title }}">使用Pandas Merge替代Excel Vlookup</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>发布时间：</strong>
+          <a href="" title="{{ page.title }}">2018年8月22日 - 10时08分</a>
+          </li>
+          <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+          </li>
+        </ul>
+      <div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://inicb.com/archives/651663e0.html" data-id="cjr1l52kx002ax6oz29vfhqi0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+      
+<nav id="article-nav">
+    
+        <a href="/archives/739fa792.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    使用 pyenv 管理 Python 版本
+                
+            </div>
+        </a>
+    
+    
+        <a href="/archives/b732e7e5.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Android项目在Gitlab-CI上的使用</div>
+        </a>
+    
+</nav>
+
+
+    
+  </div>
+
+    <!-- 
+        
+<nav id="article-nav">
+    
+        <a href="/archives/739fa792.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    使用 pyenv 管理 Python 版本
+                
+            </div>
+        </a>
+    
+    
+        <a href="/archives/b732e7e5.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Android项目在Gitlab-CI上的使用</div>
+        </a>
+    
+</nav>
+
+
+     -->
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+
+</section>
+    
+
+
+
+</section>
+            
+            <!-- 
+             -->
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 ini<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: '3RK5nvSxoKincwMiCVLCMFh1-gzGzoHsz',
+            app_key: 'MD8jv5EFuHcMxEP2mz5CUbA0',
+            placeholder: 'Just Do It'
+        });
+    </script>
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

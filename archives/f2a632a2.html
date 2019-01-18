@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Android P使用私有API弹出warning(转载) | ini&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="转自：https://huangyu.github.io/archives/35fd3a81.html 最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对">
+<meta name="keywords" content="Android P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android P使用私有API弹出warning(转载)">
+<meta property="og:url" content="http://inicb.com/archives/f2a632a2.html">
+<meta property="og:site_name" content="ini&#39;s Blog">
+<meta property="og:description" content="转自：https://huangyu.github.io/archives/35fd3a81.html 最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://huangyu.github.io/archives/35fd3a81/warning.png">
+<meta property="og:updated_time" content="2018-12-29T07:27:11.057Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android P使用私有API弹出warning(转载)">
+<meta name="twitter:description" content="转自：https://huangyu.github.io/archives/35fd3a81.html 最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对">
+<meta name="twitter:image" content="https://huangyu.github.io/archives/35fd3a81/warning.png">
+    
+
+    
+        <link rel="alternate" href="/" title="ini&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ini&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <!-- <button type="submit" class="search-form-submit"></button> -->
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+              <script type='text/javascript'>
+              $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 80%; display: block; float:none;}}</style>");
+              </script>
+              <script type='text/javascript'>
+              document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
+              </script>
+           
+            <section id="main"><article id="post-Android-P使用私有API弹出warning" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Android P使用私有API弹出warning(转载)
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/f2a632a2.html">
+            <time datetime="2018-12-29T07:21:32.000Z" itemprop="datePublished">2018-12-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android-P/">Android P</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>转自：<a href="https://huangyu.github.io/archives/35fd3a81.html" target="_blank" rel="noopener">https://huangyu.github.io/archives/35fd3a81.html</a></p>
+<p>最近手头的Mix2s接收到MIUI官方开发版的推送，可以升级为Android P，很开心，然后升级后，部分应用就打不开或者挂了，比如某奇艺（买了VIP看剧都看不了，强烈吐槽）。<br>于是顺手检查了一下公司的应用，发现都能正常启动和使用，但是最近在做SDK的接入Demo，一打开发现弹出了warning对话框<br><img src="https://huangyu.github.io/archives/35fd3a81/warning.png" alt=""></p>
+<p>起初以为是targetAPI的问题，升级到28问题依旧，于是Google了一下，发现是从Android P开始，系统会限制非SDK的接口调用，也就是如果App通过反射使用系统隐藏的API，则会弹出提示。</p>
+<p>具体的细节可参考：<a href="https://developer.android.com/about/versions/pie/restrictions-non-sdk-interfaces?hl=zh-cn" target="_blank" rel="noopener">https://developer.android.com/about/versions/pie/restrictions-non-sdk-interfaces?hl=zh-cn</a></p>
+<p>Android P中，将所有API分为以下几类：</p>
+<ul>
+<li>白名单：SDK的API，正常使用；</li>
+<li>浅灰名单（light greylist）会在logcat弹出提示：Accessing hidden field Landroid/os/Message;-&gt;flags:I (light greylist, JNI)；</li>
+<li>深灰名单（dark greylist）则debug版本在会弹出dialog提示框，在release版本会有Toast提示，均提示为”Detected problems with API compatibility”。；</li>
+<li>黑名单(darklist)则会引发异常。</li>
+</ul>
+<p>看了logcat日志，项目中许多地方使用到了系统私有API，直接全部修改工作量比较大，于是寻找解决方案。</p>
+<p>最后发现原因是在SDK 28版本中Activity中的performStart有这个警告，只要在调用performStart前，ActivityThread的mHiddenApiWarningShown变量的值为true，产生这个警告的条件就无法满足。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">boolean isAppDebuggable = (mApplication.getApplicationInfo().flags &amp; ApplicationInfo.FLAG_DEBUGGABLE) != 0;</span><br><span class="line">// This property is set for all non-user builds except final release</span><br><span class="line">boolean isApiWarningEnabled = SystemProperties.getInt(&quot;ro.art.hiddenapi.warning&quot;, 0) == 1;</span><br><span class="line">if (isAppDebuggable || isApiWarningEnabled) &#123;</span><br><span class="line">    if (!mMainThread.mHiddenApiWarningShown &amp;&amp; VMRuntime.getRuntime().hasUsedHiddenApi()) &#123;</span><br><span class="line">        // Only show the warning once per process.</span><br><span class="line">        mMainThread.mHiddenApiWarningShown = true;</span><br><span class="line">        String appName = getApplicationInfo().loadLabel(getPackageManager())</span><br><span class="line">                .toString();</span><br><span class="line">        String warning = &quot;Detected problems with API compatibility\n&quot;</span><br><span class="line">                         + &quot;(visit g.co/dev/appcompat for more info)&quot;;</span><br><span class="line">        if (isAppDebuggable) &#123;</span><br><span class="line">            new AlertDialog.Builder(this)</span><br><span class="line">                .setTitle(appName)</span><br><span class="line">                .setMessage(warning)</span><br><span class="line">                .setPositiveButton(android.R.string.ok, null)</span><br><span class="line">                .setCancelable(false)</span><br><span class="line">                .show();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            Toast.makeText(this, appName + &quot;\n&quot; + warning, Toast.LENGTH_LONG).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体是在Application OnCreate加入以下代码：（通过反射私有变量来解决私有API的warning，也是有趣）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    Class&lt;?&gt; cls = Class.forName(&quot;android.app.ActivityThread&quot;);</span><br><span class="line">    Method declaredMethod = cls.getDeclaredMethod(&quot;currentActivityThread&quot;);</span><br><span class="line">    declaredMethod.setAccessible(true);</span><br><span class="line">    Object activityThread = declaredMethod.invoke(null);</span><br><span class="line">    Field mHiddenApiWarningShown = cls.getDeclaredField(&quot;mHiddenApiWarningShown&quot;);</span><br><span class="line">    mHiddenApiWarningShown.setAccessible(true);</span><br><span class="line">    mHiddenApiWarningShown.setBoolean(activityThread, true);</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终warning框不再弹出，但是logcat依旧，在Logcat中看到，修改mHiddenApiWarningShown本身就是dark greylist，估计后续该办法会给官方禁用。</p>
+<p>最好的解决方式是根据logcat的warning提示，对使用darklist的地方必须进行修改，尽量避免使用dark greylist方法。</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者：</strong>王建磊</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="" title="{{ page.title }}">Android P使用私有API弹出warning(转载)</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>发布时间：</strong>
+          <a href="" title="{{ page.title }}">2018年12月29日 - 15时12分</a>
+          </li>
+          <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+          </li>
+        </ul>
+      <div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://inicb.com/archives/f2a632a2.html" data-id="cjr1l52mf002mx6ozxgnlypck" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+      
+<nav id="article-nav">
+    
+        <a href="/archives/ed7c431b.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    RecyclerView根据内容多少动态设置高度
+                
+            </div>
+        </a>
+    
+    
+        <a href="/archives/6d1addbc.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Cookie 的路径以及 Cookie 域，设置同一域名下多个Tomcat共享Cookie</div>
+        </a>
+    
+</nav>
+
+
+    
+  </div>
+
+    <!-- 
+        
+<nav id="article-nav">
+    
+        <a href="/archives/ed7c431b.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    RecyclerView根据内容多少动态设置高度
+                
+            </div>
+        </a>
+    
+    
+        <a href="/archives/6d1addbc.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Cookie 的路径以及 Cookie 域，设置同一域名下多个Tomcat共享Cookie</div>
+        </a>
+    
+</nav>
+
+
+     -->
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+
+</section>
+    
+
+
+
+</section>
+            
+            <!-- 
+             -->
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 ini<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: '3RK5nvSxoKincwMiCVLCMFh1-gzGzoHsz',
+            app_key: 'MD8jv5EFuHcMxEP2mz5CUbA0',
+            placeholder: 'Just Do It'
+        });
+    </script>
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
