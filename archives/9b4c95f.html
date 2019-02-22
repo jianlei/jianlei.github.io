@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上 | ini&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="最近翻出2013年海淘买回来的Google Nexus 4手机，重新进行了刷机，因为打算作为备用不想安装太多无用的应用，所以刷的是AOSP原生安卓系统，结果刷完之后发现无法上网，状态栏上Wifi图标上有x号。因为是系统链接网络之后默认会访问google服务器检查是否有网络，如果访问不了就显示“x”号。因为众所周知的原因，在中国大陆是访问不了GOOGLE的，所以就需要我们手动修改。 检查在拨号器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上">
+<meta property="og:url" content="http://inicb.com/archives/9b4c95f.html">
+<meta property="og:site_name" content="ini&#39;s Blog">
+<meta property="og:description" content="最近翻出2013年海淘买回来的Google Nexus 4手机，重新进行了刷机，因为打算作为备用不想安装太多无用的应用，所以刷的是AOSP原生安卓系统，结果刷完之后发现无法上网，状态栏上Wifi图标上有x号。因为是系统链接网络之后默认会访问google服务器检查是否有网络，如果访问不了就显示“x”号。因为众所周知的原因，在中国大陆是访问不了GOOGLE的，所以就需要我们手动修改。 检查在拨号器">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-22T02:09:45.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上">
+<meta name="twitter:description" content="最近翻出2013年海淘买回来的Google Nexus 4手机，重新进行了刷机，因为打算作为备用不想安装太多无用的应用，所以刷的是AOSP原生安卓系统，结果刷完之后发现无法上网，状态栏上Wifi图标上有x号。因为是系统链接网络之后默认会访问google服务器检查是否有网络，如果访问不了就显示“x”号。因为众所周知的原因，在中国大陆是访问不了GOOGLE的，所以就需要我们手动修改。 检查在拨号器">
+    
+
+    
+        <link rel="alternate" href="/" title="ini&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ini&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <!-- <button type="submit" class="search-form-submit"></button> -->
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+              <script type='text/javascript'>
+              $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 80%; display: block; float:none;}}</style>");
+              </script>
+              <script type='text/javascript'>
+              document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
+              </script>
+           
+            <section id="main"><article id="post-原生安卓-AOSP-WiFi信号去叹号去叉教程5-0-Android-P及以上" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/9b4c95f.html">
+            <time datetime="2019-02-22T01:20:40.000Z" itemprop="datePublished">2019-02-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>最近翻出2013年海淘买回来的Google Nexus 4手机，重新进行了刷机，因为打算作为备用不想安装太多无用的应用，所以刷的是AOSP原生安卓系统，结果刷完之后发现无法上网，状态栏上Wifi图标上有x号。因为是系统链接网络之后默认会访问google服务器检查是否有网络，如果访问不了就显示“x”号。因为众所周知的原因，在中国大陆是访问不了GOOGLE的，所以就需要我们手动修改。<br></p>
+<h5 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h5><p>在拨号器界面输入“<em>#</em>#4636#<em>#</em>”，查看“手机信息”，显示PING TEST访问的都是<a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a></p>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>Captive Portal是安卓5引入的一种检测网络是否正常连接的机制，制作的非常有创意，通过HTTP返回的状态码是否是204来判断是否成功，如果访问得到了200带网页数据，那你就可能处在一个需要登录验证才能上网的环境里，比如说校园网，再比如说一些酒店提供的客户才能免费使用的WiFi（其实是通过DNS劫持实现的），如果连接超时（根本就连接不上）就在WiFi图标和信号图标上加一个标志，安卓5和6是叹号，安卓7改成一个叉了。只不过默认访问的是谷歌自家的验证服务器，然而由于你懂的原因，就算你连接上了网络也连不上这个服务器… 嗯…那其实还是没有连接上网络嘛… 噫….</p>
+<p>谷歌设计了一个开关来控制是否启用这个特性，同时也提供了一个变量来控制待验证的服务器地址，国内的修改版ROM通常都改成了高通中国的地址，还有一些ROM设计了代码在重启的时候恢复这个设置，不知道是出于什么目的。</p>
+<p>没更新7.0的时候，一直用小狐狸的叹号杀手，很不错的应用，可惜当时他已经很久不更新了，当时安卓N不能用，后来自己做了个小工具，想了想就干脆上架酷安吧，也能帮助大家，这样有了CaptiveMgr工具，这分明就是个没有名字的名字嘛…根本就是foo, bar一样…好像也没什么好叫的了？现在代码还比较乱，要是哪天有空把这堆代码整理出来就开源了算了，毕竟纯粹体力活。</p>
+<p>具体的原理不在这里写了，这里主要写如何去掉叹号或者叉标志。</p>
+<p>如果有root权限直接用我这个工具算了，比较方便，毕竟用命令也就是检测一下系统然后代替执行命令而已嘛。<br>(PS: 如果使用SS/SSR可以通过NAT模式让系统直接连接，其内部是通过iptables实现的)</p>
+<p>如果没有root权限就得按下面操作了，做好配置以后重启WiFi和数据流量（打开再关闭飞行模式即可）就可以看到效果了。</p>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><p>以下需要ADB调试，配置不赘述</p>
+<h5 id="5-0-6-x教程"><a href="#5-0-6-x教程" class="headerlink" title="5.0 - 6.x教程"></a>5.0 - 6.x教程</h5><p>5和6还不支持HTTPS，直接修改即可</p>
+<ul>
+<li><p>检测开关相关：<br>先处理开关状态，这个变量删除就是默认开启的，删除操作随意执行，反正没影响，删除状态下获取这个变量会返回null。<br>注意：如果关闭，则无法判断当前网络是否需要登录，无法自动弹出登录页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除</span><br><span class="line">adb shell settings delete global captive_portal_server</span><br><span class="line">禁用</span><br><span class="line">adb shell settings put global captive_portal_server 0</span><br><span class="line">查询状态</span><br><span class="line">adb shell settings get global captive_portal_server</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器地址相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除地址就可以恢复默认的谷歌服务器</span><br><span class="line">adb shell settings delete global captive_portal_server</span><br><span class="line">设置一个可用地址（高通/V2EX都推荐）</span><br><span class="line">adb shell settings put global captive_portal_server captive.v2ex.co</span><br><span class="line">查询当前地址</span><br><span class="line">adb shell settings get global captive_portal_server</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="7-0-7-1教程"><a href="#7-0-7-1教程" class="headerlink" title="7.0 - 7.1教程"></a>7.0 - 7.1教程</h5><p>这两个版本相比5和6没有大的更改，只是默认连接服务器的时候使用HTTPS，但是提供了一个开关用以指定是否使用HTTPS</p>
+<ul>
+<li><p>检测开关相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同5.0 - 6.x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTTPS开关相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除（直接删除则默认使用HTTPS）</span><br><span class="line">adb shell settings delete global captive_portal_use_https</span><br><span class="line">禁用HTTPS（写1启用 写0禁用）</span><br><span class="line">adb shell settings put global captive_portal_use_https 0</span><br><span class="line">查询HTTPS开关状态</span><br><span class="line">adb shell settings get global captive_portal_use_https</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器地址相关：<br>（如果启用了HTTPS需要先确定地址是否支持HTTPS）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同5.0 - 6.x</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="7-1-1教程"><a href="#7-1-1教程" class="headerlink" title="7.1.1教程"></a>7.1.1教程</h5><p>这个版本把HTTPS和HTTP两个地址分开保存，并通过7.0加入的HTTPS开关来控制使用哪一个地址。</p>
+<ul>
+<li><p>检测开关相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同5.0 - 6.x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTTPS开关相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同7.0 - 7.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器地址相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除（删除默认用HTTPS）</span><br><span class="line">adb shell settings delete global captive_portal_https_url</span><br><span class="line">adb shell settings delete global captive_portal_http_url</span><br><span class="line">分别修改两个地址</span><br><span class="line">adb shell settings put global captive_portal_http_url http://captive.v2ex.co/generate_204</span><br><span class="line">adb shell settings put global captive_portal_https_url https://captive.v2ex.co/generate_204</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="7-1-2教程"><a href="#7-1-2教程" class="headerlink" title="7.1.2教程"></a>7.1.2教程</h5><p>此版本服务器地址判断逻辑相比7.1.1没有更改，但是检测的开关却变了。</p>
+<ul>
+<li><p>检测开关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除变量：（删除以后默认启用）</span><br><span class="line">adb shell settings delete global captive_portal_mode</span><br><span class="line">关闭检测：</span><br><span class="line">adb shell settings put global captive_portal_mode 0</span><br><span class="line">查看当前状态：</span><br><span class="line">adb shell settings get global captive_portal_mode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器地址相关（同7.1.1）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除（删除默认用HTTPS）</span><br><span class="line">adb shell settings delete global captive_portal_https_url</span><br><span class="line">adb shell settings delete global captive_portal_http_url</span><br><span class="line">分别修改两个地址</span><br><span class="line">adb shell settings put global captive_portal_http_url http://captive.v2ex.co/generate_204</span><br><span class="line">adb shell settings put global captive_portal_https_url https://captive.v2ex.co/generate_204</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="8-0-0和8-1-0和9-0-Android-P-同上7-1-2，未做修改"><a href="#8-0-0和8-1-0和9-0-Android-P-同上7-1-2，未做修改" class="headerlink" title="8.0.0和8.1.0和9.0(Android P)同上7.1.2，未做修改"></a>8.0.0和8.1.0和9.0(Android P)同上7.1.2，未做修改</h5><h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
+<li><a href="https://www.evil42.com/index.php/archives/17/" target="_blank" rel="noopener">EVIL42 原生安卓WiFi信号去叹号去叉教程5.0-Android P</a></li>
+<li><a href="https://forum.xda-developers.com/nexus-6p/help/wifi-connected-internet-exclamation-mark-t3247199" target="_blank" rel="noopener">WiFi showing “Connected, no Internet” with exclamation mark</a></li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者：</strong>王建磊</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="" title="{{ page.title }}">原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>发布时间：</strong>
+          <a href="" title="{{ page.title }}">2019年2月22日 - 09时02分</a>
+          </li>
+          <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+          </li>
+        </ul>
+      <div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://inicb.com/archives/9b4c95f.html" data-id="cjsff5s2j003odjozyku8xo7e" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+      
+<nav id="article-nav">
+    
+    
+        <a href="/archives/3f223d67.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">我是如何一步步改善儿子便秘情况的</div>
+        </a>
+    
+</nav>
+
+
+    
+  </div>
+
+    <!-- 
+        
+<nav id="article-nav">
+    
+    
+        <a href="/archives/3f223d67.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">我是如何一步步改善儿子便秘情况的</div>
+        </a>
+    
+</nav>
+
+
+     -->
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+
+</section>
+    
+
+
+
+</section>
+            
+            <!-- 
+             -->
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 ini<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: '3RK5nvSxoKincwMiCVLCMFh1-gzGzoHsz',
+            app_key: 'MD8jv5EFuHcMxEP2mz5CUbA0',
+            placeholder: 'Just Do It'
+        });
+    </script>
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

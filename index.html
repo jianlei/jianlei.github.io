@@ -154,7 +154,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                50
+                51
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -208,6 +208,158 @@
             
             
             <section id="main">
+    <article id="post-原生安卓-AOSP-WiFi信号去叹号去叉教程5-0-Android-P及以上" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/9b4c95f.html">原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/9b4c95f.html">
+            <time datetime="2019-02-22T01:20:40.000Z" itemprop="datePublished">2019-02-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>最近翻出2013年海淘买回来的Google Nexus 4手机，重新进行了刷机，因为打算作为备用不想安装太多无用的应用，所以刷的是AOSP原生安卓系统，结果刷完之后发现无法上网，状态栏上Wifi图标上有x号。因为是系统链接网络之后默认会访问google服务器检查是否有网络，如果访问不了就显示“x”号。因为众所周知的原因，在中国大陆是访问不了GOOGLE的，所以就需要我们手动修改。<br></p>
+<h5 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h5><p>在拨号器界面输入“<em>#</em>#4636#<em>#</em>”，查看“手机信息”，显示PING TEST访问的都是<a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a></p>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>Captive Portal是安卓5引入的一种检测网络是否正常连接的机制，制作的非常有创意，通过HTTP返回的状态码是否是204来判断是否成功，如果访问得到了200带网页数据，那你就可能处在一个需要登录验证才能上网的环境里，比如说校园网，再比如说一些酒店提供的客户才能免费使用的WiFi（其实是通过DNS劫持实现的），如果连接超时（根本就连接不上）就在WiFi图标和信号图标上加一个标志，安卓5和6是叹号，安卓7改成一个叉了。只不过默认访问的是谷歌自家的验证服务器，然而由于你懂的原因，就算你连接上了网络也连不上这个服务器… 嗯…那其实还是没有连接上网络嘛… 噫….</p>
+<p>谷歌设计了一个开关来控制是否启用这个特性，同时也提供了一个变量来控制待验证的服务器地址，国内的修改版ROM通常都改成了高通中国的地址，还有一些ROM设计了代码在重启的时候恢复这个设置，不知道是出于什么目的。</p>
+<p>没更新7.0的时候，一直用小狐狸的叹号杀手，很不错的应用，可惜当时他已经很久不更新了，当时安卓N不能用，后来自己做了个小工具，想了想就干脆上架酷安吧，也能帮助大家，这样有了CaptiveMgr工具，这分明就是个没有名字的名字嘛…根本就是foo, bar一样…好像也没什么好叫的了？现在代码还比较乱，要是哪天有空把这堆代码整理出来就开源了算了，毕竟纯粹体力活。</p>
+<p>具体的原理不在这里写了，这里主要写如何去掉叹号或者叉标志。</p>
+<p>如果有root权限直接用我这个工具算了，比较方便，毕竟用命令也就是检测一下系统然后代替执行命令而已嘛。<br>(PS: 如果使用SS/SSR可以通过NAT模式让系统直接连接，其内部是通过iptables实现的)</p>
+<p>如果没有root权限就得按下面操作了，做好配置以后重启WiFi和数据流量（打开再关闭飞行模式即可）就可以看到效果了。</p>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><p>以下需要ADB调试，配置不赘述</p>
+<h5 id="5-0-6-x教程"><a href="#5-0-6-x教程" class="headerlink" title="5.0 - 6.x教程"></a>5.0 - 6.x教程</h5><p>5和6还不支持HTTPS，直接修改即可</p>
+<ul>
+<li><p>检测开关相关：<br>先处理开关状态，这个变量删除就是默认开启的，删除操作随意执行，反正没影响，删除状态下获取这个变量会返回null。<br>注意：如果关闭，则无法判断当前网络是否需要登录，无法自动弹出登录页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除</span><br><span class="line">adb shell settings delete global captive_portal_server</span><br><span class="line">禁用</span><br><span class="line">adb shell settings put global captive_portal_server 0</span><br><span class="line">查询状态</span><br><span class="line">adb shell settings get global captive_portal_server</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器地址相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除地址就可以恢复默认的谷歌服务器</span><br><span class="line">adb shell settings delete global captive_portal_server</span><br><span class="line">设置一个可用地址（高通/V2EX都推荐）</span><br><span class="line">adb shell settings put global captive_portal_server captive.v2ex.co</span><br><span class="line">查询当前地址</span><br><span class="line">adb shell settings get global captive_portal_server</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="7-0-7-1教程"><a href="#7-0-7-1教程" class="headerlink" title="7.0 - 7.1教程"></a>7.0 - 7.1教程</h5><p>这两个版本相比5和6没有大的更改，只是默认连接服务器的时候使用HTTPS，但是提供了一个开关用以指定是否使用HTTPS</p>
+<ul>
+<li><p>检测开关相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同5.0 - 6.x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTTPS开关相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除（直接删除则默认使用HTTPS）</span><br><span class="line">adb shell settings delete global captive_portal_use_https</span><br><span class="line">禁用HTTPS（写1启用 写0禁用）</span><br><span class="line">adb shell settings put global captive_portal_use_https 0</span><br><span class="line">查询HTTPS开关状态</span><br><span class="line">adb shell settings get global captive_portal_use_https</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器地址相关：<br>（如果启用了HTTPS需要先确定地址是否支持HTTPS）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同5.0 - 6.x</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="7-1-1教程"><a href="#7-1-1教程" class="headerlink" title="7.1.1教程"></a>7.1.1教程</h5><p>这个版本把HTTPS和HTTP两个地址分开保存，并通过7.0加入的HTTPS开关来控制使用哪一个地址。</p>
+<ul>
+<li><p>检测开关相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同5.0 - 6.x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTTPS开关相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同7.0 - 7.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器地址相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除（删除默认用HTTPS）</span><br><span class="line">adb shell settings delete global captive_portal_https_url</span><br><span class="line">adb shell settings delete global captive_portal_http_url</span><br><span class="line">分别修改两个地址</span><br><span class="line">adb shell settings put global captive_portal_http_url http://captive.v2ex.co/generate_204</span><br><span class="line">adb shell settings put global captive_portal_https_url https://captive.v2ex.co/generate_204</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="7-1-2教程"><a href="#7-1-2教程" class="headerlink" title="7.1.2教程"></a>7.1.2教程</h5><p>此版本服务器地址判断逻辑相比7.1.1没有更改，但是检测的开关却变了。</p>
+<ul>
+<li><p>检测开关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除变量：（删除以后默认启用）</span><br><span class="line">adb shell settings delete global captive_portal_mode</span><br><span class="line">关闭检测：</span><br><span class="line">adb shell settings put global captive_portal_mode 0</span><br><span class="line">查看当前状态：</span><br><span class="line">adb shell settings get global captive_portal_mode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器地址相关（同7.1.1）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">删除（删除默认用HTTPS）</span><br><span class="line">adb shell settings delete global captive_portal_https_url</span><br><span class="line">adb shell settings delete global captive_portal_http_url</span><br><span class="line">分别修改两个地址</span><br><span class="line">adb shell settings put global captive_portal_http_url http://captive.v2ex.co/generate_204</span><br><span class="line">adb shell settings put global captive_portal_https_url https://captive.v2ex.co/generate_204</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="8-0-0和8-1-0和9-0-Android-P-同上7-1-2，未做修改"><a href="#8-0-0和8-1-0和9-0-Android-P-同上7-1-2，未做修改" class="headerlink" title="8.0.0和8.1.0和9.0(Android P)同上7.1.2，未做修改"></a>8.0.0和8.1.0和9.0(Android P)同上7.1.2，未做修改</h5><h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
+<li><a href="https://www.evil42.com/index.php/archives/17/" target="_blank" rel="noopener">EVIL42 原生安卓WiFi信号去叹号去叉教程5.0-Android P</a></li>
+<li><a href="https://forum.xda-developers.com/nexus-6p/help/wifi-connected-internet-exclamation-mark-t3247199" target="_blank" rel="noopener">WiFi showing “Connected, no Internet” with exclamation mark</a></li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
     <article id="post-我是如何一步步改善儿子便秘情况的" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1317,145 +1469,8 @@
 
 
 
-    <article id="post-使用-pyenv-管理-Python-版本" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/archives/739fa792.html" itemprop="url">
-            <img src="https://images.pexels.com/photos/1387037/pexels-photo-1387037.jpeg?cs=srgb&dl=beach-freedom-friendship-1387037.jpg&fm=jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/739fa792.html">使用 pyenv 管理 Python 版本</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/739fa792.html">
-            <time datetime="2018-09-05T00:53:52.000Z" itemprop="datePublished">2018-09-05</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Python/">Python</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/pyenv/">pyenv</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>转自<a href="http://einverne.github.io/post/2017/04/pyenv.html" target="_blank" rel="noopener">使用 pyenv 管理 Python 版本 </a>,略有修改。</p>
-<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>在使用python的时候，我们经常被python项目混乱的版本以及复杂的包依赖搞得头晕脑胀，但是自从有了pyenv和anaconda(python包虚拟环境，包依赖)，一切都清晰明了了。</p>
-<p>pyenv 是 Python 版本管理工具。 pyenv 可以改变全局的 Python 版本，安装多个版本的 Python， 设置目录级别的 Python 版本，还能创建和管理 virtual python environments 。所有的设置都是用户级别的操作，不需要 sudo 命令。</p>
-<p>pyenv 主要用来管理 Python 的版本，比如一个项目需要 Python 2.x ，一个项目需要 Python 3.x 。 而 anaconda 主要用来管理 Python 包的依赖，不同项目需要依赖的包版本不同，则需要使用虚拟环境。</p>
-<p>pyenv 通过系统修改环境变量来实现 Python 不同版本的切换。而 anaconda 通过将 Python 包安装到一个目录来作为Python 包虚拟环境，通过切换目录来实现不同包环境间的切换。</p>
-<p>pyenv 的美好之处在于，它并没有使用将不同的 PATH 植入不同的Shell这种高耦合的工作方式，而是简单的在 PATH 的最前面插入了一个垫片路径（shims）：~/.pyenv/shims:/usr/local/bin:/usr/bin:/bin。所有对 Python 可执行文件的查找都会首先被这个 shims 路径截获，从而使后方的系统路径失效。</p>
-<h4 id="pyenv安装"><a href="#pyenv安装" class="headerlink" title="pyenv安装"></a>pyenv安装</h4><p>具体的安装方式参照 <a href="https://github.com/yyuu/pyenv#installation" target="_blank" rel="noopener">官网</a><br>我这里是Mac，推荐使用brew安装。<br>安装成功之后，在.bashrc 或者 .bash_profile 中添加三行来开启自动补全.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;$HOME/.pyenv/bin:$PATH&quot;</span><br><span class="line">eval &quot;$(pyenv init -)&quot;</span><br><span class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</span><br></pre></td></tr></table></figure></p>
-<h3 id="pyenv-常用命令"><a href="#pyenv-常用命令" class="headerlink" title="pyenv 常用命令"></a>pyenv 常用命令</h3><p>使用 pyenv commands 显示所有可用命令</p>
-<ul>
-<li><p>查看本机安装 Python 版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv versions</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看可安装 Python 版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install -l</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>python 安装与卸载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv install 2.7.3   # 安装python</span><br><span class="line">$ pyenv uninstall 2.7.3 # 卸载python</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>python切换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv global 2.7.3  # 设置全局的 Python 版本，通过将版本号写入 ~/.pyenv/version 文件的方式。</span><br><span class="line">$ pyenv local 2.7.3 # 设置 Python 本地版本，通过将版本号写入当前目录下的 .python-version 文件的方式。通过这种方式设置的 Python 版本优先级较 global 高。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>python优先级</p>
-<p>shell &gt; local &gt; global</p>
-<p>pyenv 会从当前目录开始向上逐级查找 .python-version 文件，直到根目录为止。若找不到，就用 global 版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv shell 2.7.3 # 设置面向 shell 的 Python 版本，通过设置当前 shell 的 PYENV_VERSION 环境变量的方式。这个版本的优先级比 local 和 global 都要高。–unset 参数可以用于取消当前 shell 设定的版本。</span><br><span class="line">$ pyenv shell --unset</span><br><span class="line"></span><br><span class="line">$ pyenv rehash  # 创建垫片路径（为所有已安装的可执行文件创建 shims，如：~/.pyenv/versions/*/bin/*，因此，每当你增删了 Python 版本或带有可执行文件的包（如 pip）以后，都应该执行一次本命令）</span><br></pre></td></tr></table></figure></p>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
     <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
 </section>
             
@@ -1467,6 +1482,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/archives/9b4c95f.html" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a></p>
+                            <p class="item-title"><a href="/archives/9b4c95f.html" class="title">原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上</a></p>
+                            <p class="item-date"><time datetime="2019-02-22T01:20:40.000Z" itemprop="datePublished">2019-02-22</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1544,25 +1578,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/archives/ed7c431b.html" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://images.pexels.com/photos/1209658/pexels-photo-1209658.jpeg?cs=srgb&amp;dl=backlit-blurred-background-close-up-1209658.jpg&amp;fm=jpg)" alt="RecyclerView根据内容多少动态设置高度" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a></p>
-                            <p class="item-title"><a href="/archives/ed7c431b.html" class="title">RecyclerView根据内容多少动态设置高度</a></p>
-                            <p class="item-date"><time datetime="2019-01-11T05:58:36.000Z" itemprop="datePublished">2019-01-11</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1572,7 +1587,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/优秀文章/">优秀文章</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">34</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Map/">Map</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">4</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/优秀文章/">优秀文章</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Map/">Map</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -1581,7 +1596,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
