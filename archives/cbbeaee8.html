@@ -3,22 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问 | ini&#39;s Blog</title>
+    <title>CORS on Nginx | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。">
-<meta name="keywords" content="SSL,HTTPS,NGINX">
+    <meta name="description" content="在项目开发过程中对于文件访问，特别是m3u8文件的访问经常涉及到跨域问题，在不同域名无法访问文件。所以需要配置nginx，让服务器文件支持跨域请求。 The following Nginx configuration enables CORS, with support for preflight requests.1234567891011121314151617181920212223242">
+<meta name="keywords" content="Cros">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问">
-<meta property="og:url" content="http://inicb.com/archives/f19cae66.html">
+<meta property="og:title" content="CORS on Nginx">
+<meta property="og:url" content="http://inicb.com/archives/cbbeaee8.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。">
+<meta property="og:description" content="在项目开发过程中对于文件访问，特别是m3u8文件的访问经常涉及到跨域问题，在不同域名无法访问文件。所以需要配置nginx，让服务器文件支持跨域请求。 The following Nginx configuration enables CORS, with support for preflight requests.1234567891011121314151617181920212223242">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://images.pexels.com/photos/614503/pexels-photo-614503.jpeg?cs=srgb&dl=adult-back-view-beach-614503.jpg&fm=jpg">
-<meta property="og:updated_time" content="2018-05-04T02:44:05.185Z">
+<meta property="og:updated_time" content="2019-02-28T02:26:08.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问">
-<meta name="twitter:description" content="本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。">
-<meta name="twitter:image" content="https://images.pexels.com/photos/614503/pexels-photo-614503.jpeg?cs=srgb&dl=adult-back-view-beach-614503.jpg&fm=jpg">
+<meta name="twitter:title" content="CORS on Nginx">
+<meta name="twitter:description" content="在项目开发过程中对于文件访问，特别是m3u8文件的访问经常涉及到跨域问题，在不同域名无法访问文件。所以需要配置nginx，让服务器文件支持跨域请求。 The following Nginx configuration enables CORS, with support for preflight requests.1234567891011121314151617181920212223242">
     
 
     
@@ -153,23 +151,15 @@
               document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
               </script>
            
-            <section id="main"><article id="post-使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-CORS-on-Nginx" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
-        
-            
-	
-		<img src="https://images.pexels.com/photos/614503/pexels-photo-614503.jpeg?cs=srgb&dl=adult-back-view-beach-614503.jpg&fm=jpg" class="article-banner" />
-	
-
-
-
         
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-            使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问
+            CORS on Nginx
         </h1>
     
 
@@ -178,8 +168,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/archives/f19cae66.html">
-            <time datetime="2018-04-20T02:50:14.000Z" itemprop="datePublished">2018-04-20</time>
+        <a href="/archives/cbbeaee8.html">
+            <time datetime="2019-02-28T02:15:45.000Z" itemprop="datePublished">2019-02-28</time>
         </a>
     </div>
 
@@ -187,13 +177,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/NGINX/">NGINX</a>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Nginx/">Nginx</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/HTTPS/">HTTPS</a>, <a class="tag-link" href="/tags/NGINX/">NGINX</a>, <a class="tag-link" href="/tags/SSL/">SSL</a>
+        <a class="tag-link" href="/tags/Cros/">Cros</a>
     </div>
 
                     </div>
@@ -204,32 +194,16 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-                <div id="toc" class="toc-article">
-                <strong class="toc-title">文章目录</strong>
-                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#FreeSSL免费SSL证书"><span class="toc-number">1.</span> <span class="toc-text">FreeSSL免费SSL证书</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置Nginx支持Https"><span class="toc-number">2.</span> <span class="toc-text">配置Nginx支持Https</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Http请求重定向到Https"><span class="toc-number">3.</span> <span class="toc-text">Http请求重定向到Https</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Freessl-相关"><span class="toc-number">4.</span> <span class="toc-text">Freessl 相关</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
-                </div>
-            
-            <p>本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。</p>
-<a id="more"></a>
-<h5 id="FreeSSL免费SSL证书"><a href="#FreeSSL免费SSL证书" class="headerlink" title="FreeSSL免费SSL证书"></a>FreeSSL免费SSL证书</h5><p>FreeSSL.org 是一个提供免费HTTPS证书申请的网站 ，目前支持通过这两家CA机构TrustAsia，Let’s Encrypt生成SSL证书。<br>我们这里选择TrustAsia，创建一个一年期限的ssl证书。</p>
-<p><img src="/images/freessl/step_1.png" alt=""><br>输入对应的域名，选择Ca机构，点击“创建免费的SSL证书”<br><img src="/images/freessl/step_2.png" alt=""><br>输入邮箱地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在证书快到期的时候，Freessl会发邮件提醒你。</span><br></pre></td></tr></table></figure></p>
-<p>选择证书类型，验证类型为“File”，CSR生成为“浏览器生成”（为了安全，最好是选择我有CSR），点击生成，<br>会弹出如下界面<br><img src="/images/freessl/step_3.png" alt=""><br>在服务器项目根目录下新建.well-known/pki-validation/fileauth.txt文件，复制“201804190313215v2qzo2quee1emf9z180awofxk4ju12koqxbaw1d531n0jv030”到fileauth文件中，点击“点击验证”<br>如果CA生成证书成功，直接下载下来就行。<br><img src="/images/freessl/step_4.png" alt=""><br>至此 完成ssl证书的创建。</p>
-<h5 id="配置Nginx支持Https"><a href="#配置Nginx支持Https" class="headerlink" title="配置Nginx支持Https"></a>配置Nginx支持Https</h5><p>把上一步生成的证书以及私钥上传到服务器上，然后配置Nginx支持https访问，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/nginx/nginx.conf</span><br><span class="line"></span><br><span class="line">添加支持https的server</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       443 ssl;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">    root /data/blog;    </span><br><span class="line">#        root         /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">    ssl_certificate &quot;/data/chain/full_chain.pem&quot;;</span><br><span class="line">    ssl_certificate_key &quot;/data/chain/private.key&quot;;</span><br><span class="line">    ssl_session_cache shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout  10m;</span><br><span class="line">    ssl_ciphers HIGH:!aNULL:!MD5;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line"></span><br><span class="line">    # Load configuration files for the default server block.</span><br><span class="line">    include /etc/nginx/default.d/*.conf;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 404 /404.html;</span><br><span class="line">        location = /40x.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 500 502 503 504 /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="Http请求重定向到Https"><a href="#Http请求重定向到Https" class="headerlink" title="Http请求重定向到Https"></a>Http请求重定向到Https</h5><p>修改Nginx配置文件如下,在Http server中添加重定向语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">  listen       80 default_server;</span><br><span class="line">  listen       [::]:80 default_server;</span><br><span class="line">  server_name  _;</span><br><span class="line">  rewrite ^(.*)$  https://$host$1 permanent;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="Freessl-相关"><a href="#Freessl-相关" class="headerlink" title="Freessl 相关"></a>Freessl 相关</h5><ul>
-<li>关于CSR生成的说明<br>1、浏览器生成<br>在浏览器支持 Web Cryptography 的情况下，我们默认使用浏览器根据用户的信息生成CSR文件（关于 Web Cryptography 的浏览器支持情况可点击 这里 了解详情）。</li>
-</ul>
-<p>2、后端服务器生成<br>在浏览器不支持CSR文件生成的时候，我们会根据用户所填的信息，在后端服务器生成一个CSR文件。</p>
-<p>3、上传自己的CSR文件<br>如果你有自己的CSR文件，并且想使用自己的CSR文件，那么可以点击上方表单中点击生成下方的文字，通过粘贴，使用自己的CSR文件。</p>
-<ul>
-<li>关于域名验证的说明<br>CA 需要对您是否拥有该域名进行验证，这样才能给您颁发证书。这里有多种验证方式，您可以采用对您较为方便的方式进行。在进行下一步的同时，你将同意 Lets Encrypt service agreement 或 TrustAsia。如果您的网站有防火墙，请对 66.133.109.36 开放。如果您收到 504 网关超时，无法连接等其它错误， 请刷新页面重试；如果您有自己的CSR文件，可上传CSR文件之后进行手动验证。<br>1、手动验证（文件）<br>CA 将通过访问特定 URL 地址来验证您是否有改域名的所有权。因此，您需要下载给顶的验证文件，并上传到您的服务器</li>
-</ul>
-<p>2、手动验证（DNS）<br>CA 将通过查询 DNS 的 TXT 记录来确定您对该域名的所有权。您只需要在域名管理平台将生成的 TXT 记录名与记录值添加到该域名下，等待大约 1 分钟即可验证成功</p>
-<p>3、如果你有自己的CSR文件，可手动上传验证文件到您的域以验证所有权<br>CA 将通过查询 DNS 的 TXT 记录来确定您对该域名的所有权。您只需要在域名管理平台将生成的 TXT 记录名与记录值添加到该域名下，等待大约 1 分钟即可验证成功</p>
+            <p>在项目开发过程中对于文件访问，特别是m3u8文件的访问经常涉及到跨域问题，在不同域名无法访问文件。所以需要配置nginx，让服务器文件支持跨域请求。</p>
+<p>The following Nginx configuration enables CORS, with support for preflight requests.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># Wide-open CORS config for nginx</span><br><span class="line">#</span><br><span class="line">location / &#123;</span><br><span class="line">     if ($request_method = &apos;OPTIONS&apos;) &#123;</span><br><span class="line">        add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">        add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">        #</span><br><span class="line">        # Custom headers and headers various browsers *should* be OK with but aren&apos;t</span><br><span class="line">        #</span><br><span class="line">        add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range&apos;;</span><br><span class="line">        #</span><br><span class="line">        # Tell client that this pre-flight info is valid for 20 days</span><br><span class="line">        #</span><br><span class="line">        add_header &apos;Access-Control-Max-Age&apos; 1728000;</span><br><span class="line">        add_header &apos;Content-Type&apos; &apos;text/plain; charset=utf-8&apos;;</span><br><span class="line">        add_header &apos;Content-Length&apos; 0;</span><br><span class="line">        return 204;</span><br><span class="line">     &#125;</span><br><span class="line">     if ($request_method = &apos;POST&apos;) &#123;</span><br><span class="line">        add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">        add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">        add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range&apos;;</span><br><span class="line">        add_header &apos;Access-Control-Expose-Headers&apos; &apos;Content-Length,Content-Range&apos;;</span><br><span class="line">     &#125;</span><br><span class="line">     if ($request_method = &apos;GET&apos;) &#123;</span><br><span class="line">        add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">        add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">        add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range&apos;;</span><br><span class="line">        add_header &apos;Access-Control-Expose-Headers&apos; &apos;Content-Length,Content-Range&apos;;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>支持m3u8 格式</p>
+<p>服务端返回的 Access-Control-Allow-Origin: * 表明，该资源可以被任意外域访问。如果服务端仅允许来自 <a href="http://foo.example" target="_blank" rel="noopener">http://foo.example</a> 的访问，该首部字段的内容如下：</p>
+<p>Access-Control-Allow-Origin: <a href="http://foo.example" target="_blank" rel="noopener">http://foo.example</a></p>
+<p>现在，除了 <a href="http://foo.example，其它外域均不能访问该资源（该策略由请求首部中的" target="_blank" rel="noopener">http://foo.example，其它外域均不能访问该资源（该策略由请求首部中的</a> ORIGIN 字段定义，见第10行）。Access-Control-Allow-Origin 应当为 * 或者包含由 Origin 首部字段所指明的域名。</p>
 <h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
-<li><a href="https://freessl.org/" target="_blank" rel="noopener">https://freessl.org/</a></li>
-<li><a href="https://docs.lvrui.io/2017/04/01/nginx%E9%85%8D%E7%BD%AEhttp%E5%BC%BA%E5%88%B6%E8%B7%B3%E8%BD%AChttps/" target="_blank" rel="noopener">nginx配置http强制跳转https</a></li>
-<li><a href="https://aotu.io/notes/2016/08/16/nginx-https/index.html" target="_blank" rel="noopener">Nginx 配置 HTTPS 服务器</a></li>
+<li><a href="https://enable-cors.org/server_nginx.html" target="_blank" rel="noopener">https://enable-cors.org/server_nginx.html</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="noopener">HTTP访问控制（CORS）
+</a><br><a href="https://enable-cors.org/server_nginx.html" target="_blank" rel="noopener">https://enable-cors.org/server_nginx.html</a></li>
 </ul>
 
         
@@ -290,11 +264,11 @@
           </li>
           <li class="post-copyright-link">
           <strong>本文链接：</strong>
-          <a href="" title="{{ page.title }}">使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问</a>
+          <a href="" title="{{ page.title }}">CORS on Nginx</a>
           </li>
           <li class="post-copyright-link">
           <strong>发布时间：</strong>
-          <a href="" title="{{ page.title }}">2018年4月20日 - 10时04分</a>
+          <a href="" title="{{ page.title }}">2019年2月28日 - 10时02分</a>
           </li>
           <li class="post-copyright-license">
           <strong>版权声明： </strong>
@@ -309,7 +283,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/f19cae66.html" data-id="cjso0ceaq000t2doz94xzdsp8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/cbbeaee8.html" data-id="cjso0ceen003t2dozce5sw3eb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -382,19 +356,10 @@
       
 <nav id="article-nav">
     
-        <a href="/archives/fdfa2529.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    新时代e支部后台创作的故事 
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/31b33e7a.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/9b4c95f.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">FastDFS Tracker及Storage节点添加及删除</div>
+            <div class="article-nav-title">原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上</div>
         </a>
     
 </nav>
@@ -407,19 +372,10 @@
         
 <nav id="article-nav">
     
-        <a href="/archives/fdfa2529.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    新时代e支部后台创作的故事 
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/31b33e7a.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/9b4c95f.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">FastDFS Tracker及Storage节点添加及删除</div>
+            <div class="article-nav-title">原生安卓(AOSP)WiFi信号去叹号去叉教程5.0-Android P及以上</div>
         </a>
     
 </nav>
