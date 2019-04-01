@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>CORS on Nginx | ini&#39;s Blog</title>
+    <title>m3u8格式以及CORS on Nginx的问题解决 | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="在项目开发过程中对于文件访问，特别是m3u8文件的访问经常涉及到跨域问题，在不同域名无法访问文件。所以需要配置nginx，让服务器文件支持跨域请求。 为什么要用m3u8格式的视频文件。随着客户的增加，mp4文件播放的弊端也日益凸显，主要集中在两个方面，一是当视频时长比较长的时候，mp4的关键帧元素往往很大，需要加载很长时间才能开始播放，网速不好的情况缓冲加载就要20多秒的时间，客户早已急不可耐。">
 <meta name="keywords" content="Cros">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CORS on Nginx">
+<meta property="og:title" content="m3u8格式以及CORS on Nginx的问题解决">
 <meta property="og:url" content="http://inicb.com/archives/cbbeaee8.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
 <meta property="og:description" content="在项目开发过程中对于文件访问，特别是m3u8文件的访问经常涉及到跨域问题，在不同域名无法访问文件。所以需要配置nginx，让服务器文件支持跨域请求。 为什么要用m3u8格式的视频文件。随着客户的增加，mp4文件播放的弊端也日益凸显，主要集中在两个方面，一是当视频时长比较长的时候，mp4的关键帧元素往往很大，需要加载很长时间才能开始播放，网速不好的情况缓冲加载就要20多秒的时间，客户早已急不可耐。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-05T00:12:05.211Z">
+<meta property="og:updated_time" content="2019-04-01T03:06:43.023Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CORS on Nginx">
+<meta name="twitter:title" content="m3u8格式以及CORS on Nginx的问题解决">
 <meta name="twitter:description" content="在项目开发过程中对于文件访问，特别是m3u8文件的访问经常涉及到跨域问题，在不同域名无法访问文件。所以需要配置nginx，让服务器文件支持跨域请求。 为什么要用m3u8格式的视频文件。随着客户的增加，mp4文件播放的弊端也日益凸显，主要集中在两个方面，一是当视频时长比较长的时候，mp4的关键帧元素往往很大，需要加载很长时间才能开始播放，网速不好的情况缓冲加载就要20多秒的时间，客户早已急不可耐。">
     
 
@@ -159,7 +159,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            CORS on Nginx
+            m3u8格式以及CORS on Nginx的问题解决
         </h1>
     
 
@@ -208,11 +208,20 @@
 <p><a href="https://blog.csdn.net/u012539700/article/details/79640458" target="_blank" rel="noopener">https://blog.csdn.net/u012539700/article/details/79640458</a></p>
 <p>使用ffmpeg将mp4切成ts片段的时候会碰到一个问题，就是生成的m3u8文件里只有最后的五个片段的信息。</p>
 <p>这是因为ffmpeg 默认的list size 为5，所以只获得最后的5个片段。为了解决这个问题，需要指定参数-hls_list_size 0，这样就能包含所有的片段</p>
+<p>或者第二种<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i yourfile.mp4 -codec: copy -start_number 0 -hls_time 15 -hls_list_size 0 -f hls output.m3u8</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>codec 表示媒体的编码类型，你可以改成其他格式，copy 是一个关键词，表示复制原有视频的编码类型；</li>
+<li>hls_time 表示分片的时间长度，按照每个分片 10s 来分割；</li>
+<li><p>f 表示输出文件格式类型，-f hls 就是表示按照 hls 来进行输出<br>i 表示需要转换的文件地址<br>来源：<a href="https://www.jackpu.com/mp4-huan-hls-huo-zhe-dash-jiao-cheng/" target="_blank" rel="noopener">https://www.jackpu.com/mp4-huan-hls-huo-zhe-dash-jiao-cheng/</a></p>
+<p>经测试第二种方式更准确，第一种经常卡顿重复播放。</p>
+</li>
+</ul>
 <h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
 <li><a href="https://enable-cors.org/server_nginx.html" target="_blank" rel="noopener">https://enable-cors.org/server_nginx.html</a></li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="noopener">HTTP访问控制（CORS）
 </a></li>
 <li><a href="http://www.xpblog.xyz/archives/181" target="_blank" rel="noopener">Windows下 FFMPEG mp4批量转码m3u8，视频批量加水印</a></li>
+<li><a href="https://www.jackpu.com/mp4-huan-hls-huo-zhe-dash-jiao-cheng/" target="_blank" rel="noopener"></a></li>
 </ul>
 
         
@@ -273,7 +282,7 @@
           </li>
           <li class="post-copyright-link">
           <strong>本文链接：</strong>
-          <a href="" title="{{ page.title }}">CORS on Nginx</a>
+          <a href="" title="{{ page.title }}">m3u8格式以及CORS on Nginx的问题解决</a>
           </li>
           <li class="post-copyright-link">
           <strong>发布时间：</strong>
@@ -292,7 +301,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/cbbeaee8.html" data-id="cjtseazul004386ozhvt9hcw0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/cbbeaee8.html" data-id="cjtxrvtdq003qcaoz0pi31vlf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

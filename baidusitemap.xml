@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://inicb.com/archives/cbbeaee8.html</loc>
+    <lastmod>2019-04-01T03:06:43.023Z</lastmod>
+    <data>
+        <display>
+        <title>m3u8格式以及CORS on Nginx的问题解决</title>
+        <pubTime>2019-02-28T02:15:45.000Z</pubTime>
+        
+        <tag>Cros</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Nginx" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Nginx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://inicb.com/archives/62b50406.html</loc>
     <lastmod>2019-03-28T08:47:43.470Z</lastmod>
     <data>
@@ -62,29 +85,6 @@
           
              
               <breadCrumb title="GFW" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/GFW/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://inicb.com/archives/cbbeaee8.html</loc>
-    <lastmod>2019-03-05T00:12:05.211Z</lastmod>
-    <data>
-        <display>
-        <title>CORS on Nginx</title>
-        <pubTime>2019-02-28T02:15:45.000Z</pubTime>
-        
-        <tag>Cros</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
-          
-             
-              <breadCrumb title="Nginx" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Nginx/"/>
           
         </display>
     </data>
