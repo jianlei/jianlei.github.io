@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="ini&#39;s Blog">
 <meta property="og:description" content="Cookie 路径cookie 一般都是由于用户访问页面而被创建的，可是并不是只有在创建 cookie 的页面才可以访问这个cookie。在默认情况下，出于安全方面的考虑，只有与创建 cookie 的页面处于同一个目录或在创建cookie页面的子目录下的网页才可以访问。那么此时如果希望其父级或者整个网页都能够使用cookie，就需要进行路径的设置。 让这个设置的cookie 能被其他目录或者父级的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-29T07:23:54.245Z">
+<meta property="og:updated_time" content="2019-05-08T06:58:25.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cookie 的路径以及 Cookie 域，设置同一域名下多个Tomcat共享Cookie">
 <meta name="twitter:description" content="Cookie 路径cookie 一般都是由于用户访问页面而被创建的，可是并不是只有在创建 cookie 的页面才可以访问这个cookie。在默认情况下，出于安全方面的考虑，只有与创建 cookie 的页面处于同一个目录或在创建cookie页面的子目录下的网页才可以访问。那么此时如果希望其父级或者整个网页都能够使用cookie，就需要进行路径的设置。 让这个设置的cookie 能被其他目录或者父级的">
@@ -203,6 +203,9 @@
 <p>默认cookie的域是当前域名，默认的路径的设置cookie时的当前页面的目录路径。如果想要跨域或者在其他的路径下访问cookie就必须要重新设置这两个属性，<fon color="red">domain和<fon color="red">path。</fon></fon></p>
 <p><a href="http://www.baidu.com/content/example/3.jsp" target="_blank" rel="noopener">www.baidu.com/content/example/3.jsp</a><br>则域domain为<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>, 路径path为/content/example</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &quot;username=独行冰海; path=/; domain=baidu.com&quot;</span><br></pre></td></tr></table></figure>
+<p>在项目中的使用实战：<br>在一个系统例如<a href="http://www.jlspdj.cn/spzzb下" target="_blank" rel="noopener">www.jlspdj.cn/spzzb下</a> 登录之后设置cookie，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$.cookie(&quot;userName&quot;, userName, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos;  &#125;);</span><br><span class="line">	$.cookie(&quot;userType&quot;, lgUser.userType, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos;  &#125;);</span><br><span class="line">	$.cookie(&quot;perName&quot;, lgUser.perName, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos;  &#125;);</span><br><span class="line">	$.cookie(&quot;pwd&quot;, lgUser.pwd, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos;  &#125;);</span><br><span class="line">	$.cookie(&quot;systemflag&quot;, &quot;1&quot;, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos;  &#125;);</span><br></pre></td></tr></table></figure>
+<p>在另一个系统<a href="http://www.jlspdj.cn/bigdata" target="_blank" rel="noopener">www.jlspdj.cn/bigdata</a> 中就使用下面代码获取cookie即可判断。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var strcookie = document.cookie;</span><br></pre></td></tr></table></figure></p>
 
         
         </div>
@@ -281,7 +284,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/6d1addbc.html" data-id="cjtxrxl5h0030e3oziaxnnhpu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/6d1addbc.html" data-id="cjvevgtji002u40ozitugirn5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

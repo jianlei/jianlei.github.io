@@ -154,7 +154,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                54
+                55
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -208,6 +208,113 @@
             
             
             <section id="main">
+    <article id="post-Android-多个源码目录和资源目录" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/e0c2a9d8.html">Android 多个源码目录和资源目录</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/e0c2a9d8.html">
+            <time datetime="2016-06-14T02:54:46.000Z" itemprop="datePublished">2016-06-14</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="1-首先你得使用gradle-去构建项目。"><a href="#1-首先你得使用gradle-去构建项目。" class="headerlink" title="1.首先你得使用gradle 去构建项目。"></a>1.首先你得使用gradle 去构建项目。</h3><p>原理如下：</p>
+<ol>
+<li><p>引用源码目录和资源目录，以及Manifest文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line">            manifest.srcFile &apos;AndroidManifest.xml&apos;</span><br><span class="line">            java.srcDirs = [&apos;src&apos;]</span><br><span class="line">            resources.srcDirs = [&apos;src&apos;]</span><br><span class="line">            aidl.srcDirs = [&apos;src&apos;]</span><br><span class="line">            renderscript.srcDirs = [&apos;src&apos;]</span><br><span class="line">            res.srcDirs = [&apos;res&apos;]</span><br><span class="line">            assets.srcDirs = [&apos;assets&apos;]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        debug.setRoot(&apos;build-types/debug&apos;)</span><br><span class="line">        release.setRoot(&apos;build-types/release&apos;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多个目录配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sourceSets&#123;</span><br><span class="line">        main&#123;</span><br><span class="line">            res.srcDirs = [</span><br><span class="line">                    &apos;src/main/res/sub_res/base&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/notice&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/study&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/rckq&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res/associates&apos;,</span><br><span class="line">                    &apos;src/main/res/sub_res&apos;,</span><br><span class="line">                    &apos;src/main/res&apos;</span><br><span class="line">            ];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如上所示。</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
     <article id="post-Android从布局中快速高效地提取Style" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -681,6 +788,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/archives/4e5fc6be.html" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/archives/4e5fc6be.html" class="title">Face_Recongnise配置</a></p>
+                            <p class="item-date"><time datetime="2019-04-18T06:39:01.000Z" itemprop="datePublished">2019-04-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/archives/972f8a4b.html" class="thumbnail">
     
     
@@ -754,25 +880,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/archives/3f223d67.html" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://images.pexels.com/photos/207891/pexels-photo-207891.jpeg?cs=srgb&amp;dl=bear-bench-child-207891.jpg&amp;fm=jpg)" alt="我是如何一步步改善儿子便秘情况的" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/生活/">生活</a></p>
-                            <p class="item-title"><a href="/archives/3f223d67.html" class="title">我是如何一步步改善儿子便秘情况的</a></p>
-                            <p class="item-date"><time datetime="2019-02-11T02:04:12.000Z" itemprop="datePublished">2019-02-11</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -791,7 +898,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 

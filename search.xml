@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Face_Recongnise配置]]></title>
+    <url>%2Farchives%2F4e5fc6be.html</url>
+    <content type="text"><![CDATA[项目地址：https://github.com/ageitgey/face_recognition 依赖： dlibhttps://pypi.org/project/dlib/19.17.0/dlib 需要依赖安装Boost.Python face_recognition_models 0.3.0https://pypi.org/project/face_recognition_models/ face_recognition 1.2.3https://pypi.org/project/face_recognition/ face-recognition-service,用flask作为face_recognition的web服务https://github.com/tabvn/face-recognition-service 参考资料： https://www.cnblogs.com/freeweb/p/7699996.htmlhttps://blog.csdn.net/qq_19707521/article/details/80407369]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[使用Python批量在图片上显示图片创建日期]]></title>
     <url>%2Farchives%2F972f8a4b.html</url>
     <content type="text"><![CDATA[一般手机拍照图片都有图片创建时间，有时候时间久了忘记是什么时候拍的啦，后来想是否是可以通过python批量处理图片，把拍照时间显示到照片上。 下面是我写的一个脚本，可以批量处理图片，显示图片时间。1234567891011121314151617181920212223242526272829303132333435363738394041from PIL import Image, ImageDraw, ImageFontfrom datetime import datetimeimport osimport exifreadfont = ImageFont.truetype( &apos;/Users/daren/PycharmProjects/MyFirstScrapyProject/MyFirstScrapyProject/spiders/DMFT1553353872846-2.ttf&apos;, 90)def add_time(img, text): draw = ImageDraw.Draw(img) fillcolor = &quot;#ffffff&quot; text_size_x, text_size_y = draw.textsize(text, font=font) text_xy = (img.size[0] - text_size_x - 50, img.size[1] - text_size_y * 3) draw.text(text_xy, text, font=font, fill=fillcolor) img.save(new_path + &apos;&#123;&#125;.jpg&apos;.format(text + str(datetime.now().timestamp())), &apos;jpeg&apos;)def list_file(): for file in os.listdir(origin_path): file_path = origin_path + file image = Image.open(file_path) f = open(file_path, &apos;rb&apos;) tags = exifread.process_file(f) time = tags[&apos;EXIF DateTimeOriginal&apos;].printable; add_time(image, datetime.strftime(datetime.strptime(time, &apos;%Y:%m:%d %H:%M:%S&apos;), &apos;%Y-%m-%d %H:%M:%S&apos;))origin_path = &apos;/Users/daren/temp/aa/origin/&apos;new_path = &apos;/Users/daren/temp/aa/new/&apos;if __name__ == &apos;__main__&apos;: list_file()# f = open(&apos;/Users/daren/temp/aa/origin/IMG_20180317_162705.jpg&apos;, &apos;rb&apos;)# tags = exifread.process_file(f)# print(type(tags[&apos;EXIF DateTimeOriginal&apos;].printable))# print(tags) 其中用到了以下工具和知识。 ExifReadEasy to use Python module to extract Exif metadata from tiff and jpeg files.读取图片信息 Image Make，Image Model，EXIF DateTimeOriginal等相关信息 PillowPython 图像处理标准库，支持python3.6 另一种思路是对图片进行分类，按照时间创建相应的文件夹，并把图片按照时间文件夹进行整理,功能参照下面脚本。classify_picture.py 相关资料 Python教程–廖雪峰 python获取照片EXIF经纬度、拍摄时间 按拍摄日期归类照片 一键搞定 Python]]></content>
@@ -113,7 +118,7 @@
   <entry>
     <title><![CDATA[Cookie 的路径以及 Cookie 域，设置同一域名下多个Tomcat共享Cookie]]></title>
     <url>%2Farchives%2F6d1addbc.html</url>
-    <content type="text"><![CDATA[Cookie 路径cookie 一般都是由于用户访问页面而被创建的，可是并不是只有在创建 cookie 的页面才可以访问这个cookie。在默认情况下，出于安全方面的考虑，只有与创建 cookie 的页面处于同一个目录或在创建cookie页面的子目录下的网页才可以访问。那么此时如果希望其父级或者整个网页都能够使用cookie，就需要进行路径的设置。 让这个设置的cookie 能被其他目录或者父级的目录访问的方法：1document.cookie = &quot;userName = 独行冰海; path=/&quot;; Cookie 域路径能解决在同一个域下访问 cookie 的问题，那么如何解决同一个主域下的访问问题呢？我们可以通过指定可访问cookie的主机名来进行设置。 document.cookie=”name=value; domain=cookieDomain”; 例如 “www.baidu.com&quot; 与 “mp3.baidu.com” 公用一个关联的域名”baidu.com”，我们如果想让 “www.baidu.com&quot; 下的cookie被 “mp3.baidu.com” 访问，我们就需要用到 cookie 的domain属性，并且需要把path属性设置为 “/“ 这里需要注意一点：一定的是同域之间的访问，不能把domain的值设置成非主域的域名。 默认cookie的域是当前域名，默认的路径的设置cookie时的当前页面的目录路径。如果想要跨域或者在其他的路径下访问cookie就必须要重新设置这两个属性，domain和path。 www.baidu.com/content/example/3.jsp则域domain为www.baidu.com, 路径path为/content/example 1document.cookie = &quot;username=独行冰海; path=/; domain=baidu.com&quot;]]></content>
+    <content type="text"><![CDATA[Cookie 路径cookie 一般都是由于用户访问页面而被创建的，可是并不是只有在创建 cookie 的页面才可以访问这个cookie。在默认情况下，出于安全方面的考虑，只有与创建 cookie 的页面处于同一个目录或在创建cookie页面的子目录下的网页才可以访问。那么此时如果希望其父级或者整个网页都能够使用cookie，就需要进行路径的设置。 让这个设置的cookie 能被其他目录或者父级的目录访问的方法：1document.cookie = &quot;userName = 独行冰海; path=/&quot;; Cookie 域路径能解决在同一个域下访问 cookie 的问题，那么如何解决同一个主域下的访问问题呢？我们可以通过指定可访问cookie的主机名来进行设置。 document.cookie=”name=value; domain=cookieDomain”; 例如 “www.baidu.com&quot; 与 “mp3.baidu.com” 公用一个关联的域名”baidu.com”，我们如果想让 “www.baidu.com&quot; 下的cookie被 “mp3.baidu.com” 访问，我们就需要用到 cookie 的domain属性，并且需要把path属性设置为 “/“ 这里需要注意一点：一定的是同域之间的访问，不能把domain的值设置成非主域的域名。 默认cookie的域是当前域名，默认的路径的设置cookie时的当前页面的目录路径。如果想要跨域或者在其他的路径下访问cookie就必须要重新设置这两个属性，domain和path。 www.baidu.com/content/example/3.jsp则域domain为www.baidu.com, 路径path为/content/example 1document.cookie = &quot;username=独行冰海; path=/; domain=baidu.com&quot; 在项目中的使用实战：在一个系统例如www.jlspdj.cn/spzzb下 登录之后设置cookie，代码如下： 12345$.cookie(&quot;userName&quot;, userName, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos; &#125;); $.cookie(&quot;userType&quot;, lgUser.userType, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos; &#125;); $.cookie(&quot;perName&quot;, lgUser.perName, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos; &#125;); $.cookie(&quot;pwd&quot;, lgUser.pwd, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos; &#125;); $.cookie(&quot;systemflag&quot;, &quot;1&quot;, &#123; expires: 7,path:&apos;/&apos;,domain:&apos;jlspdj.cn&apos; &#125;); 在另一个系统www.jlspdj.cn/bigdata 中就使用下面代码获取cookie即可判断。1var strcookie = document.cookie;]]></content>
       <categories>
         <category>技术开发</category>
         <category>J2EE</category>
@@ -499,8 +504,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>VPS</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -550,8 +555,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>VPS</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
