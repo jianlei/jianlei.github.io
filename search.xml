@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Nginx域名跳转-rewrite]]></title>
+    <url>%2Farchives%2Ff974dc7a.html</url>
+    <content type="text"><![CDATA[在nginx中可以对域名进行跳转如：所有对www.aaa.com的访问都redirect到www.bbb.com 12345678910server &#123; listen 80; server_name www.bbb.com; index index.htm index.php; root /export/home/www if ($host = &quot;www.aaa.com&quot;)&#123; rewrite ^/(.*)$ http://www.bbb.com/$1 permanent; &#125; &#125; 符号解释：^ 匹配字符串的开始/ 匹配域名的分隔符. 匹配除换行符以外的任意字符 重复零次或更多次(.) 匹配任意字符. 匹配任意文本$ 匹配字符串的结束]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux下挂载新硬盘方法]]></title>
+    <url>%2Farchives%2F86c59740.html</url>
+    <content type="text"><![CDATA[Linux的硬盘识别:一般使用”fdisk -l”命令可以列出系统中当前连接的硬盘设备和分区信息.新硬盘没有分区信息,则只显示硬盘大小信息. 查看硬盘信息1fdisk -l 1234567891011121314151617Disk /dev/xvdb: 1073.7 GB, 1073741824000 bytes, 2097152000 sectorsUnits = sectors of 1 * 512 = 512 bytesSector size (logical/physical): 512 bytes / 512 bytesI/O size (minimum/optimal): 512 bytes / 512 bytesDisk /dev/xvda: 107.4 GB, 107374182400 bytes, 209715200 sectorsUnits = sectors of 1 * 512 = 512 bytesSector size (logical/physical): 512 bytes / 512 bytesI/O size (minimum/optimal): 512 bytes / 512 bytesDisk label type: dosDisk identifier: 0x00034d18 Device Boot Start End Blocks Id System/dev/xvda1 * 2048 1026047 512000 83 Linux/dev/xvda2 1026048 205520895 102247424 83 Linux/dev/xvda3 205520896 209715199 2097152 82 Linux swap / Solaris 进入磁盘，对磁盘进行分区1fdisk /dev/xvdb 1234567891011Command (m for help):nCommand action e extended //输入e为创建扩展分区 p primary partition (1-4) //输入p为创建逻辑分区pPartion number(1-4)：1 //在这里输入l，就进入划分逻辑分区阶段了；First cylinder (51-125, default 51): //注：这个就是分区的Start 值；这里最好直接按回车，如果您输入了一个非默认的数字，会造成空间浪费；Using default value 51Last cylinder or +size or +sizeM or +sizeK (51-125, default 125): +200M 注：这个是定义分区大小的，+200M 就是大小为200M ；当然您也可以根据p提示的单位cylinder的大小来算，然后来指定 End的数值。回头看看是怎么算的；还是用+200M这个办法来添加，这样能直观一点。如果您想添加一个10G左右大小的分区，请输入 +10000M ；Command (m for help): w //最后输入w回车保存。 查看硬盘空间1#fdisk -l 格式化分区12mkfs.xfs /dev/xvdb1对硬盘进行格式化 创建挂载目录/data1mkdir /data 挂载分区1mount /dev/xvdb1 /data 查看硬盘大小以及挂载分区1df -h 配置开机自动挂载因为mount挂载在重启服务器后会失效，所以需要将分区信息写到/etc/fstab文件中让它永久挂载：12vim /etc/fstab加入/dev/xvdb1(磁盘分区) /data（挂载目录） xfs（文件格式）defaults 0 0 完成]]></content>
+      <categories>
+        <category>技术开发</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Face_Recongnise配置]]></title>
     <url>%2Farchives%2F4e5fc6be.html</url>
     <content type="text"><![CDATA[项目地址：https://github.com/ageitgey/face_recognition 依赖： dlibhttps://pypi.org/project/dlib/19.17.0/dlib 需要依赖安装Boost.Python face_recognition_models 0.3.0https://pypi.org/project/face_recognition_models/ face_recognition 1.2.3https://pypi.org/project/face_recognition/ face-recognition-service,用flask作为face_recognition的web服务https://github.com/tabvn/face-recognition-service 参考资料： https://www.cnblogs.com/freeweb/p/7699996.htmlhttps://blog.csdn.net/qq_19707521/article/details/80407369]]></content>
@@ -504,8 +517,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>VPS</tag>
         <tag>Hexo</tag>
+        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
@@ -555,8 +568,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>VPS</tag>
         <tag>Hexo</tag>
+        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
