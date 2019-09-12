@@ -502,7 +502,7 @@
   <entry>
     <title><![CDATA[常用网站工具箱集合]]></title>
     <url>%2Farchives%2F62b50406.html</url>
-    <content type="text"><![CDATA[图片 pexels https://www.pexels.com/ https://unsplash.com/ https://foter.com/ http://www.iconfont.cn/ 生成favicon图片的网站 https://realfavicongenerator.net 存储图片平台 https://cloudinary.com/ 压缩图片 https://tinypng.com/JS layer web弹层组件 http://layer.layui.com/Nginx nginx配置location总结及rewrite规则写法 http://seanlook.com/2015/05/17/nginx-location-rewrite/ 视频音频 you-getYou-Get is a tiny command-line utility to download media contents (videos, audios, images) from the Web, in case there is no other handy way to do it. RxJava2 学习 https://maxwell-nc.github.io/android/rxjava2-1.html 破解 百度网盘下载破解 百度网盘下载破解2 bootstrap modalhttp://www.runoob.com/bootstrap/bootstrap-modal-plugin.html]]></content>
+    <content type="text"><![CDATA[图片 pexels https://www.pexels.com/ https://unsplash.com/ https://foter.com/ http://www.iconfont.cn/ 生成favicon图片的网站 https://realfavicongenerator.net 存储图片平台 https://cloudinary.com/ 压缩图片 https://tinypng.com/JS layer web弹层组件 http://layer.layui.com/ lightgallery.js 轻量级图库 https://sachinchoolur.github.io/lightgallery.js/Nginx nginx配置location总结及rewrite规则写法 http://seanlook.com/2015/05/17/nginx-location-rewrite/ 视频音频 you-getYou-Get is a tiny command-line utility to download media contents (videos, audios, images) from the Web, in case there is no other handy way to do it. RxJava2 学习 https://maxwell-nc.github.io/android/rxjava2-1.html 破解 百度网盘下载破解 百度网盘下载破解2 bootstrap modalhttp://www.runoob.com/bootstrap/bootstrap-modal-plugin.html]]></content>
       <categories>
         <category>技术开发</category>
         <category>工具箱</category>
@@ -517,8 +517,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>VPS</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -568,8 +568,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>VPS</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
