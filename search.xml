@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[centos 7下iptables 的安装和使用]]></title>
+    <url>%2Farchives%2F3aac26d6.html</url>
+    <content type="text"><![CDATA[说明：Centos 7 默认的防火墙是 firewall ，鉴于 iptables 使用的比较广，本文简要介绍在 CentOS7.0 系统下 iptables 服务的安装以及相关的使用方法。 关闭 firewall为了防止与 iptables 服务冲突，先禁用 firewall 开机启动使用systemctl status firewalld查看服务状态，active/inactive表明服务是运行/关闭状态（如下图） 查看firewalld状态 1systemctl status firewalld 关闭fiewwalld 1systemctl stop firewalld 禁止开机启动 1systemctl disable firewalld 安装 iptables1yum install -y iptables-services 启动iptables 1systemctl start iptables 设置开机启动 1systemctl enable firewalld iptables简单配置 清除已有iptables规则 123iptables -Fiptables -Xiptables -Z 开放指定的端口 1234567891011121314151617vim /etc/sysconfig/iptables注释：-A 从尾部添加 -I从开头添加允许本地回环接口(即运行本机访问本机)iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT允许已建立的或相关连的通行iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT允许所有本机向外的访问iptables -A OUTPUT -j ACCEPT允许访问22端口iptables -A INPUT -p tcp --dport 22 -j ACCEPT允许访问80端口iptables -A INPUT -p tcp --dport 80 -j ACCEPT允许FTP服务的21和20端口iptables -A INPUT -p tcp --dport 21 -j ACCEPTiptables -A INPUT -p tcp --dport 20 -j ACCEPT如果有其他端口的话，规则也类似，稍微修改上述语句就行 禁止其他未允许的规则访问（注意：如果22端口未加入允许规则，SSH链接会直接断开。） 1 .用DROP方法iptables -A INPUT -p tcp -j DROP2 .用REJECT方法iptables -A INPUT -j REJECTiptables -A FORWARD -j REJECT3 .屏蔽IP屏蔽单个IP的命令是iptables -I INPUT -s 123.45.6.7 -j DROP封整个段即从123.0.0.1到123.255.255.254的命令iptables -I INPUT -s 123.0.0.0/8 -j DROP封IP段即从123.45.0.1到123.45.255.254的命令iptables -I INPUT -s 124.45.0.0/16 -j DROP封IP段即从123.45.6.1到123.45.6.254的命令是iptables -I INPUT -s 123.45.6.0/24 -j DROP4 .查看已添加的iptables规则iptables -L -nv：显示详细信息，包括每条规则的匹配包数量和匹配字节数x：在 v 的基础上，禁止自动单位换算（K、M） vps侦探n：只显示IP地址和端口号，不将ip解析为域名5 .删除已添加的iptables规则 将所有iptables以序号标记显示，执行：iptables -L -n –line-numbers 比如要删除INPUT里序号为8的规则，执行：iptables -D INPUT 86 .iptables的开机启动及规则保存 CentOS上可能会存在安装好iptables后，iptables并不开机自启动，可以执行一下：chkconfig –level 345 iptables on或者systemctl enable iptables.service 将其加入开机启动。]]></content>
+      <categories>
+        <category>技术开发</category>
+      </categories>
+      <tags>
+        <tag>iptables</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Nginx域名跳转-rewrite]]></title>
     <url>%2Farchives%2Ff974dc7a.html</url>
     <content type="text"><![CDATA[在nginx中可以对域名进行跳转如：所有对www.aaa.com的访问都redirect到www.bbb.com 12345678910server &#123; listen 80; server_name www.bbb.com; index index.htm index.php; root /export/home/www if ($host = &quot;www.aaa.com&quot;)&#123; rewrite ^/(.*)$ http://www.bbb.com/$1 permanent; &#125; &#125; 符号解释：^ 匹配字符串的开始/ 匹配域名的分隔符. 匹配除换行符以外的任意字符 重复零次或更多次(.) 匹配任意字符. 匹配任意文本$ 匹配字符串的结束]]></content>
@@ -12,6 +23,10 @@
       <categories>
         <category>技术开发</category>
       </categories>
+      <tags>
+        <tag>mount</tag>
+        <tag>fdisk</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Face_Recongnise配置]]></title>
@@ -517,8 +532,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>VPS</tag>
         <tag>Hexo</tag>
+        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
@@ -568,8 +583,8 @@
         <category>博客</category>
       </categories>
       <tags>
-        <tag>VPS</tag>
         <tag>Hexo</tag>
+        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>

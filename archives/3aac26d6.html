@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>centos 7下iptables 的安装和使用 | ini&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="说明：Centos 7 默认的防火墙是 firewall ，鉴于 iptables 使用的比较广，本文简要介绍在 CentOS7.0 系统下 iptables 服务的安装以及相关的使用方法。  关闭 firewall为了防止与 iptables 服务冲突，先禁用 firewall 开机启动使用systemctl status firewalld查看服务状态，active/inactive表明服务是">
+<meta name="keywords" content="iptables">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos 7下iptables 的安装和使用">
+<meta property="og:url" content="http://inicb.com/archives/3aac26d6.html">
+<meta property="og:site_name" content="ini&#39;s Blog">
+<meta property="og:description" content="说明：Centos 7 默认的防火墙是 firewall ，鉴于 iptables 使用的比较广，本文简要介绍在 CentOS7.0 系统下 iptables 服务的安装以及相关的使用方法。  关闭 firewall为了防止与 iptables 服务冲突，先禁用 firewall 开机启动使用systemctl status firewalld查看服务状态，active/inactive表明服务是">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-12T05:58:51.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos 7下iptables 的安装和使用">
+<meta name="twitter:description" content="说明：Centos 7 默认的防火墙是 firewall ，鉴于 iptables 使用的比较广，本文简要介绍在 CentOS7.0 系统下 iptables 服务的安装以及相关的使用方法。  关闭 firewall为了防止与 iptables 服务冲突，先禁用 firewall 开机启动使用systemctl status firewalld查看服务状态，active/inactive表明服务是">
+    
+
+    
+        <link rel="alternate" href="/" title="ini&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ini&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <!-- <button type="submit" class="search-form-submit"></button> -->
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+              <script type='text/javascript'>
+              $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 80%; display: block; float:none;}}</style>");
+              </script>
+              <script type='text/javascript'>
+              document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
+              </script>
+           
+            <section id="main"><article id="post-centos-7下iptables-的安装和使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            centos 7下iptables 的安装和使用
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/3aac26d6.html">
+            <time datetime="2019-09-12T05:47:41.000Z" itemprop="datePublished">2019-09-12</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/iptables/">iptables</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote><p>说明：Centos 7 默认的防火墙是 firewall ，鉴于 iptables 使用的比较广，本文简要介绍在 CentOS7.0 系统下 iptables 服务的安装以及相关的使用方法。</p>
+</blockquote>
+<h4 id="关闭-firewall"><a href="#关闭-firewall" class="headerlink" title="关闭 firewall"></a>关闭 firewall</h4><p>为了防止与 iptables 服务冲突，先禁用 firewall 开机启动使用systemctl status firewalld<br>查看服务状态，active/inactive表明服务是运行/关闭状态（如下图）</p>
+<ul>
+<li><p>查看firewalld状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭fiewwalld</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>禁止开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="安装-iptables"><a href="#安装-iptables" class="headerlink" title="安装 iptables"></a>安装 iptables</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables-services</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>启动iptables</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start iptables</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable firewalld</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="iptables简单配置"><a href="#iptables简单配置" class="headerlink" title="iptables简单配置"></a>iptables简单配置</h4><ul>
+<li><p>清除已有iptables规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开放指定的端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/iptables</span><br><span class="line"></span><br><span class="line">注释：-A 从尾部添加 -I从开头添加</span><br><span class="line">允许本地回环接口(即运行本机访问本机)</span><br><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line">允许已建立的或相关连的通行</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">允许所有本机向外的访问</span><br><span class="line">iptables -A OUTPUT -j ACCEPT</span><br><span class="line">允许访问22端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT</span><br><span class="line">允许访问80端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line">允许FTP服务的21和20端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 21 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp --dport 20 -j ACCEPT</span><br><span class="line">如果有其他端口的话，规则也类似，稍微修改上述语句就行</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>禁止其他未允许的规则访问（注意：如果22端口未加入允许规则，SSH链接会直接断开。）</p>
+</li>
+</ul>
+<p>1 .用DROP方法<br>iptables -A INPUT -p tcp -j DROP<br>2 .用REJECT方法<br>iptables -A INPUT -j REJECT<br>iptables -A FORWARD -j REJECT<br>3  .屏蔽IP<br>屏蔽单个IP的命令是<br>iptables -I INPUT -s 123.45.6.7 -j DROP<br>封整个段即从123.0.0.1到123.255.255.254的命令<br>iptables -I INPUT -s 123.0.0.0/8 -j DROP<br>封IP段即从123.45.0.1到123.45.255.254的命令<br>iptables -I INPUT -s 124.45.0.0/16 -j DROP<br>封IP段即从123.45.6.1到123.45.6.254的命令是<br>iptables -I INPUT -s 123.45.6.0/24 -j DROP<br>4  .查看已添加的iptables规则<br>iptables -L -n<br>v：显示详细信息，包括每条规则的匹配包数量和匹配字节数<br>x：在 v 的基础上，禁止自动单位换算（K、M） vps侦探<br>n：只显示IP地址和端口号，不将ip解析为域名<br>5  .删除已添加的iptables规则</p>
+<p>将所有iptables以序号标记显示，执行：<br>iptables -L -n –line-numbers</p>
+<p>比如要删除INPUT里序号为8的规则，执行：<br>iptables -D INPUT 8<br>6  .iptables的开机启动及规则保存</p>
+<p>CentOS上可能会存在安装好iptables后，iptables并不开机自启动，可以执行一下：<br>chkconfig –level 345 iptables on<br>或者<br>systemctl enable iptables.service</p>
+<p>将其加入开机启动。</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者：</strong>王建磊</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="" title="{{ page.title }}">centos 7下iptables 的安装和使用</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>发布时间：</strong>
+          <a href="" title="{{ page.title }}">2019年9月12日 - 13时09分</a>
+          </li>
+          <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+          </li>
+        </ul>
+      <div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://inicb.com/archives/3aac26d6.html" data-id="ck0gadwge004bmyoz6a10oykt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+      
+<nav id="article-nav">
+    
+    
+        <a href="/archives/f974dc7a.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Nginx域名跳转-rewrite</div>
+        </a>
+    
+</nav>
+
+
+    
+  </div>
+
+    <!-- 
+        
+<nav id="article-nav">
+    
+    
+        <a href="/archives/f974dc7a.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Nginx域名跳转-rewrite</div>
+        </a>
+    
+</nav>
+
+
+     -->
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+
+</section>
+    
+
+
+
+</section>
+            
+            <!-- 
+             -->
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 ini<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: '3RK5nvSxoKincwMiCVLCMFh1-gzGzoHsz',
+            app_key: 'MD8jv5EFuHcMxEP2mz5CUbA0',
+            placeholder: 'Just Do It'
+        });
+    </script>
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
