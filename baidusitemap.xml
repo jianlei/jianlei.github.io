@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://inicb.com/archives/86c59740.html</loc>
-    <lastmod>2019-09-12T05:59:05.616Z</lastmod>
+    <lastmod>2019-09-16T00:17:17.969Z</lastmod>
     <data>
         <display>
         <title>Linux下挂载新硬盘方法</title>
@@ -27,7 +27,7 @@
     
   <url>
     <loc>http://inicb.com/archives/3aac26d6.html</loc>
-    <lastmod>2019-09-12T05:58:51.156Z</lastmod>
+    <lastmod>2019-09-16T00:17:02.459Z</lastmod>
     <data>
         <display>
         <title>centos 7下iptables 的安装和使用</title>
@@ -39,6 +39,31 @@
            
              
               <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/e0e8ec60.html</loc>
+    <lastmod>2019-09-16T00:16:52.722Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录</title>
+        <pubTime>2019-09-12T08:36:49.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+        <tag>Https</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Nginx" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Nginx/"/>
           
         </display>
     </data>

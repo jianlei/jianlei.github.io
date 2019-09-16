@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="ini&#39;s Blog">
 <meta property="og:description" content="说明：Centos 7 默认的防火墙是 firewall ，鉴于 iptables 使用的比较广，本文简要介绍在 CentOS7.0 系统下 iptables 服务的安装以及相关的使用方法。  关闭 firewall为了防止与 iptables 服务冲突，先禁用 firewall 开机启动使用systemctl status firewalld查看服务状态，active/inactive表明服务是">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-12T05:58:51.156Z">
+<meta property="og:updated_time" content="2019-09-16T00:17:02.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos 7下iptables 的安装和使用">
 <meta name="twitter:description" content="说明：Centos 7 默认的防火墙是 firewall ，鉴于 iptables 使用的比较广，本文简要介绍在 CentOS7.0 系统下 iptables 服务的安装以及相关的使用方法。  关闭 firewall为了防止与 iptables 服务冲突，先禁用 firewall 开机启动使用systemctl status firewalld查看服务状态，active/inactive表明服务是">
@@ -208,7 +208,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="安装-iptables"><a href="#安装-iptables" class="headerlink" title="安装 iptables"></a>安装 iptables</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables-services</span><br></pre></td></tr></table></figure>
+<h4 id="安装-iptables"><a href="#安装-iptables" class="headerlink" title="安装 iptables"></a>安装 iptables</h4><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables-services</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>启动iptables</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start iptables</span><br></pre></td></tr></table></figure>
@@ -310,7 +311,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/3aac26d6.html" data-id="ck0gadwge004bmyoz6a10oykt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/3aac26d6.html" data-id="ck0lnt5fs004ftxozktsu97ej" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -383,6 +384,15 @@
       
 <nav id="article-nav">
     
+        <a href="/archives/e0e8ec60.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录
+                
+            </div>
+        </a>
+    
     
         <a href="/archives/f974dc7a.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -398,6 +408,15 @@
     <!-- 
         
 <nav id="article-nav">
+    
+        <a href="/archives/e0e8ec60.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录
+                
+            </div>
+        </a>
     
     
         <a href="/archives/f974dc7a.html" id="article-nav-older" class="article-nav-link-wrap">

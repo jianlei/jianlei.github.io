@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Nginx报错403 forbidden (13: Permission denied)的解决办法 | ini&#39;s Blog</title>
+    <title>Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录 | ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="引起nginx 403 forbidden通常是三种情况：一是缺少索引文件，二是权限问题，三是SELinux状态. 一、缺少index.html或者默认访问页面，就是配置文件中location下没有默认的index.html。也可以通过index指定 index.htm文件位置。">
-<meta name="keywords" content="Nginx">
+    <meta name="description" content="Nginx+Tomcat 部署 request.getScheme获取不到Https问题通过浏览器输入https://www.xxx.com，request.getScheme()获取到的确实http而不是https.通过request.getRequestURL()拿到的也是http://www.xxx.com分析原因，是因为用nginx+tomcat部署web服务，tomcat接受到的请求都是">
+<meta name="keywords" content="Nginx,Https">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx报错403 forbidden (13: Permission denied)的解决办法">
-<meta property="og:url" content="http://inicb.com/archives/aa0e64e5.html">
+<meta property="og:title" content="Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录">
+<meta property="og:url" content="http://inicb.com/archives/e0e8ec60.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
-<meta property="og:description" content="引起nginx 403 forbidden通常是三种情况：一是缺少索引文件，二是权限问题，三是SELinux状态. 一、缺少index.html或者默认访问页面，就是配置文件中location下没有默认的index.html。也可以通过index指定 index.htm文件位置。">
+<meta property="og:description" content="Nginx+Tomcat 部署 request.getScheme获取不到Https问题通过浏览器输入https://www.xxx.com，request.getScheme()获取到的确实http而不是https.通过request.getRequestURL()拿到的也是http://www.xxx.com分析原因，是因为用nginx+tomcat部署web服务，tomcat接受到的请求都是">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-04T02:44:05.199Z">
+<meta property="og:updated_time" content="2019-09-16T00:16:52.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nginx报错403 forbidden (13: Permission denied)的解决办法">
-<meta name="twitter:description" content="引起nginx 403 forbidden通常是三种情况：一是缺少索引文件，二是权限问题，三是SELinux状态. 一、缺少index.html或者默认访问页面，就是配置文件中location下没有默认的index.html。也可以通过index指定 index.htm文件位置。">
+<meta name="twitter:title" content="Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录">
+<meta name="twitter:description" content="Nginx+Tomcat 部署 request.getScheme获取不到Https问题通过浏览器输入https://www.xxx.com，request.getScheme()获取到的确实http而不是https.通过request.getRequestURL()拿到的也是http://www.xxx.com分析原因，是因为用nginx+tomcat部署web服务，tomcat接受到的请求都是">
     
 
     
@@ -151,7 +151,7 @@
               document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
               </script>
            
-            <section id="main"><article id="post-Nginx报错403-forbidden-13-Permission-denied-的解决办法" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Nginx-增加SSL认证之后，request-getScheme-获取不到https的问题记录" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -159,7 +159,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Nginx报错403 forbidden (13: Permission denied)的解决办法
+            Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录
         </h1>
     
 
@@ -168,8 +168,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/archives/aa0e64e5.html">
-            <time datetime="2018-03-12T01:36:02.000Z" itemprop="datePublished">2018-03-12</time>
+        <a href="/archives/e0e8ec60.html">
+            <time datetime="2019-09-12T08:36:49.000Z" itemprop="datePublished">2019-09-12</time>
         </a>
     </div>
 
@@ -183,7 +183,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Nginx/">Nginx</a>
+        <a class="tag-link" href="/tags/Https/">Https</a>, <a class="tag-link" href="/tags/Nginx/">Nginx</a>
     </div>
 
                     </div>
@@ -194,29 +194,10 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>引起nginx 403 forbidden通常是三种情况：一是缺少索引文件，二是权限问题，三是SELinux状态.</p>
-<p>一、缺少index.html或者默认访问页面，就是配置文件中location下没有默认的index.html。也可以通过index指定 index.htm文件位置。<br><a id="more"></a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        listen       [::]:80 default_server;</span><br><span class="line">        server_name  _;</span><br><span class="line">        root         /data/blog;</span><br><span class="line">        #root         /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">        # Load configuration files for the default server block.</span><br><span class="line">        include /etc/nginx/default.d/*.conf;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 404 /404.html;</span><br><span class="line">            location = /40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 500 502 503 504 /50x.html;</span><br><span class="line">            location = /50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>二、权限问题，如果nginx没有web目录的操作权限，也会出现403错误。</p>
-<p>解决办法：1. 修改web目录的读写权限，或者是把nginx的启动用户改成目录的所属用户，重启Nginx即可解决</p>
-<ol>
-<li>把文件目录的访问权限分配给nginx用户</li>
-</ol>
-<p>使用chown命令可以修改文件或目录所属的用户：</p>
-<pre><code>chown 用户 目录或文件名
-
-例如：chown qq /home/qq  (把home目录下的qq目录的拥有者改为qq用户)
-</code></pre><p>使用chgrp命令可以修改文件或目录所属的组：</p>
-<pre><code>chgrp 组 目录或文件名
-
-例如：chgrp qq /home/qq  (把home目录下的qq目录的所属组改为qq组)
-</code></pre><p>三、SELinux设置为开启状态（enabled）的原因</p>
-<p>首先查看本机SELinux的开启状态，如果SELinux status参数为enabled即为开启状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/sestatus -v</span><br></pre></td></tr></table></figure></p>
-<p>如果显示disabled 表示SELinux已经关闭了。如果状态为enabled，则需要关闭。<br>1、临时关闭（不用重启）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure></p>
-<p>2、修改配置文件 /etcselinux/config，将SELINUX=enforcing改为SELINUX=disabled<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/selinux/config</span><br><span class="line"></span><br><span class="line">#SELINUX=enforcing</span><br><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure></p>
-<blockquote><p>我这次遇到的就是第三个问题 SELinux(Security-Enhanced Linux): 强制访问控制的实现，是 Linux历史上最杰出的新安全子系统</p>
-</blockquote>
-<p>问题解决资料学习来自：<a href="http://www.cleey.com/blog/single/id/833.html" target="_blank" rel="noopener">cleey</a></p>
+            <h4 id="Nginx-Tomcat-部署-request-getScheme获取不到Https问题"><a href="#Nginx-Tomcat-部署-request-getScheme获取不到Https问题" class="headerlink" title="Nginx+Tomcat 部署 request.getScheme获取不到Https问题"></a>Nginx+Tomcat 部署 request.getScheme获取不到Https问题</h4><p>通过浏览器输入<a href="https://www.xxx.com，request.getScheme()获取到的确实http而不是https" target="_blank" rel="noopener">https://www.xxx.com，request.getScheme()获取到的确实http而不是https</a>.<br>通过request.getRequestURL()拿到的也是<a href="http://www.xxx.com" target="_blank" rel="noopener">http://www.xxx.com</a><br>分析原因，是因为用<font color="red">nginx+tomcat部署web服务，tomcat接受到的请求都是来自于nginx的http请求</font>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">request.getScheme()  //总是 http，而不是实际的http或https  </span><br><span class="line">request.isSecure()  //总是false（因为总是http）  </span><br><span class="line">request.getRemoteAddr()  //总是 nginx 请求的 IP，而不是用户的IP  </span><br><span class="line">request.getRequestURL()  //总是 nginx 请求的URL 而不是用户实际请求的 URL  </span><br><span class="line">response.sendRedirect( 相对url )  //总是重定向到 http 上 （因为认为当前是 http 请求）</span><br></pre></td></tr></table></figure>
+<h4 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h4><a id="more"></a>
+<p>　　1、在nginx 配置location处加上proxy_set_header X-Forwarded-Scheme  $scheme;<br>　　　　通过request.getHeader(“X-Forwarded-Scheme”)获取真实的scheme<br>　　2、在Tomcat server.xml中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot;&gt;  </span><br><span class="line">　　这行之后</span><br><span class="line">   &lt;Valve className=&quot;org.apache.catalina.valves.RemoteIpValve&quot;  </span><br><span class="line">     remoteIpHeader=&quot;X-Forwarded-For&quot;  </span><br><span class="line">     protocolHeader=&quot;X-Forwarded-Proto&quot;  </span><br><span class="line">     protocolHeaderHttpsValue=&quot;https&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
 
         
         </div>
@@ -276,11 +257,11 @@
           </li>
           <li class="post-copyright-link">
           <strong>本文链接：</strong>
-          <a href="" title="{{ page.title }}">Nginx报错403 forbidden (13: Permission denied)的解决办法</a>
+          <a href="" title="{{ page.title }}">Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录</a>
           </li>
           <li class="post-copyright-link">
           <strong>发布时间：</strong>
-          <a href="" title="{{ page.title }}">2018年3月12日 - 09时03分</a>
+          <a href="" title="{{ page.title }}">2019年9月12日 - 16时09分</a>
           </li>
           <li class="post-copyright-license">
           <strong>版权声明： </strong>
@@ -295,7 +276,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/aa0e64e5.html" data-id="ck0lnt5gi004utxoz5on34rvk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/e0e8ec60.html" data-id="ck0lnt5fn004btxozl2gzhm0o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -368,19 +349,10 @@
       
 <nav id="article-nav">
     
-        <a href="/archives/efbdc9cb.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    部署Hexo博客到VPS
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/4a17b156.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/3aac26d6.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Hello World</div>
+            <div class="article-nav-title">centos 7下iptables 的安装和使用</div>
         </a>
     
 </nav>
@@ -393,19 +365,10 @@
         
 <nav id="article-nav">
     
-        <a href="/archives/efbdc9cb.html" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    部署Hexo博客到VPS
-                
-            </div>
-        </a>
     
-    
-        <a href="/archives/4a17b156.html" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/archives/3aac26d6.html" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Hello World</div>
+            <div class="article-nav-title">centos 7下iptables 的安装和使用</div>
         </a>
     
 </nav>
