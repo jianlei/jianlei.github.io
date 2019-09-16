@@ -3,7 +3,13 @@
   <entry>
     <title><![CDATA[Centos下ftp客户端lftp的使用]]></title>
     <url>%2Farchives%2F16634faa.html</url>
-    <content type="text"><![CDATA[安装1yum install lftp 使用语法1234567891011lftp -[fceup] user:passwd@host #passwd可选,此方式密码明文保存,history可查看-f &lt;file&gt; #执行文件中的命令后退出-c &lt;cmd&gt; #执行命令后退出-e &lt;cmd&gt; #登录后后执行命令-u &lt;user&gt;[,&lt;pass&gt;] #使用指定的用户名/口令进行验证-p &lt;port&gt; #连接指定的端口，默认21 常用命令1234567891011121314151617181920212223242526cd#切换FTP目录lcd #切换本地目录ls#列出FTP目录文件!ls#列出本地目录文件find./ -name file#查找文件mv#移动rm#删除mkdir#新建目录rmdir#删除目录 上传下载文件1234567891011121314151617get [cEaO] file-o newfilename #下载文件put [cEaO] file-o newfilename #上传文件pget -n #多线程下载可选参数：-c #支持断点续传-E #下载后删除远端文件-a #指定传输为ascii模式, 默认为二进制模式-O #指定存放目录 上传下载目录123456789101112mirror [cRnr] remote [local]可选参数：-c #支持断点续传-R #上传整个目录-n #只下载较新的档案，可用于增量备份-r #只下载当前目录，不递归目录 主动/被动模式123456#默认为被动模式setftp:passive-mode no #关闭被动模式转为主动模式#主动客户端开启数据传输端口，被动服务端开启数据传输端口。 妙用lftp多线程下载1lftp -c &quot;pget -n 10 http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.18.tar.gz&quot; 使用例子12lftp -u username,password -p 21 -e &quot;mirror --only-newer --delete lydj /data/file/;quit;&quot; ftpadmin@ip从文件服务器lydj目录中递归下载文件到本地/data/file目录中，并且只下载最新的，对于服务器不存在的问题在本地也删除。 参考资料 https://lftp.yar.ru/lftp-man.html Linux/Centos下ftp客户端lftp使用]]></content>
+    <content type="text"><![CDATA[安装1yum install lftp 使用语法1234567891011lftp -[fceup] user:passwd@host #passwd可选,此方式密码明文保存,history可查看-f &lt;file&gt; #执行文件中的命令后退出-c &lt;cmd&gt; #执行命令后退出-e &lt;cmd&gt; #登录后后执行命令-u &lt;user&gt;[,&lt;pass&gt;] #使用指定的用户名/口令进行验证-p &lt;port&gt; #连接指定的端口，默认21 常用命令1234567891011121314151617181920212223242526cd#切换FTP目录lcd #切换本地目录ls#列出FTP目录文件!ls#列出本地目录文件find./ -name file#查找文件mv#移动rm#删除mkdir#新建目录rmdir#删除目录 上传下载文件1234567891011121314151617get [cEaO] file-o newfilename #下载文件put [cEaO] file-o newfilename #上传文件pget -n #多线程下载可选参数：-c #支持断点续传-E #下载后删除远端文件-a #指定传输为ascii模式, 默认为二进制模式-O #指定存放目录 上传下载目录123456789101112mirror [cRnr] remote [local]可选参数：-c #支持断点续传-R #上传整个目录-n #只下载较新的档案，可用于增量备份-r #只下载当前目录，不递归目录 主动/被动模式123456#默认为被动模式setftp:passive-mode no #关闭被动模式转为主动模式#主动客户端开启数据传输端口，被动服务端开启数据传输端口。 妙用lftp多线程下载1lftp -c &quot;pget -n 10 http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.18.tar.gz&quot; 使用例子12lftp -u username,password -p 21 -e &quot;mirror --only-newer --delete lydj /data/file/;quit;&quot; ftpadmin@ip从文件服务器lydj目录中递归下载文件到本地/data/file目录中，并且只下载最新的，对于服务器不存在的问题在本地也删除。 参考资料 lftp使用手册 Linux/Centos下ftp客户端lftp使用]]></content>
+      <categories>
+        <category>技术开发</category>
+      </categories>
+      <tags>
+        <tag>lftp</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Nginx 增加SSL认证之后，request.getScheme()获取不到https的问题记录]]></title>
