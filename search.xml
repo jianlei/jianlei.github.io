@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SSH无密码登录]]></title>
+    <url>%2Farchives%2Fd82d84.html</url>
+    <content type="text"><![CDATA[ssh 公钥认证是ssh认证的方式之一。通过公钥认证可实现ssh免密码登陆，git的ssh方式也是通过公钥进行认证的。 在用户目录的home目录下，有一个.ssh的目录，和当前用户ssh配置认证相关的文件，几乎都在这个目录下。 ssh-keygen 可用来生成ssh公钥认证所需的公钥和私钥文件。 使用 ssh-keygen 时，请先进入到 ~/.ssh 目录，不存在的话，请先创建。 生成ssh公钥使用 ssh-kengen 会在~/.ssh/目录下生成两个文件，不指定文件名和密钥类型的时候，默认生成的两个文件是： id_rsa id_rsa.pub第一个是私钥文件，第二个是公钥文件。 生成ssh key的时候，可以通过 -f 选项指定生成文件的文件名，如下:123ssh-keygen -t rsa -f vultr_rsa -C &quot;vultr服务器&quot;其中：vultr_rsa 是文件名 vultr服务器是备注和客户端标示 配置公钥到服务器将公钥内容添加到服务器的~/.ssh/authorized_keys 文件中. alias 实现命令快速登陆做好配置之后，通过ssh可以直接登录了。对经常登录的服务器，可以将ssh登录命令的alias加到 ~/.bash_profile文件中。1alias to-ini=&apos;ssh root@11.1.1.1&apos; 登录的时候:1to-ini ssh-copy-idssh-copy-id 是一个小脚本，你可以用这个小脚本完成以上工作。这个脚本在linux系统上一般都有。1ssh-copy-id -i .ssh/id_rsa.pub root@192.168.x.xxx 参考资料 ssh public key认证免密码登录 ssh-keygen 基本用法]]></content>
+      <categories>
+        <category>技术开发</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Centos下ftp客户端lftp的使用]]></title>
     <url>%2Farchives%2F16634faa.html</url>
     <content type="text"><![CDATA[安装1yum install lftp 使用语法1234567891011lftp -[fceup] user:passwd@host #passwd可选,此方式密码明文保存,history可查看-f &lt;file&gt; #执行文件中的命令后退出-c &lt;cmd&gt; #执行命令后退出-e &lt;cmd&gt; #登录后后执行命令-u &lt;user&gt;[,&lt;pass&gt;] #使用指定的用户名/口令进行验证-p &lt;port&gt; #连接指定的端口，默认21 常用命令1234567891011121314151617181920212223242526cd#切换FTP目录lcd #切换本地目录ls#列出FTP目录文件!ls#列出本地目录文件find./ -name file#查找文件mv#移动rm#删除mkdir#新建目录rmdir#删除目录 上传下载文件1234567891011121314151617get [cEaO] file-o newfilename #下载文件put [cEaO] file-o newfilename #上传文件pget -n #多线程下载可选参数：-c #支持断点续传-E #下载后删除远端文件-a #指定传输为ascii模式, 默认为二进制模式-O #指定存放目录 上传下载目录123456789101112mirror [cRnr] remote [local]可选参数：-c #支持断点续传-R #上传整个目录-n #只下载较新的档案，可用于增量备份-r #只下载当前目录，不递归目录 主动/被动模式123456#默认为被动模式setftp:passive-mode no #关闭被动模式转为主动模式#主动客户端开启数据传输端口，被动服务端开启数据传输端口。 妙用lftp多线程下载1lftp -c &quot;pget -n 10 http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.18.tar.gz&quot; 使用例子12lftp -u username,password -p 21 -e &quot;mirror --only-newer --delete lydj /data/file/;quit;&quot; ftpadmin@ip从文件服务器lydj目录中递归下载文件到本地/data/file目录中，并且只下载最新的，对于服务器不存在的问题在本地也删除。 参考资料 lftp使用手册 Linux/Centos下ftp客户端lftp使用]]></content>

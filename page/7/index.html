@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     
-    <title>分类: 地图 | ini&#39;s Blog</title>
+    <title>ini&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="不要听一个人说什么，而看他怎么做。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ini&#39;s Blog">
-<meta property="og:url" content="http://inicb.com/categories/技术开发/地图/index.html">
+<meta property="og:url" content="http://inicb.com/page/7/index.html">
 <meta property="og:site_name" content="ini&#39;s Blog">
 <meta property="og:description" content="不要听一个人说什么，而看他怎么做。">
 <meta property="og:locale" content="zh-CN">
@@ -208,49 +208,128 @@
             
             
             <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fa fa-folder"></i></span>
-        <h1 class="title">地图</h1>
-    </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+    <article id="post-Install-Nginx-on-Centos" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
     
         <h1 itemprop="name">
-            <a class="timeline-article-title" href="/archives/9b175123.html">使用百度地图API解决区县级以下行政区划轮廓问题</a>
+            <a class="article-title" href="/archives/7ef035b3.html">Install Nginx on Centos</a>
         </h1>
     
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/archives/9b175123.html">
-            <time datetime="2018-10-10T08:30:17.000Z" itemprop="datePublished">2018-10-10</time>
+        <a href="/archives/7ef035b3.html">
+            <time datetime="2016-05-25T01:38:33.000Z" itemprop="datePublished">2016-05-25</time>
         </a>
     </div>
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/地图/">地图</a>
-    </div>
-
-                    
+                        
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Baidu-Map/">Baidu Map</a>
+        <a class="tag-link" href="/tags/Centos/">Centos</a>, <a class="tag-link" href="/tags/Nginx/">Nginx</a>
     </div>
 
-                </div>
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="The-One"><a href="#The-One" class="headerlink" title="The One :"></a>The One :</h3><ol>
+<li>Add NGINX yum repository, create a file named /etc/yum.repos.d/nginx.repo.</li>
+<li>Paste one of the configurations below:</li>
+</ol>
+<p>CentOS:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure></p>
+<h3 id="The-Two"><a href="#The-Two" class="headerlink" title="The Two :"></a>The Two :</h3><p>第一步，在/etc/yum.repos.d/目录下创建一个源配置文件nginx.repo：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.d/</span><br><span class="line"></span><br><span class="line">vim nginx.repo</span><br></pre></td></tr></table></figure>
+<p>填写如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure></p>
+<p>保存，则会产生一个/etc/yum.repos.d/nginx.repo文件。</p>
+<p>下面直接执行如下指令即可自动安装好Nginx：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx -y</span><br></pre></td></tr></table></figure></p>
+<p>安装完成，下面直接就可以启动Nginx了：</p>
+<h3 id="Operator"><a href="#Operator" class="headerlink" title="Operator"></a>Operator</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nginx start</span><br></pre></td></tr></table></figure>
+<p>现在Nginx已经启动了，直接访问服务器就能看到Nginx欢迎页面了的。</p>
+<p>如果还无法访问，则需配置一下Linux防火墙。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT 5 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT</span><br><span class="line"></span><br><span class="line">service iptables save</span><br><span class="line"></span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure></p>
+<p>Nginx的命令以及配置文件位置：</p>
+<p>/etc/init.d/nginx start # 启动Nginx服务</p>
+<p>/etc/init.d/nginx stop # 停止Nginx服务</p>
+<p>/etc/nginx/nginx.conf # Nginx配置文件位置</p>
+<p>chkconfig nginx on    #设为开机启动</p>
+<p>至此，Nginx已经全部配置安装完成。</p>
+<p>一台主机上适应多个服务器：<br>在你的nginx通过代理的方式转发请求：配置如下<br>vi /etc/nginx/nginx.conf<br>在http加入下面的内容，参考：<a href="http://wiki.nginx.org/FullExample" target="_blank" rel="noopener">http://wiki.nginx.org/FullExample</a><br>http {<br>….<br>  server {<br>          listen       80;<br>          server_name  <a href="http://www.a.com" target="_blank" rel="noopener">www.a.com</a>;<br>          charset utf-8;<br>          access_log  /home/a.com.access.log  main;<br>          location / {<br>              proxy_pass <a href="http://127.0.0.1:80" target="_blank" rel="noopener">http://127.0.0.1:80</a>;<br>          }<br>      }</p>
+<p>   server {<br>          listen       80;<br>          server_name  <a href="http://www.b.com" target="_blank" rel="noopener">www.b.com</a>;<br>          charset utf-8;<br>          access_log  /home/b.com.access.log  main;<br>          location / {<br>              proxy_pass <a href="http://127.0.0.1:81" target="_blank" rel="noopener">http://127.0.0.1:81</a>;<br>          }<br>      }<br>…</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
             </div>
         </div>
+         -->
+
     
-</div>
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    </nav>
 </section>
             
                 
