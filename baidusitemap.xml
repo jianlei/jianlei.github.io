@@ -4,6 +4,36 @@
 
     
   <url>
+    <loc>http://inicb.com/archives/16634faa.html</loc>
+    <lastmod>2019-09-16T02:34:22.828Z</lastmod>
+    <data>
+        <display>
+        <title>Centos下ftp客户端lftp的使用</title>
+        <pubTime>2019-09-16T02:30:17.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/f42d2759.html</loc>
+    <lastmod>2019-09-16T02:22:32.533Z</lastmod>
+    <data>
+        <display>
+        <title>Linux常用命令整理</title>
+        <pubTime>2018-06-25T00:47:10.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://inicb.com/archives/86c59740.html</loc>
     <lastmod>2019-09-16T00:17:17.969Z</lastmod>
     <data>
@@ -631,21 +661,6 @@
              
               <breadCrumb title="开发工具" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://inicb.com/archives/f42d2759.html</loc>
-    <lastmod>2018-06-25T06:05:18.063Z</lastmod>
-    <data>
-        <display>
-        <title>Linux常用命令整理</title>
-        <pubTime>2018-06-25T00:47:10.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
