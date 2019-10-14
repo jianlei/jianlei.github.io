@@ -4,8 +4,114 @@
 
     
   <url>
+    <loc>http://inicb.com/archives/87e7ba04.html</loc>
+    <lastmod>2019-10-14T02:18:45.651Z</lastmod>
+    <data>
+        <display>
+        <title>Mac电脑开启root账号，以及配置免密登录</title>
+        <pubTime>2019-10-14T01:13:08.000Z</pubTime>
+        
+        <tag>Mac</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/968230d9.html</loc>
+    <lastmod>2019-10-14T02:06:46.629Z</lastmod>
+    <data>
+        <display>
+        <title>关于吕先生在周会上对DRR工作指示的总结</title>
+        <pubTime>2019-10-14T02:01:46.000Z</pubTime>
+        
+        <tag>DRR</tag>
+         
+         
+           
+             
+              <breadCrumb title="工作" url="http://inicb.com/categories/%E5%B7%A5%E4%BD%9C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/62b50406.html</loc>
+    <lastmod>2019-10-14T02:05:45.538Z</lastmod>
+    <data>
+        <display>
+        <title>常用网站工具箱集合</title>
+        <pubTime>2018-03-15T08:23:50.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="工具箱" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/610bd23e.html</loc>
+    <lastmod>2019-10-14T02:02:11.579Z</lastmod>
+    <data>
+        <display>
+        <title>Spark学习笔记</title>
+        <pubTime>2019-10-13T12:16:38.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/55830bef.html</loc>
+    <lastmod>2019-10-14T02:02:11.576Z</lastmod>
+    <data>
+        <display>
+        <title>Mac OS X 中 hostname 的设置</title>
+        <pubTime>2019-10-11T13:50:05.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/f42d2759.html</loc>
+    <lastmod>2019-09-24T03:21:38.417Z</lastmod>
+    <data>
+        <display>
+        <title>Linux常用命令整理</title>
+        <pubTime>2018-06-25T00:47:10.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://inicb.com/archives/d82d84.html</loc>
-    <lastmod>2019-09-16T08:55:21.659Z</lastmod>
+    <lastmod>2019-09-16T08:56:56.771Z</lastmod>
     <data>
         <display>
         <title>SSH无密码登录</title>
@@ -38,21 +144,6 @@
              
               <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://inicb.com/archives/f42d2759.html</loc>
-    <lastmod>2019-09-16T02:22:32.533Z</lastmod>
-    <data>
-        <display>
-        <title>Linux常用命令整理</title>
-        <pubTime>2018-06-25T00:47:10.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
@@ -119,27 +210,6 @@
           
              
               <breadCrumb title="Nginx" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Nginx/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://inicb.com/archives/62b50406.html</loc>
-    <lastmod>2019-08-01T06:18:21.782Z</lastmod>
-    <data>
-        <display>
-        <title>常用网站工具箱集合</title>
-        <pubTime>2018-03-15T08:23:50.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="技术开发" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/"/>
-          
-             
-              <breadCrumb title="工具箱" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
           
         </display>
     </data>

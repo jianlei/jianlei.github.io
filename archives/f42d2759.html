@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="ini&#39;s Blog">
 <meta property="og:description" content="Yum 如何配置Yum代理123vim /etc/yum.conf# 添加如下：proxy=http://10.1.65.6:1080/   lftp1lftp -u username,password -p 21 -e &amp;quot;mirror --only-newer --delete lydj /data/file/;quit;&amp;quot; ftpadmin@ip 作用介绍：从文件服务">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-16T02:22:32.533Z">
+<meta property="og:updated_time" content="2019-09-24T03:21:38.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令整理">
 <meta name="twitter:description" content="Yum 如何配置Yum代理123vim /etc/yum.conf# 添加如下：proxy=http://10.1.65.6:1080/   lftp1lftp -u username,password -p 21 -e &amp;quot;mirror --only-newer --delete lydj /data/file/;quit;&amp;quot; ftpadmin@ip 作用介绍：从文件服务">
@@ -189,6 +189,10 @@
 </ol>
 <h4 id="lftp"><a href="#lftp" class="headerlink" title="lftp"></a>lftp</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lftp -u username,password -p 21 -e &quot;mirror --only-newer --delete lydj /data/file/;quit;&quot; ftpadmin@ip</span><br></pre></td></tr></table></figure>
 <p>作用介绍：<br>从文件服务器lydj目录中递归下载文件到本地/data/file目录中，并且只下载最新的，对于服务器不存在的问题在本地也删除。</p>
+<h4 id="ntpdate"><a href="#ntpdate" class="headerlink" title="ntpdate"></a>ntpdate</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">安装ntpdate</span><br><span class="line">yum install ntpdate -y</span><br></pre></td></tr></table></figure>
+<p>作用介绍：<br>用于linux时钟同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 同步网络时间</span><br><span class="line">ntpdate 172.31.1.1</span><br><span class="line"># 同步时间成功后调整硬件时间</span><br><span class="line">hwclock -w//</span><br><span class="line">#date 查看当前系统时间</span><br><span class="line">#hwclock 查看硬件时间</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 没间隔1个小时同步一下网络时间</span><br><span class="line">* */1 * * * root ntpdate 172.31.1.1;hwclock -w</span><br></pre></td></tr></table></figure>
+<h4 id="timedatectl"><a href="#timedatectl" class="headerlink" title="timedatectl"></a>timedatectl</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改时区为东八区</span><br><span class="line">timedatectl set-timezone Asia/Shanghai</span><br></pre></td></tr></table></figure>
 
         
         </div>
@@ -267,7 +271,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/f42d2759.html" data-id="ck0m6cvk8001w9lozswso8i1n" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/f42d2759.html" data-id="ck1pskysz00205mozscwarc1t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
