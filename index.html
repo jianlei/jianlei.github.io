@@ -357,7 +357,7 @@
             
             <blockquote><p>最近在研究大数据分布式计算环境的配置，用到了Spark环境的配置，其中涉及到需要开启root账号和免密登录，</p>
 </blockquote>
-<h4 id="如何在-Mac-上启用-root-用户或更改-root-密码"><a href="#如何在-Mac-上启用-root-用户或更改-root-密码" class="headerlink" title="如何在 Mac 上启用 root 用户或更改 root 密码"></a>如何在 Mac 上启用 root 用户或更改 root 密码</h4><p>完成某些任务需要系统更多区域的访问权限，Mac 管理员可以使用 root 用户帐户来完成这些任务。</p>
+<h4 id="一、如何在-Mac-上启用-root-用户或更改-root-密码"><a href="#一、如何在-Mac-上启用-root-用户或更改-root-密码" class="headerlink" title="一、如何在 Mac 上启用 root 用户或更改 root 密码"></a>一、如何在 Mac 上启用 root 用户或更改 root 密码</h4><p>完成某些任务需要系统更多区域的访问权限，Mac 管理员可以使用 root 用户帐户来完成这些任务。</p>
 <p>名为“root”的用户帐户是一个超级用户，拥有更多系统区域（包括 macOS 用户帐户中的文件）的读写权限。默认情况下，root 用户处于停用状态。如果您可以使用管理员帐户登录 Mac，您可以启用 root 用户，然后以 root 用户身份登录来完成您的任务。</p>
 <p>与启用 root 用户相比，在“终端”中使用 sudo 命令更为安全。要了解 sudo，请打开“终端”应用，然后输入 man sudo。</p>
 <h5 id="启用或停用-root-用户"><a href="#启用或停用-root-用户" class="headerlink" title="启用或停用 root 用户"></a>启用或停用 root 用户</h5><ol>
@@ -389,12 +389,12 @@
 <li>从“目录实用工具”的菜单栏中，选取“编辑”&gt;“更改 Root 密码…”</li>
 <li>在出现提示时输入 root 密码。</li>
 </ol>
-<h4 id="Mac-terminal-允许root用户通过ssh登录"><a href="#Mac-terminal-允许root用户通过ssh登录" class="headerlink" title="Mac terminal 允许root用户通过ssh登录"></a>Mac terminal 允许root用户通过ssh登录</h4><blockquote><p>默认情况下，Mac 的 root 用户是没有开启的，当然更不可能通过 ssh 登录了</p>
+<h4 id="二、Mac-terminal-允许root用户通过ssh登录"><a href="#二、Mac-terminal-允许root用户通过ssh登录" class="headerlink" title="二、Mac terminal 允许root用户通过ssh登录"></a>二、Mac terminal 允许root用户通过ssh登录</h4><blockquote><p>默认情况下，Mac 的 root 用户是没有开启的，当然更不可能通过 ssh 登录了</p>
 </blockquote>
 <h5 id="开启-root-用户"><a href="#开启-root-用户" class="headerlink" title="开启 root 用户"></a>开启 root 用户</h5><p>见上步。</p>
 <h5 id="配置-sshd-允许-root-用户登录（使用非root登录）"><a href="#配置-sshd-允许-root-用户登录（使用非root登录）" class="headerlink" title="配置 sshd 允许 root 用户登录（使用非root登录）"></a>配置 sshd 允许 root 用户登录（使用非root登录）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 1. 先进入 root 用户模式</span><br><span class="line">su</span><br><span class="line"></span><br><span class="line"># 2. 然后编辑 sshd_config 文件内容</span><br><span class="line">vi /private/etc/ssh/sshd_config</span><br><span class="line"></span><br><span class="line"># 3. 找到 ‘#PermitRootLogin prohibit-password’ 这一行，把前面的 # 号去掉，并把后面改成 yes</span><br><span class="line">PermitRootLogin yes</span><br><span class="line"></span><br><span class="line"># 4. 保存并退出</span><br><span class="line">:wq!</span><br></pre></td></tr></table></figure>
 <h5 id="重启-sshd-服务"><a href="#重启-sshd-服务" class="headerlink" title="重启 sshd 服务"></a>重启 sshd 服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">launchctl stop com.openssh.sshd     # 停止 ssh 服务</span><br><span class="line">launchctl start com.openssh.sshd    # 启动 ssh 服务</span><br></pre></td></tr></table></figure>
-<h4 id="mac-免密ssh登陆配置不坑指南"><a href="#mac-免密ssh登陆配置不坑指南" class="headerlink" title="mac 免密ssh登陆配置不坑指南"></a>mac 免密ssh登陆配置不坑指南</h4><p>我们把本地机子叫做为mac，远程机子叫做ubuntu（这个ubuntu也可以是centos，debian，mac之类的）。</p>
+<h4 id="三、mac-免密ssh登陆配置不坑指南"><a href="#三、mac-免密ssh登陆配置不坑指南" class="headerlink" title="三、mac 免密ssh登陆配置不坑指南"></a>三、mac 免密ssh登陆配置不坑指南</h4><p>我们把本地机子叫做为mac，远程机子叫做ubuntu（这个ubuntu也可以是centos，debian，mac之类的）。</p>
 <ol>
 <li><p>生成公私钥对</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f local_rsa -C &quot;local&quot;</span><br><span class="line"></span><br><span class="line">根据交互，输入密码，或者直接回车可以为空，生成公私钥对</span><br></pre></td></tr></table></figure>
