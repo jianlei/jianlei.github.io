@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                65
+                68
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                53
+                55
                 <span>标签</span>
             </div>
         </div>
@@ -208,6 +208,357 @@
             
             
             <section id="main">
+    <article id="post-获取Geohash当前区域周围8个区域编码" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/7b922444.html">获取Geohash当前区域周围8个区域编码</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/7b922444.html">
+            <time datetime="2019-01-18T06:56:19.000Z" itemprop="datePublished">2019-01-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Map/">Map</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/GeoHash/">GeoHash</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>由于GeoHash是用的Peano空间填充曲线实现的，因此会存在突变。如下图所示,很近的两个点分布在不同矩形区域，而两个较远的点缺分布在相同的区域，为了解决这问题，我们需要计算出该hash值附近的8个区域，再计算距离。<br>参考 <a href="https://github.com/GongDexing/Geohash" target="_blank" rel="noopener">Geohash</a><br>这种方式比较好理解，贴下例子就行了。<br>[116.3967,44.9999]和[116.3967,45.0009]分别出现在各自附近的区域中，周围8个区域的Geohash怎么计算得到呢？很简单，当Geohash长度是8时，对应的每个最小单元</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double latUnit = (Max_Lat - Min_Lat) / (1 &lt;&lt; 20);</span><br><span class="line">double lngUnit = (Max_Lng - Min_Lng) / (1 &lt;&lt; 20);</span><br></pre></td></tr></table></figure>
+<p>其中20是因为二进制拆分了20次，对应长度为8.</p>
+<p>这样可以计算出8个分别分布在周围8个区域的地点，根据地点便可以计算出周围8个区域的Geohash.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[lat + latUnit, lng]</span><br><span class="line">[lat - latUnit, lng]</span><br><span class="line">[lat, lng + lngUnit]</span><br><span class="line">[lat, lng - lngUnit]</span><br><span class="line">[lat + latUnit, lng + lngUnit]</span><br><span class="line">[lat + latUnit, lng - lngUnit]</span><br><span class="line">[lat - latUnit, lng + lngUnit]</span><br><span class="line">[lat - latUnit, lng - lngUnit]</span><br></pre></td></tr></table></figure>
+<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
+<li><a href="https://www.lhzcl.cn/2018/04/geohash-dang-qian-qu-yu-zhou-wei8ge-qu-yu-bian-ma/" target="_blank" rel="noopener">Geohash当前区域周围8个区域编码</a></li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-GeoHash算法，实现快速查找附近的点" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/87e9c296.html">GeoHash算法，实现快速查找附近的点</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/87e9c296.html">
+            <time datetime="2019-01-18T02:35:10.000Z" itemprop="datePublished">2019-01-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Map/">Map</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/GeoHash/">GeoHash</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>做任何跟地理位置相关的服务，位置如何表示及存储是绝对绕不开的问题之一。位置的表示倒是可以用经纬度，但是索引和检索的时候，经纬度这种二维表示法就比较麻烦了，这时我们就可以利用 GeoHash 进行『降维攻击』来解决这个问题了。</p>
+<h4 id="Geohash介绍"><a href="#Geohash介绍" class="headerlink" title="Geohash介绍"></a>Geohash介绍</h4><h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><ul>
+<li>POI（Point of Interest）：查找某个坐标附近的支部，餐厅等常见需求</li>
+<li>热点分析：统计某个地图区域的热度；<h5 id="Geohash算法"><a href="#Geohash算法" class="headerlink" title="Geohash算法"></a>Geohash算法</h5>地图上一般是使用经度和纬度两个维度来唯一的确定一个点，而geohash采用经纬度二维值转为一维的值。</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>只需要对一个字段进行索引，提高性能、降低复杂度</li>
+<li>可转成可排序，可比较的字符串，满足灵活的需求</li>
+</ul>
+<p>具体详细的介绍参考 维基百科： <a href="https://en.wikipedia.org/wiki/Geohash" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Geohash</a></p>
+<p>以下文章转自：<a href="http://www.cnblogs.com/LBSer/p/3310455.html" target="_blank" rel="noopener">http://www.cnblogs.com/LBSer/p/3310455.html</a></p>
+<h4 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h4><p>机机是个好动又好学的孩子，平日里就喜欢拿着手机地图点点按按来查询一些好玩的东西。某一天机机到北海公园游玩，肚肚饿了，于是乎打开手机地图，搜索北海公园附近的餐馆，并选了其中一家用餐。<br><img src="/images/map/1.png" alt=""></p>
+<p>饭饱之后机机开始反思了，地图后台如何根据自己所在位置查询来查询附近餐馆的呢？苦思冥想了半天，机机想出了个方法：计算所在位置P与北京所有餐馆的距离，然后返回距离&lt;=1000米的餐馆。小得意了一会儿，机机发现北京的餐馆何其多啊，这样计算不得了，于是想了，既然知道经纬度了，那它应该知道自己在西城区，那应该计算所在位置P与西城区所有餐馆的距离啊，机机运用了递归的思想，想到了西城区也很多餐馆啊，应该计算所在位置P与所在街道所有餐馆的距离，这样计算量又小了，效率也提升了。</p></p>
+            <p class="article-more-link">
+                <a href="/archives/87e9c296.html#more">查看更多</a>
+            </p>
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-RecyclerView根据内容多少动态设置高度" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/archives/ed7c431b.html" itemprop="url">
+            <img src="https://images.pexels.com/photos/1209658/pexels-photo-1209658.jpeg?cs=srgb&dl=backlit-blurred-background-close-up-1209658.jpg&fm=jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/ed7c431b.html">RecyclerView根据内容多少动态设置高度</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/ed7c431b.html">
+            <time datetime="2019-01-11T05:58:36.000Z" itemprop="datePublished">2019-01-11</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/RecyclerView/">RecyclerView</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>在项目开发中我们经常会遇到需要RecyclerView和ScrollViewq嵌套的情况，一般我们都需要把RecyclerView中的内容全部显示，然后设置RV的高度为所有内容的高度+RV Padding+item 之间的Divider。<br>原理很简单，实现起来也很简单。</p>
+<ul>
+<li><p>创建RV ViewHolder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public abstract class  MyViewHolder extends RecyclerView.ViewHolder &#123;</span><br><span class="line"></span><br><span class="line">    TextView tv_item;</span><br><span class="line">    ImageView img_delete_item;</span><br><span class="line"></span><br><span class="line">    public MyViewHolder(View itemView) &#123;</span><br><span class="line">        super(itemView);</span><br><span class="line">        tv_item = (TextView) itemView.findViewById(R.id.tv_single);</span><br><span class="line">        img_delete_item = (ImageView) itemView.findViewById(R.id.img_toprecycle_delete);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public abstract void setFixedHeight();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现自定义VH</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public MyViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) &#123;</span><br><span class="line">        View view = mInflater.inflate(R.layout.item_useview, parent, false);</span><br><span class="line">        MyViewHolder viewHolder = new MyViewHolder(view)&#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void setFixedHeight() &#123;</span><br><span class="line">                //  magic happening here</span><br><span class="line">                ViewGroup.LayoutParams parentParams = parent.getLayoutParams();</span><br><span class="line">                parentParams.height =</span><br><span class="line">                        ((RecyclerView) parent).computeVerticalScrollRange()</span><br><span class="line">                                + parent.getPaddingTop()</span><br><span class="line">                                + parent.getPaddingBottom();</span><br><span class="line">                parent.setLayoutParams(parentParams);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        return viewHolder;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置RV高度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//绑定viewholder</span><br><span class="line"> public void onBindViewHolder(MyViewHolder holder, final int position) &#123;</span><br><span class="line">     holder.setFixedHeight();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
     <article id="post-Android-P使用私有API弹出warning" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -722,7 +1073,16 @@
 <p>pyenv 主要用来管理 Python 的版本，比如一个项目需要 Python 2.x ，一个项目需要 Python 3.x 。 而 anaconda 主要用来管理 Python 包的依赖，不同项目需要依赖的包版本不同，则需要使用虚拟环境。</p>
 <p>pyenv 通过系统修改环境变量来实现 Python 不同版本的切换。而 anaconda 通过将 Python 包安装到一个目录来作为Python 包虚拟环境，通过切换目录来实现不同包环境间的切换。</p>
 <p>pyenv 的美好之处在于，它并没有使用将不同的 PATH 植入不同的Shell这种高耦合的工作方式，而是简单的在 PATH 的最前面插入了一个垫片路径（shims）：~/.pyenv/shims:/usr/local/bin:/usr/bin:/bin。所有对 Python 可执行文件的查找都会首先被这个 shims 路径截获，从而使后方的系统路径失效。</p>
-<h4 id="pyenv安装"><a href="#pyenv安装" class="headerlink" title="pyenv安装"></a>pyenv安装</h4><p>具体的安装方式参照 <a href="https://github.com/yyuu/pyenv#installation" target="_blank" rel="noopener">官网</a><br>我这里是Mac，推荐使用brew安装。<br>安装成功之后，在.bashrc 或者 .bash_profile 中添加三行来开启自动补全.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;$HOME/.pyenv/bin:$PATH&quot;</span><br><span class="line">eval &quot;$(pyenv init -)&quot;</span><br><span class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="pyenv安装"><a href="#pyenv安装" class="headerlink" title="pyenv安装"></a>pyenv安装</h4><p>具体的安装方式参照 <a href="https://github.com/yyuu/pyenv#installation" target="_blank" rel="noopener">官网</a></p>
+<ul>
+<li><p>centos自动安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># curl https://pyenv.run | bash</span><br><span class="line"># exec $SHELL   # Restart your shell so the path changes take effect</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>centos手动下载安装<br>在服务器环境中，发现使用上一种方式经常不好使，网络无法链接，所以采用以下这种方式，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/pyenv/pyenv.git ~/.pyenv</span><br><span class="line">$ echo &apos;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">$ echo &apos;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line"></span><br><span class="line">$ echo -e &apos;if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval &quot;$(pyenv init -)&quot;\nfi&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">$exec &quot;$SHELL&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>我这里是Mac，推荐使用brew安装。<br>安装成功之后，在.bashrc 或者 .bash_profile 中添加三行来开启自动补全.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;$HOME/.pyenv/bin:$PATH&quot;</span><br><span class="line">eval &quot;$(pyenv init -)&quot;</span><br><span class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</span><br></pre></td></tr></table></figure></p>
 <h3 id="pyenv-常用命令"><a href="#pyenv-常用命令" class="headerlink" title="pyenv 常用命令"></a>pyenv 常用命令</h3><p>使用 pyenv commands 显示所有可用命令</p>
 <ul>
 <li><p>查看本机安装 Python 版本</p>
@@ -1047,400 +1407,6 @@
 
 
 
-    <article id="post-搭建GitLab-CI服务器" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/d45e8871.html">搭建GitLab CI服务器</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/d45e8871.html">
-            <time datetime="2018-08-16T05:45:25.000Z" itemprop="datePublished">2018-08-16</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/CI/">CI</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/CI/">CI</a>, <a class="tag-link" href="/tags/Gitlab/">Gitlab</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>之前已经用Bitnami-gitlab一体包已经在虚拟机上搭建了Git服务器，在项目开发过程中，经常面临频繁打包的问题，搞得软件研发人员很疲惫，之前就听说过可以使用“持续集成”的思路解决这样的问题，并且能够提高工作效率，所在才有了今天在持续集成上的尝试。</p>
-<h4 id="什么是“持续集成”"><a href="#什么是“持续集成”" class="headerlink" title="什么是“持续集成”"></a>什么是“持续集成”</h4><blockquote><p>持续集成（Continuous Integration）指的是，频繁地（一天多次）将代码集成到主干。<br>持续集成的目的，就是让产品可以快速迭代，同时还能保持高质量。<br>它的核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成。</p>
-</blockquote>
-<h4 id="使用GitLab-CI进行持续集成"><a href="#使用GitLab-CI进行持续集成" class="headerlink" title="使用GitLab CI进行持续集成"></a>使用GitLab CI进行持续集成</h4><p>我这里因为已经使用了Gitlab作为代码服务器，而Gitlab本身已经支持了CI，所以我这里就选择了使用Gitlab CI进行持续集成。</p>
-<p>在开始之前先了解一些持续集成的相关概念。</p>
-<h5 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h5><p>一次 Pipeline 其实相当于一次构建任务，里面可以包含多个流程，如安装依赖、运行测试、编译、部署测试服务器、部署生产服务器等流程。<br>任何提交或者 Merge Request 的合并都可以触发 Pipeline，如下图所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+------------------+           +----------------+</span><br><span class="line">|                  |  trigger  |                |</span><br><span class="line">|   Commit / MR    +----------&gt;+    Pipeline    |</span><br><span class="line">|                  |           |                |</span><br><span class="line">+------------------+           +----------------+</span><br></pre></td></tr></table></figure></p>
-<h5 id="Stages"><a href="#Stages" class="headerlink" title="Stages"></a>Stages</h5><p>Stages 表示构建阶段，说白了就是上面提到的流程。<br>我们可以在一次 Pipeline 中定义多个 Stages，这些 Stages 会有以下特点：</p>
-<ol>
-<li>所有 Stages 会按照顺序运行，即当一个 Stage 完成后，下一个 Stage 才会开始</li>
-<li>只有当所有 Stages 完成后，该构建任务 (Pipeline) 才会成功</li>
-<li>如果任何一个 Stage 失败，那么后面的 Stages 不会执行，该构建任务 (Pipeline) 失败</li>
-</ol>
-<p>因此，Stages 和 Pipeline 的关系就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+--------------------------------------------------------+</span><br><span class="line">|                                                        |</span><br><span class="line">|  Pipeline                                              |</span><br><span class="line">|                                                        |</span><br><span class="line">|  +-----------+     +------------+      +------------+  |</span><br><span class="line">|  |  Stage 1  |----&gt;|   Stage 2  |-----&gt;|   Stage 3  |  |</span><br><span class="line">|  +-----------+     +------------+      +------------+  |</span><br><span class="line">|                                                        |</span><br><span class="line">+--------------------------------------------------------+</span><br></pre></td></tr></table></figure></p>
-<h5 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h5><p>Jobs 表示构建工作，表示某个 Stage 里面执行的工作。<br>我们可以在 Stages 里面定义多个 Jobs，这些 Jobs 会有以下特点：</p>
-<ol>
-<li>相同 Stage 中的 Jobs 会并行执行</li>
-<li>相同 Stage 中的 Jobs 都执行成功时，该 Stage 才会成功</li>
-<li>如果任何一个 Job 失败，那么该 Stage 失败，即该构建任务 (Pipeline) 失败</li>
-</ol>
-<p>所以，Jobs 和 Stage 的关系图就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+------------------------------------------+</span><br><span class="line">|                                          |</span><br><span class="line">|  Stage 1                                 |</span><br><span class="line">|                                          |</span><br><span class="line">|  +---------+  +---------+  +---------+   |</span><br><span class="line">|  |  Job 1  |  |  Job 2  |  |  Job 3  |   |</span><br><span class="line">|  +---------+  +---------+  +---------+   |</span><br><span class="line">|                                          |</span><br><span class="line">+------------------------------------------+</span><br></pre></td></tr></table></figure>
-<h4 id="GitLab-Runner"><a href="#GitLab-Runner" class="headerlink" title="GitLab Runner"></a>GitLab Runner</h4><p>简介<br>理解了上面的基本概念之后，有没有觉得少了些什么东西 —— 由谁来执行这些构建任务呢？<br>答案就是 GitLab Runner 了！</p>
-<p>想问为什么不是 GitLab CI 来运行那些构建任务？<br>一般来说，构建任务都会占用很多的系统资源 (譬如编译代码)，而 GitLab CI 又是 GitLab 的一部分，如果由 GitLab CI 来运行构建任务的话，在执行构建任务的时候，GitLab 的性能会大幅下降。</p>
-<p>GitLab CI 最大的作用是管理各个项目的构建状态，因此，运行构建任务这种浪费资源的事情就交给 GitLab Runner 来做拉！<br>因为 <font style="color:red">GitLab Runner 可以安装到不同的机器上 </font> ，所以在构建任务运行期间并不会影响到 GitLab 的性能.</p>
-<p>我这里采用的是：<br>git服务器地址为：192.168.1.113，<br>Gitlab runner地址为192.168.1.120</p>
-<h5 id="安装GitLab-Runner"><a href="#安装GitLab-Runner" class="headerlink" title="安装GitLab Runner"></a>安装GitLab Runner</h5><p>参照<a href="https://docs.gitlab.com/runner/install/" target="_blank" rel="noopener">官网</a>,选择一种方式进行安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># For RHEL/CentOS/Fedora</span><br><span class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash</span><br><span class="line"></span><br><span class="line"># For RHEL/CentOS/Fedora</span><br><span class="line">sudo yum install gitlab-runner</span><br></pre></td></tr></table></figure></p>
-<h5 id="注册-Runner"><a href="#注册-Runner" class="headerlink" title="注册 Runner"></a>注册 Runner</h5><p>安装好 GitLab Runner 之后，我们只要启动 Runner 然后和 CI 绑定就可以了。</p>
-<ul>
-<li>打开你 GitLab 中的项目页面，在项目设置中找到 runners<br><img src="/images/runners/1.png" alt=""></li>
-<li>运行 <font style="color:orange">sudo gitlab-ci-multi-runner register</font></li>
-<li>输入 CI URL</li>
-<li>输入 Token</li>
-<li>输入 Runner 的名字</li>
-<li>输入 gitlab-ci tags</li>
-<li>完成</li>
-</ul>
-<p>当注册好 Runner 之后，可以用 sudo gitlab-runner list 命令来查看各个 Runner 的状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># sudo gitlab-runner list</span><br><span class="line">Listing configured runners                          ConfigFile=/etc/gitlab-runner/config.toml</span><br><span class="line">localhost.localdomain                               Executor=shell Token=2a627041123ff25c490629d80f0834 URL=https://192.168.1.113/</span><br></pre></td></tr></table></figure></p>
-<p><font style="color:red">Register问题1</font><br>这一步比较坑，因为bitnami-gitlab一体包采用的是https的访问方式，所以在注册Runner的过程，一直报如下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Registering runner... failed                 runner=5nuRqxMY status=couldn&apos;t execute POST against https://192.168.1.113/api/v4/runners: Post https://192.168.1.113/api/v4/runners: x509: cannot validate certificate for 192.168.1.113 because it doesn&apos;t contain any IP SANs</span><br><span class="line">PANIC: Failed to register this runner. Perhaps you are having network problems</span><br></pre></td></tr></table></figure></p>
-<p>解决方式参考如下地址，<a href="https://stackoverflow.com/questions/44458410/gitlab-ci-runner-ignore-self-signed-certificate" target="_blank" rel="noopener">gitlab-ci-runner-ignore-self-signed-certificate</a></p>
-<ul>
-<li><p>First edit ssl configuration on the GitLab server (not the runner)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /opt/gitlab/embedded/ssl/openssl.cnf</span><br><span class="line"></span><br><span class="line">[ v3_ca ]</span><br><span class="line">subjectAltName=IP:192.168.1.1 &lt;---- Add this line. 192.168.1.1 is your GitLab server IP.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Re-generate self-signed certificate</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/gitlab/ssl</span><br><span class="line">sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/gitlab/ssl/192.168.1.1.key -out /etc/gitlab/ssl/192.168.1.1.crt</span><br><span class="line">sudo openssl dhparam -out /etc/gitlab/ssl/dhparam.pem 2048</span><br><span class="line">sudo gitlab-ctl restart</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Copy the new CA to the GitLab CI runner</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /etc/gitlab/ssl/192.168.1.113.crt root@192.168.1.120:/etc/gitlab-runner/certs</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这样就解决Https证书问题了。</p>
-<p><font style="color:red">Register问题2</font><br>在mac端配置Runner的时候，会遇到如下问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x509: certificate signed by unknown authority</span><br></pre></td></tr></table></figure></p>
-<p>主要是mac对git代码服务器的证书不信任，在注册的时候加上ca证书就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-runner register --tls-ca-file 192.168.1.113.crt</span><br></pre></td></tr></table></figure></p>
-<h5 id="unregister-Runner"><a href="#unregister-Runner" class="headerlink" title="unregister Runner"></a>unregister Runner</h5><ul>
-<li><p>所有runners</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner unregister --all-runners</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>By URL and token:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner unregister --url http://gitlab.example.com/ --token t0k3n</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>By name:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner unregister --name test-runner</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>完毕！</p>
-<p>如果想知道如何用Gitlab-CI设置Android项目，请参考我下一篇文章<a href="http://inicb.com/archives/b732e7e5.html">Android项目在Gitlab-CI上的使用</a>;</p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://docs.gitlab.com/runner/" target="_blank" rel="noopener">GitLab Runner</a></li>
-<li><a href="https://scarletsky.github.io/2016/07/29/use-gitlab-ci-for-continuous-integration/" target="_blank" rel="noopener">用 GitLab CI 进行持续集成</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-Android实现毛玻璃效果-高斯模糊" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/a0439c.html">Android实现毛玻璃效果(高斯模糊)</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/a0439c.html">
-            <time datetime="2018-08-15T07:53:36.000Z" itemprop="datePublished">2018-08-15</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/StackBlur/">StackBlur</a>, <a class="tag-link" href="/tags/毛玻璃/">毛玻璃</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？</p>
-<p>在网上看到这篇文章，大家可以参考一下</p>
-<p><a href="http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">一种快速毛玻璃虚化效果实现</a></p>
-<p>主要思想就是，</p>
-<ol>
-<li>对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。</li>
-<li>对压缩后的图片进行模糊处理。主要采用 <a href="http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html" target="_blank" rel="noopener">StackBlur</a> 模糊算法，这种算法应用非常广泛，能得到非常良好的毛玻璃效果。在这里，使用是它的 Java 实现代码<a href="https://github.com/wingjay/BlurImageView/blob/master/blurimageviewlib/src/main/java/com/wingjay/blurimageviewlib/FastBlurUtil.java" target="_blank" rel="noopener">FastBlur.java</a>。<br></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap)</span><br></pre></td></tr></table></figure>
-<p>可以看出，使用方法非常简单，传入待虚化的 bitmap、虚化程序(一般为 8)、和是否重用 flag。</p>
-<h5 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h5><ul>
-<li><a href="https://github.com/kikoso/android-stackblur" target="_blank" rel="noopener">android-stackblur</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-Android-WebView实现全屏播放的一种方法" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/d3b6c7a6.html">Android WebView实现全屏播放的一种方法</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/d3b6c7a6.html">
-            <time datetime="2018-08-09T08:23:55.000Z" itemprop="datePublished">2018-08-09</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>用过WebView的开发者们肯定都知道这里面的坑数不胜数，加载缓慢，内存泄露，文件选择…… 最近在项目中遇到了对接小鱼易联直播的情况，因为小鱼本身提供了直播功能，采用的是网页方式，所以在手机端直接进行对接网页，然后在进行全屏播放视频，又遇到了一个大坑。一个没有修饰过的原生WebView几乎不可能在某一个主流视频网站实现全屏播放，倘若在客户端自己实现简单的播放器，链接拿过来，摆个VideoView，想怎么全屏怎么全屏，放在WebView上，一切就悲剧了，大多数情况下点击“全屏按钮”是没有反应的，或者无法实现横屏全屏。今天来介绍一种简单易行粗暴的方式来实现WebView的视频全屏播放。</p>
-<p>当你无从下手的时候，照例先看一下官方文档，很多常见的问题官方文档都给我们提供思路。你会发现下面这样一段话，发现官方已经提供了实现全屏展示html content的方式。</p>
-<p><img src="/images/Android_fullscreen/1.png" alt=""></p>
-<p>应用如果需要支持HTML5的video标签，必须打开硬件加速。我们只需要在Application标签或者相应Activity标签下添加android:hardwareAccelerated=”true”即可。接着为了支持全屏，需要重写WebChromeClient的onShowCustomView()和onHideCustomView()方法，这两个方法缺一不可。先来看一下onShowCustomView（）:</p></p>
-            <p class="article-more-link">
-                <a href="/archives/d3b6c7a6.html#more">查看更多</a>
-            </p>
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
     <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
     </nav>
@@ -1454,6 +1420,63 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/archives/47d401a5.html" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/archives/47d401a5.html" class="title">SSL Pinning on Android</a></p>
+                            <p class="item-date"><time datetime="2020-06-12T02:30:51.000Z" itemprop="datePublished">2020-06-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/archives/4ead88f7.html" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a></p>
+                            <p class="item-title"><a href="/archives/4ead88f7.html" class="title">(转)Nginx代理proxy pass配置去除location路径前缀</a></p>
+                            <p class="item-date"><time datetime="2020-05-11T00:24:26.000Z" itemprop="datePublished">2020-05-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/archives/7bfbc9bd.html" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a></p>
+                            <p class="item-title"><a href="/archives/7bfbc9bd.html" class="title">如何给没有连接互联网的centos使用yum安装其他软件</a></p>
+                            <p class="item-date"><time datetime="2020-04-24T13:04:39.000Z" itemprop="datePublished">2020-04-24</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1493,63 +1516,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/archives/610bd23e.html" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a></p>
-                            <p class="item-title"><a href="/archives/610bd23e.html" class="title">Spark学习笔记</a></p>
-                            <p class="item-date"><time datetime="2019-10-13T12:16:38.000Z" itemprop="datePublished">2019-10-13</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/archives/55830bef.html" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/archives/55830bef.html" class="title">Mac OS X 中 hostname 的设置</a></p>
-                            <p class="item-date"><time datetime="2019-10-11T13:50:05.000Z" itemprop="datePublished">2019-10-11</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/archives/d82d84.html" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a></p>
-                            <p class="item-title"><a href="/archives/d82d84.html" class="title">SSH无密码登录</a></p>
-                            <p class="item-date"><time datetime="2019-09-16T08:47:26.000Z" itemprop="datePublished">2019-09-16</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1559,7 +1525,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/优秀文章/">优秀文章</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作/">工作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">45</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/GFW/">GFW</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Map/">Map</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">4</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/优秀文章/">优秀文章</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作/">工作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">47</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/GFW/">GFW</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Map/">Map</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -1568,7 +1534,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -1577,7 +1543,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-P/">Android P</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BURP/">BURP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Baidu-Map/">Baidu Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cros/">Cros</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRR/">DRR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FastDFS/">FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GeoHash/">GeoHash</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Https/">Https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICARUS/">ICARUS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nas/">Nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RecyclerView/">RecyclerView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/">SSL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/StackBlur/">StackBlur</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLookup/">VLookup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Window/">Window</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fdisk/">fdisk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lftp/">lftp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mount/">mount</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyenv/">pyenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubntu/">ubntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任正非/">任正非</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/屏幕适配/">屏幕适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众号/">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新时代e支部/">新时代e支部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毛玻璃/">毛玻璃</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科学上网/">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-P/">Android P</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BURP/">BURP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Baidu-Map/">Baidu Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cros/">Cros</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRR/">DRR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FastDFS/">FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GeoHash/">GeoHash</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Https/">Https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICARUS/">ICARUS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nas/">Nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RecyclerView/">RecyclerView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/">SSL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL-Pinning/">SSL Pinning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/StackBlur/">StackBlur</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLookup/">VLookup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Window/">Window</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fdisk/">fdisk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lftp/">lftp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mount/">mount</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyenv/">pyenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubntu/">ubntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任正非/">任正非</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/屏幕适配/">屏幕适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众号/">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新时代e支部/">新时代e支部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毛玻璃/">毛玻璃</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科学上网/">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1586,7 +1552,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-P/" style="font-size: 10px;">Android P</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BURP/" style="font-size: 10px;">BURP</a> <a href="/tags/Baidu-Map/" style="font-size: 10px;">Baidu Map</a> <a href="/tags/CI/" style="font-size: 13.33px;">CI</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Cros/" style="font-size: 10px;">Cros</a> <a href="/tags/DRR/" style="font-size: 10px;">DRR</a> <a href="/tags/FastDFS/" style="font-size: 10px;">FastDFS</a> <a href="/tags/GeoHash/" style="font-size: 13.33px;">GeoHash</a> <a href="/tags/Gitlab/" style="font-size: 13.33px;">Gitlab</a> <a href="/tags/HEXO/" style="font-size: 10px;">HEXO</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Https/" style="font-size: 10px;">Https</a> <a href="/tags/ICARUS/" style="font-size: 10px;">ICARUS</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/Nas/" style="font-size: 10px;">Nas</a> <a href="/tags/Nginx/" style="font-size: 16.67px;">Nginx</a> <a href="/tags/Pandas/" style="font-size: 10px;">Pandas</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/SQLMAP/" style="font-size: 10px;">SQLMAP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/StackBlur/" style="font-size: 10px;">StackBlur</a> <a href="/tags/VLookup/" style="font-size: 10px;">VLookup</a> <a href="/tags/VPS/" style="font-size: 13.33px;">VPS</a> <a href="/tags/Webview-Video-FullScreen/" style="font-size: 10px;">Webview Video FullScreen</a> <a href="/tags/Window/" style="font-size: 10px;">Window</a> <a href="/tags/fdisk/" style="font-size: 10px;">fdisk</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/lftp/" style="font-size: 10px;">lftp</a> <a href="/tags/mount/" style="font-size: 10px;">mount</a> <a href="/tags/pyenv/" style="font-size: 10px;">pyenv</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ubntu/" style="font-size: 10px;">ubntu</a> <a href="/tags/任正非/" style="font-size: 10px;">任正非</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/新时代e支部/" style="font-size: 10px;">新时代e支部</a> <a href="/tags/毛玻璃/" style="font-size: 10px;">毛玻璃</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-P/" style="font-size: 10px;">Android P</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BURP/" style="font-size: 10px;">BURP</a> <a href="/tags/Baidu-Map/" style="font-size: 10px;">Baidu Map</a> <a href="/tags/CI/" style="font-size: 15px;">CI</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Cros/" style="font-size: 10px;">Cros</a> <a href="/tags/DRR/" style="font-size: 10px;">DRR</a> <a href="/tags/FastDFS/" style="font-size: 10px;">FastDFS</a> <a href="/tags/GeoHash/" style="font-size: 15px;">GeoHash</a> <a href="/tags/Gitlab/" style="font-size: 15px;">Gitlab</a> <a href="/tags/HEXO/" style="font-size: 10px;">HEXO</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Https/" style="font-size: 10px;">Https</a> <a href="/tags/ICARUS/" style="font-size: 10px;">ICARUS</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/Nas/" style="font-size: 10px;">Nas</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/Pandas/" style="font-size: 10px;">Pandas</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/SQLMAP/" style="font-size: 10px;">SQLMAP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/SSL-Pinning/" style="font-size: 10px;">SSL Pinning</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/StackBlur/" style="font-size: 10px;">StackBlur</a> <a href="/tags/VLookup/" style="font-size: 10px;">VLookup</a> <a href="/tags/VPS/" style="font-size: 15px;">VPS</a> <a href="/tags/Webview-Video-FullScreen/" style="font-size: 10px;">Webview Video FullScreen</a> <a href="/tags/Window/" style="font-size: 10px;">Window</a> <a href="/tags/fdisk/" style="font-size: 10px;">fdisk</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/lftp/" style="font-size: 10px;">lftp</a> <a href="/tags/mount/" style="font-size: 10px;">mount</a> <a href="/tags/pyenv/" style="font-size: 10px;">pyenv</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ubntu/" style="font-size: 10px;">ubntu</a> <a href="/tags/任正非/" style="font-size: 10px;">任正非</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/新时代e支部/" style="font-size: 10px;">新时代e支部</a> <a href="/tags/毛玻璃/" style="font-size: 10px;">毛玻璃</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
         </div>
     </div>
 
@@ -1621,7 +1587,7 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2019 ini<br>
+            &copy; 2020 ini<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
         </div>
     </div>

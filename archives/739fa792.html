@@ -14,7 +14,7 @@
 <meta property="og:description" content="转自使用 pyenv 管理 Python 版本 ,略有修改。 前言在使用python的时候，我们经常被python项目混乱的版本以及复杂的包依赖搞得头晕脑胀，但是自从有了pyenv和anaconda(python包虚拟环境，包依赖)，一切都清晰明了了。 pyenv 是 Python 版本管理工具。 pyenv 可以改变全局的 Python 版本，安装多个版本的 Python， 设置目录级别的 Py">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://images.pexels.com/photos/1387037/pexels-photo-1387037.jpeg?cs=srgb&dl=beach-freedom-friendship-1387037.jpg&fm=jpg">
-<meta property="og:updated_time" content="2018-09-05T01:14:54.053Z">
+<meta property="og:updated_time" content="2020-05-21T08:31:44.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 pyenv 管理 Python 版本">
 <meta name="twitter:description" content="转自使用 pyenv 管理 Python 版本 ,略有修改。 前言在使用python的时候，我们经常被python项目混乱的版本以及复杂的包依赖搞得头晕脑胀，但是自从有了pyenv和anaconda(python包虚拟环境，包依赖)，一切都清晰明了了。 pyenv 是 Python 版本管理工具。 pyenv 可以改变全局的 Python 版本，安装多个版本的 Python， 设置目录级别的 Py">
@@ -210,7 +210,16 @@
 <p>pyenv 主要用来管理 Python 的版本，比如一个项目需要 Python 2.x ，一个项目需要 Python 3.x 。 而 anaconda 主要用来管理 Python 包的依赖，不同项目需要依赖的包版本不同，则需要使用虚拟环境。</p>
 <p>pyenv 通过系统修改环境变量来实现 Python 不同版本的切换。而 anaconda 通过将 Python 包安装到一个目录来作为Python 包虚拟环境，通过切换目录来实现不同包环境间的切换。</p>
 <p>pyenv 的美好之处在于，它并没有使用将不同的 PATH 植入不同的Shell这种高耦合的工作方式，而是简单的在 PATH 的最前面插入了一个垫片路径（shims）：~/.pyenv/shims:/usr/local/bin:/usr/bin:/bin。所有对 Python 可执行文件的查找都会首先被这个 shims 路径截获，从而使后方的系统路径失效。</p>
-<h4 id="pyenv安装"><a href="#pyenv安装" class="headerlink" title="pyenv安装"></a>pyenv安装</h4><p>具体的安装方式参照 <a href="https://github.com/yyuu/pyenv#installation" target="_blank" rel="noopener">官网</a><br>我这里是Mac，推荐使用brew安装。<br>安装成功之后，在.bashrc 或者 .bash_profile 中添加三行来开启自动补全.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;$HOME/.pyenv/bin:$PATH&quot;</span><br><span class="line">eval &quot;$(pyenv init -)&quot;</span><br><span class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="pyenv安装"><a href="#pyenv安装" class="headerlink" title="pyenv安装"></a>pyenv安装</h4><p>具体的安装方式参照 <a href="https://github.com/yyuu/pyenv#installation" target="_blank" rel="noopener">官网</a></p>
+<ul>
+<li><p>centos自动安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># curl https://pyenv.run | bash</span><br><span class="line"># exec $SHELL   # Restart your shell so the path changes take effect</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>centos手动下载安装<br>在服务器环境中，发现使用上一种方式经常不好使，网络无法链接，所以采用以下这种方式，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/pyenv/pyenv.git ~/.pyenv</span><br><span class="line">$ echo &apos;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">$ echo &apos;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line"></span><br><span class="line">$ echo -e &apos;if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval &quot;$(pyenv init -)&quot;\nfi&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">$exec &quot;$SHELL&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>我这里是Mac，推荐使用brew安装。<br>安装成功之后，在.bashrc 或者 .bash_profile 中添加三行来开启自动补全.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;$HOME/.pyenv/bin:$PATH&quot;</span><br><span class="line">eval &quot;$(pyenv init -)&quot;</span><br><span class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</span><br></pre></td></tr></table></figure></p>
 <h3 id="pyenv-常用命令"><a href="#pyenv-常用命令" class="headerlink" title="pyenv 常用命令"></a>pyenv 常用命令</h3><p>使用 pyenv commands 显示所有可用命令</p>
 <ul>
 <li><p>查看本机安装 Python 版本</p>
@@ -307,7 +316,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/739fa792.html" data-id="ck1r7ktgs002pp4ozxvx21dlr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/739fa792.html" data-id="ckbbrc6n4002ediozv0mpxfy7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -445,7 +454,7 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2019 ini<br>
+            &copy; 2020 ini<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
         </div>
     </div>
