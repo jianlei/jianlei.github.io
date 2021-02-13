@@ -4,8 +4,53 @@
 
     
   <url>
+    <loc>http://inicb.com/archives/acfbb6fa.html</loc>
+    <lastmod>2021-02-13T09:02:46.226Z</lastmod>
+    <data>
+        <display>
+        <title>在一台新的政务云服务器上的部署操作</title>
+        <pubTime>2020-08-27T00:58:14.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/f974dc7a.html</loc>
+    <lastmod>2020-07-27T08:01:14.698Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx域名跳转-rewrite</title>
+        <pubTime>2019-06-22T07:06:52.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://inicb.com/archives/5368ee28.html</loc>
+    <lastmod>2020-06-12T05:55:50.585Z</lastmod>
+    <data>
+        <display>
+        <title>在Centos7上安装docker</title>
+        <pubTime>2018-06-14T07:55:32.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://inicb.com/archives/47d401a5.html</loc>
-    <lastmod>2020-06-12T03:00:24.848Z</lastmod>
+    <lastmod>2020-06-12T05:49:32.855Z</lastmod>
     <data>
         <display>
         <title>SSL Pinning on Android</title>
@@ -307,21 +352,6 @@
 
     
   <url>
-    <loc>http://inicb.com/archives/f974dc7a.html</loc>
-    <lastmod>2019-06-24T07:45:42.337Z</lastmod>
-    <data>
-        <display>
-        <title>Nginx域名跳转-rewrite</title>
-        <pubTime>2019-06-22T07:06:52.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://inicb.com/archives/4e5fc6be.html</loc>
     <lastmod>2019-05-08T06:59:10.099Z</lastmod>
     <data>
@@ -574,21 +604,6 @@
              
               <breadCrumb title="Android" url="http://inicb.com/categories/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Android/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://inicb.com/archives/5368ee28.html</loc>
-    <lastmod>2018-12-24T07:12:00.992Z</lastmod>
-    <data>
-        <display>
-        <title>在Centos7上安装docker</title>
-        <pubTime>2018-06-14T07:55:32.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
@@ -1072,9 +1087,9 @@
         <title>部署Hexo博客到VPS</title>
         <pubTime>2018-03-15T02:29:59.000Z</pubTime>
         
-        <tag>VPS</tag>
-         
         <tag>Hexo</tag>
+         
+        <tag>VPS</tag>
          
          
            
@@ -1116,9 +1131,9 @@
         <title>在VPS上配置hexo博客</title>
         <pubTime>2016-05-26T06:23:17.000Z</pubTime>
         
-        <tag>VPS</tag>
-         
         <tag>Hexo</tag>
+         
+        <tag>VPS</tag>
          
          
            

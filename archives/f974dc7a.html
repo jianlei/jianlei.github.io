@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="ini&#39;s Blog">
 <meta property="og:description" content="在nginx中可以对域名进行跳转如：所有对www.aaa.com的访问都redirect到www.bbb.com 12345678910server   &amp;#123;   listen 80;   server_name www.bbb.com;   index index.htm index.php;   root  /export/home/www   if ($host = &amp;quot;ww">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-24T07:45:42.337Z">
+<meta property="og:updated_time" content="2020-07-27T08:01:14.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx域名跳转-rewrite">
 <meta name="twitter:description" content="在nginx中可以对域名进行跳转如：所有对www.aaa.com的访问都redirect到www.bbb.com 12345678910server   &amp;#123;   listen 80;   server_name www.bbb.com;   index index.htm index.php;   root  /export/home/www   if ($host = &amp;quot;ww">
@@ -185,10 +185,11 @@
             
             <p>在nginx中可以对域名进行跳转如：所有对<a href="http://www.aaa.com的访问都redirect到www.bbb.com" target="_blank" rel="noopener">www.aaa.com的访问都redirect到www.bbb.com</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">   &#123;</span><br><span class="line">   listen 80;</span><br><span class="line">   server_name www.bbb.com;</span><br><span class="line">   index index.htm index.php;</span><br><span class="line">   root  /export/home/www</span><br><span class="line">   if ($host = &quot;www.aaa.com&quot;)&#123;</span><br><span class="line">   rewrite ^/(.*)$ http://www.bbb.com/$1 permanent;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>符号解释：<br>^ 匹配字符串的开始<br>/ 匹配域名的分隔符<br>. 匹配除换行符以外的任意字符</p>
+<p>符号解释：<br>^ 匹配字符串的开始<br>/ 匹配域名的分隔符<br>. 匹配除换行符以外的任意字符<br>‘<em> 重复零次或更多次<br>(.</em>) 匹配任意字符<br>.* 匹配任意文本<br>$ 匹配字符串的结束</p>
 <ul>
-<li>重复零次或更多次<br>(.<em>) 匹配任意字符<br>.</em> 匹配任意文本<br>$ 匹配字符串的结束</li>
+<li>Nginx 禁止ip访问</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    listen 80 default;</span><br><span class="line">    server_name _;</span><br><span class="line">    return 403;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         
         </div>
@@ -267,7 +268,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/f974dc7a.html" data-id="ckbbrc6oi003xdioziswdidd9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/f974dc7a.html" data-id="ckl3hvatx0044ogozbhfwk748" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -405,7 +406,7 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2020 ini<br>
+            &copy; 2021 ini<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
         </div>
     </div>
