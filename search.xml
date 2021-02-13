@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[在一台新的政务云服务器上的部署操作]]></title>
     <url>%2Farchives%2Facfbb6fa.html</url>
-    <content type="text"><![CDATA[vimyum install vim 安装iptablessystemctl stop firewalldsystemctl disable firewalldvi /etc/selinux/configyum install iptables-services iptables-devel开启systemctl enable iptables.servicesystemctl start iptables.servicesystemctl enable iptables.service关闭firewall 安装nginxyum install epel-releaseyum install nginx 安装dockeryum install -y yum-utilsyum-config-manager \ –add-repo \ https://download.docker.com/linux/centos/docker-ce.repoyum install docker-ce-18.09.6 docker-ce-cli-18.09.6 containerd.io systemctl start dockersystemctl enable docker 安装kkdocker pull keking/kkfileview minio kkfilepreview nginx redisanaconda]]></content>
+    <content type="text"><![CDATA[vimyum install vim 安装iptablessystemctl stop firewalldsystemctl disable firewalldvi /etc/selinux/configyum install iptables-services iptables-devel开启systemctl enable iptables.servicesystemctl start iptables.servicesystemctl enable iptables.service关闭firewall 安装nginxyum install epel-releaseyum install nginx 安装docker sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine yum install -y yum-utilsyum-config-manager \ –add-repo \ https://download.docker.com/linux/centos/docker-ce.repoyum install docker-ce-18.09.6 docker-ce-cli-18.09.6 containerd.io systemctl start dockersystemctl enable docker 安装kkdocker pull keking/kkfileview minio kkfilepreview nginx redisanaconda]]></content>
   </entry>
   <entry>
     <title><![CDATA[SSL Pinning on Android]]></title>

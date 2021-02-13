@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="ini&#39;s Blog">
 <meta property="og:description" content="vimyum install vim  安装iptablessystemctl stop firewalldsystemctl disable firewalldvi /etc/selinux/configyum install iptables-services iptables-devel开启systemctl enable iptables.servicesystemctl start i">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-02-13T09:02:46.226Z">
+<meta property="og:updated_time" content="2021-02-13T09:18:20.305Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在一台新的政务云服务器上的部署操作">
 <meta name="twitter:description" content="vimyum install vim  安装iptablessystemctl stop firewalldsystemctl disable firewalldvi /etc/selinux/configyum install iptables-services iptables-devel开启systemctl enable iptables.servicesystemctl start i">
@@ -190,9 +190,11 @@
 </li>
 <li><p>安装nginx<br>yum install epel-release<br>yum install nginx</p>
 </li>
-<li><p>安装docker<br>yum install -y yum-utils<br>yum-config-manager \<br> –add-repo \<br> <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a><br>yum install docker-ce-18.09.6 docker-ce-cli-18.09.6 containerd.io</p>
+<li><p>安装docker</p>
 </li>
 </ol>
+<p>sudo yum remove docker \<br>                  docker-client \<br>                  docker-client-latest \<br>                  docker-common \<br>                  docker-latest \<br>                  docker-latest-logrotate \<br>                  docker-logrotate \<br>                  docker-engine</p>
+<p>yum install -y yum-utils<br>yum-config-manager \<br>    –add-repo \<br>    <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a><br>yum install docker-ce-18.09.6 docker-ce-cli-18.09.6 containerd.io</p>
 <p>systemctl start docker<br>systemctl enable docker</p>
 <ol>
 <li>安装kk<br>docker pull keking/kkfileview</li>
@@ -276,7 +278,7 @@
 
 </div>
 
-    <a data-url="http://inicb.com/archives/acfbb6fa.html" data-id="ckl3hvauo005eogozqq9gasht" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://inicb.com/archives/acfbb6fa.html" data-id="ckl3ic1kx005dl2ozlxzhovmy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
