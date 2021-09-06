@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                69
+                77
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                55
+                59
                 <span>标签</span>
             </div>
         </div>
@@ -208,6 +208,908 @@
             
             
             <section id="main">
+    <article id="post-检查网站的TLS版本" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/d7fe6232.html">检查网站的TLS版本</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/d7fe6232.html">
+            <time datetime="2021-08-12T08:14:20.000Z" itemprop="datePublished">2021-08-12</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>有时候需要知道某个网站支持的TLS的版本。现在SSL 2.0和SSL 3.0都已经被淘汰了。其中TLS 1.0，TLS 1.1，TLS 1.2是目前的的主流，相对也是安全的。主要看加密的算法。TLS 1.3是目前最新的协议版本，也是相对最安全的版本了。</p>
+<h3 id="通过网页查看"><a href="#通过网页查看" class="headerlink" title="通过网页查看"></a>通过网页查看</h3><ul>
+<li><a href="https://myssl.com/" target="_blank" rel="noopener">SSL/TLS安全评估报告</a></li>
+<li><a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="noopener">SSL Server Test (Powered by Qualys SSL Labs)</a></li>
+</ul>
+<h3 id="通过命令行"><a href="#通过命令行" class="headerlink" title="通过命令行"></a>通过命令行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl s_client -connect www.baidu.com:443 -tls1_2</span><br><span class="line">openssl s_client -connect www.baidu.com:443 -tls1_1</span><br><span class="line">openssl s_client -connect www.baidu.com:443 -tls1</span><br></pre></td></tr></table></figure>
+<p>以上分别检查了tls1.2,tls1.1和<code></code>tls1`。如果握手失败的话，那么就是不支持了。</p>
+<h3 id="NMAP"><a href="#NMAP" class="headerlink" title="NMAP"></a>NMAP</h3><p>依赖于nmap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --script ssl-enum-ciphers -p 443 baidu.com</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2020-11-29 09:51 CST</span><br><span class="line">Nmap scan report for baidu.com (39.156.69.79)</span><br><span class="line">Host is up (0.0068s latency).</span><br><span class="line">Other addresses for baidu.com (not scanned): 220.181.38.148</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">443/tcp open  https</span><br><span class="line">| ssl-enum-ciphers:</span><br><span class="line">|   SSLv3:</span><br><span class="line">|     ciphers:</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C</span><br><span class="line">|     compressors:</span><br><span class="line">|       NULL</span><br><span class="line">|     cipher preference: server</span><br><span class="line">|     warnings:</span><br><span class="line">|       Broken cipher RC4 is deprecated by RFC 7465</span><br><span class="line">|       CBC-mode cipher in SSLv3 (CVE-2014-3566)</span><br><span class="line">|   TLSv1.0:</span><br><span class="line">|     ciphers:</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C</span><br><span class="line">|     compressors:</span><br><span class="line">|       NULL</span><br><span class="line">|     cipher preference: server</span><br><span class="line">|     warnings:</span><br><span class="line">|       Broken cipher RC4 is deprecated by RFC 7465</span><br><span class="line">|   TLSv1.1:</span><br><span class="line">|     ciphers:</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C</span><br><span class="line">|     compressors:</span><br><span class="line">|       NULL</span><br><span class="line">|     cipher preference: server</span><br><span class="line">|     warnings:</span><br><span class="line">|       Broken cipher RC4 is deprecated by RFC 7465</span><br><span class="line">|   TLSv1.2:</span><br><span class="line">|     ciphers:</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 (secp256r1) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_GCM_SHA256 (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA256 (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA256 (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C</span><br><span class="line">|     compressors:</span><br><span class="line">|       NULL</span><br><span class="line">|     cipher preference: server</span><br><span class="line">|     warnings:</span><br><span class="line">|       Broken cipher RC4 is deprecated by RFC 7465</span><br><span class="line">|_  least strength: C</span><br><span class="line"></span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 3.22 seconds</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-Scrapy中Request-、FormRequest-、FormRequest-from-response-的小结" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/d4a32458.html">Scrapy中Request()、FormRequest()、FormRequest.from_response()的小结</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/d4a32458.html">
+            <time datetime="2021-07-16T06:18:05.000Z" itemprop="datePublished">2021-07-16</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Scrapy/">Scrapy</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>一、Request()类的实例化<br>对于爬取普通网站，不需要验证码，不需要登入的界面，我们一般用scrapy.Request类直接去爬取信息就行，下面是Request类的定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Request(object_ref):</span><br><span class="line"></span><br><span class="line">    def __init__(self, url, callback=None, method=&apos;GET&apos;, headers=None, body=None,</span><br><span class="line">                 cookies=None, meta=None, encoding=&apos;utf-8&apos;, priority=0,</span><br><span class="line">                 dont_filter=False, errback=None, flags=None):</span><br><span class="line">                 # url是要爬取的网址</span><br><span class="line">                 # callback是回调函数</span><br><span class="line">                 # method是请求的方式post还是get</span><br><span class="line">                 # headers是浏览器伪装的头信息</span><br><span class="line">                 # body是网页源代码信息</span><br><span class="line">                 # cookies是登入某网站后，网站在你电脑上保留的信息</span><br><span class="line">                 # meta要携带或者传递的信息</span><br><span class="line">                 # encoding是编码方式</span><br><span class="line">                 # priority用来设置访问网站的优先级</span><br><span class="line">                 # dont_filter是否允许重复爬取网站</span><br></pre></td></tr></table></figure></p>
+<p>可以看见，其中url，即要爬取的目标网站是必填的，其他的是选填的，method=‘GET’，说明此类是get请求，实例化该对象后，会得到一个response。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def start_requests(self):</span><br><span class="line">        # 首先爬一次登陆页，看是否有验证码。回调函数为parse()，&apos;cookiejar&apos;的值为1表示开启状态</span><br><span class="line">        # 这里要返回一个可迭代对象，用yield本身就是可迭代对象，但是，这里是return，所以用[]将其构造成一个可迭代对象</span><br><span class="line">        return [Request(&quot;https://accounts.douban.com/passport/login&quot;, meta=&#123;&apos;cookiejar&apos;: 1&#125;, headers=self.header, callback=self.parse)]</span><br></pre></td></tr></table></figure></p>
+<p>二、scrapy.FormRequest与scrapy.http.FormRequest</p>
+<blockquote><p>（1）普通请求使用scrapy.Request类就可以实现，但是遇到模拟表单或Ajax提交post请求的时候，Request类就不如 子类 FormRequest类方便了，因为他自带 formdata ，专门用来设置表单字段数据，即填写账号、密码，实现登入，默认method也是POST。<br>（2）FormRequest相当于是手动指定post。<br>（3）事实上，scrapy.FormRequest()与scrapy.http.FormRequest()使用起来的区别不大，你可以将两种方法等价互换。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def start_requests(self):</span><br><span class="line">    form_data = &#123;&apos;f1&apos;:&apos;1&apos;, &apos;f2&apos;:&apos;100&apos;&#125;  # 表单数据，字典格式，注意数字也要用引号引起来，否则报错。</span><br><span class="line">    yield scrapy.FormRequest(url, formdata=form_data) # 还可以通过callback修改回调函数等</span><br><span class="line"># 也可以</span><br><span class="line">def start_requests(self):</span><br><span class="line">    form_data = &#123;&apos;f1&apos;:&apos;1&apos;, &apos;f2&apos;:&apos;100&apos;&#125;  # 表单数据，字典格式，注意数字也要用引号引起来，否则报错。</span><br><span class="line">    yield scrapy.http.FormRequest(url, formdata=form_data) # 还可以通过callback修改回调函数等</span><br></pre></td></tr></table></figure>
+<p>三、FormRequest.from_response()</p>
+<blockquote><p>（1）FormRequest.from_response也可以进行设置formdata，用来填写并提交表单，实现模拟登入。<br>（2）FormRequest.from_response相当于是自动识别post。<br>（3）FormRequest.from_response与FormRequest.http.from_response也没有区别。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def parse(self, response):</span><br><span class="line">        return scrapy.FormRequest.from_response(</span><br><span class="line">            response,</span><br><span class="line">            formdata=&#123;&apos;username&apos;: &apos;john&apos;, &apos;password&apos;: &apos;secret&apos;&#125;,</span><br><span class="line">            callback=self.after_login</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<p>四、scrapy.FormRequest与FormRequest.from_response 的区别</p>
+<p>1.什么情况下分别使用什么</p>
+<p>先找到填写表单时发送的post请求的地址，下面以豆瓣登入为例子：</p>
+<p>可以看见其post的地址为：<a href="https://accounts.douban.com/j/mobile/login/basic" target="_blank" rel="noopener">https://accounts.douban.com/j/mobile/login/basic</a><br>然后用浏览器访问<a href="https://accounts.douban.com/j/mobile/login/basic" target="_blank" rel="noopener">https://accounts.douban.com/j/mobile/login/basic</a></p>
+<ol>
+<li>发现页面没有表单信息（也就是没有填写账号、密码的地方），所以，我们只能采用scrapy.FormRequest，手动的去发送post请求。</li>
+<li>如果浏览器访问某post网址时，里面有表单信息，这时候你可以用FormRequest.from_response也可以用scrapy.FormRequest实现模拟登入</li>
+</ol>
+<p>2.参数的不一样</p>
+<p>scrapy.FormRequest的必填参数是目标网址，而FormRequest.from_response的必填参数是response</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def parse(self, response):</span><br><span class="line">        # 如果有验证码</span><br><span class="line">        # 没有验证码，就进行登入</span><br><span class="line">        # 设置要发送的post信息</span><br><span class="line">        data = &#123;</span><br><span class="line">            &apos;name&apos;: &apos;18371417971&apos;,</span><br><span class="line">            &apos;password&apos;: &apos;wanghao211&apos;,</span><br><span class="line">            &apos;remember&apos;: &apos;false&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        print(&quot;登入中...&quot;)</span><br><span class="line">        return FormRequest(</span><br><span class="line">            url=&apos;https://accounts.douban.com/j/mobile/login/basic&apos;,</span><br><span class="line">            method=&apos;post&apos;,</span><br><span class="line">            formdata=data,</span><br><span class="line">            meta=&#123;&apos;cookiejar&apos;:response.meta[&apos;cookiejar&apos;]&#125;,</span><br><span class="line">            # 如果需要多次提交表单，且url一样，那么就必须加此参数dont_filter，防止被当成重复网页过滤掉了</span><br><span class="line">            dont_filter=True,</span><br><span class="line">            callback=self.next</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def parse(self, response):</span><br><span class="line">        # 如果有验证码</span><br><span class="line">        # 没有验证码，就进行登入</span><br><span class="line">        # 设置要发送的post信息</span><br><span class="line">        data = &#123;</span><br><span class="line">            &apos;name&apos;: &apos;18371417971&apos;,</span><br><span class="line">            &apos;password&apos;: &apos;wanghao211&apos;,</span><br><span class="line">            &apos;remember&apos;: &apos;false&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        print(&quot;登入中...&quot;)</span><br><span class="line">        return FormRequest(</span><br><span class="line">            url=response,</span><br><span class="line">            method=&apos;post&apos;,</span><br><span class="line">            formdata=data,</span><br><span class="line">            meta=&#123;&apos;cookiejar&apos;:response.meta[&apos;cookiejar&apos;]&#125;,</span><br><span class="line">            # 如果需要多次提交表单，且url一样，那么就必须加此参数dont_filter，防止被当成重复网页过滤掉了</span><br><span class="line">            dont_filter=True,</span><br><span class="line">            callback=self.next</span><br><span class="line">            )</span><br></pre></td></tr></table></figure>
+<p>3.小结</p>
+<p>总的来说，scrapy.FormRequest的功能更加强大，如果FormRequest.from_response 不能解决就用scrapy.FormRequest来解决模拟登入，毕竟是手动设置目标网址，比自动识别要精准。</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-Docker修改Docker0网桥默认网段" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/847c0e37.html">Docker修改Docker0网桥默认网段</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/847c0e37.html">
+            <time datetime="2021-06-16T23:37:14.000Z" itemprop="datePublished">2021-06-17</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Docker/">Docker</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote><p>Docker 服务启动后默认会创建一个 docker0 网桥（其上有一个 docker0 内部接口），它在内核层连通了其他的物理或虚拟网卡，这就将所有容器和本地主机都放到同一个物理网络。</p>
+<p>Docker 默认指定了 docker0 接口 的 IP 地址和子网掩码，让主机和容器之间可以通过网桥相互通信，它还给出了 MTU（接口允许接收的最大传输单元），通常是 1500 Bytes，或宿主主机网络路由上支持的默认值。这些值都可以在服务启动的时候进行配置。</p>
+</blockquote>
+<ol>
+<li><p>默认docker0 网桥信息<br>默认的docker0网桥ip为“172.17.0.1”，尤其是在自建机房和办公环境在一起的情况下，会与办公网络发生冲突，所以我们在使用docker的时候需要修改调整默认的网桥信息。</p>
+</li>
+<li><p>修改步骤<br>修改文件<font color="green">vim /etc/docker/daemon.json</font>（这里没有这个文件的话，自行创建）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;bip&quot;:&quot;10.120.0.1/16&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭docker服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop docker</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再启动docker服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再重新看网段<br><img src="/images/docker0.png" alt=""></p>
+</li>
+</ol>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-xpath获取内容的方式" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/37827dce.html">xpath获取内容的方式</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/37827dce.html">
+            <time datetime="2021-06-10T01:49:33.000Z" itemprop="datePublished">2021-06-10</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/开发效率/">开发效率</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爬虫/">爬虫</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>以百度为例：’<a href="https://tieba.baidu.com&#39;" target="_blank" rel="noopener">https://tieba.baidu.com&#39;</a></p>
+<p>1.获取最外面标签，遍历内部所有的字标签，获取标签文本</p>
+<p>content_list =div.xpath(‘.//div[@class=”d_post_content j_d_post_content “]/text()’).extract()</p>
+<p>2.正则去掉所有标签  &lt;.*?&gt;   re.compile.sub()</p>
+<p>content_list=div.xpath(‘.//div[@class=”d_post_content j_d_post_content “]’)</p>
+<p>pattern=re.compile(r(‘&lt;.*?&gt;’),re.S)</p>
+<p>content=pattern.sub(‘’,content_list)</p>
+<p>3./text() 获取标签的文本 //text()获取标签以及子标签的文本</p>
+<p>content_list = div.xpath(‘.//div[@class=”d_post_content j_d_post_content “]//text()’).extract()</p>
+<p>4 使用xpath(‘string(.)’)这种方式获取所有文本 并且拼接</p>
+<p>content_list=div.xpath(‘.//div[@class=”d_post_content j_d_post_content “]’).xpath(‘string(.)’).extract()[0]+’\n’</p>
+<p>文本内容获取之后print(content_list)查看内容,如需处理格式,则如下:</p>
+<p>remove = re.compile(‘\s’)<br>content = ‘’<br>for string in content_list:<br>    string = remove.sub(‘’,string)<br>    content += string<br>    print(content)</p>
+<p>————————————————<br>版权声明：本文为CSDN博主「sklsxy」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/sklsklsklsxy/article/details/81448478" target="_blank" rel="noopener">https://blog.csdn.net/sklsklsklsxy/article/details/81448478</a></p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-SwitchHosts动态切换host文件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/7e323156.html">SwitchHosts动态切换host文件</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/7e323156.html">
+            <time datetime="2021-05-20T06:42:29.000Z" itemprop="datePublished">2021-05-20</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/开发效率/">开发效率</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/SwitchHosts/">SwitchHosts</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>github地址：<a href="https://github.com/oldj/SwitchHosts" target="_blank" rel="noopener">https://github.com/oldj/SwitchHosts</a><br>SwitchHosts 是一个管理 hosts 文件的应用，基于 Electron 、React、UmiJS 、Chakra UI、CodeMirror 等技术开发。</p>
+<h4 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h4><ol>
+<li>快速切换 hosts 方案</li>
+<li>hosts 语法高亮</li>
+<li>支持从网络加载远程 hosts 配置</li>
+<li>可从系统菜单栏图标快速切换 hosts</li>
+</ol>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-Nginx配置禁止IP访问" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/702113a8.html">Nginx配置禁止IP访问</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/702113a8.html">
+            <time datetime="2021-03-22T02:53:26.000Z" itemprop="datePublished">2021-03-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Nginx/">Nginx</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>在配置安装好Nginx之后，打开浏览器直接输入ip地址是可以直接访问项目的，或者只要有域名指向ip可以直接用域名进行访问。<br>但是现在要求禁止使用ip地址直接访问，打开文件/etc/nginx/nginx.conf，在server上面添加代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        listen       [::]:80 default_server;</span><br><span class="line">        server_name  _;</span><br><span class="line"></span><br><span class="line">        return 404;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>并将原server中的两个default_server去掉<br><img src="/images/Nginx/ip.png" alt=""><br>代表的意思是所有除了已经配置的server_name可以访问外，其他地址返回404并断开连接，也可以返回其他状态码。</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-Docker中设置Tomcat的内存大小配置" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/af5b2750.html">Docker中设置Tomcat的内存大小配置</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/af5b2750.html">
+            <time datetime="2021-03-19T02:46:13.000Z" itemprop="datePublished">2021-03-19</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Docker/">Docker</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote><p>安装在docker中的tomcat，在下载大文件或者某些情况下，会出现tomcat的内存溢出等情况，所以需要配置tomcat的内存大小，docker中的tomcat内存大小配置有两种方式：</p>
+</blockquote>
+<h4 id="一、挂载docker中的配置文件"><a href="#一、挂载docker中的配置文件" class="headerlink" title="一、挂载docker中的配置文件"></a>一、挂载docker中的配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过将docker中tomcat的catalina.sh配置文件挂载到宿主机中，然后再catalina.sh配置jvm内存大小即可。</span><br></pre></td></tr></table></figure>
+<ol>
+<li>需要重新运行一个tomcat容器（注意： 端口和容器名称不能重复）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line"> -v /server/webapps:/usr/local/tomcat/webapps/ \</span><br><span class="line"> -v /server/catalina.sh:/usr/local/tomcat/bin/catalina.sh \</span><br><span class="line"> -v /server/logs/demo:/server/logs/demo \</span><br><span class="line"> -e TZ=&quot;Asia/Shanghai&quot; \</span><br><span class="line"> --privileged=true \</span><br><span class="line"> --name demo \</span><br><span class="line"> -p 8080:8080 \</span><br><span class="line"> tomcat8</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>说明：</p>
+<ul>
+<li>-v /server/webapps:/usr/local/tomcat/webapps/ 挂载当前项目的运行目录到tomcat下的webapps</li>
+<li>-v /server/catalina.sh:/usr/local/tomcat/bin/catalina.sh 挂载宿主机的catalina.sh到docker中tomcat下的catalina.sh</li>
+<li>-v /server/logs/demo:/server/logs/demo 挂载日志到宿主机中</li>
+<li>-e TZ=”Asia/Shanghai” 设置时区</li>
+<li>–privileged=true 设置拥有容器中的真正的root权限</li>
+<li>-p 8080:8080 映射端口</li>
+<li>tomcat8 镜像的名称</li>
+</ul>
+<p>2 .catalina.sh中的配置内存</p>
+<p>cygwin=false下面加入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPTS=&quot;-server -Xms1024m -Xmx2048m -XX:MaxNewSize=256m -XX:PermSize=128m -XX:MaxPermSize=256m&quot;</span><br></pre></td></tr></table></figure></p>
+<p>-xms 初始化堆内存<br>-xmx 最大堆内存</p>
+<p>二、直接修改tomcat容器的catalina.sh的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以直接进入容器中修改tomcat的catalina.sh的配置文件，不过该方法不推荐，因为以后再次秀挂比较麻烦，并且不方便配置，如果需要重新运行容器的时候，不知道容器中的内存大小的配置</span><br></pre></td></tr></table></figure></p>
+<p>进入容器<br>docker exec -it &lt;container_name&gt; /bin/bash</p>
+<p>找到catalina.sh配置文件, 并增加配置（第一步中增加的配置语句即可）</p>
+<p>// 如果没有vi 命令，则需要安装<br>vi /usr/local/tomcat/bin/catalina.sh<br>// 退出容器，并重新启动<br>exit<br>docker restart &lt;containner_name&gt;</p>
+<p>注意： 如果修改Catalina.sh的时候提示该文件是一个只读文件或者提示没有权限修改，那么则需要以root权限进入容器，具体的方法见： <a href="https://blog.csdn.net/weixin_42054155/article/details/101715821" target="_blank" rel="noopener">Docker容器中的root权限获取</a></p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li>转自 <a href="https://blog.csdn.net/weixin_42054155/article/details/102140839" target="_blank" rel="noopener">Docker中tomcat的设置内存大小配置</a></li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-升级ShadowSocks支持aes-256-gcm算法（ShadowsocksX-NG）" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/f1a14509.html">升级ShadowSocks支持aes-256-gcm算法（ShadowsocksX-NG）</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/f1a14509.html">
+            <time datetime="2021-03-19T01:06:21.000Z" itemprop="datePublished">2021-03-19</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>以前安装的Shadowsocks是2.8.2 不支持aes-256-gcm模式，需要升级到3.x才可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade pip</span><br><span class="line">sudo pip install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U</span><br></pre></td></tr></table></figure>
+<p>然后修改/etc/shadowsocks.conf配置文件算法为aes-256-gcm。</p>
+<p>下载最新的ShadowsocksX-NG客户端进行配置即可。</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
     <article id="post-在一台新的政务云服务器上的部署操作" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -242,22 +1144,30 @@
         
             
             <ol>
-<li><p>vim<br>yum install vim</p>
+<li><p>安装vim<br>yum install vim</p>
 </li>
-<li><p>安装iptables<br>systemctl stop firewalld<br>systemctl disable firewalld<br>vi /etc/selinux/config<br>yum install iptables-services iptables-devel<br>开启<br>systemctl enable iptables.service<br>systemctl start iptables.service<br>systemctl enable iptables.service<br>关闭firewall</p>
+<li><p>关闭系统自带防火墙，安装iptables<br>systemctl stop firewalld<br>systemctl disable firewalld<br>vi /etc/selinux/config<br>yum install iptables-services iptables-devel<br>开启<br>systemctl enable iptables.service<br>systemctl start iptables.service<br>systemctl enable iptables.service<br>关闭firewall</p>
 </li>
 <li><p>安装nginx<br>yum install epel-release<br>yum install nginx</p>
 </li>
 <li><p>安装docker</p>
 </li>
 </ol>
-<p>sudo yum remove docker \<br>                  docker-client \<br>                  docker-client-latest \<br>                  docker-common \<br>                  docker-latest \<br>                  docker-latest-logrotate \<br>                  docker-logrotate \<br>                  docker-engine</p>
-<p>yum install -y yum-utils<br>yum-config-manager \<br>    –add-repo \<br>    <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a><br>yum install docker-ce-18.09.6 docker-ce-cli-18.09.6 containerd.io</p>
+<p>先卸载旧版本的docker<br>sudo yum remove docker \<br>                  docker-client \<br>                  docker-client-latest \<br>                  docker-common \<br>                  docker-latest \<br>                  docker-latest-logrotate \<br>                  docker-logrotate \<br>                  docker-engine</p>
+<p>安装新的docker<br>yum install -y yum-utils<br>yum-config-manager \<br>    –add-repo \<br>    <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a><br>yum install docker-ce-18.09.6 docker-ce-cli-18.09.6 containerd.io</p>
+<p>升级docker<br>yum -y upgrade docker-ce docker-ce-cli containerd.io</p>
 <p>systemctl start docker<br>systemctl enable docker</p>
 <ol>
-<li>安装kk<br>docker pull keking/kkfileview</li>
+<li><p>安装kk<br>docker pull keking/kkfileview</p>
+</li>
+<li><p>安装minio<br>docker pull minio/minio</p>
+</li>
 </ol>
-<p>minio  kkfilepreview nginx redis<br>anaconda</p>
+<p>kkfilepreview nginx redis<br>anaconda</p>
+<ol>
+<li>解决docker中控制台乱码问题<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --restart=always -d --name zzb10001 -p 10001:8080 -e &quot;LC_ALL=zh_CN.UTF-8&quot; -e &quot;LANG=zh_CN.UTF-8&quot; -v /data/zzb10001/webapps:/tomcat/webapps/ -v /data/zzb10001/logs:/tomcat/logs spdk/jdk8 &gt; /data/zzb10001/id</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
         
         </div>
@@ -458,1034 +1368,8 @@
 
 
 
-    <article id="post-Nginx代理proxy-pass配置去除location路径前缀" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/4ead88f7.html">(转)Nginx代理proxy pass配置去除location路径前缀</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/4ead88f7.html">
-            <time datetime="2020-05-11T00:24:26.000Z" itemprop="datePublished">2020-05-11</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Nginx/">Nginx</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>我们在使用Nginx做代理的时候，可以简单的直接把请求原封不动的转发给下一个服务。</p>
-<p>比如，访问abc.com/appv2/a/b.html, 要求转发到localhost:8088/appv2/a/b.html</p>
-<p>简单配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">upstream one &#123;</span><br><span class="line">  server localhost:8088 weight=5;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen              80;</span><br><span class="line">    server_name         abc.com;</span><br><span class="line">    access_log  &quot;pipe:rollback /data/log/nginx/access.log interval=1d baknum=7 maxsize=1G&quot;  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header  X-Real-IP        $remote_addr;</span><br><span class="line">        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-NginX-Proxy true;</span><br><span class="line"></span><br><span class="line">        proxy_pass http://one;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>即，设置proxy_pass即可。请求只会替换域名。</p>
-<p>但很多时候，我们需要根据url的前缀转发到不同的服务。</p>
-<p>比如<br>abc.com/user/profile.html转发到 用户服务localhost:8089/profile.html</p>
-<p>abc.com/order/details.html转发到 订单服务 localhost:8090/details.html</p>
-<p>即，url的前缀对下游的服务是不需要的，除非下游服务添加context-path, 但很多时候我们并不喜欢加这个。如果Nginx转发的时候，把这个前缀去掉就好了。</p>
-<ul>
-<li>一个种方案是proxy_pass后面加根路径 /<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen              80;</span><br><span class="line">    server_name         abc.com;</span><br><span class="line">    access_log  &quot;pipe:rollback /data/log/nginx/access.log interval=1d baknum=7 maxsize=1G&quot;  main;</span><br><span class="line"></span><br><span class="line">    location ^~/user/ &#123;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header  X-Real-IP        $remote_addr;</span><br><span class="line">        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-NginX-Proxy true;</span><br><span class="line"></span><br><span class="line">        proxy_pass http://user/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ^~/order/ &#123;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header  X-Real-IP        $remote_addr;</span><br><span class="line">        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-NginX-Proxy true;</span><br><span class="line"></span><br><span class="line">        proxy_pass http://order/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>^~/user/表示匹配前缀是user的请求，proxy_pass的结尾有/， 则会把/user/* 后面的路径直接拼接到后面，即移除user.</p>
-<ul>
-<li>另一种方案是使用rewrite<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">upstream user &#123;</span><br><span class="line">  server localhost:8089 weight=5;</span><br><span class="line">&#125;</span><br><span class="line">upstream order &#123;</span><br><span class="line">  server localhost:8090 weight=5;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen              80;</span><br><span class="line">    server_name         abc.com;</span><br><span class="line">    access_log  &quot;pipe:rollback /data/log/nginx/access.log interval=1d baknum=7 maxsize=1G&quot;  main;</span><br><span class="line"></span><br><span class="line">    location ^~/user/ &#123;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header  X-Real-IP        $remote_addr;</span><br><span class="line">        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-NginX-Proxy true;</span><br><span class="line"></span><br><span class="line">        rewrite ^/user/(.*)$ /$1 break;</span><br><span class="line">        proxy_pass http://user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ^~/order/ &#123;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header  X-Real-IP        $remote_addr;</span><br><span class="line">        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-NginX-Proxy true;</span><br><span class="line"></span><br><span class="line">        rewrite ^/order/(.*)$ /$1 break;</span><br><span class="line">        proxy_pass http://order;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>注意到proxy_pass结尾没有/， rewrite重写了url。</p>
-<p>对于文件映射也可以使用这两种方式，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /dafile &#123;  </span><br><span class="line">    #rewrite ^/dafile/(.*)$ /$1 last;</span><br><span class="line">    proxy_pass http://172.31.8.168:8141/;//文件服务器nginx路径</span><br><span class="line">    #return 7;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://www.cnblogs.com/woshimrf/p/nginx-proxy-rewrite-url.html" target="_blank" rel="noopener">Nginx代理proxy pass配置去除location路径前缀</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-如何给没有连接互联网的centos使用yum安装其他软件" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/7bfbc9bd.html">如何给没有连接互联网的centos使用yum安装其他软件</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/7bfbc9bd.html">
-            <time datetime="2020-04-24T13:04:39.000Z" itemprop="datePublished">2020-04-24</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>在工作中，在生产中经常会遇到这样的情况，服务器部署环境无法链接互联网，只能在内网运行。这时候如果使用Centos系统，就会发现安装软件是一件很痛苦的事情，不知道如何下手，因为如果有外网环境的话，在Centos下安装软件和开发工具是意见很麻烦的事情，因为linux上通过yum安装软件的时候是需要把相关的依赖也会安装的，所以如果只copy一个rpm包到服务器上安装是无法完成安装的。</p>
-<p>下面介绍一种可以在无网环境的Linux下安装软件和开发工具的方法。</p>
-<p>首先准备一台跟目标服务器操作系统、环境一样的机器，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">机器A. 192.168.10.12 有外网访问权限</span><br><span class="line">机器B. 192.168.10.13 无外网访问权限</span><br></pre></td></tr></table></figure></p>
-<p>我们的目标就是在机器B上安装我们需要的软件。</p>
-<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><blockquote><p>借助yum安装的“缓存”，在有网的机器上打开yum的keepcache开关，把下载的软件和相应的依赖缓存起来，然后copy缓存到目标机器上，在目标机器上正常通过yum进行安装。</p>
-</blockquote>
-<ul>
-<li>1.需要在一台可以连外网的机子上安装一个同版本的centos的虚拟机。可能不同的版本包含了不同的基层依赖包，这样有可能会导致后续的安装失败。</li>
-<li>2.修改两台机器上的yum配置文件  /etc/yum.conf  ,将 keepcache=0  修改成  keepcache=1， 打开缓存开关。因为yum在安装的时候会先去缓存查找，如果没有查找成功则会去网络下载。</li>
-<li><ol>
-<li>在机器A上使用yum命令安装需要的软件。比如 sudo yum install -y yum-utils， 这个时候yum-utils的安装缓存就会保存起来。 在目录  /var/cache/yum/ 下可以看到，一般来说是个 x86_64的文件夹。</li>
-</ol>
-</li>
-<li><ol>
-<li>Copy机器A上 /var/cache/yum/的目录文件到机器B上的相应目录。</li>
-</ol>
-</li>
-<li>5.在机器B上执行 yum install -y yum-utils,完成软件的安装。</li>
-</ul>
-<p>至此，就可以在无网的linux服务器完成软件的安装了。</p>
-<p>注意，如果在有网的机器上添加了相应的repo的话，例如docker-ce.repo，在目标机器上也要添加相应的repo文件。</p>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-关于吕先生在周会上对DRR工作指示的总结" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/968230d9.html">关于吕先生在周会上对DRR工作指示的总结</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/968230d9.html">
-            <time datetime="2019-10-14T02:01:46.000Z" itemprop="datePublished">2019-10-14</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/工作/">工作</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/DRR/">DRR</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p>Welcome to my blog, enter password to read.</p>
-            <p class="article-more-link">
-                <a href="/archives/968230d9.html#more">查看更多</a>
-            </p>
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-Mac电脑开启root账号，以及配置免密登录" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/87e7ba04.html">Mac电脑开启root账号，以及配置免密登录</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/87e7ba04.html">
-            <time datetime="2019-10-14T01:13:08.000Z" itemprop="datePublished">2019-10-14</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Mac/">Mac</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <blockquote><p>最近在研究大数据分布式计算环境的配置，用到了Spark环境的配置，其中涉及到需要开启root账号和免密登录，</p>
-</blockquote>
-<h4 id="一、如何在-Mac-上启用-root-用户或更改-root-密码"><a href="#一、如何在-Mac-上启用-root-用户或更改-root-密码" class="headerlink" title="一、如何在 Mac 上启用 root 用户或更改 root 密码"></a>一、如何在 Mac 上启用 root 用户或更改 root 密码</h4><p>完成某些任务需要系统更多区域的访问权限，Mac 管理员可以使用 root 用户帐户来完成这些任务。</p>
-<p>名为“root”的用户帐户是一个超级用户，拥有更多系统区域（包括 macOS 用户帐户中的文件）的读写权限。默认情况下，root 用户处于停用状态。如果您可以使用管理员帐户登录 Mac，您可以启用 root 用户，然后以 root 用户身份登录来完成您的任务。</p>
-<p>与启用 root 用户相比，在“终端”中使用 sudo 命令更为安全。要了解 sudo，请打开“终端”应用，然后输入 man sudo。</p>
-<h5 id="启用或停用-root-用户"><a href="#启用或停用-root-用户" class="headerlink" title="启用或停用 root 用户"></a>启用或停用 root 用户</h5><ol>
-<li>选取苹果菜单 () &gt;“系统偏好设置”，然后点按“用户与群组”（或“帐户”）。</li>
-<li>点按 锁形图标，然后输入管理员名称和密码。</li>
-<li>点按“登录选项”。</li>
-<li>点按“加入”（或“编辑”）。</li>
-<li>点按“打开目录实用工具”。</li>
-<li>点按“目录实用工具”窗口中的 锁形图标，然后输入管理员名称和密码。</li>
-<li>从“目录实用工具”的菜单栏中：<ul>
-<li>选取“编辑”&gt;“启用 Root 用户”，然后输入要用于 root 用户的密码。</li>
-<li>或者选取“编辑”&gt;“停用 Root 用户”。</li>
-</ul>
-</li>
-</ol>
-<h5 id="以-root-用户身份登录"><a href="#以-root-用户身份登录" class="headerlink" title="以 root 用户身份登录"></a>以 root 用户身份登录</h5><p>启用 root 用户后，仅在以 root 用户身份登录时，您才拥有 root 用户的权限。</p>
-<ol>
-<li>选取苹果菜单 &gt;“退出登录”，以退出登录您的当前用户帐户。</li>
-<li>在登录窗口中，使用用户名“root”以及为 root 用户创建的密码登录。<br>如果登录窗口显示用户列表，请点按“其他”，然后登录。</li>
-</ol>
-<p>完成任务后，应务必停用 root 用户。</p>
-<h5 id="更改-root-密码"><a href="#更改-root-密码" class="headerlink" title="更改 root 密码"></a>更改 root 密码</h5><ol>
-<li>选取苹果菜单 () &gt;“系统偏好设置”，然后点按“用户与群组”（或“帐户”）。</li>
-<li>点按 锁形图标，然后输入管理员名称和密码。</li>
-<li>点按“登录选项”。</li>
-<li>点按“加入”（或“编辑”）。</li>
-<li>点按“打开目录实用工具”。</li>
-<li>点按“目录实用工具”窗口中的 锁形图标，然后输入管理员名称和密码。</li>
-<li>从“目录实用工具”的菜单栏中，选取“编辑”&gt;“更改 Root 密码…”</li>
-<li>在出现提示时输入 root 密码。</li>
-</ol>
-<h4 id="二、Mac-terminal-允许root用户通过ssh登录"><a href="#二、Mac-terminal-允许root用户通过ssh登录" class="headerlink" title="二、Mac terminal 允许root用户通过ssh登录"></a>二、Mac terminal 允许root用户通过ssh登录</h4><blockquote><p>默认情况下，Mac 的 root 用户是没有开启的，当然更不可能通过 ssh 登录了</p>
-</blockquote>
-<h5 id="开启-root-用户"><a href="#开启-root-用户" class="headerlink" title="开启 root 用户"></a>开启 root 用户</h5><p>见上步。</p>
-<h5 id="配置-sshd-允许-root-用户登录（使用非root登录）"><a href="#配置-sshd-允许-root-用户登录（使用非root登录）" class="headerlink" title="配置 sshd 允许 root 用户登录（使用非root登录）"></a>配置 sshd 允许 root 用户登录（使用非root登录）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 1. 先进入 root 用户模式</span><br><span class="line">su</span><br><span class="line"></span><br><span class="line"># 2. 然后编辑 sshd_config 文件内容</span><br><span class="line">vi /private/etc/ssh/sshd_config</span><br><span class="line"></span><br><span class="line"># 3. 找到 ‘#PermitRootLogin prohibit-password’ 这一行，把前面的 # 号去掉，并把后面改成 yes</span><br><span class="line">PermitRootLogin yes</span><br><span class="line"></span><br><span class="line"># 4. 保存并退出</span><br><span class="line">:wq!</span><br></pre></td></tr></table></figure>
-<h5 id="重启-sshd-服务"><a href="#重启-sshd-服务" class="headerlink" title="重启 sshd 服务"></a>重启 sshd 服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">launchctl stop com.openssh.sshd     # 停止 ssh 服务</span><br><span class="line">launchctl start com.openssh.sshd    # 启动 ssh 服务</span><br></pre></td></tr></table></figure>
-<h4 id="三、mac-免密ssh登陆配置不坑指南"><a href="#三、mac-免密ssh登陆配置不坑指南" class="headerlink" title="三、mac 免密ssh登陆配置不坑指南"></a>三、mac 免密ssh登陆配置不坑指南</h4><p>我们把本地机子叫做为mac，远程机子叫做ubuntu（这个ubuntu也可以是centos，debian，mac之类的）。</p>
-<ol>
-<li><p>生成公私钥对</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f local_rsa -C &quot;local&quot;</span><br><span class="line"></span><br><span class="line">根据交互，输入密码，或者直接回车可以为空，生成公私钥对</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>把共钥复制到服务器上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i [公钥文件] user@host</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>一般别的系统到第三步就可以免密登陆了，但是mac并不这样。还要调用ssh-add。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-add -K [你的私钥文件，就是那个不加.pub结尾的文件]</span><br><span class="line">// 例如ssh-add -K id_rsa</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>注意上面的shell命令都在~/.ssh目录下，中途请不要切换目录。</p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://support.apple.com/zh-cn/HT204012" target="_blank" rel="noopener">如何在 Mac 上启用 root 用户或更改 root 密码</a></li>
-<li><a href="https://blog.csdn.net/KimBing/article/details/82761986" target="_blank" rel="noopener">Mac terminal 允许root用户通过ssh登录</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/32279976" target="_blank" rel="noopener">mac 免密ssh登陆配置不坑指南</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-Spark学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/610bd23e.html">Spark学习笔记</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/610bd23e.html">
-            <time datetime="2019-10-13T12:16:38.000Z" itemprop="datePublished">2019-10-13</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spark/">Spark</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h4 id="搭建spark集群环境"><a href="#搭建spark集群环境" class="headerlink" title="搭建spark集群环境"></a>搭建spark集群环境</h4><ul>
-<li>目  标：</li>
-</ul>
-<p>搭建Spark集群环境，一台做为master（192.168.1.195），2台做为slave（192.168.1.122，192.168.1.195）</p>
-<ul>
-<li>需要准备环境并且已经完成环境变量设置：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jdk 1.8</span><br><span class="line">scala scala-2.12.5</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="1-修改hostname和hosts文件"><a href="#1-修改hostname和hosts文件" class="headerlink" title="1. 修改hostname和hosts文件"></a>1. 修改hostname和hosts文件</h5><ul>
-<li>修改hostname<br>在这两台机器上修改hostname，centos直接修改<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/hostname</span><br><span class="line"></span><br><span class="line">m0.unicom</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>mac电脑参照<a href="/archives/55830bef.html">Mac OS X 中 hostname 的设置</a></p>
-<ul>
-<li>修改hosts文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/hosts</span><br><span class="line"></span><br><span class="line">192.168.1.195  m0.unicom # 主节点</span><br><span class="line">192.168.1.195  s0.unicom # slave节点</span><br><span class="line">192.168.1.122  s1.unicom # slave节点</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="2-配置免密登录"><a href="#2-配置免密登录" class="headerlink" title="2. 配置免密登录"></a>2. 配置免密登录</h5><p>配置ssh就是为了能够实现免密登录，这样方便远程管理Hadoop并无需登录密码在Hadoop集群上共享文件资源，并且可以方便spark能方便的管理worker slave。</p>
-<p>可以参照我的这篇文章 <a href="/archives/87e7ba04.html">Mac电脑开启root账号，以及配置免密登录</a></p>
-<h5 id="3-下载安装hadoop"><a href="#3-下载安装hadoop" class="headerlink" title="3 下载安装hadoop"></a>3 下载安装hadoop</h5><p>在master节点安装hadoop，配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/Users/daren/devtool/hadoop-3.0.0</span><br><span class="line">export HADOOP_HOME_WARN_SUPPRESS=1</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure></p>
-<p>3.1 配置hdfs地址和端口<br>进入hadoop目录/Users/daren/devtool/hadoop-3.0.0/etc/hadoop,修改core-site.xml内容为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">     &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;/Users/daren/devtool/hadoop-3.0.0/hadoop_data/temp&lt;/value&gt;</span><br><span class="line">     &lt;description&gt;A base for other temporary directories.&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://m0.unicom:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;io.file.buffer.size&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;131072&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.hdfs.impl.disable.cache&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;io.compression.codecs&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;</span><br><span class="line">             org.apache.hadoop.io.compress.GzipCodec,</span><br><span class="line">             org.apache.hadoop.io.compress.DefaultCodec,</span><br><span class="line">             org.apache.hadoop.io.compress.BZip2Codec,</span><br><span class="line">             org.apache.hadoop.io.compress.SnappyCodec</span><br><span class="line">        &lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
-<p>3.2 修改mapred-site.xml 内容为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;mapred.hosts.exclude&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;/usr/unidata/hadoop/etc/hadoop/excludes&lt;/value&gt;</span><br><span class="line">         &lt;final&gt;true&lt;/final&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
-<p>3.3 修改hdfs-site.xml为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.permissions&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;false&lt;/value&gt;    &lt;!--关闭防火墙--&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;property&gt;  </span><br><span class="line">    &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;  </span><br><span class="line">    &lt;value&gt;file:///Users/daren/devtool/hadoop-3.0.0/hadoop_data/name&lt;/value&gt;  </span><br><span class="line"> &lt;/property&gt;  </span><br><span class="line"> &lt;property&gt;  </span><br><span class="line">     &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;  </span><br><span class="line">     &lt;value&gt;file:///Users/daren/devtool/hadoop-3.0.0/hadoop_data/data&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;  </span><br><span class="line"> &lt;property&gt;</span><br><span class="line">            &lt;name&gt;dfs.balance.bandwidthPerSec&lt;/name&gt;</span><br><span class="line">            &lt;value&gt;10485760&lt;/value&gt;</span><br><span class="line">            &lt;description&gt;Specifies the maximum bandwidth that each datanode can utilize for the balancing purpose in term of the number of bytes per second. &lt;/description&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">            &lt;name&gt;dfs.http.address&lt;/name&gt;</span><br><span class="line">            &lt;value&gt;m0.unicom:50070&lt;/value&gt;</span><br><span class="line">            &lt;description&gt;Secondary get fsimage and edits via dfs.http.address&lt;/description&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">            &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">           &lt;value&gt;m0.unicom:50090&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line"> &lt;property&gt;</span><br><span class="line">            &lt;name&gt;dfs.namenode.checkpoint.dir&lt;/name&gt;</span><br><span class="line">            &lt;value&gt;file:/usr/unidata/hadoop/tmp/namesecondary&lt;/value&gt;</span><br><span class="line">            &lt;description&gt;Determines where on the local filesystem the DFS secondary</span><br><span class="line">                 name node should store the temporary images to merge.</span><br><span class="line">                 If this is a comma-delimited list of directories then the image is</span><br><span class="line">                 replicated in all of the directories for redundancy.</span><br><span class="line">            &lt;/description&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">            &lt;name&gt;dfs.namenode.checkpoint.edits.dir&lt;/name&gt;</span><br><span class="line">            &lt;value&gt;file:/usr/unidata/hadoop/tmp/namesecondary&lt;/value&gt;</span><br><span class="line">            &lt;description&gt;Determines where on the local filesystem the DFS secondary</span><br><span class="line">                name node should store the temporary edits to merge.</span><br><span class="line">                If this is a comma-delimited list of directories then the edits is</span><br><span class="line">                replicated in all of the directories for redundancy.</span><br><span class="line">                Default value is same as dfs.namenode.checkpoint.dir</span><br><span class="line">            &lt;/description&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">            &lt;name&gt;dfs.namenode.checkpoint.period&lt;/name&gt;</span><br><span class="line">            &lt;value&gt;3600&lt;/value&gt;</span><br><span class="line">            &lt;description&gt;The number of seconds between two periodic checkpoints.</span><br><span class="line">           &lt;/description&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">            &lt;name&gt;dfs.hosts.exclude&lt;/name&gt;</span><br><span class="line">            &lt;value&gt;/usr/unidata/hadoop/etc/hadoop/excludes&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
-<p>3.4 格式化HDFS</p>
-<p>这个操作相当于一个文件系统的初始化，执行命令hdfs namenode -format</p>
-<p>3.5 启动关闭Hadoop服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./start-dfs.sh          </span><br><span class="line">./stop-dfs.sh</span><br></pre></td></tr></table></figure></p>
-<p>3.6 验证hadoop是否启动成功</p>
-<ul>
-<li>在master，slave01，slave02上输入jps，验证相关进程是否启动</li>
-<li>启动成功后，我们在浏览器中输入<a href="http://localhost:50070可以看到" target="_blank" rel="noopener">http://localhost:50070可以看到</a></li>
-</ul>
-<h5 id="4-下载安装Spark"><a href="#4-下载安装Spark" class="headerlink" title="4 下载安装Spark"></a>4 下载安装Spark</h5><p>去官网下载相应版本的spark，注意scala版本<br>下载地址 <a href="https://spark.apache.org/downloads.html" target="_blank" rel="noopener">https://spark.apache.org/downloads.html</a><br>4.1 配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#创建软连接</span><br><span class="line">ln -s /Users/daren/devtool/spark-2.4.4-bin-hadoop2.7 spark</span><br><span class="line"></span><br><span class="line">#设置环境变量</span><br><span class="line">export SPARK_HOME=/Users/daren/devtool/spark</span><br><span class="line">export PATH=$PATH:$SPARK_HOME/bin</span><br></pre></td></tr></table></figure></p>
-<p>4.2 配置spark-env.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/Users/daren/devtool/hadoop-3.0.0/lib/native</span><br><span class="line"></span><br><span class="line">export SPARK_HISTORY_OPTS=&quot;-Dspark.history.ui.port=18080 -Dspark.history.retainedApplications=30 -Dspark.history.fs.logDirectory=hdfs://localhost:9000/history&quot;</span><br><span class="line">#export SPARK_DAEMON_JAVA_OPTS=&quot;-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=m0.unidata:2181,m1.unidata:2181,s0.unidata:2181,s1.unidata:2181,s2.unidata:2181 -Dspark.deploy.zookeeper.dir=/spark&quot;</span><br><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home</span><br><span class="line">export SCALA_HOME=/Users/daren/devtool/scala</span><br><span class="line">export SPARK_MASTER_IP=s0.unicom</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_CORES=2</span><br><span class="line">export SPARK_WORKER_MEMORY=4g</span><br><span class="line">export HADOOP_CONF_DIR=/Users/daren/devtool/hadoop-3.0.0/etc/hadoop</span><br><span class="line">export SPARK_CLASSPATH=$SPARK_CLASSPATH</span><br><span class="line">#export SPARK_EXECUTOR_MEMORY=1G</span><br><span class="line">#export SPARK_DRIVER_MEMORY=2G</span><br></pre></td></tr></table></figure></p>
-<p>4.3 配置slaves<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s0.unicom</span><br><span class="line">#s1.unicom</span><br></pre></td></tr></table></figure></p>
-<p>4.4 启动spark<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure></p>
-<p>在浏览器查看spark工作 <a href="http://192.168.1.195:8080/" target="_blank" rel="noopener">http://192.168.1.195:8080/</a></p>
-<h4 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h4><ul>
-<li>问题1: <font color="red">Spark集群，通过master节点执行start-all.sh启动slave报错</font><br>如下错误<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">starting org.apache.spark.deploy.master.Master, logging to /Users/daren/devtool/spark/logs/spark-daren-org.apache.spark.deploy.master.Master-1-m0.unicom.out</span><br><span class="line">s1.unicom: bash: 第 0 行:cd: /Users/daren/devtool/spark: 没有那个文件或目录</span><br><span class="line">s1.unicom: bash: /Users/daren/devtool/spark/sbin/start-slave.sh: 没有那个文件或目录</span><br><span class="line">s0.unicom: starting org.apache.spark.deploy.worker.Worker, logging to /Users/daren/devtool/spark/logs/spark-daren-org.apache.spark.deploy.worker.Worker-1-m0.unicom.out</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>主要原因是想在master节点上启动所有的节点，而spark集群中需要各个节点中的spark home 的路径和master上spark home节点的路径必须一样，这样在slave节点中就找不到相应的spark home路径，所以报错了。</p>
-<p>关键点：路径找不到，是192.168.1.122报的。因为master机器只配了各slave的ip，并不知道他们的spark安装路径，所以我猜测master是按本机的路径去调，但可惜spark在另外两台的目录和master并不一样，因此就找不到指定的路径了。</p>
-<p>解决方法两种，第一种是将所有slave机器的spark路径改成和master一致，便可解决，第二种是单独启动master和slave节点</p>
-<p>我这里采用第二种方法：<br>启动master节点，进入master spark home路径下的sbin目录中，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-master.sh -h 192.168.3.207(master ip) --host 192.168.3.207(master ip)</span><br></pre></td></tr></table></figure></p>
-<p>启动slave节点，进入slave spark home路径下的sbin目录中，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-slave.sh spark://192.168.3.207(master ip):7077</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>问题2: <font color="red">master节点用户非root用户，slave节点用root节点，如何解决免密登录问题</font></li>
-</ul>
-<p>原因分析：在本地开发环境想要搭建spark集群，我本地电脑用的是mac电脑作为master节点，没开启root账号，用的是“daren”账号，而slave（s1.unicom）节点用的是root账号，在开启了免密登录之后使用start-all.sh启动spark集群的时候，显示一直无法登录，报权限失败，无法登录，发现是ssh登录的时候，使用的时候/etc/hosts中配置的地址就行登录的，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.195  m0.unicom</span><br><span class="line">192.168.1.195  s0.unicom</span><br><span class="line">192.168.1.122  s1.unicom</span><br></pre></td></tr></table></figure></p>
-<p>当通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh s1.unicom</span><br></pre></td></tr></table></figure></p>
-<p>登录的时候，其实想当于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh daren@192.168.1.122</span><br></pre></td></tr></table></figure></p>
-<p>而对于slave节点来说，是不存在daren用户的，所以我们需要修改ssh登录使用的用户名，刚开始以为可以在spark-env中进行配置，最后发现修改ssh config就可以，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.ssh/config</span><br><span class="line">Host s1.unicom</span><br><span class="line">    HostName 192.168.1.122</span><br><span class="line">    User root</span><br><span class="line">    IdentityFile ~/.ssh/122_rsa</span><br></pre></td></tr></table></figure></p>
-<p>这样我们在使用ssh s1.unicom登录的时候会修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.1.122</span><br></pre></td></tr></table></figure></p>
-<p>这样就满足了我们的需要。</p>
-<h4 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h4><p><a href="https://www.4spaces.org/spark-map-flatmap/" target="_blank" rel="noopener">Spark中map和flatMap的区别详解</a><br><a href="https://www.cnblogs.com/sharpxiajun/p/5506822.html" target="_blank" rel="noopener">Spark笔记：RDD基本操作（上）</a><br><a href="https://www.cnblogs.com/sharpxiajun/p/5510215.html" target="_blank" rel="noopener">Spark笔记：RDD基本操作（下）</a></p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://serversforhackers.com/c/ssh-tricks" target="_blank" rel="noopener">SSH Tricks</a></li>
-<li><a href="https://daemon369.github.io/ssh/2015/03/21/using-ssh-config-file" target="_blank" rel="noopener">使用 SSH config 文件</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-Mac-OS-X-中-hostname-的设置" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/55830bef.html">Mac OS X 中 hostname 的设置</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/55830bef.html">
-            <time datetime="2019-10-11T13:50:05.000Z" itemprop="datePublished">2019-10-11</time>
-        </a>
-    </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>查看系统 hostname 设置<br>使用命令行工具 hostname 可以查看系统 hostname 设置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hostname</span><br></pre></td></tr></table></figure>
-<p>它的值会按优先级依次取决于下列值：</p>
-<ul>
-<li>hostname 命令设置的值</li>
-<li>HostName 属性值</li>
-<li>LocalHostName 属性值（通常系统都会设置此属性）<br>关于 hostname 相关属性，scutil 命令手册（info scutil 或 man scutil）中有如下描述：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ComputerName   The user-friendly name for the system.</span><br><span class="line"></span><br><span class="line">LocalHostName  The local (Bonjour) host name.</span><br><span class="line"></span><br><span class="line">HostName       The name associated with hostname(1) and</span><br><span class="line">                         gethostname(3).</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>设置 hostname<br>有三种方式设置 hostname：</p>
-<ul>
-<li>System Preferences</li>
-<li>命令行工具 hostname</li>
-<li>命令行工具 scutil</li>
-</ul>
-<h4 id="System-Preferences"><a href="#System-Preferences" class="headerlink" title="System Preferences"></a>System Preferences</h4><p>设置方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System Preferences -&gt; Sharing</span><br></pre></td></tr></table></figure></p>
-<p>在这里可以查看和设置 ComputerName 和 LocalHostName，但不能设置 HostName 的值。</p>
-<p>对于普通用户通常使用这种方式就可以了，因为通常情况下都没有用 hostname 和 scutil 来设置，所以就会取 LocalHostName 的值。</p>
-<h4 id="命令行工具-hostname"><a href="#命令行工具-hostname" class="headerlink" title="命令行工具 hostname"></a>命令行工具 hostname</h4><p>设置当前系统的 hostname 为 MyMac：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hostname MyMac</span><br></pre></td></tr></table></figure>
-<p>注意：这种方式不能保持到重启后</p>
-<p>根据 hostname 命令的手册（info hostname 或 man hostname），可以使用 scutil 命令来持久修改 hostname</p>
-<h4 id="命令行工具-scutil"><a href="#命令行工具-scutil" class="headerlink" title="命令行工具 scutil"></a>命令行工具 scutil</h4><p>查看各属性值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ sudo scutil --get ComputerName</span><br><span class="line">Yanke&apos;s MBP</span><br><span class="line">$ sudo scutil --get LocalHostName</span><br><span class="line">Yankes-MBP</span><br><span class="line">$ sudo scutil --get HostName</span><br><span class="line">HostName: not set</span><br></pre></td></tr></table></figure></p>
-<p>设置 HostName 属性值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scutil --set HostName MyMac</span><br></pre></td></tr></table></figure></p>
-<p>scutil 可以修改 ComputerName，LocalHostName 和 HostName 任意一个值。</p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="http://yacca.github.io/2013/08/13/hostname-in-mac-osx.html" target="_blank" rel="noopener">Mac OS X 中 hostname 的设置</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-ssh-keygen-基本用法" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/d82d84.html">SSH无密码登录</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/d82d84.html">
-            <time datetime="2019-09-16T08:47:26.000Z" itemprop="datePublished">2019-09-16</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/ssh/">ssh</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>ssh 公钥认证是ssh认证的方式之一。通过公钥认证可实现ssh免密码登陆，git的ssh方式也是通过公钥进行认证的。</p>
-<p>在用户目录的home目录下，有一个.ssh的目录，和当前用户ssh配置认证相关的文件，几乎都在这个目录下。</p>
-<p>ssh-keygen 可用来生成ssh公钥认证所需的公钥和私钥文件。</p>
-<blockquote><p>使用 ssh-keygen 时，请先进入到 ~/.ssh 目录，不存在的话，请先创建。</p>
-</blockquote>
-<h4 id="生成ssh公钥"><a href="#生成ssh公钥" class="headerlink" title="生成ssh公钥"></a>生成ssh公钥</h4><p>使用 ssh-kengen 会在~/.ssh/目录下生成两个文件，不指定文件名和密钥类型的时候，默认生成的两个文件是：</p>
-<ul>
-<li>id_rsa</li>
-<li>id_rsa.pub<br>第一个是私钥文件，第二个是公钥文件。</li>
-</ul>
-<p>生成ssh key的时候，可以通过 -f 选项指定生成文件的文件名，如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f vultr_rsa -C &quot;vultr服务器&quot;</span><br><span class="line"></span><br><span class="line">其中：vultr_rsa 是文件名   vultr服务器是备注和客户端标示</span><br></pre></td></tr></table></figure></p>
-<h4 id="配置公钥到服务器"><a href="#配置公钥到服务器" class="headerlink" title="配置公钥到服务器"></a>配置公钥到服务器</h4><p>将公钥内容添加到服务器的~/.ssh/authorized_keys 文件中.</p>
-<h4 id="alias-实现命令快速登陆"><a href="#alias-实现命令快速登陆" class="headerlink" title="alias 实现命令快速登陆"></a>alias 实现命令快速登陆</h4><p>做好配置之后，通过ssh可以直接登录了。对经常登录的服务器，可以将ssh登录命令的alias加到 ~/.bash_profile文件中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias to-ini=&apos;ssh root@11.1.1.1&apos;</span><br></pre></td></tr></table></figure></p>
-<p>登录的时候:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">to-ini</span><br></pre></td></tr></table></figure></p>
-<h4 id="ssh-copy-id"><a href="#ssh-copy-id" class="headerlink" title="ssh-copy-id"></a>ssh-copy-id</h4><p>ssh-copy-id 是一个小脚本，你可以用这个小脚本完成以上工作。这个脚本在linux系统上一般都有。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i .ssh/id_rsa.pub  root@192.168.x.xxx</span><br></pre></td></tr></table></figure></p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://www.liaohuqiu.net/cn/posts/ssh-public-key-auto-login/" target="_blank" rel="noopener">ssh public key认证免密码登录</a></li>
-<li><a href="https://www.liaohuqiu.net/cn/posts/ssh-keygen-abc/" target="_blank" rel="noopener">ssh-keygen 基本用法</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-Centos下ftp客户端lftp的使用" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/16634faa.html">Centos下ftp客户端lftp的使用</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/16634faa.html">
-            <time datetime="2019-09-16T02:30:17.000Z" itemprop="datePublished">2019-09-16</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/lftp/">lftp</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install lftp</span><br></pre></td></tr></table></figure>
-<h4 id="使用语法"><a href="#使用语法" class="headerlink" title="使用语法"></a>使用语法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">lftp -[fceup] user:passwd@host #passwd可选,此方式密码明文保存,history可查看</span><br><span class="line"></span><br><span class="line">-f &lt;file&gt;           #执行文件中的命令后退出</span><br><span class="line"></span><br><span class="line">-c &lt;cmd&gt;        #执行命令后退出</span><br><span class="line"></span><br><span class="line">-e &lt;cmd&gt;         #登录后后执行命令</span><br><span class="line"></span><br><span class="line">-u &lt;user&gt;[,&lt;pass&gt;]  #使用指定的用户名/口令进行验证</span><br><span class="line"></span><br><span class="line">-p &lt;port&gt;           #连接指定的端口，默认21</span><br></pre></td></tr></table></figure>
-<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">cd</span><br><span class="line">#切换FTP目录</span><br><span class="line"></span><br><span class="line">lcd #切换本地目录</span><br><span class="line"></span><br><span class="line">ls</span><br><span class="line">#列出FTP目录文件</span><br><span class="line"></span><br><span class="line">!ls</span><br><span class="line">#列出本地目录文件</span><br><span class="line"></span><br><span class="line">find</span><br><span class="line">./ -name file</span><br><span class="line">#查找文件</span><br><span class="line"></span><br><span class="line">mv</span><br><span class="line">#移动</span><br><span class="line"></span><br><span class="line">rm</span><br><span class="line">#删除</span><br><span class="line"></span><br><span class="line">mkdir</span><br><span class="line">#新建目录</span><br><span class="line"></span><br><span class="line">rmdir</span><br><span class="line">#删除目录</span><br></pre></td></tr></table></figure>
-<h4 id="上传下载文件"><a href="#上传下载文件" class="headerlink" title="上传下载文件"></a>上传下载文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">get [cEaO] file</span><br><span class="line">-o newfilename #下载文件</span><br><span class="line"></span><br><span class="line">put [cEaO] file</span><br><span class="line">-o newfilename #上传文件</span><br><span class="line"></span><br><span class="line">pget -n #多线程下载</span><br><span class="line"></span><br><span class="line">可选参数：</span><br><span class="line"></span><br><span class="line">-c #支持断点续传</span><br><span class="line"></span><br><span class="line">-E #下载后删除远端文件</span><br><span class="line"></span><br><span class="line">-a #指定传输为ascii模式, 默认为二进制模式</span><br><span class="line"></span><br><span class="line">-O #指定存放目录</span><br></pre></td></tr></table></figure>
-<h4 id="上传下载目录"><a href="#上传下载目录" class="headerlink" title="上传下载目录"></a>上传下载目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mirror [cRnr] remote [local]</span><br><span class="line"></span><br><span class="line">可选参数：</span><br><span class="line"></span><br><span class="line">-c #支持断点续传</span><br><span class="line"></span><br><span class="line">-R #上传整个目录</span><br><span class="line"></span><br><span class="line">-n #只下载较新的档案，可用于增量备份</span><br><span class="line"></span><br><span class="line">-r  #只下载当前目录，不递归目录</span><br></pre></td></tr></table></figure>
-<h4 id="主动-被动模式"><a href="#主动-被动模式" class="headerlink" title="主动/被动模式"></a>主动/被动模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#默认为被动模式</span><br><span class="line"></span><br><span class="line">set</span><br><span class="line">ftp:passive-mode no #关闭被动模式转为主动模式</span><br><span class="line"></span><br><span class="line">#主动客户端开启数据传输端口，被动服务端开启数据传输端口。</span><br></pre></td></tr></table></figure>
-<h4 id="妙用lftp多线程下载"><a href="#妙用lftp多线程下载" class="headerlink" title="妙用lftp多线程下载"></a>妙用lftp多线程下载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lftp -c &quot;pget -n 10 http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.18.tar.gz&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="使用例子"><a href="#使用例子" class="headerlink" title="使用例子"></a>使用例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lftp -u username,password -p 21 -e &quot;mirror --only-newer --delete lydj /data/file/;quit;&quot; ftpadmin@ip</span><br><span class="line">从文件服务器lydj目录中递归下载文件到本地/data/file目录中，并且只下载最新的，对于服务器不存在的问题在本地也删除。</span><br></pre></td></tr></table></figure>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://lftp.yar.ru/lftp-man.html" target="_blank" rel="noopener">lftp使用手册</a></li>
-<li><a href="https://blog.csdn.net/dl425134845/article/details/42261709" target="_blank" rel="noopener">Linux/Centos下ftp客户端lftp使用</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
     <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
 </section>
             
@@ -1501,7 +1385,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/archives/acfbb6fa.html" class="thumbnail">
+                            <a href="/archives/d7fe6232.html" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1512,34 +1396,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/archives/acfbb6fa.html" class="title">在一台新的政务云服务器上的部署操作</a></p>
-                            <p class="item-date"><time datetime="2020-08-27T00:58:14.000Z" itemprop="datePublished">2020-08-27</time></p>
+                            <p class="item-title"><a href="/archives/d7fe6232.html" class="title">检查网站的TLS版本</a></p>
+                            <p class="item-date"><time datetime="2021-08-12T08:14:20.000Z" itemprop="datePublished">2021-08-12</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/archives/47d401a5.html" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a></p>
-                            <p class="item-title"><a href="/archives/47d401a5.html" class="title">SSL Pinning on Android</a></p>
-                            <p class="item-date"><time datetime="2020-06-12T02:30:51.000Z" itemprop="datePublished">2020-06-12</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/archives/4ead88f7.html" class="thumbnail">
+                            <a href="/archives/d4a32458.html" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1550,15 +1415,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a></p>
-                            <p class="item-title"><a href="/archives/4ead88f7.html" class="title">(转)Nginx代理proxy pass配置去除location路径前缀</a></p>
-                            <p class="item-date"><time datetime="2020-05-11T00:24:26.000Z" itemprop="datePublished">2020-05-11</time></p>
+                            <p class="item-title"><a href="/archives/d4a32458.html" class="title">Scrapy中Request()、FormRequest()、FormRequest.from_response()的小结</a></p>
+                            <p class="item-date"><time datetime="2021-07-16T06:18:05.000Z" itemprop="datePublished">2021-07-16</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/archives/7bfbc9bd.html" class="thumbnail">
+                            <a href="/archives/847c0e37.html" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1569,15 +1434,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a></p>
-                            <p class="item-title"><a href="/archives/7bfbc9bd.html" class="title">如何给没有连接互联网的centos使用yum安装其他软件</a></p>
-                            <p class="item-date"><time datetime="2020-04-24T13:04:39.000Z" itemprop="datePublished">2020-04-24</time></p>
+                            <p class="item-title"><a href="/archives/847c0e37.html" class="title">Docker修改Docker0网桥默认网段</a></p>
+                            <p class="item-date"><time datetime="2021-06-16T23:37:14.000Z" itemprop="datePublished">2021-06-17</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/archives/968230d9.html" class="thumbnail">
+                            <a href="/archives/37827dce.html" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1587,9 +1452,28 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/工作/">工作</a></p>
-                            <p class="item-title"><a href="/archives/968230d9.html" class="title">关于吕先生在周会上对DRR工作指示的总结</a></p>
-                            <p class="item-date"><time datetime="2019-10-14T02:01:46.000Z" itemprop="datePublished">2019-10-14</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/开发效率/">开发效率</a></p>
+                            <p class="item-title"><a href="/archives/37827dce.html" class="title">xpath获取内容的方式</a></p>
+                            <p class="item-date"><time datetime="2021-06-10T01:49:33.000Z" itemprop="datePublished">2021-06-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/archives/7e323156.html" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/开发效率/">开发效率</a></p>
+                            <p class="item-title"><a href="/archives/7e323156.html" class="title">SwitchHosts动态切换host文件</a></p>
+                            <p class="item-date"><time datetime="2021-05-20T06:42:29.000Z" itemprop="datePublished">2021-05-20</time></p>
                         </div>
                     </li>
                 
@@ -1602,7 +1486,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/优秀文章/">优秀文章</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作/">工作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">47</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/GFW/">GFW</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Map/">Map</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">4</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/优秀文章/">优秀文章</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作/">工作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发效率/">开发效率</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">51</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/GFW/">GFW</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Map/">Map</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -1611,7 +1495,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -1620,7 +1504,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-P/">Android P</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BURP/">BURP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Baidu-Map/">Baidu Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cros/">Cros</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRR/">DRR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FastDFS/">FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GeoHash/">GeoHash</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Https/">Https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICARUS/">ICARUS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nas/">Nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RecyclerView/">RecyclerView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/">SSL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL-Pinning/">SSL Pinning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/StackBlur/">StackBlur</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLookup/">VLookup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Window/">Window</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fdisk/">fdisk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lftp/">lftp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mount/">mount</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyenv/">pyenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubntu/">ubntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任正非/">任正非</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/屏幕适配/">屏幕适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众号/">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新时代e支部/">新时代e支部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毛玻璃/">毛玻璃</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科学上网/">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-P/">Android P</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BURP/">BURP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Baidu-Map/">Baidu Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cros/">Cros</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRR/">DRR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FastDFS/">FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GeoHash/">GeoHash</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Https/">Https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICARUS/">ICARUS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nas/">Nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RecyclerView/">RecyclerView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/">SSL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL-Pinning/">SSL Pinning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrapy/">Scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/StackBlur/">StackBlur</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwitchHosts/">SwitchHosts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLookup/">VLookup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Window/">Window</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fdisk/">fdisk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lftp/">lftp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mount/">mount</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyenv/">pyenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubntu/">ubntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任正非/">任正非</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/屏幕适配/">屏幕适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众号/">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新时代e支部/">新时代e支部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毛玻璃/">毛玻璃</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科学上网/">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1629,7 +1513,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-P/" style="font-size: 10px;">Android P</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BURP/" style="font-size: 10px;">BURP</a> <a href="/tags/Baidu-Map/" style="font-size: 10px;">Baidu Map</a> <a href="/tags/CI/" style="font-size: 15px;">CI</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Cros/" style="font-size: 10px;">Cros</a> <a href="/tags/DRR/" style="font-size: 10px;">DRR</a> <a href="/tags/FastDFS/" style="font-size: 10px;">FastDFS</a> <a href="/tags/GeoHash/" style="font-size: 15px;">GeoHash</a> <a href="/tags/Gitlab/" style="font-size: 15px;">Gitlab</a> <a href="/tags/HEXO/" style="font-size: 10px;">HEXO</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Https/" style="font-size: 10px;">Https</a> <a href="/tags/ICARUS/" style="font-size: 10px;">ICARUS</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/Nas/" style="font-size: 10px;">Nas</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/Pandas/" style="font-size: 10px;">Pandas</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/SQLMAP/" style="font-size: 10px;">SQLMAP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/SSL-Pinning/" style="font-size: 10px;">SSL Pinning</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/StackBlur/" style="font-size: 10px;">StackBlur</a> <a href="/tags/VLookup/" style="font-size: 10px;">VLookup</a> <a href="/tags/VPS/" style="font-size: 15px;">VPS</a> <a href="/tags/Webview-Video-FullScreen/" style="font-size: 10px;">Webview Video FullScreen</a> <a href="/tags/Window/" style="font-size: 10px;">Window</a> <a href="/tags/fdisk/" style="font-size: 10px;">fdisk</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/lftp/" style="font-size: 10px;">lftp</a> <a href="/tags/mount/" style="font-size: 10px;">mount</a> <a href="/tags/pyenv/" style="font-size: 10px;">pyenv</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ubntu/" style="font-size: 10px;">ubntu</a> <a href="/tags/任正非/" style="font-size: 10px;">任正非</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/新时代e支部/" style="font-size: 10px;">新时代e支部</a> <a href="/tags/毛玻璃/" style="font-size: 10px;">毛玻璃</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
+            <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Android-P/" style="font-size: 10px;">Android P</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BURP/" style="font-size: 10px;">BURP</a> <a href="/tags/Baidu-Map/" style="font-size: 10px;">Baidu Map</a> <a href="/tags/CI/" style="font-size: 13.33px;">CI</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Cros/" style="font-size: 10px;">Cros</a> <a href="/tags/DRR/" style="font-size: 10px;">DRR</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/FastDFS/" style="font-size: 10px;">FastDFS</a> <a href="/tags/GeoHash/" style="font-size: 13.33px;">GeoHash</a> <a href="/tags/Gitlab/" style="font-size: 13.33px;">Gitlab</a> <a href="/tags/HEXO/" style="font-size: 10px;">HEXO</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Https/" style="font-size: 10px;">Https</a> <a href="/tags/ICARUS/" style="font-size: 10px;">ICARUS</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/Nas/" style="font-size: 10px;">Nas</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/Pandas/" style="font-size: 10px;">Pandas</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/SQLMAP/" style="font-size: 10px;">SQLMAP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/SSL-Pinning/" style="font-size: 10px;">SSL Pinning</a> <a href="/tags/Scrapy/" style="font-size: 10px;">Scrapy</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/StackBlur/" style="font-size: 10px;">StackBlur</a> <a href="/tags/SwitchHosts/" style="font-size: 10px;">SwitchHosts</a> <a href="/tags/VLookup/" style="font-size: 10px;">VLookup</a> <a href="/tags/VPS/" style="font-size: 13.33px;">VPS</a> <a href="/tags/Webview-Video-FullScreen/" style="font-size: 10px;">Webview Video FullScreen</a> <a href="/tags/Window/" style="font-size: 10px;">Window</a> <a href="/tags/fdisk/" style="font-size: 10px;">fdisk</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/lftp/" style="font-size: 10px;">lftp</a> <a href="/tags/mount/" style="font-size: 10px;">mount</a> <a href="/tags/pyenv/" style="font-size: 10px;">pyenv</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ubntu/" style="font-size: 10px;">ubntu</a> <a href="/tags/任正非/" style="font-size: 10px;">任正非</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/新时代e支部/" style="font-size: 10px;">新时代e支部</a> <a href="/tags/毛玻璃/" style="font-size: 10px;">毛玻璃</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
         </div>
     </div>
 

@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[检查网站的TLS版本]]></title>
+    <url>%2Farchives%2Fd7fe6232.html</url>
+    <content type="text"><![CDATA[有时候需要知道某个网站支持的TLS的版本。现在SSL 2.0和SSL 3.0都已经被淘汰了。其中TLS 1.0，TLS 1.1，TLS 1.2是目前的的主流，相对也是安全的。主要看加密的算法。TLS 1.3是目前最新的协议版本，也是相对最安全的版本了。 通过网页查看 SSL/TLS安全评估报告 SSL Server Test (Powered by Qualys SSL Labs) 通过命令行123openssl s_client -connect www.baidu.com:443 -tls1_2openssl s_client -connect www.baidu.com:443 -tls1_1openssl s_client -connect www.baidu.com:443 -tls1 以上分别检查了tls1.2,tls1.1和tls1`。如果握手失败的话，那么就是不支持了。 NMAP依赖于nmap1nmap --script ssl-enum-ciphers -p 443 baidu.com 结果如下：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172Starting Nmap 7.91 ( https://nmap.org ) at 2020-11-29 09:51 CSTNmap scan report for baidu.com (39.156.69.79)Host is up (0.0068s latency).Other addresses for baidu.com (not scanned): 220.181.38.148PORT STATE SERVICE443/tcp open https| ssl-enum-ciphers:| SSLv3:| ciphers:| TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C| TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A| TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A| TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A| TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A| TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C| compressors:| NULL| cipher preference: server| warnings:| Broken cipher RC4 is deprecated by RFC 7465| CBC-mode cipher in SSLv3 (CVE-2014-3566)| TLSv1.0:| ciphers:| TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C| TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A| TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A| TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A| TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A| TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C| compressors:| NULL| cipher preference: server| warnings:| Broken cipher RC4 is deprecated by RFC 7465| TLSv1.1:| ciphers:| TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C| TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A| TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A| TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A| TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A| TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C| compressors:| NULL| cipher preference: server| warnings:| Broken cipher RC4 is deprecated by RFC 7465| TLSv1.2:| ciphers:| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A| TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (secp256r1) - A| TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C| TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A| TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A| TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 (secp256r1) - A| TLS_RSA_WITH_AES_128_GCM_SHA256 (rsa 2048) - A| TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A| TLS_RSA_WITH_AES_128_CBC_SHA256 (rsa 2048) - A| TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A| TLS_RSA_WITH_AES_256_CBC_SHA256 (rsa 2048) - A| TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A| TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C| compressors:| NULL| cipher preference: server| warnings:| Broken cipher RC4 is deprecated by RFC 7465|_ least strength: CNmap done: 1 IP address (1 host up) scanned in 3.22 seconds]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Scrapy中Request()、FormRequest()、FormRequest.from_response()的小结]]></title>
+    <url>%2Farchives%2Fd4a32458.html</url>
+    <content type="text"><![CDATA[一、Request()类的实例化对于爬取普通网站，不需要验证码，不需要登入的界面，我们一般用scrapy.Request类直接去爬取信息就行，下面是Request类的定义：123456789101112131415class Request(object_ref): def __init__(self, url, callback=None, method=&apos;GET&apos;, headers=None, body=None, cookies=None, meta=None, encoding=&apos;utf-8&apos;, priority=0, dont_filter=False, errback=None, flags=None): # url是要爬取的网址 # callback是回调函数 # method是请求的方式post还是get # headers是浏览器伪装的头信息 # body是网页源代码信息 # cookies是登入某网站后，网站在你电脑上保留的信息 # meta要携带或者传递的信息 # encoding是编码方式 # priority用来设置访问网站的优先级 # dont_filter是否允许重复爬取网站 可以看见，其中url，即要爬取的目标网站是必填的，其他的是选填的，method=‘GET’，说明此类是get请求，实例化该对象后，会得到一个response。1234def start_requests(self): # 首先爬一次登陆页，看是否有验证码。回调函数为parse()，&apos;cookiejar&apos;的值为1表示开启状态 # 这里要返回一个可迭代对象，用yield本身就是可迭代对象，但是，这里是return，所以用[]将其构造成一个可迭代对象 return [Request(&quot;https://accounts.douban.com/passport/login&quot;, meta=&#123;&apos;cookiejar&apos;: 1&#125;, headers=self.header, callback=self.parse)] 二、scrapy.FormRequest与scrapy.http.FormRequest （1）普通请求使用scrapy.Request类就可以实现，但是遇到模拟表单或Ajax提交post请求的时候，Request类就不如 子类 FormRequest类方便了，因为他自带 formdata ，专门用来设置表单字段数据，即填写账号、密码，实现登入，默认method也是POST。（2）FormRequest相当于是手动指定post。（3）事实上，scrapy.FormRequest()与scrapy.http.FormRequest()使用起来的区别不大，你可以将两种方法等价互换。 1234567def start_requests(self): form_data = &#123;&apos;f1&apos;:&apos;1&apos;, &apos;f2&apos;:&apos;100&apos;&#125; # 表单数据，字典格式，注意数字也要用引号引起来，否则报错。 yield scrapy.FormRequest(url, formdata=form_data) # 还可以通过callback修改回调函数等# 也可以def start_requests(self): form_data = &#123;&apos;f1&apos;:&apos;1&apos;, &apos;f2&apos;:&apos;100&apos;&#125; # 表单数据，字典格式，注意数字也要用引号引起来，否则报错。 yield scrapy.http.FormRequest(url, formdata=form_data) # 还可以通过callback修改回调函数等 三、FormRequest.from_response() （1）FormRequest.from_response也可以进行设置formdata，用来填写并提交表单，实现模拟登入。（2）FormRequest.from_response相当于是自动识别post。（3）FormRequest.from_response与FormRequest.http.from_response也没有区别。 123456def parse(self, response): return scrapy.FormRequest.from_response( response, formdata=&#123;&apos;username&apos;: &apos;john&apos;, &apos;password&apos;: &apos;secret&apos;&#125;, callback=self.after_login ) 四、scrapy.FormRequest与FormRequest.from_response 的区别 1.什么情况下分别使用什么 先找到填写表单时发送的post请求的地址，下面以豆瓣登入为例子： 可以看见其post的地址为：https://accounts.douban.com/j/mobile/login/basic然后用浏览器访问https://accounts.douban.com/j/mobile/login/basic 发现页面没有表单信息（也就是没有填写账号、密码的地方），所以，我们只能采用scrapy.FormRequest，手动的去发送post请求。 如果浏览器访问某post网址时，里面有表单信息，这时候你可以用FormRequest.from_response也可以用scrapy.FormRequest实现模拟登入 2.参数的不一样 scrapy.FormRequest的必填参数是目标网址，而FormRequest.from_response的必填参数是response 12345678910111213141516171819def parse(self, response): # 如果有验证码 # 没有验证码，就进行登入 # 设置要发送的post信息 data = &#123; &apos;name&apos;: &apos;18371417971&apos;, &apos;password&apos;: &apos;wanghao211&apos;, &apos;remember&apos;: &apos;false&apos; &#125; print(&quot;登入中...&quot;) return FormRequest( url=&apos;https://accounts.douban.com/j/mobile/login/basic&apos;, method=&apos;post&apos;, formdata=data, meta=&#123;&apos;cookiejar&apos;:response.meta[&apos;cookiejar&apos;]&#125;, # 如果需要多次提交表单，且url一样，那么就必须加此参数dont_filter，防止被当成重复网页过滤掉了 dont_filter=True, callback=self.next ) 12345678910111213141516171819def parse(self, response): # 如果有验证码 # 没有验证码，就进行登入 # 设置要发送的post信息 data = &#123; &apos;name&apos;: &apos;18371417971&apos;, &apos;password&apos;: &apos;wanghao211&apos;, &apos;remember&apos;: &apos;false&apos; &#125; print(&quot;登入中...&quot;) return FormRequest( url=response, method=&apos;post&apos;, formdata=data, meta=&#123;&apos;cookiejar&apos;:response.meta[&apos;cookiejar&apos;]&#125;, # 如果需要多次提交表单，且url一样，那么就必须加此参数dont_filter，防止被当成重复网页过滤掉了 dont_filter=True, callback=self.next ) 3.小结 总的来说，scrapy.FormRequest的功能更加强大，如果FormRequest.from_response 不能解决就用scrapy.FormRequest来解决模拟登入，毕竟是手动设置目标网址，比自动识别要精准。]]></content>
+      <categories>
+        <category>技术开发</category>
+      </categories>
+      <tags>
+        <tag>Scrapy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Docker修改Docker0网桥默认网段]]></title>
+    <url>%2Farchives%2F847c0e37.html</url>
+    <content type="text"><![CDATA[Docker 服务启动后默认会创建一个 docker0 网桥（其上有一个 docker0 内部接口），它在内核层连通了其他的物理或虚拟网卡，这就将所有容器和本地主机都放到同一个物理网络。 Docker 默认指定了 docker0 接口 的 IP 地址和子网掩码，让主机和容器之间可以通过网桥相互通信，它还给出了 MTU（接口允许接收的最大传输单元），通常是 1500 Bytes，或宿主主机网络路由上支持的默认值。这些值都可以在服务启动的时候进行配置。 默认docker0 网桥信息默认的docker0网桥ip为“172.17.0.1”，尤其是在自建机房和办公环境在一起的情况下，会与办公网络发生冲突，所以我们在使用docker的时候需要修改调整默认的网桥信息。 修改步骤修改文件vim /etc/docker/daemon.json（这里没有这个文件的话，自行创建） 123&#123; &quot;bip&quot;:&quot;10.120.0.1/16&quot;&#125; 关闭docker服务 1systemctl stop docker 再启动docker服务器 1systemctl start docker 再重新看网段]]></content>
+      <categories>
+        <category>技术开发</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[xpath获取内容的方式]]></title>
+    <url>%2Farchives%2F37827dce.html</url>
+    <content type="text"><![CDATA[以百度为例：’https://tieba.baidu.com&#39; 1.获取最外面标签，遍历内部所有的字标签，获取标签文本 content_list =div.xpath(‘.//div[@class=”d_post_content j_d_post_content “]/text()’).extract() 2.正则去掉所有标签 &lt;.*?&gt; re.compile.sub() content_list=div.xpath(‘.//div[@class=”d_post_content j_d_post_content “]’) pattern=re.compile(r(‘&lt;.*?&gt;’),re.S) content=pattern.sub(‘’,content_list) 3./text() 获取标签的文本 //text()获取标签以及子标签的文本 content_list = div.xpath(‘.//div[@class=”d_post_content j_d_post_content “]//text()’).extract() 4 使用xpath(‘string(.)’)这种方式获取所有文本 并且拼接 content_list=div.xpath(‘.//div[@class=”d_post_content j_d_post_content “]’).xpath(‘string(.)’).extract()[0]+’\n’ 文本内容获取之后print(content_list)查看内容,如需处理格式,则如下: remove = re.compile(‘\s’)content = ‘’for string in content_list: string = remove.sub(‘’,string) content += string print(content) ————————————————版权声明：本文为CSDN博主「sklsxy」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。原文链接：https://blog.csdn.net/sklsklsklsxy/article/details/81448478]]></content>
+      <categories>
+        <category>开发效率</category>
+      </categories>
+      <tags>
+        <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SwitchHosts动态切换host文件]]></title>
+    <url>%2Farchives%2F7e323156.html</url>
+    <content type="text"><![CDATA[github地址：https://github.com/oldj/SwitchHostsSwitchHosts 是一个管理 hosts 文件的应用，基于 Electron 、React、UmiJS 、Chakra UI、CodeMirror 等技术开发。 功能特性 快速切换 hosts 方案 hosts 语法高亮 支持从网络加载远程 hosts 配置 可从系统菜单栏图标快速切换 hosts]]></content>
+      <categories>
+        <category>开发效率</category>
+      </categories>
+      <tags>
+        <tag>SwitchHosts</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Nginx配置禁止IP访问]]></title>
+    <url>%2Farchives%2F702113a8.html</url>
+    <content type="text"><![CDATA[在配置安装好Nginx之后，打开浏览器直接输入ip地址是可以直接访问项目的，或者只要有域名指向ip可以直接用域名进行访问。但是现在要求禁止使用ip地址直接访问，打开文件/etc/nginx/nginx.conf，在server上面添加代码1234567server &#123; listen 80 default_server; listen [::]:80 default_server; server_name _; return 404; &#125; 并将原server中的两个default_server去掉代表的意思是所有除了已经配置的server_name可以访问外，其他地址返回404并断开连接，也可以返回其他状态码。]]></content>
+      <categories>
+        <category>技术开发</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Docker中设置Tomcat的内存大小配置]]></title>
+    <url>%2Farchives%2Faf5b2750.html</url>
+    <content type="text"><![CDATA[安装在docker中的tomcat，在下载大文件或者某些情况下，会出现tomcat的内存溢出等情况，所以需要配置tomcat的内存大小，docker中的tomcat内存大小配置有两种方式： 一、挂载docker中的配置文件1通过将docker中tomcat的catalina.sh配置文件挂载到宿主机中，然后再catalina.sh配置jvm内存大小即可。 需要重新运行一个tomcat容器（注意： 端口和容器名称不能重复）123456789docker run -d \ -v /server/webapps:/usr/local/tomcat/webapps/ \ -v /server/catalina.sh:/usr/local/tomcat/bin/catalina.sh \ -v /server/logs/demo:/server/logs/demo \ -e TZ=&quot;Asia/Shanghai&quot; \ --privileged=true \ --name demo \ -p 8080:8080 \ tomcat8 说明： -v /server/webapps:/usr/local/tomcat/webapps/ 挂载当前项目的运行目录到tomcat下的webapps -v /server/catalina.sh:/usr/local/tomcat/bin/catalina.sh 挂载宿主机的catalina.sh到docker中tomcat下的catalina.sh -v /server/logs/demo:/server/logs/demo 挂载日志到宿主机中 -e TZ=”Asia/Shanghai” 设置时区 –privileged=true 设置拥有容器中的真正的root权限 -p 8080:8080 映射端口 tomcat8 镜像的名称 2 .catalina.sh中的配置内存 cygwin=false下面加入：1JAVA_OPTS=&quot;-server -Xms1024m -Xmx2048m -XX:MaxNewSize=256m -XX:PermSize=128m -XX:MaxPermSize=256m&quot; -xms 初始化堆内存-xmx 最大堆内存 二、直接修改tomcat容器的catalina.sh的配置1可以直接进入容器中修改tomcat的catalina.sh的配置文件，不过该方法不推荐，因为以后再次秀挂比较麻烦，并且不方便配置，如果需要重新运行容器的时候，不知道容器中的内存大小的配置 进入容器docker exec -it &lt;container_name&gt; /bin/bash 找到catalina.sh配置文件, 并增加配置（第一步中增加的配置语句即可） // 如果没有vi 命令，则需要安装vi /usr/local/tomcat/bin/catalina.sh// 退出容器，并重新启动exitdocker restart &lt;containner_name&gt; 注意： 如果修改Catalina.sh的时候提示该文件是一个只读文件或者提示没有权限修改，那么则需要以root权限进入容器，具体的方法见： Docker容器中的root权限获取 参考资料 转自 Docker中tomcat的设置内存大小配置]]></content>
+      <categories>
+        <category>技术开发</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[升级ShadowSocks支持aes-256-gcm算法（ShadowsocksX-NG）]]></title>
+    <url>%2Farchives%2Ff1a14509.html</url>
+    <content type="text"><![CDATA[以前安装的Shadowsocks是2.8.2 不支持aes-256-gcm模式，需要升级到3.x才可以。 12pip install --upgrade pipsudo pip install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U 然后修改/etc/shadowsocks.conf配置文件算法为aes-256-gcm。 下载最新的ShadowsocksX-NG客户端进行配置即可。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[在一台新的政务云服务器上的部署操作]]></title>
     <url>%2Farchives%2Facfbb6fa.html</url>
-    <content type="text"><![CDATA[vimyum install vim 安装iptablessystemctl stop firewalldsystemctl disable firewalldvi /etc/selinux/configyum install iptables-services iptables-devel开启systemctl enable iptables.servicesystemctl start iptables.servicesystemctl enable iptables.service关闭firewall 安装nginxyum install epel-releaseyum install nginx 安装docker sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine yum install -y yum-utilsyum-config-manager \ –add-repo \ https://download.docker.com/linux/centos/docker-ce.repoyum install docker-ce-18.09.6 docker-ce-cli-18.09.6 containerd.io systemctl start dockersystemctl enable docker 安装kkdocker pull keking/kkfileview minio kkfilepreview nginx redisanaconda]]></content>
+    <content type="text"><![CDATA[安装vimyum install vim 关闭系统自带防火墙，安装iptablessystemctl stop firewalldsystemctl disable firewalldvi /etc/selinux/configyum install iptables-services iptables-devel开启systemctl enable iptables.servicesystemctl start iptables.servicesystemctl enable iptables.service关闭firewall 安装nginxyum install epel-releaseyum install nginx 安装docker 先卸载旧版本的dockersudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine 安装新的dockeryum install -y yum-utilsyum-config-manager \ –add-repo \ https://download.docker.com/linux/centos/docker-ce.repoyum install docker-ce-18.09.6 docker-ce-cli-18.09.6 containerd.io 升级dockeryum -y upgrade docker-ce docker-ce-cli containerd.io systemctl start dockersystemctl enable docker 安装kkdocker pull keking/kkfileview 安装miniodocker pull minio/minio kkfilepreview nginx redisanaconda 解决docker中控制台乱码问题1docker run --restart=always -d --name zzb10001 -p 10001:8080 -e &quot;LC_ALL=zh_CN.UTF-8&quot; -e &quot;LANG=zh_CN.UTF-8&quot; -v /data/zzb10001/webapps:/tomcat/webapps/ -v /data/zzb10001/logs:/tomcat/logs spdk/jdk8 &gt; /data/zzb10001/id]]></content>
   </entry>
   <entry>
     <title><![CDATA[SSL Pinning on Android]]></title>

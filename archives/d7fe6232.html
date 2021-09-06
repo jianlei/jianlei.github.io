@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>检查网站的TLS版本 | ini&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="有时候需要知道某个网站支持的TLS的版本。现在SSL 2.0和SSL 3.0都已经被淘汰了。其中TLS 1.0，TLS 1.1，TLS 1.2是目前的的主流，相对也是安全的。主要看加密的算法。TLS 1.3是目前最新的协议版本，也是相对最安全的版本了。 通过网页查看 SSL/TLS安全评估报告 SSL Server Test (Powered by Qualys SSL Labs)  通过命令行1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="检查网站的TLS版本">
+<meta property="og:url" content="http://inicb.com/archives/d7fe6232.html">
+<meta property="og:site_name" content="ini&#39;s Blog">
+<meta property="og:description" content="有时候需要知道某个网站支持的TLS的版本。现在SSL 2.0和SSL 3.0都已经被淘汰了。其中TLS 1.0，TLS 1.1，TLS 1.2是目前的的主流，相对也是安全的。主要看加密的算法。TLS 1.3是目前最新的协议版本，也是相对最安全的版本了。 通过网页查看 SSL/TLS安全评估报告 SSL Server Test (Powered by Qualys SSL Labs)  通过命令行1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-09-06T05:17:00.176Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="检查网站的TLS版本">
+<meta name="twitter:description" content="有时候需要知道某个网站支持的TLS的版本。现在SSL 2.0和SSL 3.0都已经被淘汰了。其中TLS 1.0，TLS 1.1，TLS 1.2是目前的的主流，相对也是安全的。主要看加密的算法。TLS 1.3是目前最新的协议版本，也是相对最安全的版本了。 通过网页查看 SSL/TLS安全评估报告 SSL Server Test (Powered by Qualys SSL Labs)  通过命令行1">
+    
+
+    
+        <link rel="alternate" href="/" title="ini&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ini&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <!-- <button type="submit" class="search-form-submit"></button> -->
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+              <script type='text/javascript'>
+              $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 80%; display: block; float:none;}}</style>");
+              </script>
+              <script type='text/javascript'>
+              document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
+              </script>
+           
+            <section id="main"><article id="post-检查网站的TLS版本" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            检查网站的TLS版本
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/d7fe6232.html">
+            <time datetime="2021-08-12T08:14:20.000Z" itemprop="datePublished">2021-08-12</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>有时候需要知道某个网站支持的TLS的版本。现在SSL 2.0和SSL 3.0都已经被淘汰了。其中TLS 1.0，TLS 1.1，TLS 1.2是目前的的主流，相对也是安全的。主要看加密的算法。TLS 1.3是目前最新的协议版本，也是相对最安全的版本了。</p>
+<h3 id="通过网页查看"><a href="#通过网页查看" class="headerlink" title="通过网页查看"></a>通过网页查看</h3><ul>
+<li><a href="https://myssl.com/" target="_blank" rel="noopener">SSL/TLS安全评估报告</a></li>
+<li><a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="noopener">SSL Server Test (Powered by Qualys SSL Labs)</a></li>
+</ul>
+<h3 id="通过命令行"><a href="#通过命令行" class="headerlink" title="通过命令行"></a>通过命令行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl s_client -connect www.baidu.com:443 -tls1_2</span><br><span class="line">openssl s_client -connect www.baidu.com:443 -tls1_1</span><br><span class="line">openssl s_client -connect www.baidu.com:443 -tls1</span><br></pre></td></tr></table></figure>
+<p>以上分别检查了tls1.2,tls1.1和<code></code>tls1`。如果握手失败的话，那么就是不支持了。</p>
+<h3 id="NMAP"><a href="#NMAP" class="headerlink" title="NMAP"></a>NMAP</h3><p>依赖于nmap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --script ssl-enum-ciphers -p 443 baidu.com</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2020-11-29 09:51 CST</span><br><span class="line">Nmap scan report for baidu.com (39.156.69.79)</span><br><span class="line">Host is up (0.0068s latency).</span><br><span class="line">Other addresses for baidu.com (not scanned): 220.181.38.148</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">443/tcp open  https</span><br><span class="line">| ssl-enum-ciphers:</span><br><span class="line">|   SSLv3:</span><br><span class="line">|     ciphers:</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C</span><br><span class="line">|     compressors:</span><br><span class="line">|       NULL</span><br><span class="line">|     cipher preference: server</span><br><span class="line">|     warnings:</span><br><span class="line">|       Broken cipher RC4 is deprecated by RFC 7465</span><br><span class="line">|       CBC-mode cipher in SSLv3 (CVE-2014-3566)</span><br><span class="line">|   TLSv1.0:</span><br><span class="line">|     ciphers:</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C</span><br><span class="line">|     compressors:</span><br><span class="line">|       NULL</span><br><span class="line">|     cipher preference: server</span><br><span class="line">|     warnings:</span><br><span class="line">|       Broken cipher RC4 is deprecated by RFC 7465</span><br><span class="line">|   TLSv1.1:</span><br><span class="line">|     ciphers:</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C</span><br><span class="line">|     compressors:</span><br><span class="line">|       NULL</span><br><span class="line">|     cipher preference: server</span><br><span class="line">|     warnings:</span><br><span class="line">|       Broken cipher RC4 is deprecated by RFC 7465</span><br><span class="line">|   TLSv1.2:</span><br><span class="line">|     ciphers:</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_RC4_128_SHA (secp256r1) - C</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A</span><br><span class="line">|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 (secp256r1) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_GCM_SHA256 (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA256 (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA256 (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A</span><br><span class="line">|       TLS_RSA_WITH_RC4_128_SHA (rsa 2048) - C</span><br><span class="line">|     compressors:</span><br><span class="line">|       NULL</span><br><span class="line">|     cipher preference: server</span><br><span class="line">|     warnings:</span><br><span class="line">|       Broken cipher RC4 is deprecated by RFC 7465</span><br><span class="line">|_  least strength: C</span><br><span class="line"></span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 3.22 seconds</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者：</strong>王建磊</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="" title="{{ page.title }}">检查网站的TLS版本</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>发布时间：</strong>
+          <a href="" title="{{ page.title }}">2021年8月12日 - 16时08分</a>
+          </li>
+          <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+          </li>
+        </ul>
+      <div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://inicb.com/archives/d7fe6232.html" data-id="ckt871nm500689iozhxidsw85" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+      
+<nav id="article-nav">
+    
+    
+        <a href="/archives/d4a32458.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Scrapy中Request()、FormRequest()、FormRequest.from_response()的小结</div>
+        </a>
+    
+</nav>
+
+
+    
+  </div>
+
+    <!-- 
+        
+<nav id="article-nav">
+    
+    
+        <a href="/archives/d4a32458.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Scrapy中Request()、FormRequest()、FormRequest.from_response()的小结</div>
+        </a>
+    
+</nav>
+
+
+     -->
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+
+</section>
+    
+
+
+
+</section>
+            
+            <!-- 
+             -->
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2021 ini<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: '3RK5nvSxoKincwMiCVLCMFh1-gzGzoHsz',
+            app_key: 'MD8jv5EFuHcMxEP2mz5CUbA0',
+            placeholder: 'Just Do It'
+        });
+    </script>
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

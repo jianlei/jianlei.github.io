@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                69
+                77
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                55
+                59
                 <span>标签</span>
             </div>
         </div>
@@ -208,6 +208,921 @@
             
             
             <section id="main">
+    <article id="post-Android实现毛玻璃效果-高斯模糊" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/a0439c.html">Android实现毛玻璃效果(高斯模糊)</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/a0439c.html">
+            <time datetime="2018-08-15T07:53:36.000Z" itemprop="datePublished">2018-08-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/StackBlur/">StackBlur</a>, <a class="tag-link" href="/tags/毛玻璃/">毛玻璃</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>在项目开发过程，有时候为了界面效果美观，需要在背景处用到毛玻璃效果，但是在 Android 上也能实现毛玻璃效果？性能如何？</p>
+<p>在网上看到这篇文章，大家可以参考一下</p>
+<p><a href="http://wingjay.com/2016/03/12/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%AF%9B%E7%8E%BB%E7%92%83%E8%99%9A%E5%8C%96%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">一种快速毛玻璃虚化效果实现</a></p>
+<p>主要思想就是，</p>
+<ol>
+<li>对要进行模糊的图片和界面（需要获取屏幕截图）进行压缩。</li>
+<li>对压缩后的图片进行模糊处理。主要采用 <a href="http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html" target="_blank" rel="noopener">StackBlur</a> 模糊算法，这种算法应用非常广泛，能得到非常良好的毛玻璃效果。在这里，使用是它的 Java 实现代码<a href="https://github.com/wingjay/BlurImageView/blob/master/blurimageviewlib/src/main/java/com/wingjay/blurimageviewlib/FastBlurUtil.java" target="_blank" rel="noopener">FastBlur.java</a>。<br></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap)</span><br></pre></td></tr></table></figure>
+<p>可以看出，使用方法非常简单，传入待虚化的 bitmap、虚化程序(一般为 8)、和是否重用 flag。</p>
+<h5 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h5><ul>
+<li><a href="https://github.com/kikoso/android-stackblur" target="_blank" rel="noopener">android-stackblur</a></li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-Android-WebView实现全屏播放的一种方法" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/d3b6c7a6.html">Android WebView实现全屏播放的一种方法</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/d3b6c7a6.html">
+            <time datetime="2018-08-09T08:23:55.000Z" itemprop="datePublished">2018-08-09</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>用过WebView的开发者们肯定都知道这里面的坑数不胜数，加载缓慢，内存泄露，文件选择…… 最近在项目中遇到了对接小鱼易联直播的情况，因为小鱼本身提供了直播功能，采用的是网页方式，所以在手机端直接进行对接网页，然后在进行全屏播放视频，又遇到了一个大坑。一个没有修饰过的原生WebView几乎不可能在某一个主流视频网站实现全屏播放，倘若在客户端自己实现简单的播放器，链接拿过来，摆个VideoView，想怎么全屏怎么全屏，放在WebView上，一切就悲剧了，大多数情况下点击“全屏按钮”是没有反应的，或者无法实现横屏全屏。今天来介绍一种简单易行粗暴的方式来实现WebView的视频全屏播放。</p>
+<p>当你无从下手的时候，照例先看一下官方文档，很多常见的问题官方文档都给我们提供思路。你会发现下面这样一段话，发现官方已经提供了实现全屏展示html content的方式。</p>
+<p><img src="/images/Android_fullscreen/1.png" alt=""></p>
+<p>应用如果需要支持HTML5的video标签，必须打开硬件加速。我们只需要在Application标签或者相应Activity标签下添加android:hardwareAccelerated=”true”即可。接着为了支持全屏，需要重写WebChromeClient的onShowCustomView()和onHideCustomView()方法，这两个方法缺一不可。先来看一下onShowCustomView（）:</p></p>
+            <p class="article-more-link">
+                <a href="/archives/d3b6c7a6.html#more">查看更多</a>
+            </p>
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-港岛妹妹的西班牙馅饼长什么样" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/337a9148.html">港岛妹妹的西班牙馅饼长什么样</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/337a9148.html">
+            <time datetime="2018-07-12T03:23:42.000Z" itemprop="datePublished">2018-07-12</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/生活/">生活</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>作者：西班牙馅饼<br>链接：<a href="https://www.zhihu.com/question/26876220/answer/102255551" target="_blank" rel="noopener">https://www.zhihu.com/question/26876220/answer/102255551</a><br>来源：知乎</p>
+<p>志说他不后悔做过的这些事情，但有点后悔把它写出来。不是因为怕暴露自己的品行，而是因为可能对文中人物带来困扰。我不知道我把它贴出来是否也是一种不道德。</p>
+<h4 id="港岛妹妹-你献给我的西班牙馅饼"><a href="#港岛妹妹-你献给我的西班牙馅饼" class="headerlink" title="港岛妹妹 你献给我的西班牙馅饼"></a>港岛妹妹 你献给我的西班牙馅饼</h4><h4 id="甜蜜地融化了我-天空之城在哭泣"><a href="#甜蜜地融化了我-天空之城在哭泣" class="headerlink" title="甜蜜地融化了我 天空之城在哭泣"></a>甜蜜地融化了我 天空之城在哭泣</h4><h4 id="港岛妹妹-我们曾拥有的甜蜜的爱情"><a href="#港岛妹妹-我们曾拥有的甜蜜的爱情" class="headerlink" title="港岛妹妹 我们曾拥有的甜蜜的爱情"></a>港岛妹妹 我们曾拥有的甜蜜的爱情</h4><h4 id="疯狂地撕裂了我-天空之城在哭泣"><a href="#疯狂地撕裂了我-天空之城在哭泣" class="headerlink" title="疯狂地撕裂了我 天空之城在哭泣"></a>疯狂地撕裂了我 天空之城在哭泣</h4><p>逼哥在夜话里回答过关于港岛妹妹，是一个朋友从西班牙寄来一张贺卡，贺卡上是个馅饼。</p>
+<p>李志曾经在逼逼的艺术人生里写的事情是这样的：上个世纪我在西祠鬼混的时候认识了I，原因是I要找一首歌，正好我手头有，于是I就和我有了联系，夏日炎炎的某天中午I戴着蓝色头巾顶着炙热的风穿过稻田和小卖部找到我的住处，咦，“蓝色头巾”这个词好熟悉啊……后来在我的房间，我们做了一些装逼的交流，主要是我在装逼。因为事先在西祠我已经见识了I小姐的才华和学识。不瞒您说，就我认识的无数女性中，要说才华和学识，还真没有一个能超越I小姐的——尽管I把超男和肥皂电视剧当心头肉。那天短暂的见面I小姐保持她一贯的典雅作风，笑不露齿，不笑也不露齿。</p>
+<p>这是开头，结尾是前些天我刚把一个月的工资打入I指定账户，从而结束了我们之间长达一年的债务关系。说来惭愧，这欠款是为我侄子买钢琴而借的。完事之后我给I发去短信说，以后在你面前我终于可以抬头了。I则用一贯的语气回我：在我面前你什么时候低过头啊。</p>
+<p>和I的再次联系是在去年。再往前就是某年我路过汉口路，看见一个女性面容熟悉。我色迷迷的盯着她从身前到身后，绞尽脑汁想名字，终于在一分钟之后我快步追上，对伊说：我想起来了，我认识你。I一贯的语气说：认识就认识呗，认识我的人可多了。后来I承认当天她没有认出我来。因为我实在是太胖了，同时那天距我们之前的一次联系大约已经过了七八年。</p>
+<p>再回到上个世纪吧，I在G大学历史系，我在鬼混。操，烦的一笔。我直接说了，G大学就是南京大学！！！是我较鄙视的大学之一。</p>
+<p>在早期的交往中我对I没什么要死要活的心仪，更多的是仰慕其才华和学识。尤其是有一次我用麻袋装着几块在我村随处可见的石头送给I做学术研究之用之后。我发现I的领域实在是我全然陌生之地。鄙人有个特点，就是对于那些擅长我不擅长同时我又有兴趣的事务的人非常有兴趣。I是一个很好的例子。但是如果让I看到我说她是例子，她一定会用一贯的口气对我说：你才是例子，你全家都是例子。</p>
+<p>这短短的一段我居然用了三次“才华和学识”。诶，书到用时方恨少啊。要是I写，她肯定可以用不同词句来描述。这就是I的才华和学识！</p>
+<p>刚认识那会我对I说，十年后鄙人会是中国最好的吉他手。对此I不置可否的典雅着微笑，这种微笑让我感到紧张和害臊。你看，时间很快就过去了，现在大家知道李逼是个蹩脚的吉他手。他把原本属于练琴的时间投入到了伟大的射精事业中。当然，就算他是天阉之人，就算他一日廿小时的不停练习也成不了伟大的吉他手。因为他没有天赋。</p>
+<p>现在我已经想不起来和I是怎么失去联系的了。但十年后再次收到I的邮件时，我一眼就看了出来。我们用邮件聊了不少天。I在这十年里行走正常：念完本科念硕士，念完硕士念博士。虽然江湖都称女博士为灭绝师太，但I肯定是个例外。十年前I是典雅清纯的，十年后I是典雅知性的。</p>
+<p>一个长期和古典文学打交道的人和一个长期和泡妞射精打交道的人搅合在一起，这感觉很奇妙。我们之所以有交集是因为在骨子里I有奔放的一面，我有文艺的一面。  </p>
+<p>我在I的宿舍里住过三天。她有一个面朝大海的阳台，飞机不停的从校园上空飞过，黄昏时经常下雨。回来后我写了一首歌。我们还去过一个岛屿，我们吃过芒果冰，我们做爱很少戴套。我一直怀疑她偷偷的流产过，但I坚决否认。我们冲动的决定谈恋爱，然后很快我又冲动的终止了恋爱。她去意大利帮我看了圣西罗球场，她在普林斯顿给我拍了很多照片，她从罗浮宫给我寄来彩色的明星片，她跑到天河城只为了和我喝杯咖啡，她做了我喜欢吃的红烧肉，结束的时候她又一个人默默承受。</p>
+<p>我呢，除了精液似乎什么都没留下。</p>
+<p>对于I我是忏悔的。对于I我的内心非常纠葛。我曾经幻想着我在沙发上看书，她在做家务，有个孩子在弹钢琴。我曾经幻想过婚姻，我曾经幻想过郊游，而这一些在今天看来只是可笑和卑鄙的故事。</p>
+<p>我和I的父亲通过电话，这是唯一一次和女性朋友的家人说话。电话的缘由是他写了首歌，和我探讨一下编曲录音。事后I和我说她父亲对我印象不错，我也对他印象也挺好。</p>
+<p>我和I之间断断续续的若即若离的关系导致我找不到一个书写I的好办法。时间错综复杂，事件隐隐约约。I用藏珠于渊来表达她的心情。</p>
+<p>我呢？我相信如果以后的生活或者人们说的来世存在报应的话，那里面一定有I的一份——就算我再次对神明的娜姐发誓我爱过I。</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-如何提高Android-Studio构建速度" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/archives/35dc888d.html" itemprop="url">
+            <img src="/images/pic/pexels-photo-12838.jpeg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/35dc888d.html">如何提高Android Studio构建速度</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/35dc888d.html">
+            <time datetime="2018-06-29T02:59:14.000Z" itemprop="datePublished">2018-06-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android-Studio/">Android Studio</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><blockquote><p>Tips：<br>自从切换到AS开发安卓应用以来，一直被AS蜗牛般的构建速度困扰着，特别是在构建大型项目的时候如果构建变种很多的话，速度更是慢的够呛，所以最近研究一下如何提高编译速度，在网上找到这样一篇文章，供大家参考。</p>
+</blockquote>
+<p>文章来源：</p>
+<ol>
+<li><a href="https://developer.android.com/studio/build/optimize-your-build?hl=zh-cn" target="_blank" rel="noopener">优化您的构建速度 | Android Developers</a></li>
+<li><a href="http://www.easemob.com/news/852" target="_blank" rel="noopener">几个小改动，将Android 构建速度提升10倍以上！</a></li>
+</ol>
+<p>下面提取文章重点，以做备忘。<br>在我们谈论优化措施之前，我们先来看看优化之前项目的build性能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gradlew clean //执行干净构建</span><br><span class="line">gradlew --profile --recompile-scripts --offline --rerun-tasks assembleFlavorDebug</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>profile：启用分析。</li>
+<li>recompile-scripts：在绕过缓存时强制重新编译脚本。</li>
+<li>offline：禁止 Gradle 提取在线依赖项。这样可以确保 Gradle 在尝试更新依赖项时引起的任何延迟都不会干扰您的分析数据。您应当已将项目构建一次，以便确保 Gradle 已经下载和缓存您的依赖项。</li>
+<li>rerun-tasks：强制 Gradle 重新运行所有任务并忽略任何任务优化。<br>我们使用这个命令执行full-build(从头创建)的过程，来衡量build的性能。<h2 id="优化您的构建配置"><a href="#优化您的构建配置" class="headerlink" title="优化您的构建配置"></a>优化您的构建配置</h2>按照下面的提示操作，提升您的 Android Studio 项目的构建速度。<h3 id="保持工具处于最新状态"><a href="#保持工具处于最新状态" class="headerlink" title="保持工具处于最新状态"></a>保持工具处于最新状态</h3>Android 工具几乎在每一次更新中都会获得构建优化和新功能，本页介绍的一些提示假设您正在使用最新版本。要充分利用最新优化，请保持以下工具处于最新状态.<h3 id="避免Legacy-Multidex"><a href="#避免Legacy-Multidex" class="headerlink" title="避免Legacy Multidex"></a>避免Legacy Multidex</h3>Google针对64k方法数的问题推出了MultiDex的解决方法，但是不同的api版本上，multidex的做法是不一样的，在api21以上，因为Android采用了新的运行时ART，会在安装的时候将所有的classesN.dex合并成一个.oat包。你需要做的就是在编译脚本中加一行 multiDexEnabled true。但是在api以下，你需要引入multidex support library. 而且在编译过程中，编译脚本要话很长时间决定哪些class要放入primary dex中，哪些放入secondary dex中。在api21以下，这叫做legacy multidex。</li>
+</ul></p>
+            <p class="article-more-link">
+                <a href="/archives/35dc888d.html#more">查看更多</a>
+            </p>
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-Linux常用命令整理" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/f42d2759.html">Linux常用命令整理</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/f42d2759.html">
+            <time datetime="2018-06-25T00:47:10.000Z" itemprop="datePublished">2018-06-25</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="Yum"><a href="#Yum" class="headerlink" title="Yum"></a>Yum</h4><ol>
+<li>如何配置Yum代理<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.conf</span><br><span class="line"># 添加如下：</span><br><span class="line">proxy=http://10.1.65.6:1080/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="lftp"><a href="#lftp" class="headerlink" title="lftp"></a>lftp</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lftp -u username,password -p 21 -e &quot;mirror --only-newer --delete lydj /data/file/;quit;&quot; ftpadmin@ip</span><br></pre></td></tr></table></figure>
+<p>作用介绍：<br>从文件服务器lydj目录中递归下载文件到本地/data/file目录中，并且只下载最新的，对于服务器不存在的问题在本地也删除。</p>
+<h4 id="ntpdate"><a href="#ntpdate" class="headerlink" title="ntpdate"></a>ntpdate</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">安装ntpdate</span><br><span class="line">yum install ntpdate -y</span><br></pre></td></tr></table></figure>
+<p>作用介绍：<br>用于linux时钟同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 同步网络时间</span><br><span class="line">ntpdate 172.31.1.1</span><br><span class="line"># 同步时间成功后调整硬件时间</span><br><span class="line">hwclock -w//</span><br><span class="line">#date 查看当前系统时间</span><br><span class="line">#hwclock 查看硬件时间</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 没间隔1个小时同步一下网络时间</span><br><span class="line">* */1 * * * root ntpdate 172.31.1.1;hwclock -w</span><br></pre></td></tr></table></figure>
+<h4 id="timedatectl"><a href="#timedatectl" class="headerlink" title="timedatectl"></a>timedatectl</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改时区为东八区</span><br><span class="line">timedatectl set-timezone Asia/Shanghai</span><br></pre></td></tr></table></figure>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-在Centos7上安装docker" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/5368ee28.html">在Centos7上安装docker</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/5368ee28.html">
+            <time datetime="2018-06-14T07:55:32.000Z" itemprop="datePublished">2018-06-14</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h5 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h5><p>参照官方网址：<br><a href="https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-ce" target="_blank" rel="noopener">https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-ce</a></p>
+<p>docker支持多种安装方式，我这里是用了最常见的安装方式yum进行安装。<br>Install using the repository</p>
+<h6 id="SET-UP-THE-REPOSITORY-配置"><a href="#SET-UP-THE-REPOSITORY-配置" class="headerlink" title="SET UP THE REPOSITORY(配置)"></a>SET UP THE REPOSITORY(配置)</h6><ol>
+<li><p>安装所需依赖Install required packages</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils \</span><br><span class="line">  device-mapper-persistent-data \</span><br><span class="line">  lvm2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用稳定的docker yum 源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h6 id="安装docker-1"><a href="#安装docker-1" class="headerlink" title="安装docker"></a>安装docker</h6><ol>
+<li><p>安装最新版本的docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker-ce</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检测docker是否正确安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="使用docker加载本地镜像"><a href="#使用docker加载本地镜像" class="headerlink" title="使用docker加载本地镜像"></a>使用docker加载本地镜像</h5><p>如果你的镜像没有发不到仓库上，可以通过docker的加载本地镜像来加载。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load --input docker_image_ezb_20180302.tar</span><br></pre></td></tr></table></figure></p>
+<h5 id="导出镜像"><a href="#导出镜像" class="headerlink" title="导出镜像"></a>导出镜像</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker save -o xxx.tar xxx ## xxx 镜像名称</span><br></pre></td></tr></table></figure>
+<h5 id="通过已有镜像创建新的镜像"><a href="#通过已有镜像创建新的镜像" class="headerlink" title="通过已有镜像创建新的镜像"></a>通过已有镜像创建新的镜像</h5><ol>
+<li><p>编写Dockerfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#使用 # 来注释</span><br><span class="line"># FROM 指令告诉 Docker 使用哪个镜像作为基础</span><br><span class="line">FROM xxx  ## 镜像名称</span><br><span class="line">COPY catalina.sh /tomcat/bin/  ## 拷贝本地文件到容器文件</span><br><span class="line">CMD [&quot;/run.sh&quot;]  ## 容器启动的时候运行的脚本</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过名称生成镜像文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t tomcat . ## tomcat是镜像的名称</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>完成生成镜像。</p>
+<h5 id="通过容器生成镜像"><a href="#通过容器生成镜像" class="headerlink" title="通过容器生成镜像"></a>通过容器生成镜像</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker commit 58bdddf92a57 spdk/jdk8</span><br><span class="line">docker commit 容器id  新生成的镜像名称</span><br></pre></td></tr></table></figure>
+<h5 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs --tail 0 -f xxx(容器名称)</span><br></pre></td></tr></table></figure>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-星云链Nas开发笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/9e7c4bd8.html">星云链Nas开发笔记</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/9e7c4bd8.html">
+            <time datetime="2018-06-13T04:51:18.000Z" itemprop="datePublished">2018-06-13</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/区块链/">区块链</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Nas/">Nas</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h4><ul>
+<li>官方教程</li>
+</ul>
+<p><a href="https://blog.nebulas.io/2018/05/04/how-to-build-a-dapp-on-nebulas-part-1/" target="_blank" rel="noopener">手把手教你星云DApp开发（第一部分)</a></p>
+<p><a href="https://blog.nebulas.io/2018/05/05/how-to-build-a-dapp-on-nebulas-part-2/" target="_blank" rel="noopener">手把手教你星云DApp开发（第二部分)</a></p>
+<p><a href="https://github.com/nebulasio/nebPay/blob/master/doc/NebPay%E4%BB%8B%E7%BB%8D.md" target="_blank" rel="noopener">nebPay 介绍</a></p>
+<p><a href="http://androidwing.net/index.php/282" target="_blank" rel="noopener">NAS星云链DAPP开发之宠物养成游戏</a></p>
+<ul>
+<li>开源成熟网站</li>
+</ul>
+<ol>
+<li>面试经历网<br>网站地址： <a href="https://duanyugit.github.io/interview/index.html" target="_blank" rel="noopener">https://duanyugit.github.io/interview/index.html</a><br>github地址：<br><a href="https://github.com/duanyuGit/interview" target="_blank" rel="noopener">https://github.com/duanyuGit/interview</a><br>合约地址：<br><a href="https://explorer.nebulas.io/#/address/n1uqMB4GSXudXCp5KuMo3LxbgvoNTHJSYiw" target="_blank" rel="noopener">https://explorer.nebulas.io/#/address/n1uqMB4GSXudXCp5KuMo3LxbgvoNTHJSYiw</a></li>
+</ol>
+<h4 id="我的星云"><a href="#我的星云" class="headerlink" title="我的星云"></a>我的星云</h4><p>查看gate io 钱包nas数量<br><a href="https://explorer.nebulas.io/#/address/n1dnerPW8iQRgu5mCcwHeJVaQaxdigaCyAX" target="_blank" rel="noopener">https://explorer.nebulas.io/#/address/n1dnerPW8iQRgu5mCcwHeJVaQaxdigaCyAX</a></p>
+<p>查看本地钱包 nas数量<br><a href="https://explorer.nebulas.io/#/address/n1Z1WRfKxRV3Hae4emF43m8J3GgDKn51PUZ" target="_blank" rel="noopener">https://explorer.nebulas.io/#/address/n1Z1WRfKxRV3Hae4emF43m8J3GgDKn51PUZ</a></p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
+    <article id="post-使用bitnami-gitlab一体包搭建git代码服务器" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/archives/c2439d6c.html">使用bitnami-gitlab一体包搭建git代码服务器</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/c2439d6c.html">
+            <time datetime="2018-06-13T02:03:37.000Z" itemprop="datePublished">2018-06-13</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Gitlab/">Gitlab</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Gitlab/">Gitlab</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>最近git代码服务器IP变了，需要修改git远程地址的访问ip，以前用gitlab搭建过git服务器，不过时间有点久远了，也没记录下来，这里在这里整理一下gitlab的使用方法，以备后续查找使用。</p>
+<h5 id="修改gitlab项目的ip地址"><a href="#修改gitlab项目的ip地址" class="headerlink" title="修改gitlab项目的ip地址"></a>修改gitlab项目的ip地址</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">修改为如下：</span><br><span class="line">external_url &apos;https://192.168.1.113&apos;</span><br></pre></td></tr></table></figure>
+<p>重启Gitlab<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure></p>
+<p>完成。</p>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+  </div>
+
+    <!--  -->
+</article>
+
+
+
+
     <article id="post-Android-Studio-3-0-Annotation-processors-Error" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -429,891 +1344,8 @@
 
 
 
-    <article id="post-使用Burp和sqlmap进行自动化sql注入" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/f38a06d2.html">使用Burp和sqlmap进行自动化sql注入</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/f38a06d2.html">
-            <time datetime="2018-05-16T07:01:53.000Z" itemprop="datePublished">2018-05-16</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/BURP/">BURP</a>, <a class="tag-link" href="/tags/SQLMAP/">SQLMAP</a>, <a class="tag-link" href="/tags/自动化/">自动化</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><blockquote><p>Tips：<br>本文主要用于sql注入攻击自查，请不要做犯法的事情。</p>
-</blockquote>
-<p>之前已经讲过如何用Burp和Sqlmap配合进行sql注入攻击，但是使用起来特别麻烦，对有大量接口调用的项目如何自动化的进行检测便变得重要，本篇注重介绍如何使用Burp以及sqlmap的批量注入来完成自动化注入攻击。</p>
-<p>整体流程为：</p>
-<ol>
-<li>使用BurpSuite保存request记录log</li>
-<li>因为BurpSuite的日志记录了所有走代理的流量，包括静态资源啊，重复的提交啊，这些都会影响SqlMap的分析效率，所以对Request日志进行过滤。</li>
-<li>对过滤后的日志文件进行批量注入攻击。</li>
-</ol></p>
-            <p class="article-more-link">
-                <a href="/archives/f38a06d2.html#more">查看更多</a>
-            </p>
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-微信公众号开发入门" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/75c2257b.html">微信公众号-网页开发 开发入门</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/75c2257b.html">
-            <time datetime="2018-05-11T08:26:11.000Z" itemprop="datePublished">2018-05-11</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/WeChat/">WeChat</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/微信公众号/">微信公众号</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><blockquote><p>Tips：<br>本文章主要基于微信JS-SDK和jQuery WeUI 进行的微信公众号网页开发。前提需要<br>1.微信公众号已经完成开发者认证。<br>2.在“基本配置”中设置IP白名单。<br>3.提供一个能支持80或者443的服务。</p>
-</blockquote>
-<p>微信官方文档 <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421141115" target="_blank" rel="noopener">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421141115</a></p>
-<h4 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h4><p>先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。</p>
-<h4 id="引入JS文件"><a href="#引入JS文件" class="headerlink" title="引入JS文件"></a>引入JS文件</h4><p>在需要调用JS接口的页面引入如下JS文件，（支持https）：<a href="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" target="_blank" rel="noopener">http://res.wx.qq.com/open/js/jweixin-1.2.0.js</a></p>
-<h4 id="获取access-token"><a href="#获取access-token" class="headerlink" title="获取access_token"></a>获取access_token</h4><p>access_token 用户获取jsapi_ticket，有效期7200秒，开发者必须在自己的服务全局缓存access_token。<br>建议开发者建立自己的access_token中控服务器统一获取和刷新，其他业务逻辑服务器所使用的access_token均来自于该中控服务器。 <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140183" target="_blank" rel="noopener">微信获取access_token接口文档</a></p>
-<h6 id="接口调用说明"><a href="#接口调用说明" class="headerlink" title="接口调用说明"></a>接口调用说明</h6><font color="red">前提调用接口时，请登录“微信公众平台-开发-基本配置”提前将服务器IP地址添加到IP白名单中，点击查看设置方法，否则将无法调用成功。</font>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https请求方式: GET</span><br><span class="line">https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=APPID&amp;secret=APPSECRET</span><br></pre></td></tr></table></figure>
-<p>我这里使用了shell脚本获取access_token。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a_url=`curl https://api.weixin.qq.com/cgi-bin/token\?grant_type\=client_credential\&amp;appid\=xxx\&amp;secret\=xxxx`</span><br><span class="line">access_token=`echo $a_url|jq -r &apos;.access_token&apos;`</span><br><span class="line">echo $access_token</span><br></pre></td></tr></table></figure></p>
-<p>tips: jq 是linux下shell进行json处理的工具，很强大。</p></p>
-            <p class="article-more-link">
-                <a href="/archives/75c2257b.html#more">查看更多</a>
-            </p>
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-使用Burp-Suite进行手机端代理抓包" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/c4bd228f.html">Mac 使用Burp Suite进行手机端代理抓包</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/c4bd228f.html">
-            <time datetime="2018-05-09T06:31:00.000Z" itemprop="datePublished">2018-05-09</time>
-        </a>
-    </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>在做开发的工程中经常会遇到需要进行抓包的情况，自己经常使用的有Fiddler和Charles，其中Fiddler用在Windows平台，在Mac电脑上因为没有Fiddler，只能用Charles，但是Charles还是收费的，没有找到破解版本。<br>今天在使用sqlmap进行自动化注入的时候，发现一款在mac电脑上不错的工具，Burp Suite。</p>
-<h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><p>Burp Suite是一个集成化的渗透测试工具，它集合了多种渗透测试组件，使我们自动化地或手工地能更好的完成对web应用的渗透测试和攻击。在渗透测试中，我们使用Burp Suite将使得测试工作变得更加容易和方便，即使在不需要娴熟的技巧的情况下，只有我们熟悉Burp Suite的使用，也使得渗透测试工作变得轻松和高效。<br>Burp Suite是由Java语言编写而成，而Java自身的跨平台性，使得软件的学习和使用更加方便。Burp Suite不像其他的自动化测试工具，它需要你手工的去配置一些参数，触发一些自动化流程，然后它才会开始工作。<br>我这目前只用了代理抓取手机端接口功能。<br>可以直接从官方网站下载免费版本使用：<a href="https://portswigger.net/" target="_blank" rel="noopener">https://portswigger.net/</a></p>
-<p>也可以直接下载破解版本，功能更多，可以保存工程，不用每次都配置。下载地址 链接: <a href="https://pan.baidu.com/s/1ohVEExupkhnBvs3Yo08krA" target="_blank" rel="noopener">https://pan.baidu.com/s/1ohVEExupkhnBvs3Yo08krA</a> 密码: 3svt<br><blockquote><p>在此感谢 <a href="https://github.com/Hehe-Zhc/BurpUnlimited" target="_blank" rel="noopener">https://github.com/Hehe-Zhc/BurpUnlimited</a> 作者，让我们可以用上免费的Burp，原价$349.00啊 吓人。</p>
-</blockquote></p></p>
-            <p class="article-more-link">
-                <a href="/archives/c4bd228f.html#more">查看更多</a>
-            </p>
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-从《万历十五年》看企业文化和制度" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/archives/f74614ff.html" itemprop="url">
-            <img src="/images/wanlishiwunian.jpeg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/f74614ff.html">从《万历十五年》看企业文化和制度</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/f74614ff.html">
-            <time datetime="2018-05-04T00:46:57.000Z" itemprop="datePublished">2018-05-04</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/生活/">生活</a>
-    </div>
-
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>  之前看明朝那些事的时候，就耳闻过万历十五年这本书，最近有机会拜读黄仁宇的这本“大失败的总记录”，深感本书的深奥，自己知识和能力着实有限，尽自己最大努力从公司管理运营角度揣摩一下。</p>
-<p>  明朝官僚体系中的道德和法制的问题与企业文化和制度。</p>
-<p>  中国两千年来是以道德代替法制，至明代而极。以礼法约束从皇上到臣子再到底层平民，皇帝作为一国之君，是礼法的引导和表率，是不能逾越礼法的，所以9岁就登基的皇上在礼法面前也深感无力。</p>
-<p>  礼法从上到下约束着每一层的人。整个国家的运行是依靠“礼”来进行行为规范和约束，通过道德来管理国家，让整个文官精英团队有效的工作，来管理和控制国家。这就像是公司文化对每个人的影响一样，如果文化一旦形成，即使老板也要在这个庞然大物之下按照礼法行事，充当表率，员工认同文化，然后增强文化，通过归属感和统一战线来增加公司凝聚力。</p>
-<p>  那为什么明明是把道德发展到极致的明，道德治国发展到极致的时候反而问题更严重了呢？物极必反，忽视了体制上技术上的发展。而这就对英语公司制度的制定和遵守，例如薪酬制度，奖惩制度，加班制度，项目开发制度等一系列科学的管理方式。这就是西方的管理方式，私有制以及资本主义的管理方式。</p>
-<p>  因为明礼法根深蒂固，制度改革难以行之有效。官僚集团互相麻木，自我催眠，都是在既有思维和体系下行事。也许崇祯皇帝所说的“诸臣误我”是由其历史原因的。</p>
-<p>  在公司内不仅要通过公司文化、道德来教育员工，还要通过相关的制度来激励员工，文化是产生雷锋的土壤，而制度是能够激励更多雷锋的养分。</p>
-<p>  就像华为“不让雷锋吃亏”一样，完善制度，所有人都追求高效，把文化和制度结合起来，拧成一股绳，公司产生的效益才能更进一步。而不是让文化阻挡了我们改革的脚步。</p>
-<p>  最后，平淡的“万历十五年”如何造成几十年后明朝的覆灭的，又给我们怎样的教训。也许这一周是平淡的，和以前一样，太阳照常升起，但公司未来三到五年的发展也许就决定在这一周，这一天。</p>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-为hexo-icarus添加版权说明" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/ead2b478.html">为Hexo icarus添加版权说明</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/ead2b478.html">
-            <time datetime="2018-05-03T07:55:48.000Z" itemprop="datePublished">2018-05-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/HEXO/">HEXO</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/HEXO/">HEXO</a>, <a class="tag-link" href="/tags/ICARUS/">ICARUS</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>网上很多为hexo next主题添加版权说明的文章，但是几乎没找到怎么为icarus主题设置版权说明的文章，可见还是Next主题多啊。</p>
-<p>下面介绍如何为icarus主题添加版权说明。</p>
-<h5 id="Icarus添加版权说明"><a href="#Icarus添加版权说明" class="headerlink" title="Icarus添加版权说明"></a>Icarus添加版权说明</h5><ol>
-<li><p>修改blog目录下”/themes/icarus/_config.yml” 这个文件，在文件最后添加版权说明配置，如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#版权信息</span><br><span class="line">copyright:</span><br><span class="line">    enable: true</span><br><span class="line">    # img: http://ostu98x74.bkt.clouddn.com/copyright/copyright.png #版权信息图片</span><br><span class="line">    site: http://www.inicb.com  #版权信息所属网址</span><br><span class="line">    siteName: Ini&apos;s Blog #版权信息网站名字</span><br><span class="line">    siteAuthor: &apos;王建磊&apos; #版权归属人</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改icarus主题下的layout/common/article.ejs文件，修改如下部分</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (!index) &#123; %&gt;</span><br><span class="line">    &lt;%- partial(&apos;post/nav&apos;) %&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br><span class="line"></span><br><span class="line"># 改为如下</span><br><span class="line"></span><br><span class="line">&lt;% if (!index) &#123; %&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;ul class=&quot;post-copyright&quot;&gt;</span><br><span class="line">      &lt;li class=&quot;post-copyright-author&quot;&gt;</span><br><span class="line">      &lt;strong&gt;本文作者：&lt;/strong&gt;&lt;%= theme.copyright.siteAuthor%&gt;&lt;/a&gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">      &lt;li class=&quot;post-copyright-link&quot;&gt;</span><br><span class="line">      &lt;strong&gt;本文链接：&lt;/strong&gt;</span><br><span class="line">      &lt;a href=&quot;&quot; title=&quot;&#123;&#123; page.title &#125;&#125;&quot;&gt;&lt;%= post.title %&gt;&lt;/a&gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">      &lt;li class=&quot;post-copyright-link&quot;&gt;</span><br><span class="line">      &lt;strong&gt;发布时间：&lt;/strong&gt;</span><br><span class="line">      &lt;a href=&quot;&quot; title=&quot;&#123;&#123; page.title &#125;&#125;&quot;&gt;&lt;%= post.date.format(&quot;YYYY年M月D日 - HH时MM分&quot;) %&gt;&lt;/a&gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">      &lt;li class=&quot;post-copyright-license&quot;&gt;</span><br><span class="line">      &lt;strong&gt;版权声明： &lt;/strong&gt;</span><br><span class="line">      本博客所有文章除特别声明外，均采用 &lt;a href=&quot;http://creativecommons.org/licenses/by-nc-sa/3.0/cn/&quot; rel=&quot;external nofollow&quot; target=&quot;_blank&quot;&gt;CC BY-NC-SA 3.0 CN&lt;/a&gt; 许可协议。转载请注明出处！</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;%- partial(&apos;post/nav&apos;) %&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为版权说明添加样式<br>修改themes/icarus/source/css/_partial/article.styl 文件，在文件末尾添加如下样式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// Custom styles.</span><br><span class="line">//版权声明</span><br><span class="line">.post-copyright &#123;</span><br><span class="line">    margin: 2em 0 0;</span><br><span class="line">    padding: 0.5em 1em;</span><br><span class="line">    border-left: 3px solid #FF1700;</span><br><span class="line">    background-color: #F9F9F9;</span><br><span class="line">    list-style: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.post-copyright li &#123;</span><br><span class="line">    //设置行高</span><br><span class="line">    line-height: 30px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>至此，完成了为icarus添加版权声明的功能。</p>
-<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><ul>
-<li><a href="http://www.crocutax.com/2017/05/20/Hexo%E6%8C%81%E7%BB%AD%E4%BC%98%E5%8C%96-%E5%9C%A8%E6%96%87%E7%AB%A0%E5%B0%BE%E9%83%A8%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E%E4%BF%A1%E6%81%AF.html" target="_blank" rel="noopener">Hexo持续优化-在文章尾部添加版权声明信息</a></li>
-<li><a href="http://www.tiankai.party/hexo%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%B5%9E%E8%B5%8F%E5%8A%9F%E8%83%BD.html" target="_blank" rel="noopener">hexo进阶之自定义material主题添加赞赏功能，版权信息，Gitment评论模块</a></li>
-</ul>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-从一个代码服务器同步代码到另一个代码服务器" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/a4db9902.html">从一个代码服务器同步代码到另一个代码服务器</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/a4db9902.html">
-            <time datetime="2018-05-02T07:51:38.000Z" itemprop="datePublished">2018-05-02</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/工具箱/">工具箱</a>
-    </div>
-
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>最近因为工作需要，需要把源代码提交到甲方git服务器上，因为没必要把每次的更新日志也提交到甲方服务器上，并且考虑每次提交都很琐碎麻烦，所以自己写了个自动化脚本来自动完成提交工作。<br>如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 记录同步时间</span><br><span class="line">BAK_TIME=`date +%Y%m%d%H%M`</span><br><span class="line"></span><br><span class="line">echo &quot;开始同步android=================================start&quot;</span><br><span class="line">cd /Users/daren/source/cbsxf/dbuild_province</span><br><span class="line">git pull</span><br><span class="line">echo &quot;下载代码完成&quot;</span><br><span class="line"></span><br><span class="line">echo &quot;拷贝到甲方代码目录，忽略隐藏目录&quot;</span><br><span class="line">cp -R /Users/daren/source/cbsxf/dbuild_province/* /Users/daren/source/cbsxf/dbuild_province_unicom/</span><br><span class="line">echo &quot;拷贝代码完成&quot;</span><br><span class="line"></span><br><span class="line">cd /Users/daren/source/cbsxf/dbuild_province_unicom</span><br><span class="line">echo &quot;切换到甲方代码目录&quot;</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;提交代码$BAK_TIME&quot;</span><br><span class="line">echo &quot;commit代码成功&quot;</span><br><span class="line">#git push origin master</span><br><span class="line">git push -u origin master</span><br><span class="line">echo &quot;推送代码到服务器&quot;</span><br><span class="line">echo &quot;同步android结束=================================end&quot;</span><br></pre></td></tr></table></figure></p>
-
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-新时代e支部后台创作的故事" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/fdfa2529.html">新时代e支部后台创作的故事 </a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/fdfa2529.html">
-            <time datetime="2018-04-23T02:38:42.000Z" itemprop="datePublished">2018-04-23</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/新时代e支部/">新时代e支部</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h5 id="新时代e支部大事记"><a href="#新时代e支部大事记" class="headerlink" title="新时代e支部大事记"></a>新时代e支部大事记</h5><p>对于吉林省的广大党员来说，对“新时代e支部”App肯定不陌生，不过使用了这么长时间的新时代e支部，您知道e支部背后的故事吗？下面由小编为大家整理一下新时代e支部诞生记。</p>
-<p>“新时代e支部”的诞生主要经历了两个阶段，从2017年1月1日到2018年3月11日为第一阶段，那时候叫“长白山先锋e支部”，2018年3月11日到现在是第二阶段，经吉林省委领导决定，正式上线“新时代e支部”。</p>
-<ul>
-<li><p>2017年1月-2017年2月。<br>“长白山先锋e支部”项目由吉林省委组织部发起，由吉林联通公司，吉林省达仁科技有限公司负责承建。在这段时间是主要是确认需求，规划建设内容，设计效果图，初步规划“长白山先锋e支部”建设方案。</p>
-</li>
-<li><p>2017年3月10日<br>经过一个多月的研发和需求确认，完成了第一个安卓版本的上线，并且交付梅河口试用。</p>
-</li>
-<li><p>2017年4月20日<br>苹果第一个版本研发完成，发布到苹果市场。</p>
-</li>
-<li><p>2017年4月28日<br>苹果第一个企业版本研发完成，发布到梅河口试用。版本号码为1.0。</p>
-</li>
-<li><p>2017年5月15日<br>在经过了历时三个月的驻地和封闭开发，经过了中间30余次的迭代发布，终于在5月15日完成了第一个正式全省版本的发布，版本号码为2.1.5。</p>
-</li>
-</ul></p>
-            <p class="article-more-link">
-                <a href="/archives/fdfa2529.html#more">查看更多</a>
-            </p>
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
-    <article id="post-使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/archives/f19cae66.html" itemprop="url">
-            <img src="https://images.pexels.com/photos/614503/pexels-photo-614503.jpeg?cs=srgb&dl=adult-back-view-beach-614503.jpg&fm=jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/archives/f19cae66.html">使用FreeSSL生成免费SSL证书，并为Nginx配置Https访问</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/archives/f19cae66.html">
-            <time datetime="2018-04-20T02:50:14.000Z" itemprop="datePublished">2018-04-20</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术开发/">技术开发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术开发/NGINX/">NGINX</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/HTTPS/">HTTPS</a>, <a class="tag-link" href="/tags/NGINX/">NGINX</a>, <a class="tag-link" href="/tags/SSL/">SSL</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>本文主要介绍了如何创建一个免费的并且被各大浏览器默认认可的ssl证书，并且介绍了如何用Nginx配置证书，以及重定向Http到Https。</p></p>
-            <p class="article-more-link">
-                <a href="/archives/f19cae66.html#more">查看更多</a>
-            </p>
-        
-        </div>
-
-
-    <!-- 
-          <style>
-            .linkColor{
-                color:#258FC6
-            }
-            .copyrightFont{
-                padding-left:10px;
-            }
-            .copyrightTitle{
-              font-weight:bold;
-              font-size:15px;
-              display:block;
-              padding-left:10px;
-              margin-top:5px;
-              margin-bottom:5px;
-            }
-          </style>
-          <div style="border: 1px solid black">
-            <div>
-                <span class='copyrightTitle'>版权声明</span>
-                <img src="">
-                <br/>
-                <p class='copyrightFont'>
-                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
-                  by
-                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
-                  is licensed under a
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
-                  <br/>
-                  由
-                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
-                  创作并维护的
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  采用
-                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
-                  <br/>
-                  本文首发于
-                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
-                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
-                  ，版权所有，侵权必究。
-                </p>
-            </div>
-        </div>
-         -->
-
-    
-  </div>
-
-    <!--  -->
-</article>
-
-
-
-
     <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
     </nav>
 </section>
             
@@ -1329,7 +1361,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/archives/acfbb6fa.html" class="thumbnail">
+                            <a href="/archives/d7fe6232.html" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1340,34 +1372,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/archives/acfbb6fa.html" class="title">在一台新的政务云服务器上的部署操作</a></p>
-                            <p class="item-date"><time datetime="2020-08-27T00:58:14.000Z" itemprop="datePublished">2020-08-27</time></p>
+                            <p class="item-title"><a href="/archives/d7fe6232.html" class="title">检查网站的TLS版本</a></p>
+                            <p class="item-date"><time datetime="2021-08-12T08:14:20.000Z" itemprop="datePublished">2021-08-12</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/archives/47d401a5.html" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a></p>
-                            <p class="item-title"><a href="/archives/47d401a5.html" class="title">SSL Pinning on Android</a></p>
-                            <p class="item-date"><time datetime="2020-06-12T02:30:51.000Z" itemprop="datePublished">2020-06-12</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/archives/4ead88f7.html" class="thumbnail">
+                            <a href="/archives/d4a32458.html" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1378,15 +1391,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a></p>
-                            <p class="item-title"><a href="/archives/4ead88f7.html" class="title">(转)Nginx代理proxy pass配置去除location路径前缀</a></p>
-                            <p class="item-date"><time datetime="2020-05-11T00:24:26.000Z" itemprop="datePublished">2020-05-11</time></p>
+                            <p class="item-title"><a href="/archives/d4a32458.html" class="title">Scrapy中Request()、FormRequest()、FormRequest.from_response()的小结</a></p>
+                            <p class="item-date"><time datetime="2021-07-16T06:18:05.000Z" itemprop="datePublished">2021-07-16</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/archives/7bfbc9bd.html" class="thumbnail">
+                            <a href="/archives/847c0e37.html" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1397,15 +1410,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/技术开发/">技术开发</a></p>
-                            <p class="item-title"><a href="/archives/7bfbc9bd.html" class="title">如何给没有连接互联网的centos使用yum安装其他软件</a></p>
-                            <p class="item-date"><time datetime="2020-04-24T13:04:39.000Z" itemprop="datePublished">2020-04-24</time></p>
+                            <p class="item-title"><a href="/archives/847c0e37.html" class="title">Docker修改Docker0网桥默认网段</a></p>
+                            <p class="item-date"><time datetime="2021-06-16T23:37:14.000Z" itemprop="datePublished">2021-06-17</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/archives/968230d9.html" class="thumbnail">
+                            <a href="/archives/37827dce.html" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1415,9 +1428,28 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/工作/">工作</a></p>
-                            <p class="item-title"><a href="/archives/968230d9.html" class="title">关于吕先生在周会上对DRR工作指示的总结</a></p>
-                            <p class="item-date"><time datetime="2019-10-14T02:01:46.000Z" itemprop="datePublished">2019-10-14</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/开发效率/">开发效率</a></p>
+                            <p class="item-title"><a href="/archives/37827dce.html" class="title">xpath获取内容的方式</a></p>
+                            <p class="item-date"><time datetime="2021-06-10T01:49:33.000Z" itemprop="datePublished">2021-06-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/archives/7e323156.html" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/开发效率/">开发效率</a></p>
+                            <p class="item-title"><a href="/archives/7e323156.html" class="title">SwitchHosts动态切换host文件</a></p>
+                            <p class="item-date"><time datetime="2021-05-20T06:42:29.000Z" itemprop="datePublished">2021-05-20</time></p>
                         </div>
                     </li>
                 
@@ -1430,7 +1462,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/优秀文章/">优秀文章</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作/">工作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">47</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/GFW/">GFW</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Map/">Map</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">4</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gitlab/">Gitlab</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/优秀文章/">优秀文章</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作/">工作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发效率/">开发效率</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/">技术开发</a><span class="category-list-count">51</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Android/">Android</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/CI/">CI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/GFW/">GFW</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/HEXO/">HEXO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/J2EE/">J2EE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/LINUX/">LINUX</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Map/">Map</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/NGINX/">NGINX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Nginx/">Nginx</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/SQLMAP/">SQLMAP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/WeChat/">WeChat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/分布式/">分布式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/博客/">博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/地图/">地图</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/工具箱/">工具箱</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术开发/开发工具/">开发工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -1439,7 +1471,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -1448,7 +1480,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-P/">Android P</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BURP/">BURP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Baidu-Map/">Baidu Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cros/">Cros</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRR/">DRR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FastDFS/">FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GeoHash/">GeoHash</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Https/">Https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICARUS/">ICARUS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nas/">Nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RecyclerView/">RecyclerView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/">SSL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL-Pinning/">SSL Pinning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/StackBlur/">StackBlur</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLookup/">VLookup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Window/">Window</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fdisk/">fdisk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lftp/">lftp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mount/">mount</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyenv/">pyenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubntu/">ubntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任正非/">任正非</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/屏幕适配/">屏幕适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众号/">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新时代e支部/">新时代e支部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毛玻璃/">毛玻璃</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科学上网/">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-P/">Android P</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BURP/">BURP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Baidu-Map/">Baidu Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cros/">Cros</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRR/">DRR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FastDFS/">FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GeoHash/">GeoHash</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Https/">Https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICARUS/">ICARUS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nas/">Nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RecyclerView/">RecyclerView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/">SSL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL-Pinning/">SSL Pinning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrapy/">Scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/StackBlur/">StackBlur</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwitchHosts/">SwitchHosts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLookup/">VLookup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview-Video-FullScreen/">Webview Video FullScreen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Window/">Window</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fdisk/">fdisk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lftp/">lftp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mount/">mount</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyenv/">pyenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubntu/">ubntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任正非/">任正非</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/屏幕适配/">屏幕适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众号/">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新时代e支部/">新时代e支部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毛玻璃/">毛玻璃</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科学上网/">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1457,7 +1489,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-P/" style="font-size: 10px;">Android P</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BURP/" style="font-size: 10px;">BURP</a> <a href="/tags/Baidu-Map/" style="font-size: 10px;">Baidu Map</a> <a href="/tags/CI/" style="font-size: 15px;">CI</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Cros/" style="font-size: 10px;">Cros</a> <a href="/tags/DRR/" style="font-size: 10px;">DRR</a> <a href="/tags/FastDFS/" style="font-size: 10px;">FastDFS</a> <a href="/tags/GeoHash/" style="font-size: 15px;">GeoHash</a> <a href="/tags/Gitlab/" style="font-size: 15px;">Gitlab</a> <a href="/tags/HEXO/" style="font-size: 10px;">HEXO</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Https/" style="font-size: 10px;">Https</a> <a href="/tags/ICARUS/" style="font-size: 10px;">ICARUS</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/Nas/" style="font-size: 10px;">Nas</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/Pandas/" style="font-size: 10px;">Pandas</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/SQLMAP/" style="font-size: 10px;">SQLMAP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/SSL-Pinning/" style="font-size: 10px;">SSL Pinning</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/StackBlur/" style="font-size: 10px;">StackBlur</a> <a href="/tags/VLookup/" style="font-size: 10px;">VLookup</a> <a href="/tags/VPS/" style="font-size: 15px;">VPS</a> <a href="/tags/Webview-Video-FullScreen/" style="font-size: 10px;">Webview Video FullScreen</a> <a href="/tags/Window/" style="font-size: 10px;">Window</a> <a href="/tags/fdisk/" style="font-size: 10px;">fdisk</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/lftp/" style="font-size: 10px;">lftp</a> <a href="/tags/mount/" style="font-size: 10px;">mount</a> <a href="/tags/pyenv/" style="font-size: 10px;">pyenv</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ubntu/" style="font-size: 10px;">ubntu</a> <a href="/tags/任正非/" style="font-size: 10px;">任正非</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/新时代e支部/" style="font-size: 10px;">新时代e支部</a> <a href="/tags/毛玻璃/" style="font-size: 10px;">毛玻璃</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
+            <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Android-P/" style="font-size: 10px;">Android P</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BURP/" style="font-size: 10px;">BURP</a> <a href="/tags/Baidu-Map/" style="font-size: 10px;">Baidu Map</a> <a href="/tags/CI/" style="font-size: 13.33px;">CI</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Cros/" style="font-size: 10px;">Cros</a> <a href="/tags/DRR/" style="font-size: 10px;">DRR</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/FastDFS/" style="font-size: 10px;">FastDFS</a> <a href="/tags/GeoHash/" style="font-size: 13.33px;">GeoHash</a> <a href="/tags/Gitlab/" style="font-size: 13.33px;">Gitlab</a> <a href="/tags/HEXO/" style="font-size: 10px;">HEXO</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Https/" style="font-size: 10px;">Https</a> <a href="/tags/ICARUS/" style="font-size: 10px;">ICARUS</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/Nas/" style="font-size: 10px;">Nas</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/Pandas/" style="font-size: 10px;">Pandas</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/SQLMAP/" style="font-size: 10px;">SQLMAP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/SSL-Pinning/" style="font-size: 10px;">SSL Pinning</a> <a href="/tags/Scrapy/" style="font-size: 10px;">Scrapy</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/StackBlur/" style="font-size: 10px;">StackBlur</a> <a href="/tags/SwitchHosts/" style="font-size: 10px;">SwitchHosts</a> <a href="/tags/VLookup/" style="font-size: 10px;">VLookup</a> <a href="/tags/VPS/" style="font-size: 13.33px;">VPS</a> <a href="/tags/Webview-Video-FullScreen/" style="font-size: 10px;">Webview Video FullScreen</a> <a href="/tags/Window/" style="font-size: 10px;">Window</a> <a href="/tags/fdisk/" style="font-size: 10px;">fdisk</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/lftp/" style="font-size: 10px;">lftp</a> <a href="/tags/mount/" style="font-size: 10px;">mount</a> <a href="/tags/pyenv/" style="font-size: 10px;">pyenv</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ubntu/" style="font-size: 10px;">ubntu</a> <a href="/tags/任正非/" style="font-size: 10px;">任正非</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/新时代e支部/" style="font-size: 10px;">新时代e支部</a> <a href="/tags/毛玻璃/" style="font-size: 10px;">毛玻璃</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
         </div>
     </div>
 
