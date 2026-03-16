@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>SSL Pinning on Android | ini&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="简介众所周知，我们在做手机端开发的时候，网络访问如果不做加密的话，请求数据很容易被抓包工具获取，从而造成安全隐患。所以我们怎么避免数据被别人通过抓包工具抓取呢？ SSL Pinning不是一个新概念，尽管很多开发者使用SSL来保证数据传输的安全性，但基本上都是未设置受信任证书，所以无法防止中间人攻击，数据还是可以被抓包。 证书锁定（SSL&#x2F;TLS Pinning）顾名思义，将服务器提供的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSL Pinning on Android">
+<meta property="og:url" content="http://inicb.com/archives/47d401a5.html">
+<meta property="og:site_name" content="ini&#39;s Blog">
+<meta property="og:description" content="简介众所周知，我们在做手机端开发的时候，网络访问如果不做加密的话，请求数据很容易被抓包工具获取，从而造成安全隐患。所以我们怎么避免数据被别人通过抓包工具抓取呢？ SSL Pinning不是一个新概念，尽管很多开发者使用SSL来保证数据传输的安全性，但基本上都是未设置受信任证书，所以无法防止中间人攻击，数据还是可以被抓包。 证书锁定（SSL&#x2F;TLS Pinning）顾名思义，将服务器提供的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-12T02:30:51.000Z">
+<meta property="article:modified_time" content="2020-06-12T05:49:32.000Z">
+<meta property="article:author" content="ini">
+<meta property="article:tag" content="SSL Pinning">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/" title="ini&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ini&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <!-- <button type="submit" class="search-form-submit"></button> -->
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+              <script type='text/javascript'>
+              $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 80%; display: block; float:none;}}</style>");
+              </script>
+              <script type='text/javascript'>
+              document.querySelector('style').textContent += "@media screen and (max-width: 1199px) and (min-width: 800px) { #main {margin: auto; width: 70%; display: block; float:none;}}"
+              </script>
+           
+            <section id="main"><article id="post-SSL-Pinning-on-Android" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            SSL Pinning on Android
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/archives/47d401a5.html">
+            <time datetime="2020-06-12T02:30:51.000Z" itemprop="datePublished">2020-06-12</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/SSL-Pinning/" rel="tag">SSL Pinning</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>众所周知，我们在做手机端开发的时候，网络访问如果不做加密的话，请求数据很容易被抓包工具获取，从而造成安全隐患。所以我们怎么避免数据被别人通过抓包工具抓取呢？</p>
+<p>SSL Pinning不是一个新概念，尽管很多开发者使用SSL来保证数据传输的安全性，但基本上都是未设置受信任证书，所以无法防止中间人攻击，数据还是可以被抓包。</p>
+<p>证书锁定（SSL&#x2F;TLS Pinning）顾名思义，将服务器提供的SSL&#x2F;TLS证书内置到移动端开发的APP客户端中，当客户端发起请求时，通过比对内置的证书和服务器端证书的内容，以确定这个连接的合法性。</p>
+<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><h5 id="获取服务器证书摘要"><a href="#获取服务器证书摘要" class="headerlink" title="获取服务器证书摘要"></a>获取服务器证书摘要</h5><p>创建一个脚本文件，certs.sh,文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">certs=`openssl s_client -servername $1 -host $1 -port 443 -showcerts &lt;/dev/null 2&gt;/dev/null | sed -n &#x27;/Certificate chain/,/Server certificate/p&#x27;`</span><br><span class="line">rest=$certs</span><br><span class="line">while [[ &quot;$rest&quot; =~ &#x27;-----BEGIN CERTIFICATE-----&#x27; ]]</span><br><span class="line">do</span><br><span class="line"> cert=&quot;$&#123;rest%%-----END CERTIFICATE-----*&#125;-----END CERTIFICATE-----&quot;</span><br><span class="line"> rest=$&#123;rest#*-----END CERTIFICATE-----&#125;</span><br><span class="line"> echo `echo &quot;$cert&quot; | grep &#x27;s:&#x27; | sed &#x27;s/.*s:\(.*\)/\1/&#x27;`</span><br><span class="line"> echo &quot;$cert&quot; | openssl x509 -pubkey -noout |</span><br><span class="line">     openssl rsa -pubin -outform der 2&gt;/dev/null |</span><br><span class="line">     openssl dgst -sha256 -binary | openssl enc -base64</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>使用方法如下，可以看到获取的证书摘要信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># ./certs.sh www.jllydj.gov.cn</span><br><span class="line"></span><br><span class="line">/CN=www.jllydj.gov.cn</span><br><span class="line">2o2MOiraYxPymc3kSEYyLx8IbdlToM0D5Je9PK/lSlk=</span><br><span class="line">/C=US/O=DigiCert Inc/OU=www.digicert.com/CN=Encryption Everywhere DV TLS CA - G1</span><br><span class="line">GI75anSEdkuHj05mreE0Sd9jE6dVqUIzzXRHHlZBVbI=</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过okhttp设置CertificatePinner"><a href="#通过okhttp设置CertificatePinner" class="headerlink" title="通过okhttp设置CertificatePinner"></a>通过okhttp设置CertificatePinner</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CertificatePinner certPinner = new CertificatePinner.Builder()</span><br><span class="line">        .add(&quot;www.jllydj.gov.cn&quot;,</span><br><span class="line">                &quot;sha256/2o2MOiraYxPymc3kSEYyLx8IbdlToM0D5Je9PK/lSlk=&quot;)</span><br><span class="line">        .add(&quot;www.jllydj.gov.cn&quot;,</span><br><span class="line">                &quot;sha256/GI75anSEdkuHj05mreE0Sd9jE6dVqUIzzXRHHlZBVbI=&quot;)</span><br><span class="line">        .build();</span><br><span class="line">builder.certificatePinner(certPinner);</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><h5 id="Android-okHttp-如何实现SSL-Pinning"><a href="#Android-okHttp-如何实现SSL-Pinning" class="headerlink" title="Android okHttp 如何实现SSL Pinning"></a>Android okHttp 如何实现SSL Pinning</h5><ul>
+<li>加载可信任的Ca证书</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CertificateFactory certificateFactory = CertificateFactory.getInstance(&quot;X.509&quot;);</span><br><span class="line"></span><br><span class="line">InputStream caInput = getResources().openRawResource(R.raw.ca);</span><br><span class="line">Certificate ca  = certificateFactory.generateCertificate(caInput);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过Ca创建一个包含可信任证书的keystore文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String keyStoreType = KeyStore.getDefaultType();</span><br><span class="line">KeyStore keyStore = KeyStore.getInstance(keyStoreType);</span><br><span class="line">keyStore.load(null, null);</span><br><span class="line">keyStore.setCertificateEntry(&quot;ca&quot;, ca);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Create a custom TrustManager from the trusted CAs in the keystore</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String algorithm = TrustManagerFactory.getDefaultAlgorithm();</span><br><span class="line">TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(algorithm);</span><br><span class="line">trustManagerFactory.init(keyStore);</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>设置到okhttp中</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Install the all-trusting trust manager</span><br><span class="line">final SSLContext sslContext = SSLContext.getInstance(&quot;SSL&quot;);</span><br><span class="line">sslContext.init(null, trustManagerFactory.getTrustManagers(), null);</span><br><span class="line">// Create an ssl socket factory with our all-trusting manager</span><br><span class="line">final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();</span><br><span class="line">builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustManagerFactory.getTrustManagers()[0]);</span><br><span class="line">builder.hostnameVerifier(new HostnameVerifier() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean verify(String hostname, SSLSession session) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这样就完成了android客户端的SSL PINning设置。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li><p>方法一存在的问题<br>服务器SSL证书到期前，测试环境更换证书，在更换配置OK后，发现APP停止服务了。所有的请求全部都失败，也就是SSL-PINNING证书到期后会导致APP拒绝服务。</p>
+</li>
+<li><p>改进：<br>可以将证书的publicKey部分提取到客户端硬编码，每次建立TLS连接时候，匹配公钥。<br>服务器在更换续费证书时不要更换私钥就行了。推荐需要实现防用户自己抓包的APP采取本方案。</p>
+</li>
+</ul>
+<h3 id="常用SSLpinning绕过方法以及原理介绍"><a href="#常用SSLpinning绕过方法以及原理介绍" class="headerlink" title="常用SSLpinning绕过方法以及原理介绍"></a>常用SSLpinning绕过方法以及原理介绍</h3><p>在前面我们已经介绍了SSL pinning的原理以及具体的实现，那么我们想要绕过SSL pinning的话，只需要将证书校验的过程绕过就可以。那么我们可以通过hook的方式来修改证书校验过程，这样就能成功的绕过SSL pinning了。</p>
+<p>本人常用且比较熟悉的hook工具有两种，分别是frida和Xposed，这两种工具中都有hook所有https证书校验方法的模块。</p>
+<p>其中我使用的比较多的是基于Xposed框架下的Justtrustme模块。该模块对上述所说的https实现证书校验的过程都添加了hook代码，至于具体代码细节我这里就不详细说明了，感兴趣的话可以自己去查看源码</p>
+<p>也可以使用国内大神写的太极框架，太极 阳是不需要root的，太极 magic是需要root的。太极框架兼容Xposed框架。<a href="https://www.taichi-app.com/#/index">https://www.taichi-app.com/#/index</a></p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/35438533">为什么不推荐APP使用SSL-PINNING?</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/58204817">证书锁定SSL Pinning简介及用途</a></li>
+<li><a href="https://medium.com/@richa123/ssl-pinning-on-android-8baa822e3bd5">SSL Pinning on Android</a></li>
+<li><a href="https://www.jianshu.com/p/93ccaf149ae6">Retrofit&#x2F;OkHttp 设置 SSL Pinning</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/127847550">Android应用中https SSL pinning以及绕过的方法介绍</a></li>
+<li><a href="https://medium.com/@appmattus/android-security-ssl-pinning-1db8acb6621e">Android Security: SSL Pinning</a></li>
+</ul>
+
+        
+        </div>
+
+
+    <!-- 
+          <style>
+            .linkColor{
+                color:#258FC6
+            }
+            .copyrightFont{
+                padding-left:10px;
+            }
+            .copyrightTitle{
+              font-weight:bold;
+              font-size:15px;
+              display:block;
+              padding-left:10px;
+              margin-top:5px;
+              margin-bottom:5px;
+            }
+          </style>
+          <div style="border: 1px solid black">
+            <div>
+                <span class='copyrightTitle'>版权声明</span>
+                <img src="">
+                <br/>
+                <p class='copyrightFont'>
+                  <a href="http://www.inicb.com" class='linkColor'>Ini&#39;s Blog</a>
+                  by
+                  <a href="http://www.inicb.com"  class='linkColor'>ini</a>
+                  is licensed under a
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>Creative Commons BY-NC-ND 4.0 International License</a>.
+                  <br/>
+                  由
+                  <a href="http://www.inicb.com"  class='linkColor'>王建磊</a>
+                  创作并维护的
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  采用
+                  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"  class='linkColor'>创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。
+                  <br/>
+                  本文首发于
+                  <a href="http://www.inicb.com"  class='linkColor'>Ini&#39;s Blog</a>
+                  （ <a href="http://www.inicb.com"  class='linkColor'>http://www.inicb.com</a> ）
+                  ，版权所有，侵权必究。
+                </p>
+            </div>
+        </div>
+         -->
+
+    
+
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者：</strong>王建磊</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="" title="{{ page.title }}">SSL Pinning on Android</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>发布时间：</strong>
+          <a href="" title="{{ page.title }}">2020年6月12日 - 10时06分</a>
+          </li>
+          <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+          </li>
+        </ul>
+      <div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://inicb.com/archives/47d401a5.html" data-id="cuidu_QpWdqqmScfdPRxDHNXj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+      
+<nav id="article-nav">
+    
+        <a href="/archives/acfbb6fa.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    在一台新的政务云服务器上的部署操作
+                
+            </div>
+        </a>
+    
+    
+        <a href="/archives/4ead88f7.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">(转)Nginx代理proxy pass配置去除location路径前缀</div>
+        </a>
+    
+</nav>
+
+
+    
+  </div>
+
+    <!-- 
+        
+<nav id="article-nav">
+    
+        <a href="/archives/acfbb6fa.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    在一台新的政务云服务器上的部署操作
+                
+            </div>
+        </a>
+    
+    
+        <a href="/archives/4ead88f7.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">(转)Nginx代理proxy pass配置去除location路径前缀</div>
+        </a>
+    
+</nav>
+
+
+     -->
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+
+</section>
+    
+
+
+
+</section>
+            
+            <!-- 
+             -->
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2026 ini<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:true,
+            verify:false,
+            app_id: '3RK5nvSxoKincwMiCVLCMFh1-gzGzoHsz',
+            app_key: 'MD8jv5EFuHcMxEP2mz5CUbA0',
+            placeholder: 'Just Do It'
+        });
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
